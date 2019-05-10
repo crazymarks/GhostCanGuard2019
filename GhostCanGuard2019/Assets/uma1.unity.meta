@@ -1,5 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:GhostCanGuard2019/Assets/uma1.unity.meta
 guid: 13f07bda463b9a1438ebc755a09700c6
+=======
+guid: adfaebac09c8ee44489404cff145d2df
+folderAsset: yes
+>>>>>>> b6fc632daf202ba9a13a9f67b99a6db2312e4a11:GhostCanGuard2019/Assets/Scripts/Player.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
