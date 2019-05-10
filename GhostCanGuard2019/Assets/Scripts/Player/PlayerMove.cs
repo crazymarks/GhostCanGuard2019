@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour
 
     private Rigidbody playerRB;
 
-    public static PlayerMove instance;
+    public static PlayerMove instancePM;
 
     private bool _playerMove = true;
     public bool IsPlayerMove { get { return _playerMove; } set { _playerMove = value; } }
@@ -31,6 +31,8 @@ public class PlayerMove : MonoBehaviour
    
     private void PlayerOperation(float speed)
     {
+        if (!_playerMove) return;
+
         // キー操作がないときmoveを０にする
         Vector3 move = Vector3.zero;
 

@@ -6,13 +6,17 @@ public class GimmicksUI : MonoBehaviour
     // playerとの距離が短いときに発動するギミックはtrue
     //[SerializeField]
     //private bool toPlayerDistance = false;
+    
+    private EventTrigger eventTrigger;
 
     [SerializeField]
-    private EventTrigger eventTrigger;
+    GimickOpen gimickOpen;
 
     private void Start()
     {
-        /// マウスのポインターを話した時のイベント作成
+        eventTrigger = this.gameObject.GetComponent<EventTrigger>();
+
+        /// マウスのポインターを離した時のイベント作成
         var entryPUP = new EventTrigger.Entry();
         entryPUP.eventID = EventTriggerType.PointerUp;
         entryPUP.callback.AddListener((data) => GimmickStart(data));
@@ -26,6 +30,8 @@ public class GimmicksUI : MonoBehaviour
     private void GimmickStart(BaseEventData data)
     {
         if ( !this.gameObject.activeSelf ) return;
+        // gimmickのUIを閉じる
+        gimickOpen.GimmickUIsOnOff(false);
         Debug.Log(this.gameObject.name);
     }
 }
