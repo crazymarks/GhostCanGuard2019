@@ -18,7 +18,7 @@ public class gimmick : MonoBehaviour
             now_time_scale = Time.timeScale;
             Time.timeScale = 0;
             ps = Instantiate(PauseUI)as GameObject;
-            ps = GetComponent<TextAsset>();
+            //ps = GetComponent<TextAsset>();
             Debug.Log("Pause");
         }
         else
