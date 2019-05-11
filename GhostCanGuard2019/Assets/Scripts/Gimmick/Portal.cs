@@ -39,14 +39,15 @@ public class Portal : MonoBehaviour
     }
 
 
-    private void PortSwitch()       //ゲートを開けるまたは閉じる
+    public void PortOnOff()       //ゲートを開けるまたは閉じる
     {
-        if (!IfEnable)
-        {
-            IfEnable = true;
-        }
-        else
-            IfEnable = false;
+        IfEnable = !IfEnable;
+        //if (!IfEnable)
+        //{
+        //    IfEnable = true;
+        //}
+        //else
+        //    IfEnable = false;
     } 
     
  
@@ -82,11 +83,11 @@ public class Portal : MonoBehaviour
 
 
 
-    private void addBanTag(string tag)
+    public void addBanTag(string tag)
     {
         BannedTag.Add(tag);
     }
-    private void RemoveBanTag(string tag)
+    public void RemoveBanTag(string tag)
     {
         BannedTag.Remove(tag);
     }
