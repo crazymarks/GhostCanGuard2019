@@ -14,23 +14,27 @@ public class Hourse : MonoBehaviour
     //馬の移動時間
     [SerializeField]
     public float HourseMoveTime = 3.0f;
-    public float starttime = 0f;
-    private bool moving=false;
+
+    float floorheight = 0;
 
     private Rigidbody HourseRB;
 
     public static Hourse instanceHourse;
 
-    private bool _HourseMove = true;
+    private bool _HourseMove = false;
     public bool IsHourseMove { get { return _HourseMove; } set { _HourseMove = value; } }
 
     private float radius = 1f;
     [SerializeField]
     private PlayerMove playerMove;
-
+    [SerializeField]
+    private GameObject Player;
+    [SerializeField]
+    private GameObject Saddle;                          //馬の鞍（くら）
     // Start is called before the first frame update
     void OnEnable()
     {
+        IfEnable = true;
         HourseRB = this.gameObject.GetComponent<Rigidbody>();
     }
 
@@ -38,104 +42,109 @@ public class Hourse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IfUsed) return;
-        Move(HourseSpeed, GetOrient());
+        if (!IsHourseMove) return;
+        Move(HourseSpeed, HourseMoveTime);
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!IfUsed&&other.tag=="Player")
+        if (!IfUsed && !IsHourseMove && IfEnable &&other.tag=="Player")
         {
-            IfEnable = true;
-            playerMove.IsPlayerMove = false;
-            StartCoroutine(HourseMove(other.gameObject));
-            IfUsed = true;
+            IfEnable = false;
+            GetOnHourse(Player);
+            IsHourseMove = true;
+            //StartCoroutine(HourseMove(other.gameObject, HourseSpeed, GetOrient()));
+            
         }
         
     }
     private void OnTriggerExit(Collider other)
     {
-        IfUsed = false;
+        IfEnable = false;
+        Stime = 0;
         Debug.Log("Reade to Reuse");
     }
 
-    private string GetOrient()
+   
+          
+    private Vector3 GetOrient()                                                  
     {// 右
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            return "right";
+            return Vector3.right.normalized;
         }
         // 左
         else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            return "left";
+            return Vector3.left.normalized;
         }
         // 上
         else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            return "up";
+            return Vector3.forward.normalized;
         }
         // 下
         else if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
-            return "down";
+            return Vector3.back.normalized;
         }
-        else return null;
+        else return MoveOrient.normalized;
         
     }
-    Vector3 LastMove = Vector3.zero;
-    private void Move(float speed,string orient)
+    Vector3 MoveOrient = Vector3.zero;
+    float Stime=0;
+    private void Move(float speed, float time)
     {
-        // 右
-        if (orient=="right"&&IfEnable)
-        {
-            LastMove = Vector3.right.normalized* speed;
-             
-        }
-
-        // 左
-        if (orient == "left" && IfEnable)
-        {
-            LastMove = Vector3.left.normalized * speed;
-     
-        }
-        // 上
-        if (orient == "up"&& IfEnable)
-        {
-            LastMove = Vector3.forward.normalized * speed;
-          
-        }
-        // 下
-        if (orient == "down" && IfEnable)
-        {
-            LastMove = Vector3.back.normalized * speed;
-        }
         
-        Debug.Log(LastMove);
-        transform.position += LastMove * Time.deltaTime;
-        IfEnable = false;
+        //StartCoroutine(HourseMoveTImeCountDown(time));
+        MoveOrient = GetOrient() * speed;
+        Debug.Log(MoveOrient);
+        transform.position += MoveOrient * Time.deltaTime;
+        Stime += Time.deltaTime;
+        if (Stime > time)
+        {
+            GetOffHourse(Player, MoveOrient.normalized);
+            IsHourseMove = false;
+            return;
+        }
+       
     }
 
-    IEnumerator HourseMove(GameObject player)
+    IEnumerator HourseMoveTImeCountDown(float time)
     {
-        
-        player.SetActive(false);
+        //Debug.Log(orient);
+        //transform.position +=orient * speed/60;
+        //IfEnable = false;
+        //if ()
+        //{
+
+        //   yield break;
+        //}
+        yield return new WaitForSeconds(time);
+        GetOffHourse(Player,MoveOrient.normalized);
+        IsHourseMove = false;
+    }
+    private void GetOnHourse(GameObject player)
+    {
+        playerMove.IsPlayerMove = false;
+        player.transform.position = Saddle.transform.position;
         player.transform.SetParent(this.transform);
-        Debug.Log("Parent Set");
-
-        
-        yield return new WaitForSeconds(HourseMoveTime);
-        Move(0,null);
-        player.SetActive(true);
-        this.transform.DetachChildren();
+        Debug.Log("Saddle Set");
+        IfUsed = true;
+    } 
+    private void GetOffHourse(GameObject player,Vector3 orient)
+    {
+       
+        player.transform.position += orient * this.transform.localScale.magnitude;
+        player.transform.parent = null;
+        player.transform.position = new Vector3(player.transform.position.x, floorheight, player.transform.position.z);
         playerMove.IsPlayerMove = true;
-        
-        starttime = 0;
     }
-
-
     public void OnOff()      
     {
         IfEnable = !IfEnable;
     }
+
+
 }
