@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour
     private bool _playerMove = true;
     public bool IsPlayerMove { get { return _playerMove; } set { _playerMove = value; } }
 
-    private float radius = 0.1f;
+    private float radius = 0.5f;
 
     // Start is called before the first frame update
     void Start()
