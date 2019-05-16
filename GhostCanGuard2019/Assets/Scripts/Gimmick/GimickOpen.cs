@@ -36,7 +36,7 @@ public class GimickOpen : MonoBehaviour
     /// <param name="onoff">true: 展開  false: 収縮</param>
     public void GimmickUIsOnOff(bool onoff)
     {
-        playerMove.IsPlayerMove = false;
+        playerMove.IsPlayerMove = !playerMove.IsPlayerMove;
         // UI表示
         gimmickUIParent.SetActive(onoff);
     }

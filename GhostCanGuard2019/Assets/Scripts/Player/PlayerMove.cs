@@ -15,7 +15,7 @@ public class PlayerMove : MonoBehaviour
     private bool _playerMove = true;
     public bool IsPlayerMove { get { return _playerMove; } set { _playerMove = value; } }
 
-    private float radius = 1.0f;
+    private float radius = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -64,7 +64,7 @@ public class PlayerMove : MonoBehaviour
         //自身の位置から移動方向に自身の半径+移動距離分の長さのRayを飛ばす
         if (Physics.Raycast(transform.position, move, out hit, movedistance + radius))
         {
-            //Debug.Log(hit.point);
+            Debug.Log(hit.point);
             //移動距離をClampして移動距離を制限する
             movedistance = Mathf.Clamp(movedistance, 0, hit.distance - radius > 0 ? hit.distance - radius : 0);
         }
