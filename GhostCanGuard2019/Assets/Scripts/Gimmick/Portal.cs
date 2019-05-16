@@ -20,8 +20,9 @@ public class Portal : MonoBehaviour
 
     void OnEnable()
     {
-        IfEnable = false;
-    }
+        IfEnable = true;
+        IfPorted = false;
+}
 
     private void OnTriggerEnter(Collider collision)
     {
