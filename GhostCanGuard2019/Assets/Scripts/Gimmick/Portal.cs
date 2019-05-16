@@ -12,7 +12,7 @@ public class Portal : MonoBehaviour
     [SerializeField]
     private Portal PortDestination;     //目標ゲート
 
-    protected bool IfPorted=false;      //このゲートがいま使った(目標として)かどうかを判定
+    private bool IfPorted = false;      //このゲートがいま使った(目標として)かどうかを判定
 
     [SerializeField]
     private List<string> BannedTag;     //転送でけない物のタグ
@@ -20,15 +20,17 @@ public class Portal : MonoBehaviour
 
     void OnEnable()
     {
-        IfEnable = false;
+        IfEnable = true;
+        IfPorted = false;
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider other)
     {
+        
         if (IfEnable && !IfPorted)        //開いている且つ目標じゃない
         {
             Debug.Log("Enabled Portal IN TelePort IN " + PortDlay + " Seconds");
-            Port(collision.gameObject);
+            Port(other.gameObject);
 
         }
 
