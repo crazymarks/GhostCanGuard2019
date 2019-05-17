@@ -15,7 +15,7 @@ public class Portal : MonoBehaviour
     protected bool IfPorted=false;      //このゲートがいま使った(目標として)かどうかを判定
 
     [SerializeField]
-    private List<string> BannedTag;     //転送でけない物のタグ
+    private List<string> BannedTag;     //転送できない物のタグ
 
 
     void OnEnable()
@@ -52,7 +52,7 @@ public class Portal : MonoBehaviour
     } 
     
  
-    private void Port(GameObject obj)
+    private void Port(GameObject obj)                 //伝送できない物のタグ
     {
         for (int i = 0; i < BannedTag.Count; i++)
         {
@@ -66,11 +66,11 @@ public class Portal : MonoBehaviour
         PortDestination.IfPorted = true;  // 目標ゲートを使った状態に設定
         Debug.Log("Port");
     }
-    IEnumerator Teleport(GameObject obj)
+    IEnumerator Teleport(GameObject obj)     //　伝送装置の時間遅延
     {
-       
+           
                 //MayDo:animation tele_Start_Anime;
-        yield return new WaitForSeconds(PortDlay);
+        yield return new WaitForSeconds(PortDlay);　　　//リターンして、そして後ろのプログラムを続きます
         if (PortDestination != null)
         {
             GameObject mono = obj;
