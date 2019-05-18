@@ -21,7 +21,7 @@ public class Portal : MonoBehaviour
     };     //転送できない物のタグ
 
 
-    void OnEnable()
+    void Awake()
     {
         IfEnable = true;
         IfPorted = false;
