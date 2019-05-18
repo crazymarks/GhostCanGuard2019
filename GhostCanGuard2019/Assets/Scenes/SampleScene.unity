@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 251559716}
   m_Layer: 0
   m_Name: PortalA
-  m_TagString: Untagged
+  m_TagString: Gimmik
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -307,7 +307,8 @@ MonoBehaviour:
   IfEnable: 1
   PortDlay: 0
   PortDestination: {fileID: 1733297169}
-  BannedTag: []
+  BannedTag:
+  - Default Banned By Portal
 --- !u!65 &251559717
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -396,7 +397,7 @@ GameObject:
   - component: {fileID: 396595926}
   m_Layer: 0
   m_Name: Gimmick
-  m_TagString: Untagged
+  m_TagString: Gimmik
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1110,7 +1111,7 @@ GameObject:
   - component: {fileID: 1132025840}
   m_Layer: 0
   m_Name: Hourse
-  m_TagString: Untagged
+  m_TagString: Gimmik
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1130,6 +1131,8 @@ MonoBehaviour:
   IfEnable: 0
   HourseSpeed: 10
   HourseMoveTime: 2
+  HourseBackTime: 0
+  DispearAlpha: 70
   playerMove: {fileID: 474188130}
   Player: {fileID: 474188128}
   Saddle: {fileID: 1494071139}
@@ -1163,7 +1166,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fc89bddac58981f4f8eca6d6dd0a9d7a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1199,7 +1202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132025834}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0.1}
+  m_LocalPosition: {x: -4, y: 0, z: 5.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1494071140}
@@ -5920,36 +5923,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1 &1248302592
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1248302593}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1248302593
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1248302592}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1494071139
 GameObject:
   m_ObjectHideFlags: 0
@@ -6377,7 +6350,7 @@ GameObject:
   - component: {fileID: 1733297169}
   m_Layer: 0
   m_Name: PortalB
-  m_TagString: Untagged
+  m_TagString: Gimmik
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6397,7 +6370,8 @@ MonoBehaviour:
   IfEnable: 1
   PortDlay: 0
   PortDestination: {fileID: 251559716}
-  BannedTag: []
+  BannedTag:
+  - Default Banned By Portal
 --- !u!65 &1733297170
 BoxCollider:
   m_ObjectHideFlags: 0

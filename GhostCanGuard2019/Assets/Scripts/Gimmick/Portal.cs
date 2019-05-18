@@ -15,7 +15,10 @@ public class Portal : MonoBehaviour
     private bool IfPorted = false;      //このゲートがいま使った(目標として)かどうかを判定
 
     [SerializeField]
-    private List<string> BannedTag;     //転送でけない物のタグ
+    private List<string> BannedTag = new List<string>()
+    {
+        "Default Banned By Portal"
+    };     //転送できない物のタグ
 
 
     void OnEnable()
