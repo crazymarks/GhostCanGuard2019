@@ -55,54 +55,40 @@ public class Hourse : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!IfActivated && IfEnable &&other.tag=="Player")
+        if (other.tag == "Player")
+        {
+            Active(Vector3.right.normalized);
+        }
+        else return;
+        
+    }
+    public void Active(Vector3 orient)
+    {
+        if (!IfActivated && IfEnable )
         {
             IfEnable = false;
-            MoveOrient = Vector3.right.normalized;
+            MoveOrient = orient;
             GetOnHourse(Player);
-           // StartCoroutine(HourseMove(HourseMoveTime));
+            // StartCoroutine(HourseMove(HourseMoveTime));
             IfActivated = true;
             //IsHourseMove = true;
             //StartCoroutine(HourseMove(other.gameObject, HourseSpeed, GetOrient()));
-            
+
         }
-        
     }
     private void OnTriggerExit(Collider other)
     {
         
         
     }
-
-
-    Vector3 MoveOrient = Vector3.zero;
-    Vector3 LeftOrient = Vector3.zero;
     
-    //private Vector3 GetOrient()                                                  
-    //{// 右
-    //    if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-    //    {
-    //        return Vector3.right.normalized;
-    //    }
-    //    // 左
-    //    else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-    //    {
-    //        return Vector3.left.normalized;
-    //    }
-    //    // 上
-    //    else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-    //    {
-    //        return Vector3.forward.normalized;
-    //    }
-    //    // 下
-    //    else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
-    //    {
-    //        return Vector3.back.normalized;
-    //    }
-    //    else return MoveOrient.normalized;
-        
-    //}
-   private bool GetKeyInput(Vector3 input)
+
+    
+    Vector3 LeftOrient = Vector3.zero;
+    Vector3 _moveorient = Vector3.zero;
+    public  Vector3 MoveOrient { get { return _moveorient; } set { _moveorient = value; } }
+   
+    private bool GetKeyInput(Vector3 input)
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow)) return true;
         else return false;
@@ -139,7 +125,7 @@ public class Hourse : MonoBehaviour
     {
         if (IfActivated)
         {
-            Move(HourseSpeed,MoveOrient);
+            Move(HourseSpeed,_moveorient);
            
             if (!IfBacking) 
             {
@@ -147,7 +133,7 @@ public class Hourse : MonoBehaviour
                 {
                     IfBacking = true;
                     Debug.Log("Start Back");
-                    LeftOrient = Vector3.right;
+                    //LeftOrient = Vector3.right;
                     //MoveOrient = Vector3.zero;
                     GetOffHourse(Player, LeftOrient);
                 }
@@ -155,7 +141,7 @@ public class Hourse : MonoBehaviour
                 {
                     IfBacking = true;
                     Debug.Log("Start Back");
-                    LeftOrient = Vector3.left;
+                    //LeftOrient = Vector3.left;
                     //MoveOrient = Vector3.zero;
                     GetOffHourse(Player, LeftOrient);
                 }
@@ -163,7 +149,7 @@ public class Hourse : MonoBehaviour
                 {
                     IfBacking = true;
                     Debug.Log("Start Back");
-                    LeftOrient = Vector3.up;
+                    //LeftOrient = Vector3.up;
                     //MoveOrient = Vector3.zero;
                     GetOffHourse(Player, LeftOrient);
                 }
@@ -171,7 +157,7 @@ public class Hourse : MonoBehaviour
                 {
                     IfBacking = true;
                     Debug.Log("Start Back");
-                    LeftOrient = Vector3.down;
+                    //LeftOrient = Vector3.down;
                     //MoveOrient = Vector3.zero;
                     GetOffHourse(Player, LeftOrient);
                 }
@@ -240,6 +226,7 @@ public class Hourse : MonoBehaviour
         player.tag = "Player";
         player.transform.position = new Vector3(player.transform.position.x, floorheight, player.transform.position.z);
         playerMove.IsPlayerMove = true;
+        LeftOrient = Vector3.zero;
     }
     public void OnOff()      
     {
