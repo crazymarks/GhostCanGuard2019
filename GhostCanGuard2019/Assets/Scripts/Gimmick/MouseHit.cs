@@ -5,6 +5,7 @@ using UnityEngine;
 public class MouseHit : MonoBehaviour
 {
     GameObject highlighttrigger;
+    
     Material material;
     [SerializeField]
     [Range(0f, 3f)]
@@ -14,16 +15,16 @@ public class MouseHit : MonoBehaviour
     {
         material = GetComponent<Renderer>().material;
 
-        highlighttrigger = new GameObject("highttrigger");
+        highlighttrigger = new GameObject("highlighttrigger");
         highlighttrigger.transform.position = transform.position;
         highlighttrigger.transform.localScale = transform.localScale + new Vector3(zoomRange, 0, zoomRange);
         highlighttrigger.transform.SetParent(transform);
         highlighttrigger.AddComponent<BoxCollider> ();
         highlighttrigger.layer = 10;
+        highlighttrigger.tag = "Default Banned By Portal";
+        
        
     }
-
-   
 
 
     void MouseCheck()

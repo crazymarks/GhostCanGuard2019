@@ -8,42 +8,43 @@ using UnityEngine.EventSystems;
  ** ギミックにアタッチ
  */
 
-public class GimickOpen : MonoBehaviour
+public class GimickOpen : GimmickBase
 {
-    // UIの親の空オブジェ
-    private GameObject gimmickUIParent;
-
-    private EventTrigger eventTrigger;
-
-    [SerializeField]
-    private PlayerMove playerMove;
 
     private void Start()
     {
-        eventTrigger = this.gameObject.GetComponent<EventTrigger>();
+        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        GimmickEventSetUp(EventTriggerType.PointerDown, SelectGimmick);
         gimmickUIParent = this.gameObject.transform.GetChild(0).gameObject;
-        Debug.Log(gimmickUIParent.name);
-
-        var entryPDOWN = new EventTrigger.Entry();
-        entryPDOWN.eventID = EventTriggerType.PointerDown;
-        entryPDOWN.callback.AddListener((data) => GimmickEvent(data));
-        this.eventTrigger.triggers.Add(entryPDOWN);
     }
 
-    /// <summary>
-    /// gimmickの効果を表示、非表示させる
-    /// </summary>
-    /// <param name="onoff">true: 展開  false: 収縮</param>
-    public void GimmickUIsOnOff(bool onoff)
+
+    private void DebugFunction(BaseEventData data)
     {
-        playerMove.IsPlayerMove = !playerMove.IsPlayerMove;
-        // UI表示
-        gimmickUIParent.SetActive(onoff);
+        Debug.Log("正常に動いてます");
     }
 
-    public void GimmickEvent(BaseEventData data)
+    public override void SelectGimmick(BaseEventData data)
     {
-        Debug.Log("gimmick touch");
-        GimmickUIsOnOff(true);
+        Vector3 mPosition = Input.mousePosition;
+        mPosition.z = 10f;
+
+        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mPosition);
+        worldMousePosition.x += 2;
+
+        //Debug.Log(this.transform.position);
+        //Debug.Log(worldMousePosition);
+
+        if (worldMousePosition.x <= this.transform.position.x)
+        {
+            // キャンセルする
+            GimmickUIClose();
+            return;
+        }
+        else
+        {
+            // gimmickを作動させる
+            StartGimmick();
+        }        
     }
 }

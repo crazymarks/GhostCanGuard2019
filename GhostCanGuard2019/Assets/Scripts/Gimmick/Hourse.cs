@@ -53,15 +53,16 @@ public class Hourse : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            Active(Vector3.right.normalized);
-        }
-        else return;
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.tag == "Player")
+    //    {
+    //        Active(Vector3.right.normalized);
+    //    }
+    //    else return;
         
-    }
+    //}
+    
     public void Active(Vector3 orient)
     {
         if (!IfActivated && IfEnable )
