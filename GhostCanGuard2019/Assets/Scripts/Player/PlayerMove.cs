@@ -1,40 +1,59 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
     // playerの速さ
     [SerializeField]
-    private float pMove = 5.0f; 
+    private float speed = 5.0f; 
+    public float PlayerSpeed { get { return speed; } set { speed = value; } }
 
-    private Rigidbody playerRB;
+    //private Rigidbody playerRB;
 
-    public static PlayerMove instancePM;
-
-    private bool _playerMove = true;
-    public bool IsPlayerMove { get { return _playerMove; } set { _playerMove = value; } }
-
+    public static PlayerMove Instance;
+    
     private float radius = 1.0f;
+
+    [SerializeField]
+    private LayerMask DontEnter;
+
+    private Vector3 debugPos;
+    float movedistance = 0;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        playerRB = this.gameObject.GetComponent<Rigidbody>();
+        //playerRB = this.gameObject.GetComponent<Rigidbody>();
+        debugPos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        PlayerOperation(pMove);
+        PlayerOperation();
     }
    
-    private void PlayerOperation(float speed)
+    private void PlayerOperation()
     {
-        if (!_playerMove) return;
+        if (PlayerManager.Instance.CurrentPlayer == PlayerState.Stop) return;
 
         // キー操作がないときmoveを０にする
         Vector3 move = Vector3.zero;
+
+        if(debugPos != transform.position)
+        {
+            Debug.Log(movedistance);
+        }
+
+        debugPos = transform.position;
+
+
 
         // 右
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
@@ -59,10 +78,10 @@ public class PlayerMove : MonoBehaviour
         }
 
         //移動距離を計算する
-        float movedistance = (speed / Mathf.Sqrt(2.0f) * Time.deltaTime);
+        movedistance = (speed / Mathf.Sqrt(2.0f) * Time.deltaTime);
         RaycastHit hit;
         //自身の位置から移動方向に自身の半径+移動距離分の長さのRayを飛ばす
-        if (Physics.Raycast(transform.position, move, out hit, movedistance + radius))
+        if (Physics.Raycast(transform.position, move, out hit, movedistance + radius, DontEnter))
         {
             //Debug.Log(hit.point);
             //移動距離をClampして移動距離を制限する

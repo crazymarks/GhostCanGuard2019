@@ -9,8 +9,7 @@ public class GimmickPointSelect : GimmickBase
     private GameObject targetObj;
 
     private Material targetMaterial;
-
-    private bool eventFlag = false;
+    
     private int eventCount = 0;
 
     private Vector3 gimmickStrtPos;
@@ -23,23 +22,15 @@ public class GimmickPointSelect : GimmickBase
     }
     private void Update()
     {
-        EventPlaying(eventFlag);
-
-        if(eventCount != 0)
-        {
-            if(Input.GetMouseButtonUp(0))
-            {
-                eventFlag = false;
-                targetObj.SetActive(eventFlag);
-                eventCount = 0;
-                Debug.Log(gimmickStrtPos);
-            }
-        }
+        // EventPlaying();
+        if (!GimmickBase.GimmickFlag) return;
+        OnButttonStateChange(ButtonManager.Instance.CurrentButton);
     }
     public override void SelectGimmick(BaseEventData data)
     {
         //base.SelectGimmick(data);  
         TargetToMousePoint(targetObj);
+        GimmickBase.GimmickFlag = true;
     }
 
     public override void StartGimmick()
@@ -50,18 +41,15 @@ public class GimmickPointSelect : GimmickBase
 
     private void TargetToMousePoint(GameObject gameObject)
     {
-        eventFlag = true;
         //if (Input.GetMouseButton(0))
         //    TargetToMousePoint(targetObj);
         //else
         //    StartGimmick();
     }
 
-    private void EventPlaying(bool flag)
+    private void EventPlaying()
     {
-        if (!flag) return;
-
-        targetObj.SetActive(flag);
+        targetObj.SetActive(true);
         // マウス座標取得
         Vector3 mPosition = Input.mousePosition;
         mPosition.z = 15f;
@@ -72,7 +60,22 @@ public class GimmickPointSelect : GimmickBase
         targetMaterial.SetVector("_MousePosition", worldMousePosition);
         // 外部スクリプトにgimmickの発動場所を送る
         gimmickStrtPos = worldMousePosition;
-        if (eventCount != 0) return;
-        eventCount++;
+    }
+    private void OnButttonStateChange(ButtonState state)
+    {
+        switch (state)
+        {
+            case ButtonState.None:
+                break;
+            case ButtonState.Stay:
+                EventPlaying();
+                break;
+            case ButtonState.Release:
+                targetObj.SetActive(false);
+                Debug.Log(targetObj.transform.position);
+                GimmickBase.GimmickFlag = false;
+                ButtonManager.Instance.ChangeButtonState(ButtonState.None);
+                break;
+        }
     }
 }

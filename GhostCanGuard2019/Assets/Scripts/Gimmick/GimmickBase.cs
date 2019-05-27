@@ -12,15 +12,8 @@ public class GimmickBase : MonoBehaviour
     protected GameObject gimmickUIParent;
     
     protected EventTrigger eventTrigger;
-    
-    [SerializeField]
-    private PlayerMove playerMove;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    public static bool GimmickFlag = false;
 
     /// <summary>
     /// gimmickの効果を表示、非表示させる
@@ -29,7 +22,7 @@ public class GimmickBase : MonoBehaviour
     public void GimmickUIsOnOff(bool onoff)
     {
         // playerの動きを止める
-        playerMove.IsPlayerMove = !onoff;
+        PlayerManager.Instance.SetCurrentState(PlayerState.Stop);
         // UI表示
         gimmickUIParent.SetActive(onoff);
     }
@@ -81,5 +74,17 @@ public class GimmickBase : MonoBehaviour
         entry.callback.AddListener((data) => action(data));
         this.eventTrigger.triggers.Add(entry);
     }
-
+    
+    //public virtual void OnButttonStateChange(ButtonState state)
+    //{
+    //    switch(state)
+    //    {
+    //        case ButtonState.None:
+    //            break;
+    //        case ButtonState.Stay:
+    //            break;
+    //        case ButtonState.Release:
+    //            break;
+    //    }
+    //}
 }
