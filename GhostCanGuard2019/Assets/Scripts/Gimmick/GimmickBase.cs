@@ -22,7 +22,7 @@ public class GimmickBase : MonoBehaviour
     public void GimmickUIsOnOff(bool onoff)
     {
         // playerの動きを止める
-        PlayerManager.Instance.SetCurrentState(PlayerState.Stop);
+        PlayerMove.instancePM.IsPlayerMove= !PlayerMove.instancePM.IsPlayerMove;
         // UI表示
         gimmickUIParent.SetActive(onoff);
     }
