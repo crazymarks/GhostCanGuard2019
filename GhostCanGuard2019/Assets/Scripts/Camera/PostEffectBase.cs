@@ -8,12 +8,19 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class PostEffectBase : MonoBehaviour
 {
-    private Camera mainCamera;
-    public Camera MainCamera { get { return mainCamera = mainCamera == null ? GetComponent<Camera>() : mainCamera; } }
 
-    public Shader targetShader;
-    private Material targetMaterial = null;
-    public Material TargetMaterial { get { return CheckShaderAndCreatMaterial(targetShader, ref targetMaterial); } }
+
+    public Shader postEffectShader;
+    private Material _material;
+    public Material GetMaterial
+    {
+        get
+        {
+            if (_material == null)
+                _material = GenerateMaterial(postEffectShader);
+            return _material;
+        }
+    }
     
         
     /// <summary>
@@ -45,15 +52,16 @@ public class PostEffectBase : MonoBehaviour
     /// <param name="shader">指定shader</param>
     /// <param name="material">作れたmaterial</param>
     /// <returns>指定shaderのmaterialを戻す</returns>
-    protected Material CheckShaderAndCreatMaterial(Shader shader,ref Material material)
+    protected Material GenerateMaterial(Shader shader)
     {
         if (shader == null || !shader.isSupported)
             return null;
-        if (material && material.shader == shader)
-            return material;
-        material = new Material(shader);
+        
+        Material  material = new Material(shader);
         material.hideFlags = HideFlags.DontSave;
-        return material;
+        if (material)
+            return material;
+        return null;
     }
 
   

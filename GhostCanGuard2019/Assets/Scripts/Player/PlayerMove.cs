@@ -62,7 +62,7 @@ public class PlayerMove : MonoBehaviour
         float movedistance = (speed / Mathf.Sqrt(2.0f) * Time.deltaTime);
         RaycastHit hit;
         //自身の位置から移動方向に自身の半径+移動距離分の長さのRayを飛ばす
-        if (Physics.Raycast(transform.position, move, out hit, movedistance + radius, 1))
+        if (Physics.Raycast(transform.position, move, out hit, movedistance + radius, LayerMask.NameToLayer("TransparentFX")))
         {
             Debug.Log(hit.point);
             //移動距離をClampして移動距離を制限する

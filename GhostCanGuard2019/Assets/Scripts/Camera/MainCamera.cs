@@ -24,7 +24,7 @@ public class MainCamera : MonoBehaviour
     Vector3 offset;
     void Start()
     {
-        transform.position = target.position + new Vector3(0, Mathf.Sin(Angle) * distance, Mathf.Cos(Angle) * distance);
+        transform.position = target.position + new Vector3(0, distance, 0);
        
         offset = transform.position - target.position;
     }
@@ -36,5 +36,6 @@ public class MainCamera : MonoBehaviour
         Vector3 targetCampos = target.position + offset;
         //lerpを使て移動を緩やかします
         transform.position = Vector3.Lerp(transform.position, targetCampos, smothing * Time.deltaTime);
+        
     }
 }

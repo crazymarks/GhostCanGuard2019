@@ -5,16 +5,20 @@ using UnityEngine;
 public class MouseHit : MonoBehaviour
 {
     GameObject highlighttrigger;
-    
-    Material material;
+
+    Camera MainCamera;
+
+    //Material material;
     [SerializeField]
     [Range(0f, 3f)]
     private float zoomRange = 0f;
     // Start is called before the first frame update
     void Start()
     {
-        material = GetComponent<Renderer>().material;
-
+        //material = GetComponent<Renderer>().material;
+        MainCamera=Camera.main;
+        MainCamera.GetComponent<OutLineCamera>();
+       
         highlighttrigger = new GameObject("highlighttrigger");
         highlighttrigger.transform.position = transform.position;
         highlighttrigger.transform.localScale = transform.localScale + new Vector3(zoomRange, 0, zoomRange);
@@ -31,19 +35,41 @@ public class MouseHit : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray,out hit)&&hit.collider.gameObject==highlighttrigger)
+        if (Physics.Raycast(ray, out hit,LayerMask.NameToLayer("highlighttrigger")) && hit.collider.gameObject == highlighttrigger)
         {
-            material.SetFloat("_OutlineWidth", 1.3f);
-            material.SetVector("_OutlineColor", new Vector4(1f, 1f, 0f, 0.8f));
+            Camera.main.GetComponent<OutLineCamera>().enabled = true;
+            ChangeLayer(transform, "outline");
+            
+            //material.SetFloat("_OutlineWidth", 1.3f);
+            // material.SetVector("_OutlineColor", new Vector4(1f, 1f, 0f, 0.8f));
             Debug.Log(name);
         }
-        else material.SetFloat("_OutlineWidth", 1f);
-
+        else
+        {
+            //Camera.main.GetComponent<OutLineCamera>().enabled = false;
+            ChangeLayer(transform, "Default");
+            //else material.SetFloat("_OutlineWidth", 1f);
+        }
     }
 
     private void Update()
     {
         MouseCheck();
+    }
+
+
+    void ChangeLayer(Transform trans,string targetLayer)
+    {
+        if (LayerMask.NameToLayer(targetLayer) == -1)
+        {
+            Debug.Log("layer dosen't exist");
+            return;
+        }
+        trans.gameObject.layer = LayerMask.NameToLayer(targetLayer);
+        foreach(Transform child in trans)
+        {
+            ChangeLayer(child, targetLayer);
+        }
     }
 
     //private void OnMouseOver()
