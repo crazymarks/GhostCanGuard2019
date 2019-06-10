@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Gimmik
-  - Default Banned By Portal
+  - Thief
+  - Ghost
   layers:
   - Default
   - TransparentFX

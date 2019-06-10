@@ -14,12 +14,16 @@ public class Portal : MonoBehaviour
 
     private bool IfPorted = false;      //このゲートがいま使った(目標として)かどうかを判定
 
+    //[SerializeField]
+    //private List<string> BannedTag = new List<string>()
+    //{
+    //    "Default Banned By Portal"
+    //};     //転送でき物のタグ
     [SerializeField]
-    private List<string> BannedTag = new List<string>()
+    private List<string> PortabeTag = new List<string>()
     {
-        "Default Banned By Portal"
-    };     //転送できない物のタグ
-
+        "Player"
+    };     //転送できる物のタグ
 
     void Awake()
     {
@@ -53,22 +57,38 @@ public class Portal : MonoBehaviour
         //}
         //else
         //    IfEnable = false;
-    } 
-    
- 
+    }
+
+
+    //private void Port(GameObject obj)
+    //{
+    //    for (int i = 0; i < BannedTag.Count; i++)
+    //    {
+    //        if (obj.tag == BannedTag[i])
+    //        {
+    //            Debug.Log("Banned Object IN, Cannot TelePort This Object");
+    //            return;
+    //        }
+    //    }
+    //    StartCoroutine(Teleport(obj));
+    //    PortDestination.IfPorted = true;  // 目標ゲートを使った状態に設定
+    //    Debug.Log("Port");
+    //}
     private void Port(GameObject obj)
     {
-        for (int i = 0; i < BannedTag.Count; i++)
+        for (int i = 0; i < PortabeTag.Count; i++)
         {
-            if (obj.tag == BannedTag[i])
+            if (obj.tag == PortabeTag[i])
             {
-                Debug.Log("Banned Object IN, Cannot TelePort This Object");
-                return;
+                StartCoroutine(Teleport(obj));
+                PortDestination.IfPorted = true;  // 目標ゲートを使った状態に設定
+                Debug.Log("Port");
+
             }
+            else
+                Debug.Log("Banned Object IN, Cannot TelePort This Object");
+            return;
         }
-        StartCoroutine(Teleport(obj));
-        PortDestination.IfPorted = true;  // 目標ゲートを使った状態に設定
-        Debug.Log("Port");
     }
     IEnumerator Teleport(GameObject obj)
     {
@@ -88,12 +108,21 @@ public class Portal : MonoBehaviour
 
 
 
-    public void addBanTag(string tag)
+    //public void addBanTag(string tag)
+    //{
+    //    BannedTag.Add(tag);
+    //}
+    //public void RemoveBanTag(string tag)
+    //{
+    //    BannedTag.Remove(tag);
+    //}
+
+    public void addPortableTag(string tag)
     {
-        BannedTag.Add(tag);
+        PortabeTag.Add(tag);
     }
-    public void RemoveBanTag(string tag)
+    public void RemovePortableTag(string tag)
     {
-        BannedTag.Remove(tag);
+        PortabeTag.Remove(tag);
     }
 }
