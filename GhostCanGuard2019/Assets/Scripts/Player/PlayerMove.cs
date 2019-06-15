@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField]
     private float pMove = 5.0f; 
 
-    private Rigidbody playerRB;
+    private Rigidbody rb;
 
     public static PlayerMove instancePM;
 
@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerRB = this.gameObject.GetComponent<Rigidbody>();
+        rb = this.gameObject.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
