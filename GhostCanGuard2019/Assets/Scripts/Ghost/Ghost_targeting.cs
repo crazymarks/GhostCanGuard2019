@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class Ghost_targeting : MonoBehaviour
 {
-    public Transform targetpos;
+    
     public float chasingSpeed = 5f;
     public float turnSpeed = 0.5f;
     public float walkSpeed = 2f;
     public bool isTargeting;
-    public float distanceOfChasingPlayer;
+    public float distanceOfChasingPlayer = 10f;
+    public float distanceOfGiveUpChase = 15f;
     public float maxPatrolRange=5f;
     public float waitTime = 5f;
 
+    GameObject thief;
+    GameObject player;
+
+
+    private Transform targetpos;
     Rigidbody rb;
     Vector3 missingPosition;
     Vector3 patroPosition;
@@ -25,8 +31,9 @@ public class Ghost_targeting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        isTargeting = true;
+        rb = GetComponent<Rigidbody>();
+        thief = GameObject.FindGameObjectWithTag("Thief");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -36,26 +43,39 @@ public class Ghost_targeting : MonoBehaviour
             Chase();
         else
             patrol();
-        
     }
-
+    private void Update()
+    {
+        targetCheck();
+    }
     void Chase()
     {
         if (targetpos == null)
         {
+            missingPosition = transform.position;
             return;
         }
-        transform.position = Vector3.MoveTowards(transform.position, targetpos.position, chasingSpeed * Time.deltaTime);
-        if (targetpos.position - transform.position != Vector3.zero)
-            targetQuaternion = Quaternion.LookRotation(targetpos.position - transform.position, Vector3.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetQuaternion, turnSpeed);
+        if (targetpos == thief.transform)
+        {
+            Rigidbody trb = thief.GetComponent<Rigidbody>();
+            rb.position =Vector3.MoveTowards(transform.position, targetpos.position + trb.velocity.normalized, chasingSpeed * Time.deltaTime);
+            if (targetpos.position - transform.position != Vector3.zero)
+                targetQuaternion = Quaternion.LookRotation(targetpos.position - transform.position, Vector3.up);
+            rb.rotation = Quaternion.Slerp(transform.rotation, targetQuaternion, turnSpeed);
+        }
+        if(targetpos == player.transform)
+        {
+            rb.position = Vector3.MoveTowards(transform.position, targetpos.position, chasingSpeed * Time.deltaTime);
+            if (targetpos.position - transform.position != Vector3.zero)
+                targetQuaternion = Quaternion.LookRotation(targetpos.position - transform.position, Vector3.up);
+            rb.rotation = Quaternion.Slerp(transform.rotation, targetQuaternion, turnSpeed);
+        }
+        
         lastActTime = Time.time;
-        missingPosition = transform.position;
     }
 
     void patrol()
     {
-        
         if (Time.time - lastActTime > waitTime)
         {
             generateRandomTarget();
@@ -65,8 +85,6 @@ public class Ghost_targeting : MonoBehaviour
         if (patroPosition - transform.position != Vector3.zero)
             targetQuaternion = Quaternion.LookRotation(patroPosition - transform.position, Vector3.up);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetQuaternion, turnSpeed);
-
-
     }
 
     void generateRandomTarget()
@@ -80,6 +98,27 @@ public class Ghost_targeting : MonoBehaviour
             Debug.Log("離れすぎから、もう一度生成します");
             generateRandomTarget();
         }
+    }
+
+    void targetCheck()
+    {
+        if (thief == null || player == null)
+            return;
+        if (targetpos == null)
+        {
+            targetpos = thief.transform;
+        }
+        distancetoPlayer = Vector3.Distance(transform.position, player.transform.position);
+        Debug.Log(distancetoPlayer);
+        if (distancetoPlayer < distanceOfChasingPlayer)
+        {
+            targetpos = player.transform;
+        }
+        if (distancetoPlayer > distanceOfGiveUpChase)
+        {
+            targetpos = thief.transform;
+        }
+        
     }
 
 }
