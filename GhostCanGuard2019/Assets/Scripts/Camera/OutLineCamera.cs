@@ -12,7 +12,7 @@ public class OutLineCamera : PostEffectBase
 
 
     public Shader preRenderShader = null;
-    public Color outlineColor = Color.yellow;
+    //public Color outlineColor = Color.yellow;
 
     [Range(0, 10)]
     public int downSample = 4;

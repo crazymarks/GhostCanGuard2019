@@ -34,7 +34,7 @@ Shader "OutlineShader/OutlinePrePass"
 				{
 
 					//単色のテキスチャーをoutする
-					return fixed4(1,1,0,1);
+					return fixed4(1,1,0,1);//アウトラインの色
 				}
 
 				

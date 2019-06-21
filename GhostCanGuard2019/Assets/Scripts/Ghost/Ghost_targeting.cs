@@ -13,13 +13,15 @@ public class Ghost_targeting : MonoBehaviour
     public float distanceOfGiveUpChase = 15f;
     public float maxPatrolRange=5f;
     public float waitTime = 5f;
+    
+
 
     GameObject thief;
     GameObject player;
-
+    Rigidbody trb;
 
     private Transform targetpos;
-    Rigidbody rb;
+    
     Vector3 missingPosition;
     Vector3 patroPosition;
     float distancetoPlayer;
@@ -28,12 +30,25 @@ public class Ghost_targeting : MonoBehaviour
     float lastActTime;
     float patrolDistance = 0f;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        thief = GameObject.FindGameObjectWithTag("Thief");
-        player = GameObject.FindGameObjectWithTag("Player");
+        
+        if (thief == null)
+        {
+            thief = GameObject.FindGameObjectWithTag("Thief");
+        }
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+        }
+        if (thief != null)
+        {
+            trb = thief.GetComponent<Rigidbody>();
+        }
+        
     }
 
     // Update is called once per frame
@@ -57,22 +72,28 @@ public class Ghost_targeting : MonoBehaviour
         }
         if (targetpos == thief.transform)
         {
-            Rigidbody trb = thief.GetComponent<Rigidbody>();
-            rb.position =Vector3.MoveTowards(transform.position, targetpos.position + trb.velocity.normalized, chasingSpeed * Time.deltaTime);
-            if (targetpos.position - transform.position != Vector3.zero)
-                targetQuaternion = Quaternion.LookRotation(targetpos.position - transform.position, Vector3.up);
-            rb.rotation = Quaternion.Slerp(transform.rotation, targetQuaternion, turnSpeed);
+            
+            move(chasingSpeed, trb.velocity.normalized);
         }
         if(targetpos == player.transform)
         {
-            rb.position = Vector3.MoveTowards(transform.position, targetpos.position, chasingSpeed * Time.deltaTime);
-            if (targetpos.position - transform.position != Vector3.zero)
-                targetQuaternion = Quaternion.LookRotation(targetpos.position - transform.position, Vector3.up);
-            rb.rotation = Quaternion.Slerp(transform.rotation, targetQuaternion, turnSpeed);
+            move(chasingSpeed, Vector3.zero);
         }
         
         lastActTime = Time.time;
     }
+
+    void move(float speed, Vector3 advance_speed)
+    {
+        if((targetpos.position- transform.position).sqrMagnitude < 0.2f)  return;
+        Vector3 moveSpeed = (targetpos.position + advance_speed - transform.position).normalized * speed * Time.deltaTime;
+        transform.position += moveSpeed;
+        //Debug.Log(moveSpeed);
+        if (targetpos.position - transform.position != Vector3.zero)
+            targetQuaternion = Quaternion.LookRotation(targetpos.position - transform.position, Vector3.up);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetQuaternion, turnSpeed);
+    }
+
 
     void patrol()
     {
@@ -81,10 +102,8 @@ public class Ghost_targeting : MonoBehaviour
             generateRandomTarget();
             lastActTime = Time.time + (patroPosition-transform.position).magnitude / walkSpeed;
         }
-        transform.position = Vector3.MoveTowards(transform.position, patroPosition, walkSpeed * Time.deltaTime);
-        if (patroPosition - transform.position != Vector3.zero)
-            targetQuaternion = Quaternion.LookRotation(patroPosition - transform.position, Vector3.up);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetQuaternion, turnSpeed);
+        
+        move(walkSpeed, Vector3.zero);
     }
 
     void generateRandomTarget()
@@ -102,6 +121,7 @@ public class Ghost_targeting : MonoBehaviour
 
     void targetCheck()
     {
+
         if (thief == null || player == null)
             return;
         if (targetpos == null)
@@ -109,7 +129,7 @@ public class Ghost_targeting : MonoBehaviour
             targetpos = thief.transform;
         }
         distancetoPlayer = Vector3.Distance(transform.position, player.transform.position);
-        Debug.Log(distancetoPlayer);
+        //Debug.Log(distancetoPlayer);
         if (distancetoPlayer < distanceOfChasingPlayer)
         {
             targetpos = player.transform;
@@ -120,5 +140,15 @@ public class Ghost_targeting : MonoBehaviour
         }
         
     }
-
+    public void bible(float time)
+    {
+       
+        StartCoroutine(bibleEffect(time));
+    }
+    IEnumerator bibleEffect(float time)
+    {
+        chasingSpeed *= -1;
+        yield return new WaitForSeconds(time);
+        chasingSpeed *= -1;
+    }
 }
