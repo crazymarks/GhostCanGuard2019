@@ -5,16 +5,15 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     // playerの速さ
-    
     public float speed = 5.0f;
-    public float turnSpeed = 0.1f;
+    public float turnSpeed = 1f;
 
     private Rigidbody rb;
 
     public static PlayerMove instancePM;
 
     private bool _playerMove = true;
-    public bool IsPlayerMove { get { return _playerMove; } set { _playerMove = value; } }
+    public bool CanPlayerMove { get { return _playerMove; } set { _playerMove = value; } }
 
 
     // Start is called before the first frame update

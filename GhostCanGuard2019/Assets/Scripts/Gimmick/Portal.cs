@@ -18,7 +18,7 @@ public class Portal : MonoBehaviour
     //private List<string> BannedTag = new List<string>()
     //{
     //    "Default Banned By Portal"
-    //};     //転送でき物のタグ
+    //};     //転送できない物のタグ
     [SerializeField]
     private List<string> PortabeTag = new List<string>()
     {

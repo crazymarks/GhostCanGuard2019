@@ -1,0 +1,235 @@
+fileFormatVersion: 2
+guid: fbd244baebcb29e4b8a70c4c4f3fe3f8
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Ar
+    100002: //RootNode
+    100004: horse
+    100006: polySurface102
+    100008: polySurface103
+    100010: polySurface104
+    100012: polySurface105
+    100014: polySurface105 1
+    100016: polySurface106
+    100018: polySurface107
+    100020: polySurface108
+    100022: polySurface113
+    100024: polySurface114
+    100026: polySurface115
+    100028: polySurface116
+    100030: polySurface117
+    100032: polySurface118
+    100034: polySurface119
+    100036: polySurface120
+    100038: polySurface121
+    100040: polySurface122
+    100042: polySurface123
+    100044: polySurface135
+    100046: polySurface136
+    100048: polySurface137
+    100050: polySurface138
+    100052: polySurface139
+    100054: polySurface140
+    100056: polySurface141
+    100058: polySurface142
+    100060: polySurface143
+    100062: polySurface143 1
+    100064: polySurface144
+    100066: polySurface145
+    100068: transform1
+    100070: transform10
+    100072: transform11
+    100074: transform12
+    100076: transform13
+    100078: transform14
+    100080: transform15
+    100082: transform16
+    100084: transform17
+    100086: transform18
+    100088: transform19
+    100090: transform2
+    100092: transform20
+    100094: transform21
+    100096: transform22
+    100098: transform23
+    100100: transform24
+    100102: transform25
+    100104: transform26
+    100106: transform27
+    100108: transform28
+    100110: transform29
+    100112: transform3
+    100114: transform4
+    100116: transform5
+    100118: transform6
+    100120: transform7
+    100122: transform8
+    100124: transform9
+    400000: Ar
+    400002: //RootNode
+    400004: horse
+    400006: polySurface102
+    400008: polySurface103
+    400010: polySurface104
+    400012: polySurface105
+    400014: polySurface105 1
+    400016: polySurface106
+    400018: polySurface107
+    400020: polySurface108
+    400022: polySurface113
+    400024: polySurface114
+    400026: polySurface115
+    400028: polySurface116
+    400030: polySurface117
+    400032: polySurface118
+    400034: polySurface119
+    400036: polySurface120
+    400038: polySurface121
+    400040: polySurface122
+    400042: polySurface123
+    400044: polySurface135
+    400046: polySurface136
+    400048: polySurface137
+    400050: polySurface138
+    400052: polySurface139
+    400054: polySurface140
+    400056: polySurface141
+    400058: polySurface142
+    400060: polySurface143
+    400062: polySurface143 1
+    400064: polySurface144
+    400066: polySurface145
+    400068: transform1
+    400070: transform10
+    400072: transform11
+    400074: transform12
+    400076: transform13
+    400078: transform14
+    400080: transform15
+    400082: transform16
+    400084: transform17
+    400086: transform18
+    400088: transform19
+    400090: transform2
+    400092: transform20
+    400094: transform21
+    400096: transform22
+    400098: transform23
+    400100: transform24
+    400102: transform25
+    400104: transform26
+    400106: transform27
+    400108: transform28
+    400110: transform29
+    400112: transform3
+    400114: transform4
+    400116: transform5
+    400118: transform6
+    400120: transform7
+    400122: transform8
+    400124: transform9
+    2100000: horse1
+    2100002: Armor
+    2300000: horse
+    2300002: polySurface143
+    3300000: horse
+    3300002: polySurface143
+    4300000: horse
+    4300002: polySurface143
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Armor
+    second: {fileID: 2100000, guid: b664773682dd43e459be760f8be1bf6f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: horse1
+    second: {fileID: 2100000, guid: 35db97d6f69923c46bcb4c3f38f8c831, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

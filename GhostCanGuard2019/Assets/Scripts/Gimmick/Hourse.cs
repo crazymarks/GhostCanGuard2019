@@ -77,11 +77,7 @@ public class Hourse : MonoBehaviour
 
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        
-        
-    }
+   
     
 
     
