@@ -1,8 +1,10 @@
-﻿//using System.Collections;
-//using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+/*
+ * Playerの移動クラス
+ */
+
+public class PlayerMove : UnityEngine.MonoBehaviour
 {
     // playerの速さ
     [SerializeField]
@@ -10,27 +12,21 @@ public class PlayerMove : MonoBehaviour
     public float PlayerSpeed { get { return speed; } set { speed = value; } }
 
     //private Rigidbody playerRB;
-
-    public static PlayerMove Instance;
     
-    private float radius = 1.0f;
+    private readonly float radius = 1.0f;
 
     [SerializeField]
-    private LayerMask DontEnter;
-
-    private Vector3 debugPos;
-    float movedistance = 0;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
-
+    private LayerMask DontEnter = LayerMask.NameToLayer("Everything");
+    /*
+     * layerを複数設定するときビット演算でレイヤーマスクする
+     * int layermask = 1 << layer.No;
+     * int layermask = 1 << 8;
+     * int layermask = 1 << 8 | 1 << 9;
+     */
     // Start is called before the first frame update
     void Start()
     {
         //playerRB = this.gameObject.GetComponent<Rigidbody>();
-        debugPos = transform.position;
     }
 
     // Update is called once per frame
@@ -45,16 +41,7 @@ public class PlayerMove : MonoBehaviour
 
         // キー操作がないときmoveを０にする
         Vector3 move = Vector3.zero;
-
-        if(debugPos != transform.position)
-        {
-            Debug.Log(movedistance);
-        }
-
-        debugPos = transform.position;
-
-
-
+       
         // 右
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
@@ -78,7 +65,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         //移動距離を計算する
-        movedistance = (speed / Mathf.Sqrt(2.0f) * Time.deltaTime);
+        float movedistance = (speed / Mathf.Sqrt(2.0f) * Time.deltaTime);
         RaycastHit hit;
         //自身の位置から移動方向に自身の半径+移動距離分の長さのRayを飛ばす
         if (Physics.Raycast(transform.position, move, out hit, movedistance + radius, DontEnter))

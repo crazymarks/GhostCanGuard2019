@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GimmickShaderSample : MonoBehaviour
+public class GimmickShaderSample : UnityEngine.MonoBehaviour
 {
     private Material material;
     private Vector3 mousePos;

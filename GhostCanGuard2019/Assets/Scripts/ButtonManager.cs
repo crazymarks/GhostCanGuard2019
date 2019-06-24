@@ -9,7 +9,7 @@ public enum ButtonState
     Release,
 }
 
-public class ButtonManager : MonoBehaviour
+public class ButtonManager : UnityEngine.MonoBehaviour
 {
     public static ButtonManager Instance;
     private bool debugFlag;
@@ -24,7 +24,7 @@ public class ButtonManager : MonoBehaviour
     }
     private void Update()
     {
-        if ( !GimmickBase.GimmickFlag ) return;
+        //if ( !GimmickBase.GimmickFlag ) return;
         if(debugFlag)
         {
             Debug.Log("aaaaaaa");
