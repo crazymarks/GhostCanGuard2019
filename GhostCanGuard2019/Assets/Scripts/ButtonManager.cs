@@ -24,7 +24,7 @@ public class ButtonManager : MonoBehaviour
     }
     private void Update()
     {
-        if ( !GimmickBase.GimmickFlag ) return;
+        //if ( !GimmickBase.GimmickFlag ) return;
         if(debugFlag)
         {
             Debug.Log("aaaaaaa");

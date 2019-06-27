@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Bible : MonoBehaviour
+public class Bible : GimmickBase
 {
    
     public float buffTime = 5f;
@@ -18,8 +19,10 @@ public class Bible : MonoBehaviour
     GameObject obj;
     Ghost_targeting gt;
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
+        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
         collision = GetComponent<SphereCollider>();
         if (collision != null)
         {
@@ -44,13 +47,14 @@ public class Bible : MonoBehaviour
     
 
 
-    public void open()
+    private void open()
     {
         if (canOpen)
         {
             StartCoroutine(AuraON());
         }
-        
+        GimmickUIClose();
+
     }
     IEnumerator AuraON()
     {
@@ -65,6 +69,10 @@ public class Bible : MonoBehaviour
         Debug.Log("Ready to ReUse");
     }
 
-    
+    public void ClickUIStart()
+    {
+        GimmickManager.Instance.SetGimmickAction(open);
+        GimmickUIsOnOff(false);
+    }
 
 }

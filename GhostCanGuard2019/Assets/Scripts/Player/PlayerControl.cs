@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PlayerControl : MonoBehaviour
 
     private Rigidbody rb;
 
-    public static PlayerMove instancePM;
+    //public static PlayerMove instancePM;
 
     private bool _playerMove = true;
     public bool CanPlayerMove { get { return _playerMove; } set { _playerMove = value; } }
@@ -30,15 +31,18 @@ public class PlayerControl : MonoBehaviour
 
     private void move(float speed)
     {
-        if (!_playerMove) return;
-
+        if (!_playerMove) {
+            //rb.velocity = Vector3.zero;
+            return;
+        }
+        
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         Vector3 move = new Vector3(horizontal, 0, vertical).normalized;
-
+        
 
         rb.velocity = move * speed;
-        
+        //Debug.Log("プレイヤーのスピードは"+speed+"です");
         if (move!= Vector3.zero)
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(move, Vector3.up), turnSpeed);
     }

@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Portal : MonoBehaviour
+public class Portal : GimmickBase
 {
+
     [SerializeField]
     private bool IfEnable = false;              //ゲートが開いているかどうかの状態
 
@@ -24,21 +26,29 @@ public class Portal : MonoBehaviour
     {
         "Player"
     };     //転送できる物のタグ
-
+    protected override void Start()
+    {
+        base.Start();
+        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        if (PortDestination == null) 
+        {
+            PortDestination = this;
+            //enabled = false;   //目標ゲートがない場合、オブジェクトをdisableにします
+        }
+    }
     void Awake()
     {
-        IfEnable = true;
+        IfEnable = false;
         IfPorted = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        if (IfEnable && !IfPorted)        //開いている且つ目標じゃない
+
+        if (IfEnable && !IfPorted && PortDestination.IfEnable)        //開いている且つ目標じゃない
         {
             Debug.Log("Enabled Portal IN TelePort IN " + PortDlay + " Seconds");
             Port(other.gameObject);
-
         }
 
     }
@@ -48,15 +58,10 @@ public class Portal : MonoBehaviour
     }
 
 
-    public void PortOnOff()       //ゲートを開けるまたは閉じる
+    private void PortOnOff()       //ゲートを開けるまたは閉じる
     {
         IfEnable = !IfEnable;
-        //if (!IfEnable)
-        //{
-        //    IfEnable = true;
-        //}
-        //else
-        //    IfEnable = false;
+        GimmickUIClose();
     }
 
 
@@ -76,14 +81,14 @@ public class Portal : MonoBehaviour
     //}
     private void Port(GameObject obj)
     {
-        for (int i = 0; i < PortabeTag.Count; i++)
+        for (int i = 0; i < PortabeTag.Count;)
         {
             if (obj.tag == PortabeTag[i])
             {
                 StartCoroutine(Teleport(obj));
                 PortDestination.IfPorted = true;  // 目標ゲートを使った状態に設定
                 Debug.Log("Port");
-
+                i++;
             }
             else
                 Debug.Log("Banned Object IN, Cannot TelePort This Object");
@@ -98,7 +103,7 @@ public class Portal : MonoBehaviour
         if (PortDestination != null)
         {
             GameObject mono = obj;
-            mono.transform.position = PortDestination.transform.position;
+            mono.transform.position = new Vector3(PortDestination.transform.position.x,mono.transform.position.y,PortDestination.transform.position.z);
         }
         else
             Debug.Log("UnSet PortDestination, TelePort Failed");
@@ -125,4 +130,11 @@ public class Portal : MonoBehaviour
     {
         PortabeTag.Remove(tag);
     }
+
+    public void ClickUIStart()
+    {
+        GimmickManager.Instance.SetGimmickAction(PortOnOff);
+        GimmickUIsOnOff(false);
+    }
+
 }

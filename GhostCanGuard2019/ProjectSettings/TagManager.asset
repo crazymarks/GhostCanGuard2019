@@ -7,6 +7,9 @@ TagManager:
   - Gimmik
   - Thief
   - Ghost
+  - Alarm
+  - Exit
+  - Treasure
   layers:
   - Default
   - TransparentFX
@@ -20,7 +23,7 @@ TagManager:
   - floor
   - highlighttrigger
   - outline
-  - 
+  - Wall
   - 
   - 
   - 
