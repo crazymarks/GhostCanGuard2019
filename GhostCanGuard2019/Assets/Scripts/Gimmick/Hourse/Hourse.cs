@@ -85,11 +85,13 @@ public class Hourse : GimmickBase
     float Stime = 0;
     private void Move(float speed,Vector3 orient)
     {
+        if (orient == Vector3.zero) return;
         float movedistance = (speed / Mathf.Sqrt(2.0f) * Time.deltaTime);
         Vector3 Direction = orient.normalized * movedistance;
         //Debug.Log(Direction);
-        transform.position += Direction;
-        transform.rotation = Quaternion.LookRotation(orient);
+        
+        //transform.rotation = Quaternion.LookRotation(orient);
+        transform.position += transform.forward.normalized * movedistance;
     }
     private void MoveUpdate()
     {
@@ -106,9 +108,9 @@ public class Hourse : GimmickBase
                     //Debug.Log(hit.distance);
                     //Debug.Log(hit.collider);
                     //movedistance = Mathf.Clamp(movedistance, 0, hit.distance - radius > 0 ? hit.distance - radius : 0);
-                    if (hit.distance <= radius)
+                    if (hit.distance <= radius && hit.collider.isTrigger == false)
                     {
-                        Debug.Log("壁をぶつけた"+hit.distance+hit.collider+hit.point);
+                        Debug.Log("壁をぶつけた" + hit.distance + hit.collider + hit.point);
                         IfBacking = true;
                         LeftOrient = Vector3.zero;
                         GetOffHourse(Player, LeftOrient);
@@ -183,6 +185,7 @@ public class Hourse : GimmickBase
 
     private void Active()
     {
+        
         if (!IfActivated)
         {
             //MoveOrient = orient;
@@ -191,8 +194,8 @@ public class Hourse : GimmickBase
             //IsHourseMove = true;
             
         }
+
         if (!Input.GetMouseButtonDown(0)) return;
-        
         RaycastHit hitInfo;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hitInfo, 100))
@@ -200,7 +203,11 @@ public class Hourse : GimmickBase
             Vector3 dir = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
 
             if (_moveorient == Vector3.zero)
+            {
                 MoveOrient = dir - transform.position;
+                transform.rotation = Quaternion.LookRotation(MoveOrient);
+            }
+               
             
         }
         

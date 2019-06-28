@@ -129,7 +129,12 @@ public class Portal : GimmickBase
         if (PortDestination != null)
         {
             GameObject mono = obj;
+            //Debug.Log(mono.transform.rotation.eulerAngles);
             mono.transform.position = new Vector3(PortDestination.transform.position.x,mono.transform.position.y,PortDestination.transform.position.z);
+            mono.transform.rotation = PortDestination.transform.rotation;
+            //mono.transform.rotation = Quaternion.Euler(-mono.transform.rotation.eulerAngles - PortDestination.transform.rotation.eulerAngles);
+            
+            //Debug.Log(mono.transform.rotation.eulerAngles);
         }
         else
             Debug.Log("UnSet PortDestination, TelePort Failed");
