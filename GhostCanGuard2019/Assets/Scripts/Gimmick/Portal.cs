@@ -7,14 +7,18 @@ public class Portal : GimmickBase
 {
 
     [SerializeField]
-    private bool IfEnable = false;              //ゲートが開いているかどうかの状態
+    public bool IfEnable = false;              //ゲートが開いているかどうかの状態
 
     public float PortDlay = 0f;              //転送遅延時間
-
     [SerializeField]
     private Portal PortDestination;     //目標ゲート
 
     private bool IfPorted = false;      //このゲートがいま使った(目標として)かどうかを判定
+
+
+    [SerializeField]
+    GameObject portalPartical;
+
 
     //[SerializeField]
     //private List<string> BannedTag = new List<string>()
@@ -35,11 +39,17 @@ public class Portal : GimmickBase
             PortDestination = this;
             //enabled = false;   //目標ゲートがない場合、オブジェクトをdisableにします
         }
+        if (portalPartical == null)
+        {
+            portalPartical = GameObject.Find("PortPartical");
+        }
     }
     void Awake()
     {
         IfEnable = false;
         IfPorted = false;
+        
+        portalPartical.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -60,7 +70,23 @@ public class Portal : GimmickBase
 
     private void PortOnOff()       //ゲートを開けるまたは閉じる
     {
-        IfEnable = !IfEnable;
+        if (IfEnable)
+        {
+            IfEnable = false;
+            PortDestination.IfEnable = false;
+            portalPartical.SetActive(false);
+            PortDestination.portalPartical.SetActive(false);
+        }
+        else
+        {
+            IfEnable = true;
+            PortDestination.IfEnable = true;
+            portalPartical.SetActive(true);
+            PortDestination.portalPartical.SetActive(true);
+        }
+        //IfEnable = !IfEnable;
+        //PortDestination.IfEnable = IfEnable;
+
         GimmickUIClose();
     }
 

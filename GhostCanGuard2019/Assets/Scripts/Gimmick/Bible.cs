@@ -16,6 +16,8 @@ public class Bible : GimmickBase
     float startTime;
     SphereCollider collision;
 
+    ParticleSystem aura;
+
     GameObject obj;
     Ghost_targeting gt;
     // Start is called before the first frame update
@@ -29,7 +31,12 @@ public class Bible : GimmickBase
             collision.enabled = false;
             collision.radius = auraRadius;
         }
-        
+        if (aura == null)
+        {
+            aura = GetComponentInChildren<ParticleSystem>();
+        }
+        aura.Stop();
+        aura.Clear();
         isOpen = false;
         canOpen = true;
     }
@@ -53,6 +60,14 @@ public class Bible : GimmickBase
         {
             StartCoroutine(AuraON());
         }
+        else
+        {
+            if (isOpen)
+                Debug.Log("起動中です");
+            else
+                Debug.Log("準備中です");
+        }
+            
         GimmickUIClose();
 
     }
@@ -60,9 +75,11 @@ public class Bible : GimmickBase
     {
         isOpen = true;
         collision.enabled = true;
+        aura.Play();
         canOpen = false;
         yield return new WaitForSeconds(auraTime);
         isOpen = false;
+        aura.Stop();
         collision.enabled = false;
         yield return new WaitForSeconds(coolDownTime);
         canOpen = true;

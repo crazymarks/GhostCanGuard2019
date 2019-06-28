@@ -2533,7 +2533,7 @@ PrefabInstance:
     - target: {fileID: 3749461932045439641, guid: 74cfcdc012de9c24b8dde93b61635c13,
         type: 3}
       propertyPath: orthographic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3749461932045439640, guid: 74cfcdc012de9c24b8dde93b61635c13,
         type: 3}
@@ -2595,13 +2595,18 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 474188134}
+    - target: {fileID: 3749461932045439642, guid: 74cfcdc012de9c24b8dde93b61635c13,
+        type: 3}
+      propertyPath: distance
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 1431679565, guid: 74cfcdc012de9c24b8dde93b61635c13, type: 3}
       propertyPath: m_TargetTexture
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1431679565, guid: 74cfcdc012de9c24b8dde93b61635c13, type: 3}
       propertyPath: orthographic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74cfcdc012de9c24b8dde93b61635c13, type: 3}
