@@ -8,13 +8,15 @@ public class KabinGimmick : GimmickBase
     private Vector3 throwPos = Vector3.zero;   // 花瓶が飛んでいく場所
 
     [SerializeField]
-    private float power = 5.0f; // 花瓶を押す力
+    private float power = 400f; // 花瓶を押す力
     [SerializeField]
     private GameObject player = null;
     [SerializeField]
-    private float speed = 2.0f;
+    private float speed = 0.01f;
 
     private bool kabinSetPos = false;
+
+    private bool kabinFinish = false;
 
 
     private Rigidbody rb = null;
@@ -23,6 +25,7 @@ public class KabinGimmick : GimmickBase
     {
         base.Start();
         GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+
         rb = GetComponent<Rigidbody>();
     }
 
@@ -46,7 +49,7 @@ public class KabinGimmick : GimmickBase
         mousePos.z = 10f;
         throwPos = Camera.main.ScreenToWorldPoint(mousePos);
         Debug.Log(throwPos);
-        throwPos.y = 5.0f;
+        throwPos.y = 1.0f;
 
         // 力を加える方向をきめる
         Vector3 direction = (throwPos - this.transform.position).normalized;
@@ -57,13 +60,14 @@ public class KabinGimmick : GimmickBase
 
         GimmickManager.Instance.ClearGimmick();
         GimmickUIClose();
+        ClearGimmickEvent();
 
     }
 
     // ButtonのonClickで呼ぶ関数
     public void ClickUIStart()
     {
-        GimmickManager.Instance.SetGimmickAction(KabinGimmickAction);
+        GimmickManager.Instance.SetGimmickAction( () => KabinGimmickAction() );
         GimmickUIsOnOff(false);
     }
 
@@ -72,9 +76,7 @@ public class KabinGimmick : GimmickBase
         while(transform.position != pPos)
         {
             transform.position = Vector3.MoveTowards(transform.position, pPos, speed);
-            
         }
-
         kabinSetPos = true;
     }
 }
