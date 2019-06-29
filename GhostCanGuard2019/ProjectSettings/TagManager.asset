@@ -10,6 +10,7 @@ TagManager:
   - Alarm
   - Exit
   - Treasure
+  - PlayerCollider
   layers:
   - Default
   - TransparentFX
@@ -24,7 +25,7 @@ TagManager:
   - highlighttrigger
   - outline
   - Wall
-  - 
+  - ThiefAlert
   - 
   - 
   - 

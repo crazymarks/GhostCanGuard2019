@@ -36,17 +36,18 @@ public class Unit : MonoBehaviour
         //InvokeRepeating("RefindPath", 0f, 0.5f);
         thief = GetComponent<Thief>();
         mIsAllowFollow = true;
-        
+        PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
+
     }
 
     void Update()
     {
         //call this when
         //assuming path changed && after updating grid Gizmos
-        if (Input.GetKeyDown(KeyCode.A))// start pathfiding
-        {
-            PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
-        }
+        //if (Input.GetKeyDown(KeyCode.A))// start pathfiding
+        //{
+        //    PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
+        //}
         if (Input.GetKeyDown(KeyCode.Q)) GotStunned();//stunned gimmick, 
         //PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
 

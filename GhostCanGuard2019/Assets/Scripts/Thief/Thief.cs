@@ -85,7 +85,7 @@ public class Thief : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && thiefState != ThiefState.END)
+        if (other.tag == "PlayerCollider" && thiefState != ThiefState.END)
         {
             Debug.Log("detected Player");
             mIsPlayerExitedState = false;

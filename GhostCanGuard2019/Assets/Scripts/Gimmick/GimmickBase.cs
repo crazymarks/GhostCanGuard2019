@@ -15,6 +15,8 @@ public class GimmickBase : MonoBehaviour
     protected GameObject gimmickUIParent;
     protected EventTrigger eventTrigger;
 
+    private EventTrigger.Entry entry = new EventTrigger.Entry();
+
     // public static bool GimmickFlag = false;
 
     //virtual protected void Start()
@@ -25,13 +27,11 @@ public class GimmickBase : MonoBehaviour
     virtual protected void Start()
     {
         eventTrigger = this.gameObject.GetComponent<EventTrigger>();
-        
+
         if (gimmickUIParent == null)
         {
             gimmickUIParent = transform.Find("UI").gameObject;
         }
-        
-        
     }
     /// <summary>
     /// gimmickの効果を表示、非表示させる
@@ -39,11 +39,15 @@ public class GimmickBase : MonoBehaviour
     /// <param name="onoff">true: 展開  false: 収縮</param>
     public void GimmickUIsOnOff(bool onoff)
     {
-        
+        // UIの展開とギミック発動のフラグが異なっていたらreturn
+        if (onoff != GimmickManager.Instance.GimmickFrag) return;
+
         // playerの動きを止める
         PlayerManager.Instance.SetCurrentState(PlayerState.Gimmick);
         // UI表示
         gimmickUIParent.SetActive(onoff);
+        // Gimmickが発動待ち
+        GimmickManager.Instance.GimmickFrag = false;
     }
     // Eventに追加される関数
     public void GimmickEventOpen(BaseEventData data)
@@ -56,6 +60,7 @@ public class GimmickBase : MonoBehaviour
     /// </summary>
     public void GimmickUIClose()
     {
+        
         GimmickUIsOnOff(false);
         GimmickManager.Instance.ClearGimmick();
         PlayerManager.Instance.SetCurrentState(PlayerState.Play);
@@ -69,9 +74,18 @@ public class GimmickBase : MonoBehaviour
     protected void GimmickEventSetUp(EventTriggerType triggerType, Action<BaseEventData> action)
     {
         // eventを作成し、Triggerに追加する
-        var entry = new EventTrigger.Entry();
         entry.eventID = triggerType;
         entry.callback.AddListener((data) => action(data));
         this.eventTrigger.triggers.Add(entry);
+    }
+
+    /// <summary>
+    /// Gimmickのイベントを削除する
+    /// </summary>
+    protected void ClearGimmickEvent()
+    {
+        if (this.eventTrigger.triggers == null) return;
+
+        this.eventTrigger.triggers.Remove(entry);
     }
 }

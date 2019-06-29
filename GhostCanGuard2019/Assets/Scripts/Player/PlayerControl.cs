@@ -36,8 +36,8 @@ public class PlayerControl : MonoBehaviour
             return;
         }
         
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
         Vector3 move = new Vector3(horizontal, 0, vertical).normalized;
         
 
