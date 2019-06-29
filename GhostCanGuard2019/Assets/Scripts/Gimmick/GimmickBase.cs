@@ -4,36 +4,51 @@ using UnityEngine.EventSystems;
 
 /*
  * gimmickに継承するクラス
- * gimmickにEventを追加する関数やgimmick選択時にUIを表示する関数
+ * gimmickにEventを追加する関数やgimmickクリック時にUIを表示する関数
  */
 
 public class GimmickBase : MonoBehaviour
 {
-    protected GameObject gimmickUIParent;
-    
-    protected EventTrigger eventTrigger;
-    
+
+    //ギミックの効果や説明のUIの展開
     [SerializeField]
-    private PlayerMove playerMove;
+    protected GameObject gimmickUIParent;
+    protected EventTrigger eventTrigger;
 
-    // Start is called before the first frame update
-    void Start()
+    private EventTrigger.Entry entry = new EventTrigger.Entry();
+
+    // public static bool GimmickFlag = false;
+
+    //virtual protected void Start()
+    //{
+    //    eventTrigger = this.gameObject.GetComponent<EventTrigger>();
+    //    gimmickUIParent = this.transform.GetChild(0).gameObject;
+    //}
+    virtual protected void Start()
     {
-
+        eventTrigger = this.gameObject.GetComponent<EventTrigger>();
+        
+        if (gimmickUIParent == null)
+        {
+            gimmickUIParent = transform.Find("UI").gameObject;
+        }
     }
-
     /// <summary>
     /// gimmickの効果を表示、非表示させる
     /// </summary>
     /// <param name="onoff">true: 展開  false: 収縮</param>
     public void GimmickUIsOnOff(bool onoff)
     {
+        // UIの展開とギミック発動のフラグが異なっていたらreturn
+        if (onoff != GimmickManager.Instance.GimmickFrag) return;
+        
         // playerの動きを止める
-        playerMove.IsPlayerMove = !onoff;
+        PlayerManager.Instance.SetCurrentState(PlayerState.Gimmick);
         // UI表示
         gimmickUIParent.SetActive(onoff);
+        // Gimmickが発動待ち
+        GimmickManager.Instance.GimmickFrag = false;
     }
-
     // Eventに追加される関数
     public void GimmickEventOpen(BaseEventData data)
     {
@@ -45,22 +60,10 @@ public class GimmickBase : MonoBehaviour
     /// </summary>
     public void GimmickUIClose()
     {
+        
         GimmickUIsOnOff(false);
-    }
-    /// <summary>
-    /// Gimmick選択
-    /// 地点選択と効果選択
-    /// </summary>
-    public virtual void SelectGimmick(BaseEventData data)
-    {
-        // 継承先でoverrideする
-    }
-    /// <summary>
-    /// gimmickの効果開始
-    /// </summary>
-    public virtual void StartGimmick()
-    {
-        // 継承先でoverrideする
+        GimmickManager.Instance.ClearGimmick();
+        PlayerManager.Instance.SetCurrentState(PlayerState.Play);
     }
 
     /// <summary>
@@ -68,18 +71,21 @@ public class GimmickBase : MonoBehaviour
     /// </summary>
     /// <param name="triggerType">EventtTrriget.type</param>
     /// <param name="action">BaseEventDataが引数のvoid関数</param>
-    public void GimmickEventSetUp(EventTriggerType triggerType, Action<BaseEventData> action)
+    protected void GimmickEventSetUp(EventTriggerType triggerType, Action<BaseEventData> action)
     {
-        // ギミックのイベント
-        eventTrigger = this.gameObject.GetComponent<EventTrigger>();
-        // UIの親の空オブジェ
-        // gimmickUIParent = this.gameObject.transform.GetChild(0).gameObject;
-
         // eventを作成し、Triggerに追加する
-        var entry = new EventTrigger.Entry();
         entry.eventID = triggerType;
         entry.callback.AddListener((data) => action(data));
         this.eventTrigger.triggers.Add(entry);
     }
 
+    /// <summary>
+    /// Gimmickのイベントを削除する
+    /// </summary>
+    protected void ClearGimmickEvent()
+    {
+        if (this.eventTrigger.triggers == null) return;
+
+        this.eventTrigger.triggers.Remove(entry);
+    }
 }
