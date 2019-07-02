@@ -17,6 +17,7 @@ public class Thief : MonoBehaviour
     public ThiefState thiefState = ThiefState.HEAD_TREASURE;
 
     public float headTreasureTimer = 5.0f; //duration of timer in escape before heading treasure
+    public float idleTimer = 1.0f;
     public GameObject playerCollider;// collider object of the player , for passage blocking
     public GameObject ghostCollider;
 
@@ -26,10 +27,14 @@ public class Thief : MonoBehaviour
     Unit unit;// unit scrpt
 
     float escapeTimer = 0.0f;// timer in escape state
+    float escapeTimer2 = 0.0f;
     float stayTimer = 0.0f; // timer in the radius of player, changes target after certain time
     float treasureTimer = 0.0f; // time taken to take treasure
+    float idleTime = 0.0f;
     bool mIsPlayerExitedState = false, mIsTakenTreasure = false;// exited from radius 
     bool mIsPaused = false;
+    bool mIsTouched = false;
+    bool mIsAllowFInd = true;
 
 
     void Start()
@@ -47,9 +52,19 @@ public class Thief : MonoBehaviour
 
     void EscapeUpdate()
     {
+        idleTime += Time.deltaTime;
+        if (idleTime > idleTimer)
+        {
+            idleTime = 0f;
+            mIsAllowFInd = true;
+        }
         if(mIsPlayerExitedState == true)
         {
             StartCounter();
+        }
+        if(mIsTouched == true)
+        {
+            StartSecondaryCounter();
         }
     }
 
@@ -65,6 +80,7 @@ public class Thief : MonoBehaviour
 
     void StartCounter()
     {
+        Debug.Log("startCOunter");
         escapeTimer += Time.deltaTime;
         if (escapeTimer > headTreasureTimer)
         {
@@ -82,21 +98,45 @@ public class Thief : MonoBehaviour
             }
         }
     }
+    void StartSecondaryCounter()
+    {
+        Debug.Log("start2ndCOunter");
+        escapeTimer2 += Time.deltaTime;
+        if (escapeTimer2 > headTreasureTimer)
+        {
+            if (!mIsTakenTreasure)
+            {
+                unit.HeadToTreasure();
+                escapeTimer2 = 0f;
+                thiefState = ThiefState.HEAD_TREASURE;
+            }
+            else
+            {
+                unit.HeadExit();
+                escapeTimer2 = 0f;
+                thiefState = ThiefState.HEAD_EXIT;
+            }
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "PlayerCollider" && thiefState != ThiefState.END)
+        if (other.tag == "PlayerCollider" && thiefState != ThiefState.END && mIsAllowFInd == true)
         {
+            mIsAllowFInd = false;
             Debug.Log("detected Player");
             mIsPlayerExitedState = false;
             thiefState = ThiefState.ESCAPE;
             playerCollider.SetActive(true);// activates the collider of player, thus not pasing that route
             unit.GetNewTarget();
+            mIsTouched = true;
             //unit.RefindPath();
             //unit.FollowPriority();
+            //StartCounter();
         }
-        if (other.tag == "Ghost" && thiefState != ThiefState.END)
+        if (other.tag == "Ghost" && thiefState != ThiefState.END && mIsAllowFInd == true)
         {
+            mIsAllowFInd = false;
             Debug.Log("detected Ghost");
             mIsPlayerExitedState = false;
             thiefState = ThiefState.ESCAPE;
@@ -128,7 +168,7 @@ public class Thief : MonoBehaviour
         {
             mIsPlayerExitedState = false;
             stayTimer += Time.deltaTime;
-            if (stayTimer > 30.0f) unit.GetNewTarget();//changes escape target if still inside player radius for a certain time **hardcode 
+            //if (stayTimer > 2.0f) unit.GetNewTarget();//changes escape target if still inside player radius for a certain time **hardcode 
         }
         if (other.tag == "Treasure")
         {
@@ -154,7 +194,9 @@ public class Thief : MonoBehaviour
     {
         if (other.tag == "Player"|| other.tag == "Ghost")
         {
+            Debug.Log("exitedtrigger");
             mIsPlayerExitedState = true;
+            mIsTouched = false;
         }
     }
 

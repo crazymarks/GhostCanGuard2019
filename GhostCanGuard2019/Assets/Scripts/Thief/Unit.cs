@@ -80,7 +80,7 @@ public class Unit : MonoBehaviour
     {
         int rand = Random.Range(0, escapePoints.Capacity);
         currTarget = escapePoints[rand];
-        PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
+        PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
     }
 
     public void HeadToTreasure()
@@ -118,8 +118,22 @@ public class Unit : MonoBehaviour
         Debug.Log("hue");
         if (pathSuccessful)
         {
-            Debug.Log("PathSuccess");
-            mIsHeadable = true;
+            Debug.Log("pathSuccess");
+            path = newPath;
+            targetIndex = 0;
+            StopCoroutine("FollowPath");
+            StartCoroutine("FollowPath");
+        }
+        else
+        {
+            Debug.Log("inside else0");
+            int rand = Random.Range(0, escapePoints.Capacity);
+            while(currTarget == escapePoints[rand])
+            {
+                rand = Random.Range(0, escapePoints.Capacity);
+            }
+            currTarget = escapePoints[rand];
+            PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
         }
     }
 
@@ -147,6 +161,11 @@ public class Unit : MonoBehaviour
                 }
             }
         }
+    }
+
+    void FindAndFollow2()
+    {
+
     }
 
     IEnumerator FindAndFollow()
