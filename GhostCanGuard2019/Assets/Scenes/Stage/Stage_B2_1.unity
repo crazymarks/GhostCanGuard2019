@@ -304,7 +304,7 @@ PrefabInstance:
     - target: {fileID: 761259888724726605, guid: d9139de19a01d3a429e3f467149e890b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.07
+      value: 0.89
       objectReference: {fileID: 0}
     - target: {fileID: 761259888724726605, guid: d9139de19a01d3a429e3f467149e890b,
         type: 3}
@@ -1338,6 +1338,11 @@ PrefabInstance:
       propertyPath: playerControl
       value: 
       objectReference: {fileID: 1675019776}
+    - target: {fileID: 8566343946069160460, guid: 28c763a9102517c45909d079c3eec7bb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1242445073, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
       propertyPath: tf
       value: 
@@ -1346,11 +1351,6 @@ PrefabInstance:
       propertyPath: pc
       value: 
       objectReference: {fileID: 1675019776}
-    - target: {fileID: 8566343946069160460, guid: 28c763a9102517c45909d079c3eec7bb,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
 --- !u!1001 &1173965559
@@ -1434,6 +1434,11 @@ PrefabInstance:
         type: 3}
       propertyPath: gridWorldSize.y
       value: 19.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3957643227851540784, guid: f770db28de46b9d41bb3333a9f2dd0ca,
+        type: 3}
+      propertyPath: displayGridGizmos
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f770db28de46b9d41bb3333a9f2dd0ca, type: 3}
@@ -1963,6 +1968,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Thief
       objectReference: {fileID: 0}
+    - target: {fileID: 5639844316279069712, guid: a6f09db9e7f9c7e46835de870444befb,
+        type: 3}
+      propertyPath: playerCollider
+      value: 
+      objectReference: {fileID: 2122411534}
     - target: {fileID: 5639844316279069714, guid: a6f09db9e7f9c7e46835de870444befb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2033,24 +2043,24 @@ PrefabInstance:
       propertyPath: escapePoints.Array.data[0]
       value: 
       objectReference: {fileID: 500990061}
-    - target: {fileID: 5639844316279069712, guid: a6f09db9e7f9c7e46835de870444befb,
+    - target: {fileID: 5639844316279069718, guid: a6f09db9e7f9c7e46835de870444befb,
         type: 3}
-      propertyPath: playerCollider
+      propertyPath: ghost
       value: 
-      objectReference: {fileID: 2122411534}
+      objectReference: {fileID: 500990061}
+    - target: {fileID: 809986697978711428, guid: a6f09db9e7f9c7e46835de870444befb,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5639844316279069713, guid: a6f09db9e7f9c7e46835de870444befb,
         type: 3}
       propertyPath: m_IsTrigger
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5639844316279069713, guid: a6f09db9e7f9c7e46835de870444befb,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 809986697978711428, guid: a6f09db9e7f9c7e46835de870444befb,
-        type: 3}
-      propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

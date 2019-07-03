@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\Camera\OutLineManager.cs" />
     <Compile Include="Assets\Scripts\Camera\PostEffectBase.cs" />
     <Compile Include="Assets\Scripts\Ghost\Ghost_targeting.cs" />
+    <Compile Include="Assets\Scripts\Ghost\ParticalDelaytime.cs" />
     <Compile Include="Assets\Scripts\Gimmick\_Abandoned\GimickOpen.cs" />
     <Compile Include="Assets\Scripts\Gimmick\_Abandoned\GimmickPointSelect.cs" />
     <Compile Include="Assets\Scripts\Gimmick\_Abandoned\GimmicksUI.cs" />
@@ -82,7 +83,6 @@
     <Compile Include="Assets\Scripts\Gimmick\Kabin\KabinGimmick.cs" />
     <Compile Include="Assets\Scripts\Gimmick\Portal\Portal.cs" />
     <Compile Include="Assets\Scripts\Gimmick\Statue\testStatue.cs" />
-    <Compile Include="Assets\Scripts\ParticalDelaytime.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerControl.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMove.cs" />
     <Compile Include="Assets\Scripts\Singleton_Manager\CharctorManager.cs" />
@@ -105,6 +105,7 @@
     <Compile Include="Assets\Scripts\Thief\thiefHide.cs" />
     <Compile Include="Assets\Scripts\Thief\Unit.cs" />
     <Compile Include="Assets\Scripts\Title.cs" />
+    <Compile Include="Assets\Scripts\treasure.cs" />
     <None Include="Assets\Resources\Shader\OutlinePostEffect.shader" />
     <None Include="Assets\Resources\Shader\OutlinePrePass.shader" />
     <None Include="Assets\Resources\Z_Abandoned_Gimmick_Test\GimmickTargetPoint.shader" />

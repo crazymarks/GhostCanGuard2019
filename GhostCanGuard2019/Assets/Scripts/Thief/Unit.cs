@@ -32,7 +32,7 @@ public class Unit : MonoBehaviour
 
     void Start()
     {
-        
+
         currTarget = treasure;
         currSpeed = initialSpeed;
         //InvokeRepeating("RefindPath", 0f, 0.5f);
@@ -94,7 +94,7 @@ public class Unit : MonoBehaviour
     public void HeadExit()
     {
         currTarget = exit;
-        PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
+        PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -122,6 +122,7 @@ public class Unit : MonoBehaviour
         if (pathSuccessful)
         {
             //Debug.Log("pathSuccess");
+            thief.ghostCollider.SetActive(true);
             path = newPath;
             targetIndex = 0;
             StopCoroutine("FollowPath");
@@ -136,7 +137,7 @@ public class Unit : MonoBehaviour
                 Debug.Log("index " + pathFindIndex);
                 pathFindIndex++;
                 Debug.Log("index after plus " + pathFindIndex + escapePoints.Count);
-                
+
                 if (pathFindIndex == escapePoints.Count)
                 {
                     thief.ghostCollider.SetActive(false);
@@ -171,14 +172,14 @@ public class Unit : MonoBehaviour
 
     public void OnDrawGizmos()
     {
-        if(path != null)
+        if (path != null)
         {
-            for(int i = targetIndex; i < path.Length; i++)
+            for (int i = targetIndex; i < path.Length; i++)
             {
                 Gizmos.color = Color.black;
                 Gizmos.DrawCube(path[i], Vector3.one);
 
-                if(i == targetIndex)
+                if (i == targetIndex)
                 {
                     Gizmos.DrawLine(transform.position, path[i]);
                 }
@@ -234,18 +235,18 @@ public class Unit : MonoBehaviour
         }
         else currentWayPoint = transform.position;
 
-        while (true )
+        while (true)
         {
-            if(transform.position == currentWayPoint)
+            if (transform.position == currentWayPoint)
             {
                 targetIndex++;
-                if(targetIndex >= path.Length)
+                if (targetIndex >= path.Length)
                 {
                     yield break;
                 }
                 currentWayPoint = path[targetIndex];
             }
-            transform.position = Vector3.MoveTowards(transform.position,currentWayPoint, currSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, currentWayPoint, currSpeed * Time.deltaTime);
             //GetComponent<Rigidbody>().velocity = new Vector3(currentWayPoint.x - transform.position.x, 0, currentWayPoint.z - transform.position.z).normalized * currSpeed;
             //Debug.Log(GetComponent<Rigidbody>().velocity);
             transform.LookAt(new Vector3(currentWayPoint.x, transform.position.y, currentWayPoint.z));

@@ -13,7 +13,8 @@ public class Thief : MonoBehaviour
         ESCAPE,
         PAUSE,
         STOP,
-        END
+        EXITED,// player succeed
+        END //player failed
     }
     public ThiefState thiefState = ThiefState.HEAD_TREASURE;
 
@@ -40,7 +41,7 @@ public class Thief : MonoBehaviour
 
     void Start()
     {
-        
+
         unit = GetComponent<Unit>();
     }
 
@@ -59,11 +60,11 @@ public class Thief : MonoBehaviour
             idleTime = 0f;
             mIsAllowFInd = true;
         }
-        if(mIsPlayerExitedState == true)
+        if (mIsPlayerExitedState == true)
         {
             StartCounter();
         }
-        if(mIsTouched == true)
+        if (mIsTouched == true)
         {
             StartSecondaryCounter();
         }
@@ -72,6 +73,7 @@ public class Thief : MonoBehaviour
     void HeadExitUpdate()
     {
         StartSecondaryCounter();
+        unit.HeadExit();
     }
 
     void PauseUpdate()
@@ -81,7 +83,7 @@ public class Thief : MonoBehaviour
 
     void StartCounter()
     {
-        Debug.Log("startCOunter");
+        //Debug.Log("startCOunter");
         escapeTimer += Time.deltaTime;
         if (escapeTimer > headTreasureTimer)
         {
@@ -135,7 +137,7 @@ public class Thief : MonoBehaviour
             //unit.FollowPriority();
             //StartCounter();
         }
-        if (other.tag == "Ghost" && thiefState != ThiefState.END && mIsAllowFInd == true)
+        else if (other.tag == "Ghost" && thiefState != ThiefState.END && mIsAllowFInd == true)
         {
             mIsAllowFInd = false;
             Debug.Log("detected Ghost");
@@ -146,32 +148,36 @@ public class Thief : MonoBehaviour
             //unit.RefindPath();
             //unit.FollowPriority();
         }
-        if (other.tag == "Treasure")
+        else if (other.tag == "Treasure")
         {
             Debug.Log("inTreasure");
             thiefState = ThiefState.STOP;
         }
-        if(other.tag == "Alarm")
+        else if (other.tag == "Alarm")
         {
             Debug.Log("sensed alarm");
         }
-        if(other.tag == "Exit" && thiefState == ThiefState.HEAD_EXIT)
+        else if (other.tag == "Exit" && thiefState == ThiefState.HEAD_EXIT)
         {
             Debug.Log("exited");
             thiefState = ThiefState.END;
+        }
+        else if (other.tag == "Exit" && !mIsTakenTreasure)
+        {
+            thiefState = ThiefState.EXITED;
         }
     }
 
     void OnTriggerStay(Collider other)
     {
-        
-        if ((other.tag == "Player" || other.tag == "Ghost" )&& thiefState != ThiefState.END)
+
+        if ((other.tag == "Player" || other.tag == "Ghost") && thiefState != ThiefState.END)
         {
             mIsPlayerExitedState = false;
             stayTimer += Time.deltaTime;
             //if (stayTimer > 2.0f) unit.GetNewTarget();//changes escape target if still inside player radius for a certain time **hardcode 
         }
-        if (other.tag == "Treasure")
+        else if (other.tag == "Treasure")
         {
             treasureTimer += Time.deltaTime;
             if (treasureTimer > 1.0f)//time needed to collect treasure ** hardcode
@@ -181,11 +187,11 @@ public class Thief : MonoBehaviour
                 thiefState = ThiefState.HEAD_EXIT;
             }
         }
-        if(other.tag == "Alarm" && isAlarmActivated)// soon to be changed
+        else if (other.tag == "Alarm" && isAlarmActivated)// soon to be changed
         {
             unit.tempIncreaseSpeed();//increase thief speed during inside Alarm radius
         }
-        if (other.tag == "Exit" && thiefState == ThiefState.HEAD_EXIT)
+        else if (other.tag == "Exit" && thiefState == ThiefState.HEAD_EXIT)
         {
             Debug.Log("exited");
             thiefState = ThiefState.END;
@@ -193,7 +199,7 @@ public class Thief : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player"|| other.tag == "Ghost")
+        if (other.tag == "Player" || other.tag == "Ghost")
         {
             Debug.Log("exitedtrigger");
             mIsPlayerExitedState = true;

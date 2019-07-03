@@ -14,12 +14,12 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     [SerializeField]
     private PlayerControl pc;
 
-    bool ghostEnable=false;
+    bool ghostEnable = false;
     [SerializeField]
     private Ghost_targeting ght;
     [SerializeField]
     private LoadScene ldc;
-    bool gameover=false;
+    bool gameover = false;
     [SerializeField]
     float checkdistance = 0.2f;
     float distance_player_to_thief;
@@ -28,9 +28,9 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
 
 
-    bool gameStart=false;
+    bool gameStart = false;
     [SerializeField]
-    float startWait=2f;
+    float startWait = 2f;
     [SerializeField]
     Text text;
 
@@ -66,7 +66,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                 else
                     throw;
             }
-            
+
         }
         if (ght != null)
         {
@@ -81,7 +81,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         {
             swordlight = treasure.GetComponentInChildren<ParticleSystem>(true);
         }
-        
+
         gameStart = false;
         text.text = "";
         GimmickManager.Instance.GimmickFrag = false;
@@ -91,13 +91,13 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     // Update is called once per frame
     void Update()
     {
-     
+
         if (ghostEnable)
         {
             distance_ghost_to_thief = getXZDistance(ght.gameObject, tf.gameObject);
             distance_player_to_ghost = getXZDistance(pc.gameObject, ght.gameObject);
         }
-        
+
         distance_player_to_thief = getXZDistance(pc.gameObject, tf.gameObject);
         if (!gameover)
         {
@@ -109,10 +109,16 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                 Debug.Log("泥棒が逃げました！");
                 gameover = true;
             }
-            
+            if (tf.thiefState == Thief.ThiefState.EXITED)
+            {
+                text.text = "平和な夜ですね．．．";
+                text.enabled = true;
+                Debug.Log("You Win!");
+                gameover = true;
+            }
             if (distance_player_to_thief <= checkdistance)
             {
-                text.text = "You Win!";
+                text.text = "逮捕!";
                 text.enabled = true;
                 Debug.Log("You Win!");
                 gameover = true;
@@ -121,7 +127,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             {
                 if (distance_ghost_to_thief <= checkdistance)
                 {
-                    text.text = "泥棒が殺人鬼に殺された！！";
+                    text.text = "迷えば、敗れる";
                     text.enabled = true;
                     Debug.Log("泥棒が殺人鬼に殺された！！");
                     gameover = true;
@@ -134,7 +140,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                     gameover = true;
                 }
             }
-            if(tf.thiefState == Thief.ThiefState.HEAD_EXIT && swordlight != null)
+            if (tf.thiefState == Thief.ThiefState.HEAD_EXIT && swordlight != null)
             {
                 swordlight.Stop();
                 swordlight.Clear();
@@ -157,7 +163,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     IEnumerator startCount(float startTime)
     {
         Time.timeScale = 0;
-        for(int i = (int)startTime+1; i >= 0; i--)
+        for (int i = (int)startTime + 1; i >= 0; i--)
         {
             if (i > 0)
             {
@@ -165,7 +171,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             }
             else
                 text.text = "Start!!";
-            Debug.Log(i+1+"..");
+            Debug.Log(i + 1 + "..");
             yield return new WaitForSecondsRealtime(1f);
         }
         text.enabled = false;
