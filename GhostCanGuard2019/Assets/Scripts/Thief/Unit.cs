@@ -6,7 +6,7 @@ public class Unit : MonoBehaviour
 {
     //** Values should be changed in the inspector**
 
-    public Transform treasure, exit;// positions of treasure and exit
+    public Transform treasure, exit, ghost;// positions of treasure and exit
     public float initialSpeed = 20;// initial speed for thief
     public float increasedSpeed = 30, increasedSpeedDur = 3.0f;//increased speed and duration
     public float stunnedTime = 1.5f;// stunned gimick effect duration
@@ -27,6 +27,8 @@ public class Unit : MonoBehaviour
 
     public bool mIsAllowFollow = false;
     bool mIsHeadable = false;
+
+    int pathFindIndex = 0;
 
     void Start()
     {
@@ -78,8 +80,8 @@ public class Unit : MonoBehaviour
 
     public void GetNewTarget()
     {
-        int rand = Random.Range(0, escapePoints.Capacity);
-        currTarget = escapePoints[rand];
+        //int rand = Random.Range(0, escapePoints.Capacity);
+        currTarget = escapePoints[0];
         PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
     }
 
@@ -92,7 +94,7 @@ public class Unit : MonoBehaviour
     public void HeadExit()
     {
         currTarget = exit;
-        PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
+        PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
     }
 
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -108,32 +110,57 @@ public class Unit : MonoBehaviour
         else
         {
             Debug.Log("what?");
-            StopCoroutine("FollowPath");
-            mIsAllowFollow = false;
+            //StopCoroutine("FollowPath");
+            //mIsAllowFollow = false;
+            PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
         }
     }
 
     public void OnPathFound2(Vector3[] newPath, bool pathSuccessful)//  for priority
     {
-        Debug.Log("hue");
+        //Debug.Log("hue");
         if (pathSuccessful)
         {
-            Debug.Log("pathSuccess");
+            //Debug.Log("pathSuccess");
             path = newPath;
             targetIndex = 0;
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
+            pathFindIndex = 0;
         }
         else
         {
             Debug.Log("inside else0");
-            int rand = Random.Range(0, escapePoints.Capacity);
-            while(currTarget == escapePoints[rand])
+            if (pathFindIndex < escapePoints.Count)
             {
-                rand = Random.Range(0, escapePoints.Capacity);
+                Debug.Log("index " + pathFindIndex);
+                pathFindIndex++;
+                Debug.Log("index after plus " + pathFindIndex + escapePoints.Count);
+                
+                if (pathFindIndex == escapePoints.Count)
+                {
+                    thief.ghostCollider.SetActive(false);
+                    //thief.playerCollider.SetActive(false);
+                    currTarget = ghost;
+                    Debug.Log("!");
+                    pathFindIndex = 0;
+                }
+                else currTarget = escapePoints[pathFindIndex];
+                PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
             }
-            currTarget = escapePoints[rand];
-            PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
+            //else if (pathFindIndex == escapePoints.Count)
+            //{
+            //    Debug.Log("hi");
+            //    currTarget = ghost;
+            //    PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
+            //}
+            //int rand = Random.Range(0, escapePoints.Capacity);
+            //while(currTarget == escapePoints[rand])
+            //{
+            //    rand = Random.Range(0, escapePoints.Capacity);
+            //}
+            //currTarget = escapePoints[rand];
+            //PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
         }
     }
 

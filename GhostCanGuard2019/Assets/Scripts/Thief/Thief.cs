@@ -9,6 +9,7 @@ public class Thief : MonoBehaviour
         HEAD_TREASURE,
         IN_TREASURE,
         HEAD_EXIT,
+        HEAD_GHOST,
         ESCAPE,
         PAUSE,
         STOP,
@@ -70,7 +71,7 @@ public class Thief : MonoBehaviour
 
     void HeadExitUpdate()
     {
-        
+        StartSecondaryCounter();
     }
 
     void PauseUpdate()
@@ -100,7 +101,7 @@ public class Thief : MonoBehaviour
     }
     void StartSecondaryCounter()
     {
-        Debug.Log("start2ndCOunter");
+        //Debug.Log("start2ndCOunter");
         escapeTimer2 += Time.deltaTime;
         if (escapeTimer2 > headTreasureTimer)
         {

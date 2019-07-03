@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6857619921078188233}
   - component: {fileID: 6857619921078188234}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Statue
   m_TagString: Gimmik
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ GameObject:
   - component: {fileID: 1037799797}
   - component: {fileID: 1037799796}
   - component: {fileID: 2014411214}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: cube
   m_TagString: Gimmik
   m_Icon: {fileID: 0}
@@ -206,6 +206,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2488910463636175315, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2488910463636175319, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -311,6 +316,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2488910463806349784, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2488910463655980230, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2488910463636175316, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
         type: 3}
       propertyPath: m_RenderMode
@@ -331,32 +346,57 @@ PrefabInstance:
       propertyPath: m_ReferenceResolution.y
       value: 1080
       objectReference: {fileID: 0}
-    - target: {fileID: 2488910463287514016, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+    - target: {fileID: 2488910463327663652, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2488910463287514030, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2488910464071319343, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2488910464212335400, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2488910463475634001, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2488910463655980248, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2488910463287514016, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+    - target: {fileID: 2488910463655980248, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1037799796}
-    - target: {fileID: 2488910463287514016, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+    - target: {fileID: 2488910463655980248, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: FallLeft
+      value: CloseUI
       objectReference: {fileID: 0}
-    - target: {fileID: 2488910463287514016, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+    - target: {fileID: 2488910463655980248, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2488910463287514016, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+    - target: {fileID: 2488910463655980248, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 2488910463287514016, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+    - target: {fileID: 2488910463655980248, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -391,32 +431,32 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 2488910463655980248, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+    - target: {fileID: 2488910463287514016, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2488910463655980248, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+    - target: {fileID: 2488910463287514016, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1037799796}
-    - target: {fileID: 2488910463655980248, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+    - target: {fileID: 2488910463287514016, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: CloseUI
+      value: FallLeft
       objectReference: {fileID: 0}
-    - target: {fileID: 2488910463655980248, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+    - target: {fileID: 2488910463287514016, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2488910463655980248, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+    - target: {fileID: 2488910463287514016, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 2488910463655980248, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
+    - target: {fileID: 2488910463287514016, guid: 163c6d28c03bc2b4ea126b74a9fa0aa8,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -449,6 +489,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: e031477a247b6944f98bef6173950b0c, type: 3}
       propertyPath: m_TagString
       value: Gimmik
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e031477a247b6944f98bef6173950b0c, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e031477a247b6944f98bef6173950b0c, type: 3}
       propertyPath: m_LocalPosition.x

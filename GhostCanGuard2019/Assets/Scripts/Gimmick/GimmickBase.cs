@@ -54,13 +54,14 @@ public class GimmickBase : MonoBehaviour
     {
         Debug.Log("gimmick touch");
         GimmickUIsOnOff(true);
+        Time.timeScale = 0f;
     }
     /// <summary>
     /// gimmickの選択を解除する
     /// </summary>
     public void GimmickUIClose()
     {
-        
+        Time.timeScale = 1f;
         GimmickUIsOnOff(false);
         GimmickManager.Instance.ClearGimmick();
         PlayerManager.Instance.SetCurrentState(PlayerState.Play);
