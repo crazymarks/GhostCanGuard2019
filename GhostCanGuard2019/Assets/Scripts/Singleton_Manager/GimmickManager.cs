@@ -23,7 +23,7 @@ public class GimmickManager : SingletonMonoBehavior<GimmickManager>
 
     private void Start()
     {
-        GimmickFrag = true;
+        GimmickFrag = false;
     }
 
     /// <summary>

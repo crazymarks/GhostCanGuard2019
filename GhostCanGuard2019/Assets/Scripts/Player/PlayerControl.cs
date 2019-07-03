@@ -10,7 +10,7 @@ public class PlayerControl : MonoBehaviour
     public float turnSpeed = 1f;
 
     private Rigidbody rb;
-
+    public float velocity { get { return rb.velocity.magnitude; } }
     //public static PlayerMove instancePM;
 
     private bool _playerMove = true;

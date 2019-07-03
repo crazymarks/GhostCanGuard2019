@@ -22,6 +22,9 @@ public class PlayerManager: SingletonMonoBehavior<PlayerManager>
     private float playerSpeed = 0f;
     private float playerTurnSpeed = 0f;
 
+    private Animator animcontrol;
+
+
     [SerializeField]
     //private PlayerMove playerMove = null;
     private PlayerControl playerControl = null;
@@ -33,10 +36,13 @@ public class PlayerManager: SingletonMonoBehavior<PlayerManager>
         playerSpeed = playerControl.speed;
         playerTurnSpeed = playerControl.turnSpeed;
         Debug.Log("playerの初期のspeedは"+playerSpeed);
+        animcontrol = playerControl.gameObject.GetComponentInChildren<Animator>();
+        
     }
 
     private void Update()
     {
+        animcontrol.SetFloat("speed", playerControl.velocity);
         // Debug用
         //if (Input.GetKeyDown(KeyCode.P))
         //    SetCurrentState(PlayerState.Play);
@@ -84,17 +90,22 @@ public class PlayerManager: SingletonMonoBehavior<PlayerManager>
             case PlayerState.Stop:
                 playerControl.speed = 0;
                 playerControl.turnSpeed = 0;
+                animcontrol.speed = 0;
                 break;
             case PlayerState.Play:
                 playerControl.speed = playerSpeed;
                 playerControl.turnSpeed = playerTurnSpeed;
+                animcontrol.speed = 1;
+                animcontrol.SetBool("gimmick", false);
                 break;
             case PlayerState.Slow:
                 playerControl.speed = playerSpeed / 3;
+                animcontrol.speed = 1 / 3;
                 break;
             case PlayerState.Gimmick:
                 playerControl.speed = 0;
                 playerControl.turnSpeed = 0;
+                animcontrol.SetBool("gimmick", true);
                 break;
             default:
                 break;

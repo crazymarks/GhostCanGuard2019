@@ -25,21 +25,51 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     float distance_player_to_ghost;
     float distance_ghost_to_thief;
 
-
+    bool gameStart=false;
+    [SerializeField]
+    float startWait=2f;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (pc == null)
+        {
+            pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+        }
+        if (tf == null)
+        {
+            tf = GameObject.FindGameObjectWithTag("Thief").GetComponent<Thief>();
+        }
+        if (ght == null)
+        {
+            try
+            {
+                ght = GameObject.FindGameObjectWithTag("Ghost").GetComponent<Ghost_targeting>();
+            }
+            catch (System.Exception)
+            {
+                if (ght == null)
+                {
+                    Debug.Log("Ghost Dosen't Exist");
+                }
+                else
+                    throw;
+            }
+            
+        }
         if (ght != null)
         {
             ghostEnable = true;
         }
-       
+        gameStart = false;
+        GimmickManager.Instance.GimmickFrag = false;
+        StartCoroutine(startCount(startWait));
     }
 
     // Update is called once per frame
     void Update()
     {
+     
         if (ghostEnable)
         {
             distance_ghost_to_thief = getXZDistance(ght.gameObject, tf.gameObject);
@@ -49,7 +79,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         distance_player_to_thief = getXZDistance(pc.gameObject, tf.gameObject);
         if (!gameover)
         {
-            Debug.Log(distance_player_to_thief);
+            //Debug.Log(distance_player_to_thief);
             if (tf.thiefState == Thief.ThiefState.END)
             {
                 Debug.Log("泥棒が逃げました！");
@@ -86,7 +116,22 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     {
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(2f);
+        Time.timeScale = 1f;
         ldc.loadScene("TitleScene");
+
+    }
+    IEnumerator startCount(float startTime)
+    {
+        Time.timeScale = 0;
+        for(int i = (int)startTime; i > 0; i--)
+        {
+            Debug.Log(i+"..");
+            yield return new WaitForSecondsRealtime(1f);
+        }
+        Debug.Log("start!!");
+        gameStart = true;
+        Time.timeScale = 1f;
+        GimmickManager.Instance.GimmickFrag = true;
     }
     float getXZDistance(GameObject a, GameObject b)
     {
