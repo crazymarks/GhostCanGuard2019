@@ -245,8 +245,10 @@ public class Unit : MonoBehaviour
                 }
                 currentWayPoint = path[targetIndex];
             }
-            transform.position = Vector3.MoveTowards(transform.position, currentWayPoint, currSpeed * Time.deltaTime);
-            transform.LookAt(currentWayPoint);
+            transform.position = Vector3.MoveTowards(transform.position,currentWayPoint, currSpeed * Time.deltaTime);
+            //GetComponent<Rigidbody>().velocity = new Vector3(currentWayPoint.x - transform.position.x, 0, currentWayPoint.z - transform.position.z).normalized * currSpeed;
+            //Debug.Log(GetComponent<Rigidbody>().velocity);
+            transform.LookAt(new Vector3(currentWayPoint.x, transform.position.y, currentWayPoint.z));
             //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(currentWayPoint, Vector3.up), 0.5f);
             yield return null;
         }

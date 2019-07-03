@@ -16,6 +16,10 @@ public class StatueScript : MonoBehaviour
     float tiltAroundX;
     float tiltAroundZ;
 
+
+
+
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftArrow) && isFallen == false)
