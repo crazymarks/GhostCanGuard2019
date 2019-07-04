@@ -17,6 +17,9 @@ public class PlayerControl : MonoBehaviour
     public bool CanPlayerMove { get { return _playerMove; } set { _playerMove = value; } }
 
 
+    float horizontal = 0;
+    float vertical = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,15 +32,28 @@ public class PlayerControl : MonoBehaviour
         move(speed);
     }
 
+    private void Update()
+    {
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
+
+        // playerのAnimation処理
+        //if (horizontal == 0 && vertical == 0)
+        if (velocity < 0.1)
+            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Stop);
+        else if (PlayerManager.Instance.CurrentPlayerState == PlayerState.Slow)
+            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Walk);
+        else
+            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Run);
+    }
+
     private void move(float speed)
     {
         if (!_playerMove) {
             //rb.velocity = Vector3.zero;
             return;
         }
-        
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+       
         Vector3 move = new Vector3(horizontal, 0, vertical).normalized;
         
 

@@ -307,6 +307,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &372655207 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 761259888724726609, guid: d9139de19a01d3a429e3f467149e890b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1994591931}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &466408638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -640,6 +646,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5639844316279069718, guid: a6f09db9e7f9c7e46835de870444befb,
         type: 3}
+      propertyPath: escapePoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639844316279069718, guid: a6f09db9e7f9c7e46835de870444befb,
+        type: 3}
       propertyPath: treasure
       value: 
       objectReference: {fileID: 1994591932}
@@ -653,9 +664,24 @@ PrefabInstance:
       propertyPath: escapePoints.Array.data[0]
       value: 
       objectReference: {fileID: 1404099126}
+    - target: {fileID: 5639844316279069718, guid: a6f09db9e7f9c7e46835de870444befb,
+        type: 3}
+      propertyPath: ghost
+      value: 
+      objectReference: {fileID: 1404099126}
+    - target: {fileID: 5639844316279069718, guid: a6f09db9e7f9c7e46835de870444befb,
+        type: 3}
+      propertyPath: escapePoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1403556288}
     - target: {fileID: 5639844316279069712, guid: a6f09db9e7f9c7e46835de870444befb,
         type: 3}
       propertyPath: playerCollider
+      value: 
+      objectReference: {fileID: 664703343}
+    - target: {fileID: 5639844316279069712, guid: a6f09db9e7f9c7e46835de870444befb,
+        type: 3}
+      propertyPath: ghostCollider
       value: 
       objectReference: {fileID: 664703343}
     m_RemovedComponents: []
@@ -1516,6 +1542,10 @@ PrefabInstance:
       propertyPath: tf
       value: 
       objectReference: {fileID: 637617390}
+    - target: {fileID: 1242445073, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
+      propertyPath: treasure
+      value: 
+      objectReference: {fileID: 372655207}
     - target: {fileID: 5770323048838871665, guid: 28c763a9102517c45909d079c3eec7bb,
         type: 3}
       propertyPath: m_Color.r

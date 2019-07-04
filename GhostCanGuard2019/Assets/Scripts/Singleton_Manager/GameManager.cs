@@ -180,9 +180,18 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         Time.timeScale = 1f;
         GimmickManager.Instance.GimmickFrag = true;
     }
-    float getXZDistance(GameObject a, GameObject b)
+    public float getXZDistance(GameObject a, GameObject b)
     {
         float distance = Mathf.Sqrt((a.transform.position.x - b.transform.position.x) * (a.transform.position.x - b.transform.position.x) + (a.transform.position.z - b.transform.position.z) * (a.transform.position.z - b.transform.position.z));
         return distance;
+    }
+    public IEnumerator showTextWithSeconds(string msg,float seconds)
+    {
+        Time.timeScale = 0;
+        text.text = msg;
+        text.enabled = true;
+        yield return new WaitForSecondsRealtime(seconds);
+        text.enabled = false;
+        Time.timeScale = 1;
     }
 }

@@ -117,15 +117,27 @@ public class Hourse : GimmickBase
                     }
                     
                 }
-                float horizontal = Input.GetAxis("Horizontal");
-                float vertical = Input.GetAxis("Vertical");
-                if (horizontal != 0 || vertical != 0)
+                
+              
+                if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
                 {
-                    IfBacking = true;
-                    Debug.Log("Start Back");
-                    LeftOrient = new Vector3(horizontal,0,vertical).normalized;
+                    float horizontal = Input.GetAxis("Horizontal");
+                    float vertical = Input.GetAxis("Vertical");
+                    LeftOrient = new Vector3(horizontal, 0, vertical).normalized;
                     GetOffHourse(Player, LeftOrient);
+
+                    if (transform.position == StartPosition)
+                    {
+                        resetHourse();
+                    }
+                    else
+                    {
+                        IfBacking = true;
+                        Debug.Log("Start Back");
+                    }
+                    
                 }
+
             }
             if (IfBacking)
             {
@@ -194,7 +206,7 @@ public class Hourse : GimmickBase
             //IsHourseMove = true;
             
         }
-
+        Time.timeScale = 1f;
         if (!Input.GetMouseButtonDown(0)) return;
         RaycastHit hitInfo;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -218,11 +230,14 @@ public class Hourse : GimmickBase
 
     public void OnClickUIStart()
     {
-
-
-        GimmickManager.Instance.SetGimmickAction(Active);
+        if (GameManager.Instance.getXZDistance(gameObject, Player) <= 3)
+            GimmickManager.Instance.SetGimmickAction(Active);
+        else
+        {
+            StartCoroutine(GameManager.Instance.showTextWithSeconds("もっと近づいてください！", 1f));
+            GimmickUIClose();
+        }
         GimmickUIsOnOff(false);
-
     }
 
 }

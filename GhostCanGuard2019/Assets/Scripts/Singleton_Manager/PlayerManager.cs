@@ -17,12 +17,15 @@ public enum PlayerState
 public class PlayerManager: SingletonMonoBehavior<PlayerManager>
 {
     private PlayerState currentPlayerState = PlayerState.Stop;
-    public PlayerState CurrentPlayer => currentPlayerState;
+    public PlayerState CurrentPlayerState => currentPlayerState;
 
     private float playerSpeed = 0f;
     private float playerTurnSpeed = 0f;
 
-    private Animator animcontrol;
+    //private Animator animcontrol;
+    private float nowTime = 0;      // 経過時間
+    private float cancelSlow = 5;   // slowが解除される時間
+
 
 
     [SerializeField]
@@ -36,13 +39,15 @@ public class PlayerManager: SingletonMonoBehavior<PlayerManager>
         playerSpeed = playerControl.speed;
         playerTurnSpeed = playerControl.turnSpeed;
         Debug.Log("playerの初期のspeedは"+playerSpeed);
-        animcontrol = playerControl.gameObject.GetComponentInChildren<Animator>();
+        //animcontrol = playerControl.gameObject.GetComponentInChildren<Animator>();
         
     }
 
     private void Update()
     {
-        animcontrol.SetFloat("speed", playerControl.velocity);
+        if (currentPlayerState != PlayerState.Slow) return;
+        SlowStateToPlay();
+        //animcontrol.SetFloat("speed", playerControl.velocity);
         // Debug用
         //if (Input.GetKeyDown(KeyCode.P))
         //    SetCurrentState(PlayerState.Play);
@@ -67,50 +72,47 @@ public class PlayerManager: SingletonMonoBehavior<PlayerManager>
     /// </summary>
     private void OnGameStateChanged(PlayerState state)
     {
-        //switch(state)
-        //{
-        //    case PlayerState.Stop:
-        //        playerMove.PlayerSpeed = 0;
-        //        break;
-        //    case PlayerState.Play:
-        //        playerMove.PlayerSpeed = playerSpeed;
-        //        break;
-        //    case PlayerState.Slow:
-        //        playerMove.PlayerSpeed = playerSpeed / 3;
-        //        break;
-        //    case PlayerState.Gimmick:
-        //        playerMove.PlayerSpeed = 0;
-        //        break;
-        //    default:
-        //        break;
-        //}
-
+      
         switch (state)
         {
             case PlayerState.Stop:
                 playerControl.speed = 0;
                 playerControl.turnSpeed = 0;
-                animcontrol.speed = 0;
+                //animcontrol.speed = 0;
                 break;
             case PlayerState.Play:
                 playerControl.speed = playerSpeed;
                 playerControl.turnSpeed = playerTurnSpeed;
-                animcontrol.speed = 1;
-                animcontrol.SetBool("gimmick", false);
+                //animcontrol.speed = 1;
+                //animcontrol.SetBool("gimmick", false);
                 break;
             case PlayerState.Slow:
                 playerControl.speed = playerSpeed / 3;
-                animcontrol.speed = 1 / 3;
+                PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Walk);
+                //animcontrol.speed = 1 / 3;
                 break;
             case PlayerState.Gimmick:
                 playerControl.speed = 0;
                 playerControl.turnSpeed = 0;
-                animcontrol.SetBool("gimmick", true);
+                //animcontrol.SetBool("gimmick", true);
                 break;
             default:
                 break;
         }
+        
+    }
 
+    /// <summary>
+    /// Slowの状態変化解除
+    /// </summary>
+    private void SlowStateToPlay()
+    {
+        nowTime += Time.deltaTime;
 
+        if (nowTime > cancelSlow)
+        {
+            nowTime = 0;
+            SetCurrentState(PlayerState.Play);
+        }
     }
 }

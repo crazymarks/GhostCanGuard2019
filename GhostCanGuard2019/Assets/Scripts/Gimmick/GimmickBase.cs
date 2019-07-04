@@ -52,7 +52,9 @@ public class GimmickBase : MonoBehaviour
     // Eventに追加される関数
     public void GimmickEventOpen(BaseEventData data)
     {
+
         Debug.Log("gimmick touch");
+        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
         GimmickUIsOnOff(true);
         Time.timeScale = 0f;
     }
@@ -63,8 +65,9 @@ public class GimmickBase : MonoBehaviour
     {
         Time.timeScale = 1f;
         GimmickUIsOnOff(false);
+        PlayerAnimationController.Instance.CancelPlayerAnimation(SetPAnimator.Hold);
         GimmickManager.Instance.ClearGimmick();
-        PlayerManager.Instance.SetCurrentState(PlayerState.Play);
+        //PlayerManager.Instance.SetCurrentState(PlayerState.Play);
     }
 
     /// <summary>

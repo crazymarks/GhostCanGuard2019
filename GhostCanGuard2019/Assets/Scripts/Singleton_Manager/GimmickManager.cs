@@ -41,6 +41,7 @@ public class GimmickManager : SingletonMonoBehavior<GimmickManager>
     /// </summary>
     public void ClearGimmick()
     {
+        PlayerManager.Instance.SetCurrentState(PlayerState.Play);
         if (gimmickNames != null)
         {
             gimmickNames.ForEach(name => Debug.Log(name));
@@ -48,6 +49,11 @@ public class GimmickManager : SingletonMonoBehavior<GimmickManager>
         }
         GimmickFunc = null;
         GimmickFrag = true;
+    }
+
+    public void PlayerPushAnimation()
+    {
+        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
     }
 
     private void Update()

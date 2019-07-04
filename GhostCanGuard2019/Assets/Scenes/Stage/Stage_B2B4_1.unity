@@ -562,9 +562,19 @@ PrefabInstance:
       propertyPath: escapePoints.Array.data[3]
       value: 
       objectReference: {fileID: 1256938585}
+    - target: {fileID: 5639844316279069718, guid: a6f09db9e7f9c7e46835de870444befb,
+        type: 3}
+      propertyPath: ghost
+      value: 
+      objectReference: {fileID: 898505480}
     - target: {fileID: 5639844316279069712, guid: a6f09db9e7f9c7e46835de870444befb,
         type: 3}
       propertyPath: playerCollider
+      value: 
+      objectReference: {fileID: 1759226617}
+    - target: {fileID: 5639844316279069712, guid: a6f09db9e7f9c7e46835de870444befb,
+        type: 3}
+      propertyPath: ghostCollider
       value: 
       objectReference: {fileID: 1759226617}
     - target: {fileID: 5639844316279069713, guid: a6f09db9e7f9c7e46835de870444befb,
@@ -1156,6 +1166,19 @@ PrefabInstance:
       propertyPath: playerControl
       value: 
       objectReference: {fileID: 1759226616}
+    - target: {fileID: 8566343946069160460, guid: 28c763a9102517c45909d079c3eec7bb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242445073, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
+      propertyPath: pc
+      value: 
+      objectReference: {fileID: 1759226616}
+    - target: {fileID: 1242445073, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
+      propertyPath: tf
+      value: 
+      objectReference: {fileID: 221060749}
     - target: {fileID: 2206261245167281746, guid: 28c763a9102517c45909d079c3eec7bb,
         type: 3}
       propertyPath: tf
@@ -1176,19 +1199,6 @@ PrefabInstance:
       propertyPath: checkdistance
       value: 0.8
       objectReference: {fileID: 0}
-    - target: {fileID: 8566343946069160460, guid: 28c763a9102517c45909d079c3eec7bb,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1242445073, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
-      propertyPath: pc
-      value: 
-      objectReference: {fileID: 1759226616}
-    - target: {fileID: 1242445073, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
-      propertyPath: tf
-      value: 
-      objectReference: {fileID: 221060749}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
 --- !u!114 &1204382995 stripped
