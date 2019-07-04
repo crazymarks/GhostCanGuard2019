@@ -193,6 +193,8 @@ public class Hourse : GimmickBase
         PlayerManager.Instance.SetCurrentState(PlayerState.Play);
         LeftOrient = Vector3.zero;
         player.GetComponent<Rigidbody>().isKinematic = false;
+        PlayerManager.Instance.SetCurrentState(PlayerState.Play);
+        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
     }
 
     private void Active()

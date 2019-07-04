@@ -122,7 +122,7 @@ public class Unit : MonoBehaviour
         if (pathSuccessful)
         {
             //Debug.Log("pathSuccess");
-            thief.ghostCollider.SetActive(true);
+            if(thief.ghostCollider!=null)thief.ghostCollider.SetActive(true);
             path = newPath;
             targetIndex = 0;
             StopCoroutine("FollowPath");
@@ -140,7 +140,7 @@ public class Unit : MonoBehaviour
 
                 if (pathFindIndex == escapePoints.Count)
                 {
-                    thief.ghostCollider.SetActive(false);
+                    if (thief.ghostCollider != null) thief.ghostCollider.SetActive(false);
                     //thief.playerCollider.SetActive(false);
                     currTarget = ghost;
                     Debug.Log("!");

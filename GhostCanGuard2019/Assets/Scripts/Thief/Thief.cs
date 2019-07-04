@@ -143,7 +143,7 @@ public class Thief : MonoBehaviour
             Debug.Log("detected Ghost");
             mIsPlayerExitedState = false;
             thiefState = ThiefState.ESCAPE;
-            ghostCollider.SetActive(true);// activates the collider of player, thus not pasing that route
+            if(ghostCollider!=null)ghostCollider.SetActive(true);// activates the collider of player, thus not pasing that route
             unit.GetNewTarget();
             //unit.RefindPath();
             //unit.FollowPriority();
