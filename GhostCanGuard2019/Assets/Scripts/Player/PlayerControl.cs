@@ -16,6 +16,9 @@ public class PlayerControl : MonoBehaviour
     private bool _playerMove = true;
     public bool CanPlayerMove { get { return _playerMove; } set { _playerMove = value; } }
 
+    private float horizontal = 0;
+    private float vertical = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,17 @@ public class PlayerControl : MonoBehaviour
         rb = this.gameObject.GetComponent<Rigidbody>();
     }
 
+    private void Update()
+    {
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
+
+        // playerのAnimation処理
+        if (horizontal == 0 && vertical == 0)
+            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Stop);
+        else
+            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Run);
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -36,8 +50,6 @@ public class PlayerControl : MonoBehaviour
             return;
         }
         
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
         Vector3 move = new Vector3(horizontal, 0, vertical).normalized;
         
 
@@ -45,5 +57,6 @@ public class PlayerControl : MonoBehaviour
         //Debug.Log("プレイヤーのスピードは"+speed+"です");
         if (move!= Vector3.zero)
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(move, Vector3.up), turnSpeed);
+            
     }
 }

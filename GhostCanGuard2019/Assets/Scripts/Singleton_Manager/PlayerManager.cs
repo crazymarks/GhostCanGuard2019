@@ -22,6 +22,9 @@ public class PlayerManager: SingletonMonoBehavior<PlayerManager>
     private float playerSpeed = 0f;
     private float playerTurnSpeed = 0f;
 
+    private float nowTime = 0;      // 経過時間
+    private float cancelSlow = 5;   // slowが解除される時間
+
     [SerializeField]
     //private PlayerMove playerMove = null;
     private PlayerControl playerControl = null;
@@ -37,6 +40,10 @@ public class PlayerManager: SingletonMonoBehavior<PlayerManager>
 
     private void Update()
     {
+        if (currentPlayerState != PlayerState.Slow) return;
+
+        SlowStateToPlay();
+
         // Debug用
         //if (Input.GetKeyDown(KeyCode.P))
         //    SetCurrentState(PlayerState.Play);
@@ -61,24 +68,6 @@ public class PlayerManager: SingletonMonoBehavior<PlayerManager>
     /// </summary>
     private void OnGameStateChanged(PlayerState state)
     {
-        //switch(state)
-        //{
-        //    case PlayerState.Stop:
-        //        playerMove.PlayerSpeed = 0;
-        //        break;
-        //    case PlayerState.Play:
-        //        playerMove.PlayerSpeed = playerSpeed;
-        //        break;
-        //    case PlayerState.Slow:
-        //        playerMove.PlayerSpeed = playerSpeed / 3;
-        //        break;
-        //    case PlayerState.Gimmick:
-        //        playerMove.PlayerSpeed = 0;
-        //        break;
-        //    default:
-        //        break;
-        //}
-
         switch (state)
         {
             case PlayerState.Stop:
@@ -91,6 +80,7 @@ public class PlayerManager: SingletonMonoBehavior<PlayerManager>
                 break;
             case PlayerState.Slow:
                 playerControl.speed = playerSpeed / 3;
+                PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Walk);
                 break;
             case PlayerState.Gimmick:
                 playerControl.speed = 0;
@@ -99,7 +89,18 @@ public class PlayerManager: SingletonMonoBehavior<PlayerManager>
             default:
                 break;
         }
+    }
+    /// <summary>
+    /// Slowの状態変化解除
+    /// </summary>
+    private void SlowStateToPlay()
+    {
+        nowTime += Time.deltaTime;
 
-
+        if(nowTime > cancelSlow)
+        {
+            nowTime = 0;
+            SetCurrentState(PlayerState.Play);
+        }
     }
 }

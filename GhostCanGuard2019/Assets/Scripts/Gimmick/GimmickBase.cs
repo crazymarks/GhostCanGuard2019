@@ -41,7 +41,7 @@ public class GimmickBase : MonoBehaviour
     {
         // UIの展開とギミック発動のフラグが異なっていたらreturn
         if (onoff != GimmickManager.Instance.GimmickFrag) return;
-        
+
         // playerの動きを止める
         PlayerManager.Instance.SetCurrentState(PlayerState.Gimmick);
         // UI表示
@@ -53,17 +53,17 @@ public class GimmickBase : MonoBehaviour
     public void GimmickEventOpen(BaseEventData data)
     {
         Debug.Log("gimmick touch");
+        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
         GimmickUIsOnOff(true);
     }
     /// <summary>
     /// gimmickの選択を解除する
     /// </summary>
     public void GimmickUIClose()
-    {
-        
+    {        
         GimmickUIsOnOff(false);
+        PlayerAnimationController.Instance.CancelPlayerAnimation(SetPAnimator.Hold);
         GimmickManager.Instance.ClearGimmick();
-        PlayerManager.Instance.SetCurrentState(PlayerState.Play);
     }
 
     /// <summary>
