@@ -45,11 +45,16 @@ public class OutLineCamera : PostEffectBase
 
 
         Transform outlinecamTransform = transform.Find("outlineCamera");
-        if (outlinecamTransform != null)
-            DestroyImmediate(outlinecamTransform.gameObject);
-
-        GameObject outlinecamobj = new GameObject("outlineCamera");
-        outlineCamera = outlinecamobj.AddComponent<Camera>();
+        //if (outlinecamTransform != null)
+        //    DestroyImmediate(outlinecamTransform.gameObject);
+        //outlineCamera = GetComponentInChildren<Camera>();
+        outlineCamera = transform.Find("outlineCamera").gameObject.GetComponent<Camera>();
+        if(outlineCamera == null)
+        {
+            GameObject outlinecamobj = new GameObject("outlineCamera");
+            outlineCamera = outlinecamobj.AddComponent<Camera>();
+        }
+        
 
         SetUpOutlineCamera();
 
@@ -96,7 +101,7 @@ public class OutLineCamera : PostEffectBase
         {
             RenderTexture.ReleaseTemporary(renderTexture);
         }
-        DestroyImmediate(outlineCamera.gameObject);
+        //Destroy(outlineCamera.gameObject);
     }
 
     private void OnPreRender()

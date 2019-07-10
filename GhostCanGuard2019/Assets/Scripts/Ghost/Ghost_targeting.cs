@@ -15,7 +15,7 @@ public class Ghost_targeting : MonoBehaviour
     public bool isTargeting;
     //プレイヤーを追う距離
     public float distanceOfChasingPlayer = 10f;
-    //追いかけを辞める距離
+    //追いかけを止める距離
     public float distanceOfGiveUpChase = 15f;
     //パトロールの最大範囲
     public float maxPatrolRange=5f;

@@ -7,6 +7,10 @@ TagManager:
   - Gimmik
   - Thief
   - Ghost
+  - Alarm
+  - Exit
+  - Treasure
+  - PlayerCollider
   layers:
   - Default
   - TransparentFX
@@ -20,8 +24,8 @@ TagManager:
   - floor
   - highlighttrigger
   - outline
-  - 
-  - 
+  - Wall
+  - ThiefAlert
   - 
   - 
   - 
