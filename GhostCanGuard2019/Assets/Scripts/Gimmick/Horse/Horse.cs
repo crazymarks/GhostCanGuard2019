@@ -4,22 +4,31 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
 
-public class Hourse : GimmickBase
+public class Horse : GimmickBase
 {
+
+    public enum HorseState
+    {
+        Sleep,
+        Active,
+        Back
+    }
+
+    HorseState horseState;
+
     [SerializeField]
-    
     private bool IfActivated = false;   //使う中ですか
     private bool IfBacking = false;
     
-    private Rigidbody HourseRB;
-    private MeshRenderer HourseRenderer;
+    private Rigidbody HorseRB;
+    private MeshRenderer HorseRenderer;
    
     //馬の速さ
     [SerializeField][Range(0,15)]
-    private float HourseSpeed = 10.0f;
+    private float HorseSpeed = 10.0f;
    
     [Range(0, 2)]
-    public float HourseBackTime = 2.0f;
+    public float HorseBackTime = 2.0f;
     [Range(0,1)]
     public float DispearAlpha =0.3f;
     float floorheight = 0;
@@ -48,15 +57,22 @@ public class Hourse : GimmickBase
         StartPosition = transform.position;
         startQuaternion = transform.localRotation;
         
-        HourseRB = GetComponent<Rigidbody>();
-        HourseRenderer = GetComponent<MeshRenderer>();
-        HourseRB.isKinematic = true;
+        HorseRB = GetComponent<Rigidbody>();
+        HorseRenderer = GetComponent<MeshRenderer>();
+        HorseRB.isKinematic = true;
         if (Player == null)
         {
             Player = GameObject.FindGameObjectWithTag("Player");
         }
+        try
+        {
+            playerControl = Player.GetComponent<PlayerControl>();
+        }
+        catch (NullReferenceException)
+        {
+            Debug.Log("プレイヤー未発見" + name);
+        }
         
-        playerControl = Player.GetComponent<PlayerControl>();
         
         if (Saddle == null)
         {
@@ -72,7 +88,7 @@ public class Hourse : GimmickBase
             Debug.Log("殺人鬼をぶつけた!!");
             IfBacking = true;
             LeftOrient = Vector3.zero;
-            GetOffHourse(Player, LeftOrient);
+            GetOffHorse(Player, LeftOrient);
         }
     }
 
@@ -97,7 +113,7 @@ public class Hourse : GimmickBase
     {
         if (IfActivated)
         {
-            Move(HourseSpeed,_moveorient);
+            Move(HorseSpeed,_moveorient);
            
             if (!IfBacking) 
             {
@@ -113,7 +129,7 @@ public class Hourse : GimmickBase
                         Debug.Log("壁をぶつけた" + hit.distance + hit.collider + hit.point);
                         IfBacking = true;
                         LeftOrient = Vector3.zero;
-                        GetOffHourse(Player, LeftOrient);
+                        GetOffHorse(Player, LeftOrient);
                     }
                     
                 }
@@ -124,11 +140,11 @@ public class Hourse : GimmickBase
                     float horizontal = Input.GetAxis("Horizontal");
                     float vertical = Input.GetAxis("Vertical");
                     LeftOrient = new Vector3(horizontal, 0, vertical).normalized;
-                    GetOffHourse(Player, LeftOrient);
+                    GetOffHorse(Player, LeftOrient);
 
                     if (transform.position == StartPosition)
                     {
-                        resetHourse();
+                        resetHorse();
                     }
                     else
                     {
@@ -151,13 +167,13 @@ public class Hourse : GimmickBase
     {
         Stime += Time.fixedDeltaTime;
        
-        if (Stime> HourseBackTime)
+        if (Stime> HorseBackTime)
         {
-            resetHourse();
+            resetHorse();
             Stime = 0;
         }
     }
-   private void resetHourse()
+   private void resetHorse()
     {
         transform.position = StartPosition;
         transform.rotation = startQuaternion;
@@ -169,7 +185,7 @@ public class Hourse : GimmickBase
         Debug.Log("Ready to Reuse");
     }
  
-    private void GetOnHourse(GameObject player)
+    private void GetOnHorse(GameObject player)
     {
         tag = "Player";
        
@@ -181,7 +197,7 @@ public class Hourse : GimmickBase
         player.tag = "Untagged";
         Debug.Log("Saddle Set");
     } 
-    private void GetOffHourse(GameObject player,Vector3 orient)
+    private void GetOffHorse(GameObject player,Vector3 orient)
     {
         tag = "Gimmik";
         //player.transform.position += orient * transform.localScale.magnitude;
@@ -202,13 +218,13 @@ public class Hourse : GimmickBase
         
         if (!IfActivated)
         {
-            //MoveOrient = orient;
-            GetOnHourse(Player);
+            
+            GetOnHorse(Player);
             IfActivated = true;
-            //IsHourseMove = true;
+            
             
         }
-        Time.timeScale = 1f;
+        
         if (!Input.GetMouseButtonDown(0)) return;
         RaycastHit hitInfo;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -241,5 +257,5 @@ public class Hourse : GimmickBase
         }
         GimmickUIsOnOff(false);
     }
-
+    
 }

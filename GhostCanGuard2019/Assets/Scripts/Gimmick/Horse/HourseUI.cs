@@ -10,7 +10,7 @@ public class HourseUI : MonoBehaviour
     [SerializeField]
     Image image;
     [SerializeField]
-    Hourse hourse;
+    Horse hourse;
     [SerializeField]
     Image panel;
     // Start is called before the first frame update
@@ -26,7 +26,7 @@ public class HourseUI : MonoBehaviour
         }
         if (hourse == null)
         {
-            hourse = GetComponentInParent<Hourse>();
+            hourse = GetComponentInParent<Horse>();
         }
         if (panel == null)
         {

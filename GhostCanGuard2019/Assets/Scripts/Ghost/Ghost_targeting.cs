@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Ghost_targeting : MonoBehaviour
 {
+
     //目標を追う速度
     public float chasingSpeed = 5f;
     //体を回す速度
@@ -246,7 +247,7 @@ public class Ghost_targeting : MonoBehaviour
     {
         
         StartCoroutine(bibleEffect(time));
-
+        
     }
     IEnumerator bibleEffect(float time)
     {
@@ -256,4 +257,5 @@ public class Ghost_targeting : MonoBehaviour
         yield return new WaitForSeconds(time);
         ifBibleAffect = false;
     }
+
 }

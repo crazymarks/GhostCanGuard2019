@@ -14,7 +14,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     [SerializeField]
     private PlayerControl pc;
 
-    bool ghostEnable = false;
+    bool ghostEnable = true;
     [SerializeField]
     private Ghost_targeting ght;
     [SerializeField]
@@ -43,13 +43,31 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     // Start is called before the first frame update
     void Start()
     {
+        
+        ///キャラクタを取得
         if (pc == null)
         {
-            pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+            try
+            {
+                pc = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+            }
+            catch (System.NullReferenceException)
+            {
+                Debug.Log("プレイヤー未発見" + name);
+            }
+            
         }
         if (tf == null)
         {
-            tf = GameObject.FindGameObjectWithTag("Thief").GetComponent<Thief>();
+            try
+            {
+                tf = GameObject.FindGameObjectWithTag("Thief").GetComponent<Thief>();
+            }
+            catch (System.NullReferenceException)
+            {
+                Debug.Log("Thief未発見" + name);
+            }
+           
         }
         if (ght == null)
         {
@@ -57,29 +75,38 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             {
                 ght = GameObject.FindGameObjectWithTag("Ghost").GetComponent<Ghost_targeting>();
             }
-            catch (System.Exception)
+            catch (System.NullReferenceException)
             {
-                if (ght == null)
-                {
-                    Debug.Log("Ghost Dosen't Exist");
-                }
-                else
-                    throw;
+                Debug.Log("Ghost Dosen't Exist");
+                ghostEnable = false;
             }
 
         }
-        if (ght != null)
-        {
-            ghostEnable = true;
-        }
+        
 
         if (treasure == null)
         {
-            treasure = GameObject.FindGameObjectWithTag("Treasure");
+            try
+            {
+                treasure = GameObject.FindGameObjectWithTag("Treasure");
+            }
+            catch (System.NullReferenceException)
+            {
+                Debug.Log("宝未指定" + name);
+            }
         }
         if (treasure != null)
         {
-            swordlight = treasure.GetComponentInChildren<ParticleSystem>(true);
+            try
+            {
+                swordlight = treasure.GetComponentInChildren<ParticleSystem>(true);
+            }
+            catch (System.NullReferenceException)
+            {
+
+                Debug.Log("");
+            }
+            
         }
 
         gameStart = false;
