@@ -4,25 +4,15 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : SingletonMonoBehavior<UIManager>
 {
-    private static UIManager _instance;
-    // Start is called before the first frame update
-    public static UIManager Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<UIManager>();
-            }
-            return _instance;
-        }
-    }
-
     public GameObject menuPanel;
     public GameObject desPanel;
 
+    private void Start()
+    {
+        desPanel.SetActive(false);
+    }
     // Update is called once per frame
     private void Update()
     {

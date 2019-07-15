@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameManager : SingletonMonoBehavior<GameManager>
 {
@@ -9,30 +10,35 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     //private PlayerManager pmanager;
     //[SerializeField]
     //private GimmickManager gmkmanager;
+  
     [SerializeField]
-    private Thief tf;
+    private Thief tf;  //泥棒を取得
     [SerializeField]
-    private PlayerControl pc;
+    private PlayerControl pc;  //Playerを取得
 
-    bool ghostEnable = true;
+    bool ghostEnable = true;  //殺人鬼があるかどうか
     [SerializeField]
-    private Ghost_targeting ght;
+    private Ghost_targeting ght;  //殺人鬼を取得
+
     [SerializeField]
-    private LoadScene ldc;
-    bool gameover = false;
+    private LoadScene ldc;  //Scene管理コンポーネント
+
+    bool gameover = false;   //ゲーム状態flag
     [SerializeField]
-    float checkdistance = 0.2f;
+    float checkdistance = 0.2f;     //ゲーム勝負の判定距離
+
     float distance_player_to_thief;
     float distance_player_to_ghost;
     float distance_ghost_to_thief;
 
 
 
-    bool gameStart = false;
+    bool gameStart = false;  //ゲームが始まるかどうかのflag
     [SerializeField]
-    float startWait = 2f;
+    float startWait = 2f;   //始まるまでの時間設定
+
     [SerializeField]
-    Text text;
+    Text text;      //ゲームメッセージを表すメッセージボックス
 
 
 
@@ -44,7 +50,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     void Start()
     {
         
-        ///キャラクタを取得
+        ///キャラクタをそれぞれ取得
         if (pc == null)
         {
             try
@@ -131,22 +137,25 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             //Debug.Log(distance_player_to_thief);
             if (tf.thiefState == Thief.ThiefState.END)
             {
-                text.text = "泥棒が逃げました！";
-                text.enabled = true;
+                UIManager.Instance.ShowDesPanel("泥棒が逃げました！");
+                //text.text = "泥棒が逃げました！";
+                //text.enabled = true;
                 Debug.Log("泥棒が逃げました！");
                 gameover = true;
             }
             if (tf.thiefState == Thief.ThiefState.EXITED)
             {
-                text.text = "平和な夜ですね．．．";
-                text.enabled = true;
+                UIManager.Instance.ShowDesPanel("平和な夜ですね．．．");
+                //text.text = "平和な夜ですね．．．";
+                //text.enabled = true;
                 Debug.Log("You Win!");
                 gameover = true;
             }
             if (distance_player_to_thief <= checkdistance)
             {
-                text.text = "逮捕!";
-                text.enabled = true;
+                UIManager.Instance.ShowDesPanel("逮捕成功!");
+                //text.text = "逮捕成功!";
+                //text.enabled = true;
                 Debug.Log("You Win!");
                 gameover = true;
             }
@@ -154,15 +163,17 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             {
                 if (distance_ghost_to_thief <= checkdistance)
                 {
-                    text.text = "迷えば、敗れる";
-                    text.enabled = true;
+                    UIManager.Instance.ShowDesPanel("迷えば、敗れる");
+                    //text.text = "迷えば、敗れる";
+                    //text.enabled = true;
                     Debug.Log("泥棒が殺人鬼に殺された！！");
                     gameover = true;
                 }
                 if (distance_player_to_ghost <= checkdistance)
                 {
-                    text.text = "死";
-                    text.enabled = true;
+                    UIManager.Instance.ShowDesPanel("死");
+                    //text.text = "死";
+                    //text.enabled = true;
                     Debug.Log("死");
                     gameover = true;
                 }
@@ -221,4 +232,13 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         text.enabled = false;
         Time.timeScale = 1;
     }
+
+    private void theWorld()
+    {
+        Time.timeScale = 0.1f;
+    }
+
+
+
+
 }
