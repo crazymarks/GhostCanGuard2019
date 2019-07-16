@@ -6,12 +6,13 @@ using UnityEngine;
 /// </summary>
 public class OutLineManager : MonoBehaviour
 {
+    public stop st;
     public static OutLineManager instanceoutLineManager;
     private GameObject outlineObject = null;
     // Start is called before the first frame update
     void Start()
     {
-        
+        st = GameManager.Instance.GetComponent<stop>();
     }
 
     // Update is called once per frame
@@ -24,35 +25,58 @@ public class OutLineManager : MonoBehaviour
     
     void outlinecheck()   
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //RaycastHit hit;
         
        
-        if(Physics.Raycast(ray, out hit) && (hit.collider.gameObject.tag == "Gimmik" || hit.collider.gameObject.tag == "Player"))       //新し アウトライン出来る オブジェクトをヒットする場合
+        //if(Physics.Raycast(ray, out hit) && (hit.collider.gameObject.tag == "Gimmik" || hit.collider.gameObject.tag == "Player"))       //新し アウトライン出来る オブジェクトをヒットする場合
+        //{
+        //    if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Default"))  //ヒットされたオブジェクトはデフォルト層にいる場合、つまり、アウトライン出来る状態で
+        //    {
+        //        if (outlineObject == null)                                          //既に アウトラインされた オブジェクトがいない
+        //        {
+        //            outline(hit.collider.gameObject);
+        //        }
+
+        //        else                                                                //既に アウトラインされた オブジェクトがいる
+        //        {
+        //            outlineCancel();                                                //今アウトラインしているオブジェクトをキャンセルし
+        //            outline(hit.collider.gameObject);
+        //            return;
+        //        }
+        //    }
+        //    else                                                                    //ヒットされたオブジェクトはデフォルト層にいない場合、つまり、アウトライン出来る状態じゃない
+        //        return;
+           
+        //}
+        //else                                                                        //何もヒットしない場合
+        //{
+        //    outlineCancel();
+        //}
+        if (st.selectedObject)       //新し アウトライン出来る オブジェクトをヒットする場合
         {
-            if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Default"))  //ヒットされたオブジェクトはデフォルト層にいる場合、つまり、アウトライン出来る状態で
+            if (st.selectedObject.layer == LayerMask.NameToLayer("Default"))  //ヒットされたオブジェクトはデフォルト層にいる場合、つまり、アウトライン出来る状態で
             {
                 if (outlineObject == null)                                          //既に アウトラインされた オブジェクトがいない
                 {
-                    outline(hit.collider.gameObject);
+                    outline(st.selectedObject);
                 }
 
                 else                                                                //既に アウトラインされた オブジェクトがいる
                 {
                     outlineCancel();                                                //今アウトラインしているオブジェクトをキャンセルし
-                    outline(hit.collider.gameObject);
+                    outline(st.selectedObject);
                     return;
                 }
             }
             else                                                                    //ヒットされたオブジェクトはデフォルト層にいない場合、つまり、アウトライン出来る状態じゃない
                 return;
-           
+
         }
         else                                                                        //何もヒットしない場合
         {
             outlineCancel();
         }
-
 
     }
 

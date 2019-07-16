@@ -86,8 +86,8 @@ public class Portal : GimmickBase
         }
         //IfEnable = !IfEnable;
         //PortDestination.IfEnable = IfEnable;
-
-        GimmickUIClose();
+        st.gamestop();
+        //GimmickUIClose();
     }
 
 
@@ -166,6 +166,13 @@ public class Portal : GimmickBase
     {
         GimmickManager.Instance.SetGimmickAction(PortOnOff);
         GimmickUIsOnOff(false);
+    }
+    private void Update()
+    {
+        if (Input.GetButtonDown("Send") && st.selectedObject == gameObject)
+        {
+            PortOnOff();
+        }
     }
 
 }

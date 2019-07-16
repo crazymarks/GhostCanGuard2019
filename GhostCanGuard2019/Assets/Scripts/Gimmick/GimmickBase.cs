@@ -14,7 +14,7 @@ public class GimmickBase : MonoBehaviour
     [SerializeField]
     protected GameObject gimmickUIParent;
     protected EventTrigger eventTrigger;
-
+    protected stop st;
     private EventTrigger.Entry entry = new EventTrigger.Entry();
 
     // public static bool GimmickFlag = false;
@@ -26,6 +26,7 @@ public class GimmickBase : MonoBehaviour
     //}
     virtual protected void Start()
     {
+        st = GameManager.Instance.GetComponent<stop>();
         eventTrigger = this.gameObject.GetComponent<EventTrigger>();
         
         if (gimmickUIParent == null)

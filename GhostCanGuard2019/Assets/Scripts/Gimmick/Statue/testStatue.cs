@@ -51,7 +51,10 @@ public class testStatue : GimmickBase
     }
     private void Update()
     {
-       
+        if (Input.GetButtonDown("Send") && st.selectedObject == gameObject)
+        {
+            FallForwards();
+        }
     }
     // for buttons
     public void FallRight()
@@ -74,7 +77,8 @@ public class testStatue : GimmickBase
         {
             tiltAngle = 90f;
             isFallen = true;
-            GimmickUIClose();
+            st.gamestop();
+            //GimmickUIClose();
         }
        
         //rb.AddForce(transform.forward * thrust);

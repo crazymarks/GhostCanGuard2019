@@ -19,7 +19,8 @@ public class Horse : GimmickBase
     [SerializeField]
     private bool IfActivated = false;   //使う中ですか
     private bool IfBacking = false;
-    
+    private bool IfMoving = false;
+
     private Rigidbody HorseRB;
     private MeshRenderer HorseRenderer;
    
@@ -133,26 +134,29 @@ public class Horse : GimmickBase
                     }
                     
                 }
-                
-              
-                if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
-                {
-                    float horizontal = Input.GetAxis("Horizontal");
-                    float vertical = Input.GetAxis("Vertical");
-                    LeftOrient = new Vector3(horizontal, 0, vertical).normalized;
-                    GetOffHorse(Player, LeftOrient);
 
-                    if (transform.position == StartPosition)
+                if (IfMoving)
+                {
+                    if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
                     {
-                        resetHorse();
+                        float horizontal = Input.GetAxis("Horizontal");
+                        float vertical = Input.GetAxis("Vertical");
+                        LeftOrient = new Vector3(horizontal, 0, vertical).normalized;
+                        GetOffHorse(Player, LeftOrient);
+
+                        if (transform.position == StartPosition)
+                        {
+                            resetHorse();
+                        }
+                        else
+                        {
+                            IfBacking = true;
+                            Debug.Log("Start Back");
+                        }
+
                     }
-                    else
-                    {
-                        IfBacking = true;
-                        Debug.Log("Start Back");
-                    }
-                    
                 }
+                
 
             }
             if (IfBacking)
@@ -211,6 +215,7 @@ public class Horse : GimmickBase
         player.GetComponent<Rigidbody>().isKinematic = false;
         PlayerManager.Instance.SetCurrentState(PlayerState.Play);
         PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
+        IfMoving = false;
     }
 
     private void Active()
@@ -221,13 +226,27 @@ public class Horse : GimmickBase
             
             GetOnHorse(Player);
             IfActivated = true;
-            
-            
         }
         
-        if (!Input.GetMouseButtonDown(0)) return;
+        //if (!Input.GetMouseButtonDown(0)) return;
+        //RaycastHit hitInfo;
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //if (Physics.Raycast(ray, out hitInfo, 100))
+        //{
+        //    Vector3 dir = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
+
+        //    if (_moveorient == Vector3.zero)
+        //    {
+        //        MoveOrient = dir - transform.position;
+        //        transform.rotation = Quaternion.LookRotation(MoveOrient);
+        //    }
+
+
+        //}
+        
+        if (!Input.GetButtonDown("Send")|| st.selectedObject == gameObject) return;
         RaycastHit hitInfo;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = Camera.main.ScreenPointToRay(st.cursor.transform.position);
         if (Physics.Raycast(ray, out hitInfo, 100))
         {
             Vector3 dir = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
@@ -237,13 +256,14 @@ public class Horse : GimmickBase
                 MoveOrient = dir - transform.position;
                 transform.rotation = Quaternion.LookRotation(MoveOrient);
             }
-               
-            
+
+
         }
-        
-       
+        IfMoving = true;
+
         Debug.Log(_moveorient);
-        GimmickUIClose();
+        st.gamestop();
+        //GimmickUIClose();
     }
 
     public void OnClickUIStart()
@@ -257,5 +277,12 @@ public class Horse : GimmickBase
         }
         GimmickUIsOnOff(false);
     }
-    
+    private void Update()
+    {
+        if ((Input.GetButtonDown("Send") && (st.selectedObject == gameObject && !IfActivated) ||  st.selectedObject != gameObject && IfActivated && !IfMoving && !IfBacking))
+        {
+            Active();
+        }
+        
+    }
 }

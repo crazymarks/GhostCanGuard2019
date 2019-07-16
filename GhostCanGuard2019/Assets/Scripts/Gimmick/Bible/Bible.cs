@@ -67,8 +67,8 @@ public class Bible : GimmickBase
             else
                 Debug.Log("準備中です");
         }
-            
-        GimmickUIClose();
+        st.gamestop(); 
+        //GimmickUIClose();
 
     }
     IEnumerator AuraON()
@@ -91,5 +91,11 @@ public class Bible : GimmickBase
         GimmickManager.Instance.SetGimmickAction(open);
         GimmickUIsOnOff(false);
     }
-
+    private void Update()
+    {
+        if (Input.GetButtonDown("Send") && st.selectedObject == gameObject)
+        {
+            open();
+        }
+    }
 }

@@ -56,7 +56,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -999
   m_CullingMask:
@@ -135,7 +135,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -190,7 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   smothing: 5
-  distance: 9.5
+  distance: 20
   Angle: 90
 --- !u!114 &3749461932045439645
 MonoBehaviour:
@@ -221,3 +221,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca813a91919ae2c4b9f48f7142bf0f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  st: {fileID: 0}

@@ -14,7 +14,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     [SerializeField]
     private Thief tf;  //泥棒を取得
     [SerializeField]
-    private PlayerControl pc;  //Playerを取得
+    public PlayerControl pc;  //Playerを取得
 
     bool ghostEnable = true;  //殺人鬼があるかどうか
     [SerializeField]
@@ -33,7 +33,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
 
 
-    bool gameStart = false;  //ゲームが始まるかどうかのflag
+    public bool gameStart { get; private set; }  //ゲームが始まるかどうかのflag
     [SerializeField]
     float startWait = 2f;   //始まるまでの時間設定
 
