@@ -21,7 +21,7 @@ public class HolyWater : GimmickBase
     override protected void Start()
     {
         base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+
         
             try
             {

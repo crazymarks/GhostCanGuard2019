@@ -2,17 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// なんのボタンが押されたか判定用
+/// </summary>
+public enum ControllerButton
+{
+    A,
+    B,
+    X,
+    Y,
+    Max
+}
+
 public class InputManager : SingletonMonoBehavior<InputManager>
 {
-    //private Vector3 mousePosition;
-    //public Vector3 MousePosition => mousePosition;
+    /// <summary>
+    /// 現在押されているボタン
+    /// </summary>
+    public ControllerButton CurrentControllerButton { get; private set; } = ControllerButton.Max;
+
 
     private void Update()
     {
-        //Vector3 mousePos = Input.mousePosition;
-        //mousePos.x = Mathf.Clamp(mousePos.x, 0, Screen.width);
-        //mousePos.y = Mathf.Clamp(mousePos.y, 0, Screen.height);
-        //mousePos.z = 10f;
-        //mousePosition = Camera.main.ScreenToWorldPoint(mousePos);
+        if (Input.GetKeyDown(KeyCode.A))
+            CurrentControllerButton = ControllerButton.A;
+        if (Input.GetKeyDown(KeyCode.S))
+            CurrentControllerButton = ControllerButton.B;
+        if (Input.GetKeyDown(KeyCode.D))
+            CurrentControllerButton = ControllerButton.X;
+        if (Input.GetKeyDown(KeyCode.F))
+            CurrentControllerButton = ControllerButton.Y;
     }
 }

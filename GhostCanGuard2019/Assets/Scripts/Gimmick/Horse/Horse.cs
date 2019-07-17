@@ -53,7 +53,6 @@ public class Horse : GimmickBase
     protected override void Start()
     {
         base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
         tag = "Gimmik";
         StartPosition = transform.position;
         startQuaternion = transform.localRotation;
@@ -273,7 +272,7 @@ public class Horse : GimmickBase
         else
         {
             StartCoroutine(GameManager.Instance.showTextWithSeconds("もっと近づいてください！", 1f));
-            GimmickUIClose();
+
         }
         GimmickUIsOnOff(false);
     }

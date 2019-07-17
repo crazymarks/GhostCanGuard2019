@@ -22,7 +22,7 @@ public class testStatue : GimmickBase
     {
         base.Start();
         rb = GetComponent<Rigidbody>();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+
         rb.isKinematic = true;
         tiltAroundX = 0f;
         tiltAroundZ = 0f;
@@ -61,14 +61,13 @@ public class testStatue : GimmickBase
     {
         tiltAroundZ = tiltAngle;
         //rb.AddForce(transform.right * thrust);
-        GimmickUIClose();
+
     }
 
     public void FallLeft()
     {
         tiltAroundZ = -tiltAngle;
         //rb.AddForce(-transform.right * thrust);
-        GimmickUIClose();
     }
 
     public void FallForwards()
@@ -89,7 +88,6 @@ public class testStatue : GimmickBase
     {
         tiltAroundX = -tiltAngle;
         //rb.AddForce(-transform.forward * thrust);
-        GimmickUIClose();
     }
 
     public void resetPillar()
@@ -102,6 +100,6 @@ public class testStatue : GimmickBase
 
     public void CloseUI()
     {
-        GimmickUIClose();
+
     }
 }

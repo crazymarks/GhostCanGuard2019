@@ -24,7 +24,7 @@ public class Bible : GimmickBase
     protected override void Start()
     {
         base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+
         collision = GetComponent<SphereCollider>();
         if (collision != null)
         {

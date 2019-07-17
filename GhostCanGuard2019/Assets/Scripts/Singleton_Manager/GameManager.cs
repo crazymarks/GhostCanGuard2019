@@ -40,8 +40,6 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     [SerializeField]
     Text text;      //ゲームメッセージを表すメッセージボックス
 
-
-
     [SerializeField]
     private GameObject treasure;
     private ParticleSystem swordlight;

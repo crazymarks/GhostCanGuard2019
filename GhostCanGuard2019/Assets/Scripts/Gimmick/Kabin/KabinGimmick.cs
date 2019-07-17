@@ -22,7 +22,6 @@ public class KabinGimmick : GimmickBase
     protected override void Start()
     {
         base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
         rb = GetComponent<Rigidbody>();
     }
 
@@ -56,7 +55,6 @@ public class KabinGimmick : GimmickBase
         throwPos = Vector3.zero;
 
         GimmickManager.Instance.ClearGimmick();
-        GimmickUIClose();
 
     }
 
@@ -64,7 +62,6 @@ public class KabinGimmick : GimmickBase
     public void ClickUIStart()
     {
         GimmickManager.Instance.SetGimmickAction(KabinGimmickAction);
-        GimmickUIsOnOff(false);
     }
 
     private void KabinToPlayer(Vector3 pPos)

@@ -33,7 +33,7 @@ public class Portal : GimmickBase
     protected override void Start()
     {
         base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+
         if (PortDestination == null) 
         {
             PortDestination = this;

@@ -13,19 +13,11 @@ public class GimmickManager : SingletonMonoBehavior<GimmickManager>
     // gimmickそれぞれにつける
     private System.Action GimmickFunc = null;
 
-    private List<string> gimmickNames = new List<string>();
-
     /// <summary>
     /// true -> Gimmick発動なし false->ギミック発動中
     /// </summary>
-    public bool GimmickFrag { get; set; }
-
-
-    private void Start()
-    {
-        GimmickFrag = false;
-    }
-
+    public bool GimmickFrag { get; set; } = false;
+    
     /// <summary>
     /// 関数をsetする
     /// 呼び方 -> GimmickManager.Instance.SetGimmickAction( () => 関数名() );
@@ -34,7 +26,6 @@ public class GimmickManager : SingletonMonoBehavior<GimmickManager>
     public void SetGimmickAction(System.Action action)
     {
         GimmickFunc = action;
-        gimmickNames.Add(action.Method.Name);
     }
     /// <summary>
     /// Action初期化
@@ -42,11 +33,7 @@ public class GimmickManager : SingletonMonoBehavior<GimmickManager>
     public void ClearGimmick()
     {
         PlayerManager.Instance.SetCurrentState(PlayerState.Play);
-        if (gimmickNames != null)
-        {
-            gimmickNames.ForEach(name => Debug.Log(name));
-            gimmickNames.Clear();
-        }
+
         GimmickFunc = null;
         GimmickFrag = true;
     }
