@@ -7,7 +7,8 @@ using UnityEngine.EventSystems;
 
 public class stop : MonoBehaviour
 {
-    
+    [SerializeField]
+    OutLineCamera outline;
     public GameObject selectedObject;
     [SerializeField]
     float speed = 10f;
@@ -25,6 +26,8 @@ public class stop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        outline = Camera.main.GetComponent<OutLineCamera>();
+        outline.enabled = false;
         cursor.SetActive (false);
         //Cursor.visible = false;
     }
@@ -57,14 +60,15 @@ public class stop : MonoBehaviour
         if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
-            cursor.SetActive( false);
+            cursor.SetActive(false);
+            outline.enabled = false;
         }
         else
         {
             cursor.SetActive( true);
             cursor.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.pc.gameObject.transform.position);
             Time.timeScale = 0;
-
+            outline.enabled = true;
         }
         
     }
