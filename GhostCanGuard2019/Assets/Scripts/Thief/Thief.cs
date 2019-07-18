@@ -38,11 +38,16 @@ public class Thief : MonoBehaviour
     bool mIsTouched = false;
     bool mIsAllowFInd = true;
 
+    /// <summary>
+    /// animation
+    /// </summary>
+    [SerializeField]
+    ThiefAnimationController anim;
 
     void Start()
     {
-
         unit = GetComponent<Unit>();
+        anim.setRunAnimation();
     }
 
     void Update()
@@ -92,12 +97,14 @@ public class Thief : MonoBehaviour
                 unit.HeadToTreasure();
                 escapeTimer = 0f;
                 thiefState = ThiefState.HEAD_TREASURE;
+                anim.setRunAnimation();
             }
             else
             {
                 unit.HeadExit();
                 escapeTimer = 0f;
                 thiefState = ThiefState.HEAD_EXIT;
+                anim.setRunAnimation();
             }
         }
     }
@@ -112,12 +119,14 @@ public class Thief : MonoBehaviour
                 unit.HeadToTreasure();
                 escapeTimer2 = 0f;
                 thiefState = ThiefState.HEAD_TREASURE;
+                anim.setRunAnimation();
             }
             else
             {
                 unit.HeadExit();
                 escapeTimer2 = 0f;
                 thiefState = ThiefState.HEAD_EXIT;
+                anim.setRunAnimation();
             }
         }
     }
@@ -152,6 +161,7 @@ public class Thief : MonoBehaviour
         {
             Debug.Log("inTreasure");
             thiefState = ThiefState.STOP;
+            anim.setWaitAnimation();
         }
         else if (other.tag == "Alarm")
         {
@@ -185,6 +195,7 @@ public class Thief : MonoBehaviour
                 mIsTakenTreasure = true;
                 unit.HeadExit();
                 thiefState = ThiefState.HEAD_EXIT;
+                anim.setRunAnimation();
             }
         }
         else if (other.tag == "Alarm" && isAlarmActivated)// soon to be changed
@@ -195,6 +206,7 @@ public class Thief : MonoBehaviour
         {
             Debug.Log("exited");
             thiefState = ThiefState.END;
+            anim.setWaitAnimation();
         }
     }
     void OnTriggerExit(Collider other)

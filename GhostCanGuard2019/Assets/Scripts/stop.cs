@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 
 public class stop : MonoBehaviour
 {
+    public LayerMask mask;
     [SerializeField]
     OutLineCamera outline;
     public GameObject selectedObject;
@@ -62,6 +63,7 @@ public class stop : MonoBehaviour
             Time.timeScale = 1;
             cursor.SetActive(false);
             outline.enabled = false;
+            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
         }
         else
         {
@@ -69,6 +71,7 @@ public class stop : MonoBehaviour
             cursor.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.pc.gameObject.transform.position);
             Time.timeScale = 0;
             outline.enabled = true;
+            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
         }
         
     }
@@ -78,7 +81,7 @@ public class stop : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
 
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit,mask))
         {
             if (hit.collider.tag == "Gimmik" || hit.collider.tag == "Player")
             {

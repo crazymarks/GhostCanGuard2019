@@ -2600,6 +2600,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1754914911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3749461932045439645, guid: 74cfcdc012de9c24b8dde93b61635c13,
+    type: 3}
+  m_PrefabInstance: {fileID: 3749461931563776201}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45042f3c06db2ef4aab2ecde9a86d520, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1794575798 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2259769206178960839, guid: 7ecfb9b3182d77140b7cc55dd50281d7,
@@ -3290,6 +3302,22 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 697739187276260010, guid: 28c763a9102517c45909d079c3eec7bb,
+        type: 3}
+      propertyPath: mask.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 697739187276260010, guid: 28c763a9102517c45909d079c3eec7bb,
+        type: 3}
+      propertyPath: outline
+      value: 
+      objectReference: {fileID: 1754914911}
+    - target: {fileID: 4199751110184333570, guid: 28c763a9102517c45909d079c3eec7bb,
+        type: 3}
+      propertyPath: menuPanel
+      value: 
+      objectReference: {fileID: 6757446705375586402, guid: f60e29945cbc1d145997f78485c6115f,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
 --- !u!1001 &4966074043993101280
