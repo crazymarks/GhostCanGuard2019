@@ -86,6 +86,7 @@ public class Horse : GimmickBase
     {
         if (collision.gameObject.tag == "Ghost" && IfActivated)
         {
+            collision.gameObject.GetComponent<Ghost_targeting>().HolyWater(5f);
             Debug.Log("殺人鬼をぶつけた!!");
             IfBacking = true;
             LeftOrient = Vector3.zero;
@@ -227,7 +228,7 @@ public class Horse : GimmickBase
             GetOnHorse(Player);
             IfActivated = true;
         }
-        
+
         //if (!Input.GetMouseButtonDown(0)) return;
         //RaycastHit hitInfo;
         //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -243,8 +244,14 @@ public class Horse : GimmickBase
 
 
         //}
+        if (!st.SecondPhase)
+        {
+            st.SecondPhase = true;
+            return;
+        }
         
-        if (!Input.GetButtonDown("Send")|| st.selectedObject == gameObject) return;
+        
+        if (!Input.GetButtonDown("Send")) return;
         RaycastHit hitInfo;
         Ray ray = Camera.main.ScreenPointToRay(st.cursor.transform.position);
         if (Physics.Raycast(ray, out hitInfo, 100))
@@ -262,7 +269,9 @@ public class Horse : GimmickBase
         IfMoving = true;
 
         Debug.Log(_moveorient);
+        
         st.gamestop();
+        st.SecondPhase = false;
         //GimmickUIClose();
     }
 
@@ -279,7 +288,7 @@ public class Horse : GimmickBase
     }
     private void Update()
     {
-        if ((Input.GetButtonDown("Send") && (st.selectedObject == gameObject && !IfActivated) ||  st.selectedObject != gameObject && IfActivated && !IfMoving && !IfBacking))
+        if (Input.GetButtonDown("Send") && st.selectedObject == gameObject &&  (!IfActivated||st.SecondPhase))
         {
             Active();
         }

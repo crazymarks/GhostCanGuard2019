@@ -10,12 +10,16 @@ public class stop : MonoBehaviour
     public LayerMask mask;
     [SerializeField]
     OutLineCamera outline;
+
     public GameObject selectedObject;
     [SerializeField]
     float speed = 10f;
-    [SerializeField]
+    
     public GameObject cursor;
 
+    public bool SecondPhase;
+
+    bool stopped = false;
     //[DllImport("user32.dll")]
     //public static extern int SetCursorPos(float x, float y); //マウス位置を設定する
 
@@ -27,10 +31,12 @@ public class stop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SecondPhase = false;
         outline = Camera.main.GetComponent<OutLineCamera>();
         outline.enabled = false;
         cursor.SetActive (false);
         //Cursor.visible = false;
+        stopped = false;
     }
 
     // Update is called once per frame
@@ -40,7 +46,7 @@ public class stop : MonoBehaviour
         {
             gamestop();
         }
-        if (Time.timeScale == 0)
+        if (stopped)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
@@ -49,8 +55,11 @@ public class stop : MonoBehaviour
             cursor.transform.Translate(move * speed);
             DragRangeLimit(cursor.transform);
             //SetMouseToAnyOfScreenPosition();
-
-            getPosition();
+            if (!SecondPhase)
+            {
+                getObjectAtPosition();
+            }
+            
         }
             
 
@@ -58,12 +67,13 @@ public class stop : MonoBehaviour
     public void gamestop()
     {
         if (GameManager.Instance.gameStart == false) return;
-        if (Time.timeScale == 0)
+        if (stopped)
         {
             Time.timeScale = 1;
             cursor.SetActive(false);
             outline.enabled = false;
             PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
+            stopped=false;
         }
         else
         {
@@ -72,16 +82,17 @@ public class stop : MonoBehaviour
             Time.timeScale = 0;
             outline.enabled = true;
             PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
+            stopped = true;
         }
         
     }
     
-    public void getPosition()
+    public void getObjectAtPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
 
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit,mask))
+        if (Physics.Raycast(ray, out hit,mask) && hit.collider.gameObject != selectedObject)
         {
             if (hit.collider.tag == "Gimmik" || hit.collider.tag == "Player")
             {
@@ -94,11 +105,16 @@ public class stop : MonoBehaviour
             else
             {
                 selectedObject = null;
-                
             }
         }
-        
+    }
 
+    public Vector3 getCursorWorldPosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
+        RaycastHit hit;
+        Physics.Raycast(ray, out hit);
+        return hit.point;
     }
 
     /// <summary>
@@ -108,8 +124,8 @@ public class stop : MonoBehaviour
     public void DragRangeLimit(Transform tra)
     {
         var pos = tra.GetComponent<RectTransform>();
-        float x = Mathf.Clamp(pos.position.x, pos.rect.width * 0.5f, Screen.width - (pos.rect.width * 0.5f));
-        float y = Mathf.Clamp(pos.position.y, pos.rect.height * 0.5f, Screen.height - (pos.rect.height * 0.5f));
+        float x = Mathf.Clamp(pos.position.x, 0, Screen.width*0.99f);
+        float y = Mathf.Clamp(pos.position.y, Screen.height * 0.01f, Screen.height);
         pos.position = new Vector2(x, y);
     }
 }

@@ -23,7 +23,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     [SerializeField]
     private LoadScene ldc;  //Scene管理コンポーネント
 
-    bool gameover = false;   //ゲーム状態flag
+    public bool gameover { get; private set; } = false;   //ゲーム状態flag
     [SerializeField]
     float checkdistance = 0.2f;     //ゲーム勝負の判定距離
 
@@ -159,7 +159,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                 Debug.Log("You Win!");
                 gameover = true;
             }
-            if (ghostEnable)
+            if (ghostEnable && !ght.ifBibleAffect && !ght.ifHolyWaterAffect)
             {
                 if (distance_ghost_to_thief <= checkdistance)
                 {

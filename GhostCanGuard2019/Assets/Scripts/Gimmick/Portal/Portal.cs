@@ -54,7 +54,7 @@ public class Portal : GimmickBase
 
     private void OnTriggerEnter(Collider other)
     {
-
+        if (other.isTrigger) return;        //他のトリガーコライダーを無視する(実体だけ判定)
         if (IfEnable && !IfPorted && PortDestination.IfEnable)        //開いている且つ目標じゃない
         {
             Debug.Log("Enabled Portal IN TelePort IN " + PortDlay + " Seconds");
@@ -64,6 +64,7 @@ public class Portal : GimmickBase
     }
     private void OnTriggerExit(Collider other)
     {
+        if (other.isTrigger) return;          //他のトリガーコライダーを無視する(実体だけ判定)
         IfPorted = false;   //転送者が離れたら、このゲートをまた使う;
     }
 

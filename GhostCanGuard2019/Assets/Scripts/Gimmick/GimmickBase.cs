@@ -57,14 +57,13 @@ public class GimmickBase : MonoBehaviour
         Debug.Log("gimmick touch");
         PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
         GimmickUIsOnOff(true);
-        Time.timeScale = 0f;
+        st.gamestop();
     }
     /// <summary>
     /// gimmickの選択を解除する
     /// </summary>
     public void GimmickUIClose()
     {
-        Time.timeScale = 1f;
         GimmickUIsOnOff(false);
         PlayerAnimationController.Instance.CancelPlayerAnimation(SetPAnimator.Hold);
         GimmickManager.Instance.ClearGimmick();

@@ -6,6 +6,16 @@ using UnityEngine;
 public class Ghost_targeting : MonoBehaviour
 {
 
+    public enum GhostState
+    {
+        Chasing_Player,
+        Chasing_Thief,
+        Patrol,
+        Bible_Affected,
+        HolyWater_Affected
+    }
+    [SerializeField]
+    GhostState Gs;
     //目標を追う速度
     public float chasingSpeed = 5f;
     //体を回す速度
@@ -58,39 +68,82 @@ public class Ghost_targeting : MonoBehaviour
     //目標の瞬時位置(バイブルに影響された時用)
     Vector3 targetpos;
     //バイブルに影響されたが
-    bool ifBibleAffect = false;
+    public bool ifBibleAffect = false;
 
+    public bool ifHolyWaterAffect = false;
     // Start is called before the first frame update
     void Start()
     {
-        //デフォルトで泥棒が設定されてない場合
-        if (thief == null)
-        {
-            thief = GameObject.FindGameObjectWithTag("Thief");
-        }
         //デフォルトでプレイヤーが設定されてない場合
         if (player == null)
         {
-            player = GameObject.FindGameObjectWithTag("Player");
+            try
+            {
+                player = GameObject.FindGameObjectWithTag("Player");
+            }
+            catch (System.NullReferenceException)
+            {
+                Debug.Log("プレイヤー未発見" + name);
+                Destroy(gameObject);
+            }
+            
         }
-        //泥棒が見つかる場合
+        //デフォルトで泥棒が設定されてない場合
+        if (thief == null)
+        {
+            try
+            {
+                thief = GameObject.FindGameObjectWithTag("Thief");
+            }
+            catch (System.NullReferenceException)
+            {
+                Debug.Log("Thief未発見" + name);
+                Destroy(gameObject);
+            }
+           
+        }
+        //泥棒が見つかったら
         if (thief != null)
         {
             trb = thief.GetComponent<Rigidbody>();
             ifThiefHide = thief.GetComponent<thiefHide>().ifHide;
         }
-        
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        switch (Gs)
+        {
+            
+            case GhostState.Chasing_Player:
+                lastActTime = Time.time;
+                move(player.transform.position, chasingSpeed, Vector3.zero);
+                break;
+            case GhostState.Chasing_Thief:
+                lastActTime = Time.time;
+                move(thief.transform.position, chasingSpeed, trb.velocity.normalized);
+                break;
+            case GhostState.Patrol:
+                patrol();
+                break;
+            case GhostState.Bible_Affected:
+                move(targetpos, -chasingSpeed, Vector3.zero);
+                break;
+            case GhostState.HolyWater_Affected:
+                lastActTime = Time.time;
+                move(gameObject.transform.position, 0, Vector3.zero);
+                break;
+            default:
+                break;
+        }
         //目標がある場合
-        if (isTargeting)
-            Chase();
-        //目標がない場合
-        else
-            patrol();
+        //if (isTargeting)
+        //    Chase();
+        ////目標がない場合
+        //else
+        //    patrol();
     }
     private void Update()
     {
@@ -101,31 +154,31 @@ public class Ghost_targeting : MonoBehaviour
     /// <summary>
     /// 目標を追跡
     /// </summary>
-    void Chase()
-    {
-        //目標がないと何もしない
-        if (targetobj == null)
-        {
-            return;
-        }
-        //バイブルに影響された時
-        if(ifBibleAffect){
-            move(targetpos, -chasingSpeed, Vector3.zero);
-            return;
-        }
-        //目標が泥棒の時
-        if (targetobj == thief)
-        {
-            move(thief.transform.position,chasingSpeed, trb.velocity.normalized);
-        }
-        //目標がプレイヤーの時
-        if (targetobj == player)
-        {
-            move(player.transform.position,chasingSpeed, Vector3.zero);//目安追跡を辞めます
-        }
-        //行動の開始時間を記録します
-        lastActTime = Time.time;
-    }
+    //void Chase()
+    //{
+    //    //目標がないと何もしない
+    //    if (targetobj == null)
+    //    {
+    //        return;
+    //    }
+    //    //バイブルに影響された時
+    //    if(ifBibleAffect){
+    //        move(targetpos, -chasingSpeed, Vector3.zero);
+    //        return;
+    //    }
+    //    //目標が泥棒の時
+    //    if (targetobj == thief)
+    //    {
+    //        move(thief.transform.position,chasingSpeed, trb.velocity.normalized);
+    //    }
+    //    //目標がプレイヤーの時
+    //    if (targetobj == player)
+    //    {
+    //        move(player.transform.position,chasingSpeed, Vector3.zero);//目安追跡を辞めます
+    //    }
+    //    //行動の開始時間を記録します
+    //    lastActTime = Time.time;
+    //}
     /// <summary>
     /// 殺人鬼を移動する
     /// </summary>
@@ -144,7 +197,7 @@ public class Ghost_targeting : MonoBehaviour
         //Debug.Log(moveSpeed);
         if (target - transform.position != Vector3.zero)
             //目標までの回転を計算する
-            targetQuaternion = Quaternion.LookRotation(target - transform.position, Vector3.up);
+            targetQuaternion = Quaternion.LookRotation(moveSpeed, Vector3.up);
         //slrepで回転する
         transform.rotation = Quaternion.Slerp(transform.rotation, targetQuaternion, turnSpeed);
     }
@@ -154,12 +207,12 @@ public class Ghost_targeting : MonoBehaviour
     /// </summary>
     void patrol()
     {
-        //バイブルに影響された時
-        if (ifBibleAffect)
-        {
-            move(targetpos, -chasingSpeed, Vector3.zero);
-            return;
-        }
+        ////バイブルに影響された時
+        //if (ifBibleAffect)
+        //{
+        //    move(targetpos, -chasingSpeed, Vector3.zero);
+        //    return;
+        //}
         if (Time.time - lastActTime > waitTime)　//前回の行動に一定時間を経過すると
         {
             generateRandomTarget();　//新しパトロール目標を生成する
@@ -193,12 +246,14 @@ public class Ghost_targeting : MonoBehaviour
     /// </summary>
     void targetCheck()
     {
+        if (ifBibleAffect||ifHolyWaterAffect) return;
         //オブジェクトがない時
         if (thief == null || player == null)
             return;
         //デフォルトで泥棒を追う
         if (targetobj == null && !ifThiefHide)
         {
+            Gs = GhostState.Chasing_Thief;
             targetobj = thief;
         }
         distancetoPlayer = Vector3.Distance(transform.position, player.transform.position);
@@ -209,12 +264,14 @@ public class Ghost_targeting : MonoBehaviour
             if (distancetoPlayer < distanceOfChasingPlayer && distancetoPlayer < distancetoThief)
             {
                 //プレイヤーが泥棒より殺人鬼に近づくかつ、殺人鬼の警戒範囲内に入る
+                Gs = GhostState.Chasing_Player;
                 targetobj = player;
             }
 
             if (distancetoPlayer > distanceOfGiveUpChase || distancetoPlayer > distancetoThief)
             {
                 //プレイヤーが泥棒より殺人鬼に離れた場合、または殺人鬼の最大追跡範囲に出す
+                Gs = GhostState.Chasing_Thief;
                 targetobj = thief;
             }
         }
@@ -224,18 +281,21 @@ public class Ghost_targeting : MonoBehaviour
             {
                 targetobj = null;
                 missingPosition = transform.position;
-                isTargeting = false;
+                Gs = GhostState.Patrol;
+                //isTargeting = false;
             }
             if (distancetoPlayer < distanceOfChasingPlayer)
             {
-                isTargeting = true;
-                targetobj = player;
+                Gs = GhostState.Chasing_Player;
+                //isTargeting = true;
+                //targetobj = player;
             }
 
             if (distancetoPlayer > distanceOfGiveUpChase)
             {
                 targetobj = null;
-                isTargeting = false;
+                Gs = GhostState.Patrol;
+                //isTargeting = false;
             }
         }
     }
@@ -245,17 +305,29 @@ public class Ghost_targeting : MonoBehaviour
     /// <param name="time">効果時間</param>
     public void bible(float time)
     {
-        
         StartCoroutine(bibleEffect(time));
-        
     }
     IEnumerator bibleEffect(float time)
     {
         ifBibleAffect = true;
+        Gs = GhostState.Bible_Affected;
         targetpos = targetobj.transform.position;
         //Debug.Log("bible affected");
         yield return new WaitForSeconds(time);
         ifBibleAffect = false;
     }
 
+    public void HolyWater(float time)
+    {
+        if (!ifHolyWaterAffect)
+            StartCoroutine(HolyWaterEffect(time));
+    }
+    IEnumerator HolyWaterEffect(float time)
+    {
+        ifHolyWaterAffect = true;
+        Gs = GhostState.HolyWater_Affected;
+        Debug.Log("HolyWater affected");
+        yield return new WaitForSeconds(time);
+        ifHolyWaterAffect = false;
+    }
 }
