@@ -13,6 +13,16 @@ public class GimmickManager : SingletonMonoBehavior<GimmickManager>
     // gimmickそれぞれにつける
     private System.Action GimmickFunc = null;
 
+    private GameObject[] sceneGimmicks = null;
+    private string gimmickTag = "Gimmick";
+
+    protected override void Awake()
+    {
+        base.Awake();
+        // Sceneに配置されているGimmickを配列に入れる
+        sceneGimmicks = GameObject.FindGameObjectsWithTag("Gimmik");
+    }
+
     /// <summary>
     /// true -> Gimmick発動なし false->ギミック発動中
     /// </summary>
@@ -49,4 +59,14 @@ public class GimmickManager : SingletonMonoBehavior<GimmickManager>
         GimmickFunc();
     }
 
+    /// <summary>
+    /// Scene上のGimmickのUIを展開する
+    /// </summary>
+    public void GimmicksOpenUI()
+    {
+        foreach(GameObject gimmick in sceneGimmicks)
+        {
+            gimmick.GetComponent<GimmickBase>().GimmickUIsOnOff(true);
+        }
+    }
 }

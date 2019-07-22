@@ -32,7 +32,7 @@ public class stop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Stop"))
+        if (Input.GetButtonDown("Stop") || Input.GetKeyDown(KeyCode.Space))
         {
             gamestop();
         }
@@ -65,6 +65,7 @@ public class stop : MonoBehaviour
             cursor.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.pc.gameObject.transform.position);
             Time.timeScale = 0;
 
+            GimmickManager.Instance.GimmicksOpenUI();
         }
         
     }

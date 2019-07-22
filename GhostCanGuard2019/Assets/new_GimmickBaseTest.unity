@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gimmickUIParent: {fileID: 289642289}
+  gimmickButtons: 0100000003000000
 --- !u!65 &748493215
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -358,7 +359,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748493213}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.35, y: 4.46, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 289642293}
@@ -537,6 +538,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920191666662132070, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -36.02664
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920191666662132070, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 7.2053375
       objectReference: {fileID: 0}
     - target: {fileID: 2920191666889746956, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
         type: 3}

@@ -31,7 +31,7 @@ public class GimmickBase : MonoBehaviour
     public void GimmickUIsOnOff(bool onoff)
     {
         // UIの展開とギミック発動のフラグが異なっていたらreturn
-        if (onoff != GimmickManager.Instance.GimmickFrag) return;
+        // if (onoff != GimmickManager.Instance.GimmickFrag) return;
 
         // UI表示
         gimmickUIParent.SetActive(onoff);
