@@ -63,9 +63,9 @@ public class stop : MonoBehaviour
         {
             cursor.SetActive( true);
             cursor.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.pc.gameObject.transform.position);
-            Time.timeScale = 0;
+            Time.timeScale = 0.1f;
 
-            GimmickManager.Instance.GimmicksOpenUI();
+            //GimmickManager.Instance.GimmicksOpenUI();
         }
         
     }
@@ -87,8 +87,9 @@ public class stop : MonoBehaviour
             }
             else
             {
+                if(selectedObject != null)
+                    selectedObject.GetComponent<GimmickBase>().GimmickUIsOnOff(false);
                 selectedObject = null;
-                
             }
         }
         
@@ -105,5 +106,18 @@ public class stop : MonoBehaviour
         float x = Mathf.Clamp(pos.position.x, pos.rect.width * 0.5f, Screen.width - (pos.rect.width * 0.5f));
         float y = Mathf.Clamp(pos.position.y, pos.rect.height * 0.5f, Screen.height - (pos.rect.height * 0.5f));
         pos.position = new Vector2(x, y);
+    }
+
+    private void PrepareGimmick(GameObject gimmick)
+    {
+        if (gimmick == null)
+        {
+            GimmickManager.Instance.ClearGimmick();
+            return;
+        }
+        // UI展開
+        gimmick.GetComponent<GimmickBase>().GimmickUIsOnOff(true);
+        // コントローラー入力待ち状態に送る
+        gimmick.GetComponent<GimmickBase>().ClickGimmick();
     }
 }
