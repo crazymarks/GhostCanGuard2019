@@ -13,6 +13,8 @@ public class GimmickBase : MonoBehaviour
     //ギミックの効果や説明のUIの展開
     [SerializeField] protected GameObject gimmickUIParent;
     protected stop st = null;
+    // 各ギミックで必要なボタンを入れる
+    [SerializeField] protected ControllerButton[] gimmickButtons = null; 
 
     virtual protected void Start()
     {
@@ -52,6 +54,6 @@ public class GimmickBase : MonoBehaviour
     /// </summary>
     protected virtual void PushButtonGamePad(ControllerButton controller)
     {
-        
+
     }
 }

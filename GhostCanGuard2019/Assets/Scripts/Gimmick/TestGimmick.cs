@@ -14,6 +14,8 @@ public class TestGimmick : GimmickBase
     {
         if (Input.GetMouseButtonDown(0))
             ClickGimmick();
+        else
+            GimmickManager.Instance.ClearGimmick();
     }
 
     /// <summary>
@@ -21,20 +23,30 @@ public class TestGimmick : GimmickBase
     /// </summary>
     protected override void PushButtonGamePad(ControllerButton controller)
     {
-        switch(controller)
+        for(int i = 0; i < gimmickButtons.Length; i++)
         {
-            case ControllerButton.A:
-                Debug.Log("Push A button! ");
-                break;
-            case ControllerButton.B:
-                Debug.Log("Push B button! ");
-                break;
-            case ControllerButton.X:
-                Debug.Log("Push X button! ");
-                break;
-            case ControllerButton.Y:
-                Debug.Log("Push Y button! ");
-                break;
+            if (controller == gimmickButtons[i])
+            {
+                Debug.Log("Push " + gimmickButtons[i]);
+                return;
+            }
         }
+
+        Debug.Log("this Gimmick don't setup Button");
+        //switch(controller)
+        //{
+        //    case ControllerButton.A:
+        //        Debug.Log("Push A button! ");
+        //        break;
+        //    case ControllerButton.B:
+        //        Debug.Log("Push B button! ");
+        //        break;
+        //    case ControllerButton.X:
+        //        Debug.Log("Push X button! ");
+        //        break;
+        //    case ControllerButton.Y:
+        //        Debug.Log("Push Y button! ");
+        //        break;
+        //}
     }
 }

@@ -32,7 +32,7 @@ public class GimmickManager : SingletonMonoBehavior<GimmickManager>
     /// </summary>
     public void ClearGimmick()
     {
-        PlayerManager.Instance.SetCurrentState(PlayerState.Play);
+        //PlayerManager.Instance.SetCurrentState(PlayerState.Play);
 
         GimmickFunc = null;
         GimmickFrag = true;
