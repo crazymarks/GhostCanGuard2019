@@ -16,18 +16,23 @@ public class PlayerControl : MonoBehaviour {
     public bool IsPlayerMove { get { return _playerMove; } set { _playerMove = value; } }
 
     
+
+
+
     // Start is called before the first frame update
     void Start() {
         rb = this.gameObject.GetComponent<Rigidbody>();
+        
     }
 
     // Update is called once per frame
     void FixedUpdate() {
         move(speed);
     }
-
+    
     private void move(float speed) {
         if (!_playerMove) return;
+        
 
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
