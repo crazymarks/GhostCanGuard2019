@@ -15,6 +15,9 @@ public class GimmickBase : MonoBehaviour
     protected GameObject gimmickUIParent;
     protected EventTrigger eventTrigger;
     protected stop st;
+    // 各ギミックで必要なボタンを入れる
+    [SerializeField]
+    protected ControllerButton[] gimmickButtons = null;
     private EventTrigger.Entry entry = new EventTrigger.Entry();
 
     // public static bool GimmickFlag = false;
@@ -91,5 +94,24 @@ public class GimmickBase : MonoBehaviour
         if (this.eventTrigger.triggers == null) return;
 
         this.eventTrigger.triggers.Remove(entry);
+    }
+    /// <summary>
+    /// playerがギミックとカーソルが重なっているときにボタンを押した時に呼ぶ
+    /// </summary>
+    public void ClickGimmick()
+    {
+        GimmickManager.Instance.SetGimmickAction(CurrentButtonIN);
+    }
+    protected void CurrentButtonIN()
+    {
+        // 押したときのボタンをギミック処理に送る
+        PushButtonGamePad(InputManager.Instance.CurrentControllerButton);
+    }
+    /// <summary>
+    /// switch文で押されたボタンに対する処理を各ギミックで行う
+    /// </summary>
+    protected virtual void PushButtonGamePad(ControllerButton controller)
+    {
+
     }
 }

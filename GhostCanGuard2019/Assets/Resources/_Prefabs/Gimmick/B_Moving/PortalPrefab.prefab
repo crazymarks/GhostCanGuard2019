@@ -188,7 +188,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35bd94ec419a9e145ab578d836ea52e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gimmickUIParent: {fileID: 5636696399576320459}
+  gimmickUIParent: {fileID: 0}
+  gimmickButtons: 
   IfEnable: 0
   PortDlay: 0
   PortDestination: {fileID: 0}
@@ -505,12 +506,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5894c61bf5e48489c380c30cc56449, type: 3}
---- !u!1 &5636696399576320459 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 462991974789556335, guid: 6d5894c61bf5e48489c380c30cc56449,
-    type: 3}
-  m_PrefabInstance: {fileID: 5212196653582803364}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5636696399576320455 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 462991974789556323, guid: 6d5894c61bf5e48489c380c30cc56449,

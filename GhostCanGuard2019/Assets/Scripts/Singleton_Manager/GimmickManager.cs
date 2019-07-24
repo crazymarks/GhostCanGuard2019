@@ -41,7 +41,7 @@ public class GimmickManager : SingletonMonoBehavior<GimmickManager>
     /// </summary>
     public void ClearGimmick()
     {
-        PlayerManager.Instance.SetCurrentState(PlayerState.Play);
+        //PlayerManager.Instance.SetCurrentState(PlayerState.Play);
         if (gimmickNames != null)
         {
             gimmickNames.ForEach(name => Debug.Log(name));

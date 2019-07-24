@@ -87,8 +87,8 @@ public class Portal : GimmickBase
         }
         //IfEnable = !IfEnable;
         //PortDestination.IfEnable = IfEnable;
-        st.gamestop();
-        //GimmickUIClose();
+        //st.gamestop();
+        GimmickUIClose();
     }
 
 
@@ -163,17 +163,38 @@ public class Portal : GimmickBase
         PortabeTag.Remove(tag);
     }
 
-    public void ClickUIStart()
-    {
-        GimmickManager.Instance.SetGimmickAction(PortOnOff);
-        GimmickUIsOnOff(false);
-    }
+    //public void ClickUIStart()
+    //{
+    //    GimmickManager.Instance.SetGimmickAction(PortOnOff);
+    //    GimmickUIsOnOff(false);
+    //}
     private void Update()
     {
-        if (Input.GetButtonDown("Send") && st.selectedObject == gameObject)
+        //if (Input.GetButtonDown("Send") && st.selectedObject == gameObject)
+        //{
+        //    PortOnOff();
+        //}
+        
+    }
+    protected override void PushButtonGamePad(ControllerButton controller)
+    {
+        base.PushButtonGamePad(controller);
+        switch (controller)
         {
-            PortOnOff();
+            case ControllerButton.A:
+                break;
+            case ControllerButton.B:
+                Debug.Log("Send");
+                PortOnOff();
+                break;
+            case ControllerButton.X:
+                break;
+            case ControllerButton.Y:
+                break;
+            case ControllerButton.Max:
+                break;
+            default:
+                break;
         }
     }
-
 }

@@ -74,15 +74,17 @@ public class stop : MonoBehaviour
             outline.enabled = false;
             PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
             stopped=false;
+            GameManager.Instance.pc.CanPlayerMove = true;
         }
         else
         {
             cursor.SetActive( true);
             cursor.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.pc.gameObject.transform.position);
-            Time.timeScale = 0;
+            Time.timeScale = 0.1f;
             outline.enabled = true;
             PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
             stopped = true;
+            GameManager.Instance.pc.CanPlayerMove = false;
         }
         
     }
@@ -96,15 +98,19 @@ public class stop : MonoBehaviour
         {
             if (hit.collider.tag == "Gimmik" || hit.collider.tag == "Player")
             {
+                PrepareGimmick(hit.collider.gameObject);
                 //EventSystem.current.SetSelectedGameObject(hit.collider.gameObject);
                 //gimmickmanager.instance.GetGimick = hit.collidr.gamaobject;
                 Debug.Log(hit.collider.gameObject.name);
-                selectedObject = hit.collider.gameObject;
+                //selectedObject = hit.collider.gameObject;
                 
             }
             else
             {
+                //if (selectedObject != null)
+                //    selectedObject.GetComponent<GimmickBase>().GimmickUIsOnOff(false);
                 selectedObject = null;
+
             }
         }
     }
@@ -127,5 +133,19 @@ public class stop : MonoBehaviour
         float x = Mathf.Clamp(pos.position.x, 0, Screen.width*0.99f);
         float y = Mathf.Clamp(pos.position.y, Screen.height * 0.01f, Screen.height);
         pos.position = new Vector2(x, y);
+    }
+
+    private void PrepareGimmick(GameObject gimmick)
+    {
+        if (gimmick == null)
+        {
+            GimmickManager.Instance.ClearGimmick();
+            return;
+        }
+        // UI展開
+        //gimmick.GetComponent<GimmickBase>().GimmickUIsOnOff(true);
+        // コントローラー入力待ち状態に送る
+        gimmick.GetComponent<GimmickBase>().ClickGimmick();
+        
     }
 }

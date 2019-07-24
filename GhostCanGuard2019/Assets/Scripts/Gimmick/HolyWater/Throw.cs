@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Throw : MonoBehaviour
 {
-
+    
     
     public GameObject HolyWater;
     public float force=10;
@@ -25,6 +25,7 @@ public class Throw : MonoBehaviour
         if (Input.GetButtonDown("Send") && st.selectedObject == gameObject && (!IfActivated || st.SecondPhase == true))
         {
             throwHolyWater();
+            
         }
     }
 

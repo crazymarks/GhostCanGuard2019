@@ -275,17 +275,17 @@ public class Horse : GimmickBase
         //GimmickUIClose();
     }
 
-    public void OnClickUIStart()
-    {
-        if (GameManager.Instance.getXZDistance(gameObject, Player) <= 3)
-            GimmickManager.Instance.SetGimmickAction(Active);
-        else
-        {
-            StartCoroutine(GameManager.Instance.showTextWithSeconds("もっと近づいてください！", 1f));
-            GimmickUIClose();
-        }
-        GimmickUIsOnOff(false);
-    }
+    //public void OnClickUIStart()
+    //{
+    //    if (GameManager.Instance.getXZDistance(gameObject, Player) <= 3)
+    //        GimmickManager.Instance.SetGimmickAction(Active);
+    //    else
+    //    {
+    //        StartCoroutine(GameManager.Instance.showTextWithSeconds("もっと近づいてください！", 1f));
+    //        GimmickUIClose();
+    //    }
+    //    GimmickUIsOnOff(false);
+    //}
     private void Update()
     {
         if (Input.GetButtonDown("Send") && st.selectedObject == gameObject &&  (!IfActivated||st.SecondPhase))

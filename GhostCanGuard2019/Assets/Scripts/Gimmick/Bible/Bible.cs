@@ -86,11 +86,11 @@ public class Bible : GimmickBase
         Debug.Log("Ready to ReUse");
     }
 
-    public void ClickUIStart()
-    {
-        GimmickManager.Instance.SetGimmickAction(open);
-        GimmickUIsOnOff(false);
-    }
+    //public void ClickUIStart()
+    //{
+    //    GimmickManager.Instance.SetGimmickAction(open);
+    //    GimmickUIsOnOff(false);
+    //}
     private void Update()
     {
         if (Input.GetButtonDown("Send") && st.selectedObject == gameObject)
