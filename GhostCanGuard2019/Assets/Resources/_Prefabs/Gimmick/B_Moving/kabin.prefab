@@ -63,7 +63,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gimmickUIParent: {fileID: 1132920514640244720}
-  power: 300
+  gimmickButtons: 0300000001000000
+  power: 10
   player: {fileID: 0}
   speed: 2
 --- !u!114 &708210332387505835

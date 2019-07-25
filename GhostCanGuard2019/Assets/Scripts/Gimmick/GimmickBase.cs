@@ -100,12 +100,18 @@ public class GimmickBase : MonoBehaviour
     /// </summary>
     public void ClickGimmick()
     {
-        GimmickManager.Instance.SetGimmickAction(CurrentButtonIN);
+        if (Input.GetButtonDown("Send"))
+        {
+            GimmickManager.Instance.SetGimmickAction(CurrentButtonIN);
+            Debug.Log("Click");
+        }
+        
     }
     protected void CurrentButtonIN()
     {
         // 押したときのボタンをギミック処理に送る
         PushButtonGamePad(InputManager.Instance.CurrentControllerButton);
+        Debug.Log(InputManager.Instance.CurrentControllerButton);
     }
     /// <summary>
     /// switch文で押されたボタンに対する処理を各ギミックで行う

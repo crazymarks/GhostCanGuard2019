@@ -16,6 +16,8 @@ public class KabinGimmick : GimmickBase
 
     private bool kabinSetPos = false;
 
+    private bool IfActivated = false;
+    private bool Broken = false;
 
     private Rigidbody rb = null;
 
@@ -24,6 +26,25 @@ public class KabinGimmick : GimmickBase
         base.Start();
         GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
         rb = GetComponent<Rigidbody>();
+        Broken = false;
+        IfActivated = false;
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player"  || other.tag == "Ghost") return;
+        
+        if (IfActivated)
+        {
+            if (other.tag == "Thief")
+            {
+
+            }
+            rb.velocity = Vector3.zero;
+            Debug.Log("Broken");
+            Broken = true;
+            Destroy(gameObject, 2f);
+        }
     }
 
     private void KabinGimmickSetup()
@@ -40,32 +61,44 @@ public class KabinGimmick : GimmickBase
         KabinGimmickSetup();
         
         if (!kabinSetPos) return;
-        if (!Input.GetMouseButtonDown(0)) return;
+        
+        if (!st.SecondPhase)
+        {
+            st.SecondPhase = true;
+            Debug.Log("Choose target");
+            return;
+        }
+        
 
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 10f;
-        throwPos = Camera.main.ScreenToWorldPoint(mousePos);
+        if (!Input.GetButtonDown("Send")) return;
+        
+        throwPos = Camera.main.ScreenToWorldPoint(st.getCursorWorldPosition());
         Debug.Log(throwPos);
         throwPos.y = 5.0f;
 
         // 力を加える方向をきめる
-        Vector3 direction = (throwPos - this.transform.position).normalized;
-        Debug.Log(direction);
         Debug.Log("thorw!");
-        rb.AddForce(direction * power);
-        throwPos = Vector3.zero;
+        
+        Vector3 target = st.getCursorWorldPosition();
+        player.transform.LookAt(new Vector3(target.x, gameObject.transform.position.y, target.z));
+
+        KabinToPlayer(player.transform.position+player.transform.forward);
+        rb.AddForce(player.transform.forward * power + player.transform.up, ForceMode.Impulse);
+        IfActivated = true;
 
         GimmickManager.Instance.ClearGimmick();
         GimmickUIClose();
-
+        st.SecondPhase = false;
+        st.gamestop();
+        
     }
 
-    // ButtonのonClickで呼ぶ関数
-    public void ClickUIStart()
-    {
-        GimmickManager.Instance.SetGimmickAction(KabinGimmickAction);
-        GimmickUIsOnOff(false);
-    }
+    //// ButtonのonClickで呼ぶ関数
+    //public void ClickUIStart()
+    //{
+    //    GimmickManager.Instance.SetGimmickAction(KabinGimmickAction);
+    //    GimmickUIsOnOff(false);
+    //}
 
     private void KabinToPlayer(Vector3 pPos)
     {
@@ -76,5 +109,26 @@ public class KabinGimmick : GimmickBase
         }
 
         kabinSetPos = true;
+    }
+    protected override void PushButtonGamePad(ControllerButton controller)
+    {
+        base.PushButtonGamePad(controller);
+        switch (controller)
+        {
+            case ControllerButton.A:
+                break;
+            case ControllerButton.B:
+                Debug.Log("Send");
+                KabinGimmickAction();
+                break;
+            case ControllerButton.X:
+                break;
+            case ControllerButton.Y:
+                break;
+            case ControllerButton.Max:
+                break;
+            default:
+                break;
+        }
     }
 }

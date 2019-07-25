@@ -62,16 +62,5 @@ public class PlayerControl : MonoBehaviour
         if (move!= Vector3.zero)
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(move, Vector3.up), turnSpeed);
     }
-    private void PrepareGimmick(GameObject gimmick)
-    {
-        if (gimmick == null)
-        {
-            GimmickManager.Instance.ClearGimmick();
-            return;
-        }
-        // UI展開
-        gimmick.GetComponent<GimmickBase>().GimmickUIsOnOff(true);
-        // コントローラー入力待ち状態に送る
-        gimmick.GetComponent<GimmickBase>().ClickGimmick();
-    }
+    
 }

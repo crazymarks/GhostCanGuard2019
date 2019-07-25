@@ -67,12 +67,6 @@ public class OutLineCamera : PostEffectBase
         {
             outlineCamera.CopyFrom(MainCamera);
             outlineCamera.transform.parent = MainCamera.transform;
-            //outlineCamera.transform.localPosition = Vector3.zero;
-            //outlineCamera.transform.localRotation = Quaternion.identity;
-            //outlineCamera.transform.localScale = Vector3.one;
-            //outlineCamera.farClipPlane = MainCamera.farClipPlane;
-            //outlineCamera.nearClipPlane = MainCamera.nearClipPlane;
-            //outlineCamera.fieldOfView = MainCamera.fieldOfView;
             outlineCamera.backgroundColor = Color.clear;
             outlineCamera.clearFlags = CameraClearFlags.Color;
             outlineCamera.cullingMask = 1 << LayerMask.NameToLayer("outline");

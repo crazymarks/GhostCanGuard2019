@@ -122,9 +122,7 @@ public class Horse : GimmickBase
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, _moveorient, out hit))
                 {
-                    //Debug.Log(hit.point);
-                    //Debug.Log(hit.distance);
-                    //Debug.Log(hit.collider);
+                   
                     //movedistance = Mathf.Clamp(movedistance, 0, hit.distance - radius > 0 ? hit.distance - radius : 0);
                     if (hit.distance <= radius && hit.collider.isTrigger == false)
                     {
@@ -157,8 +155,6 @@ public class Horse : GimmickBase
 
                     }
                 }
-                
-
             }
             if (IfBacking)
             {
@@ -227,6 +223,11 @@ public class Horse : GimmickBase
             
             GetOnHorse(Player);
             IfActivated = true;
+            if (!st.SecondPhase)
+            {
+                st.SecondPhase = true;
+                return;
+            }
         }
 
         //if (!Input.GetMouseButtonDown(0)) return;
@@ -244,11 +245,7 @@ public class Horse : GimmickBase
 
 
         //}
-        if (!st.SecondPhase)
-        {
-            st.SecondPhase = true;
-            return;
-        }
+        
         
         
         if (!Input.GetButtonDown("Send")) return;
@@ -272,7 +269,7 @@ public class Horse : GimmickBase
         
         st.gamestop();
         st.SecondPhase = false;
-        //GimmickUIClose();
+        GimmickUIClose();
     }
 
     //public void OnClickUIStart()
@@ -286,12 +283,40 @@ public class Horse : GimmickBase
     //    }
     //    GimmickUIsOnOff(false);
     //}
-    private void Update()
-    {
-        if (Input.GetButtonDown("Send") && st.selectedObject == gameObject &&  (!IfActivated||st.SecondPhase))
-        {
-            Active();
-        }
+    //private void Update()
+    //{
+    //    if (Input.GetButtonDown("Send") && st.selectedObject == gameObject &&  (!IfActivated||st.SecondPhase))
+    //    {
+    //        Active();
+    //    }
         
+    //}
+    protected override void PushButtonGamePad(ControllerButton controller)
+    {
+        base.PushButtonGamePad(controller);
+        switch (controller)
+        {
+            case ControllerButton.A:
+                break;
+            case ControllerButton.B:
+                Debug.Log("Send");
+                if (GameManager.Instance.getXZDistance(gameObject, Player) <= 3)
+                    Active();
+                else
+                {
+                    StartCoroutine(GameManager.Instance.showTextWithSeconds("もっと近づいてください！", 1f));
+                    st.gamestop();
+                    GimmickUIClose();
+                }
+                break;
+            case ControllerButton.X:
+                break;
+            case ControllerButton.Y:
+                break;
+            case ControllerButton.Max:
+                break;
+            default:
+                break;
+        }
     }
 }

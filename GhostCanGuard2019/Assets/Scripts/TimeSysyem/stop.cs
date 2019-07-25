@@ -96,14 +96,16 @@ public class stop : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit,mask) && hit.collider.gameObject != selectedObject)
         {
-            if (hit.collider.tag == "Gimmik" || hit.collider.tag == "Player")
+            if (hit.collider.tag == "Gimmik")
             {
                 PrepareGimmick(hit.collider.gameObject);
                 //EventSystem.current.SetSelectedGameObject(hit.collider.gameObject);
                 //gimmickmanager.instance.GetGimick = hit.collidr.gamaobject;
                 Debug.Log(hit.collider.gameObject.name);
-                //selectedObject = hit.collider.gameObject;
-                
+            }
+            else if (hit.collider.tag == "Player")
+            {
+                selectedObject = hit.collider.gameObject;
             }
             else
             {
@@ -145,7 +147,8 @@ public class stop : MonoBehaviour
         // UI展開
         //gimmick.GetComponent<GimmickBase>().GimmickUIsOnOff(true);
         // コントローラー入力待ち状態に送る
-        gimmick.GetComponent<GimmickBase>().ClickGimmick();
+        if(gimmick.tag== "Gimmik")
+            gimmick.GetComponent<GimmickBase>().ClickGimmick();
         
     }
 }

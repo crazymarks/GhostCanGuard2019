@@ -38,7 +38,7 @@ public class InputManager : SingletonMonoBehavior<InputManager>
             CurrentControllerButton = ControllerButton.X;
         if (Input.GetKeyDown(KeyCode.I) || Input.GetButtonDown("Info"))
             CurrentControllerButton = ControllerButton.Y;
-        else
-            CurrentControllerButton = ControllerButton.Null;
+        //else
+        //    CurrentControllerButton = ControllerButton.Null;
     }
 }

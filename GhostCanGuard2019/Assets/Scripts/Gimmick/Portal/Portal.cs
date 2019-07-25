@@ -84,10 +84,11 @@ public class Portal : GimmickBase
             PortDestination.IfEnable = true;
             portalPartical.SetActive(true);
             PortDestination.portalPartical.SetActive(true);
+
         }
         //IfEnable = !IfEnable;
         //PortDestination.IfEnable = IfEnable;
-        //st.gamestop();
+        st.gamestop();
         GimmickUIClose();
     }
 
