@@ -3,21 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StartMenu : MonoBehaviour {
+public class StartMenu : MonoBehaviour
+{
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
         select.enabled = false;
     }
 
     // Update is called once per frame
-    void Update() {
-
+    void Update()
+    {
+        
     }
     public Canvas startMenu;
     public Canvas select;
 
-    public void enableSelect() {
-        startMenu.enabled = false;
+    public void enableSelect()
+    {
+        startMenu.enabled=false;
         select.enabled = true;
 
     }

@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Gimmik
+  - Thief
+  - Ghost
+  - Alarm
+  - Exit
+  - Treasure
+  - PlayerCollider
   layers:
   - Default
   - TransparentFX
@@ -15,11 +21,11 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - DontEnterPlayer
-  - 
-  - 
-  - 
-  - 
+  - floor
+  - highlighttrigger
+  - outline
+  - Wall
+  - ThiefAlert
   - 
   - 
   - 
@@ -41,4 +47,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: highlighttrigger
+    uniqueID: 2897803015
+    locked: 0
+  - name: outline
+    uniqueID: 1199050653
     locked: 0

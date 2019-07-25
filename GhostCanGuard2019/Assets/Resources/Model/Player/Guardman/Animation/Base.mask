@@ -1,0 +1,317 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Base
+  m_Mask: 00000000010000000100000000000000000000000100000001000000010000000100000000000000000000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: atama1
+    m_Weight: 1
+  - m_Path: hair
+    m_Weight: 1
+  - m_Path: kosi
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Index1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Index1/L_Index1_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Index1/L_Index1_Cube/L_Index2
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Index1/L_Index1_Cube/L_Index2/L_Index2_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Index1/L_Index1_Cube/L_Index2/L_Index2_Cube/L_Index3
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Index1/L_Index1_Cube/L_Index2/L_Index2_Cube/L_Index3/L_Index3_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Middle1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Middle1/L_Middle1_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Middle1/L_Middle1_Cube/L_Middle2
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Middle1/L_Middle1_Cube/L_Middle2/L_Middle2_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Middle1/L_Middle1_Cube/L_Middle2/L_Middle2_Cube/L_Middle3
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Middle1/L_Middle1_Cube/L_Middle2/L_Middle2_Cube/L_Middle3/L_Middle3_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Pinky1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Pinky1/L_Pinky1_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Pinky1/L_Pinky1_Cube/L_Pinky2
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Pinky1/L_Pinky1_Cube/L_Pinky2/L_Pinky2_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Pinky1/L_Pinky1_Cube/L_Pinky2/L_Pinky2_Cube/L_Pinky3
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Pinky1/L_Pinky1_Cube/L_Pinky2/L_Pinky2_Cube/L_Pinky3/L_Pinky3_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Ring1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Ring1/L_Ring1_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Ring1/L_Ring1_Cube/L_Ring2
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Ring1/L_Ring1_Cube/L_Ring2/L_Ring2_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Ring1/L_Ring1_Cube/L_Ring2/L_Ring2_Cube/L_Ring3
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Ring1/L_Ring1_Cube/L_Ring2/L_Ring2_Cube/L_Ring3/L_Ring3_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Thumb1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Thumb1/L_Thumb1_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Thumb1/L_Thumb1_Cube/L_Thumb2
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Thumb1/L_Thumb1_Cube/L_Thumb2/L_Thumb2_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Thumb1/L_Thumb1_Cube/L_Thumb2/L_Thumb2_Cube/L_Thumb3
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/L_Shoulder/L_Shoulder_Cube/IK_L_Hand/L_HandCircle/L_Hand/L_Hand_Cube/L_Thumb1/L_Thumb1_Cube/L_Thumb2/L_Thumb2_Cube/L_Thumb3/L_Thumb3_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/Neck
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/Neck/Neck_Circle
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Index1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Index1/R_Index1_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Index1/R_Index1_Cube/R_Index2
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Index1/R_Index1_Cube/R_Index2/R_Index2_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Index1/R_Index1_Cube/R_Index2/R_Index2_Cube/R_Index3
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Index1/R_Index1_Cube/R_Index2/R_Index2_Cube/R_Index3/R_Index3_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Middle1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Middle1/R_Middle1_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Middle1/R_Middle1_Cube/R_Middle2
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Middle1/R_Middle1_Cube/R_Middle2/R_Middle2_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Middle1/R_Middle1_Cube/R_Middle2/R_Middle2_Cube/R_Middle3
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Middle1/R_Middle1_Cube/R_Middle2/R_Middle2_Cube/R_Middle3/R_Middle3_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Pinky1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Pinky1/R_Pinky1_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Pinky1/R_Pinky1_Cube/R_Pinky2
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Pinky1/R_Pinky1_Cube/R_Pinky2/R_Pinky2_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Pinky1/R_Pinky1_Cube/R_Pinky2/R_Pinky2_Cube/R_Pinky3
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Pinky1/R_Pinky1_Cube/R_Pinky2/R_Pinky2_Cube/R_Pinky3/R_Pinky3_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Ring1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Ring1/R_Ring1_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Ring1/R_Ring1_Cube/R_Ring2
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Ring1/R_Ring1_Cube/R_Ring2/R_Ring2_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Ring1/R_Ring1_Cube/R_Ring2/R_Ring2_Cube/R_Ring3
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Ring1/R_Ring1_Cube/R_Ring2/R_Ring2_Cube/R_Ring3/R_Ring3_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Thumb1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Thumb1/R_Thumb1_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Thumb1/R_Thumb1_Cube/R_Thumb2
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Thumb1/R_Thumb1_Cube/R_Thumb2/R_Thumb2_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Thumb1/R_Thumb1_Cube/R_Thumb2/R_Thumb2_Cube/R_Thumb3
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/hip/hip_Circle1/Spine1/Spine1_Circle/Spine2/Spine2_Circle/Spine3/Spine3_Circle/R_Shoulder/R_Shoulder_Cube/IK_R_Hand/R_HandCircle/R_Hand/R_Hand_Cube/R_Thumb1/R_Thumb1_Cube/R_Thumb2/R_Thumb2_Cube/R_Thumb3/R_Thumb3_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/IKHandle1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/IKHandle1/Foot
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/IKHandle1/Foot/L_Foot
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/IKHandle1/Foot/L_Foot/L_Foot_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/IKHandle1/Foot/L_Foot/L_Foot_Cube/L_Toe
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/IKHandle1/Foot/L_Foot/L_Foot_Cube/L_Toe/L_Toe_Cube
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/IKHandle2
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/IKHandle2/Foot1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/IKHandle2/Foot1/R_Foot
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/IKHandle2/Foot1/R_Foot/L_Foot_Cube1
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/IKHandle2/Foot1/R_Foot/L_Foot_Cube1/R_Toe
+    m_Weight: 1
+  - m_Path: kosi/Hip_Circle/IKHandle2/Foot1/R_Foot/L_Foot_Cube1/R_Toe/R_Toe_Cube1
+    m_Weight: 1
+  - m_Path: kosi_joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/L_UpperLeg_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/L_UpperLeg_Joint/L_ForeLeg_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/L_UpperLeg_Joint/L_ForeLeg_Joint/L_Foot_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/L_UpperLeg_Joint/L_ForeLeg_Joint/L_Foot_Joint/L_Toe_joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/R_UpperLeg_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/R_UpperLeg_Joint/R_ForeLeg_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/R_UpperLeg_Joint/R_ForeLeg_Joint/R_Foot_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/R_UpperLeg_Joint/R_ForeLeg_Joint/R_Foot_Joint/R_Toe_joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Index_Joint1
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Index_Joint1/L_Index_Joint2
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Index_Joint1/L_Index_Joint2/L_Index_Joint3
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Middle_Joint1
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Middle_Joint1/L_Middle_Joint2
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Middle_Joint1/L_Middle_Joint2/L_Middle_Joint3
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Pinky_Joint1
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Pinky_Joint1/L_Pinky_Joint2
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Pinky_Joint1/L_Pinky_Joint2/L_Pinky_Joint3
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Ring_Joint1
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Ring_Joint1/L_Ring_Joint2
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Ring_Joint1/L_Ring_Joint2/L_Ring_Joint3
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Thumb_Joint1
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Thumb_Joint1/L_Thumb_Joint2
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/L_Shoulder_Joint/L_UpperArm_Joint/L_Forearm_Joint/L_Hand_Joint/L_Thumb_Joint1/L_Thumb_Joint2/L_Thumb_Joint3
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/Neck_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/Neck_Joint/Head_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Index_Joint1
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Index_Joint1/R_Index_Joint2
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Index_Joint1/R_Index_Joint2/R_Index_Joint3
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Middle_Joint1
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Middle_Joint1/R_Middle_Joint2
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Middle_Joint1/R_Middle_Joint2/R_Middle_Joint3
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Pinky_Joint1
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Pinky_Joint1/R_Pinky_Joint2
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Pinky_Joint1/R_Pinky_Joint2/R_Pinky_Joint3
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Ring_Joint1
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Ring_Joint1/R_Ring_Joint2
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Ring_Joint1/R_Ring_Joint2/R_Ring_Joint3
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Thumb_Joint1
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Thumb_Joint1/R_Thumb_Joint2
+    m_Weight: 1
+  - m_Path: kosi_joint/hip_joint/Spine1_joint/Spine2_joint/Spine3_Joint/R_Shoulder_Joint/R_UpperArm_Joint/R_Forearm_Joint/R_Hand_Joint/R_Thumb_Joint1/R_Thumb_Joint2/R_Thumb_Joint3
+    m_Weight: 1
+  - m_Path: yiso
+    m_Weight: 1
