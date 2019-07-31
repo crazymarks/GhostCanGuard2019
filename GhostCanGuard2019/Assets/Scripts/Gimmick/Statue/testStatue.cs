@@ -49,13 +49,13 @@ public class testStatue : GimmickBase
         }
         
     }
-    private void Update()
-    {
-        if (Input.GetButtonDown("Send") && st.selectedObject == gameObject)
-        {
-            FallForwards();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetButtonDown("Send") && st.selectedObject == gameObject)
+    //    {
+    //        FallForwards();
+    //    }
+    //}
     // for buttons
     public void FallRight()
     {
@@ -77,11 +77,11 @@ public class testStatue : GimmickBase
             tiltAngle = 90f;
             isFallen = true;
             st.gamestop();
-            //GimmickUIClose();
+            GimmickUIClose();
         }
        
         //rb.AddForce(transform.forward * thrust);
-       
+
     }
 
     public void FallBackwards()
@@ -101,5 +101,26 @@ public class testStatue : GimmickBase
     public void CloseUI()
     {
 
+    }
+    protected override void PushButtonGamePad(ControllerButton controller)
+    {
+        base.PushButtonGamePad(controller);
+        switch (controller)
+        {
+            case ControllerButton.A:
+                break;
+            case ControllerButton.B:
+                Debug.Log("Send");
+                FallForwards();
+                break;
+            case ControllerButton.X:
+                break;
+            case ControllerButton.Y:
+                break;
+            case ControllerButton.Max:
+                break;
+            default:
+                break;
+        }
     }
 }

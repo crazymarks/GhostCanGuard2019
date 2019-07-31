@@ -68,7 +68,7 @@ public class Bible : GimmickBase
                 Debug.Log("準備中です");
         }
         st.gamestop(); 
-        //GimmickUIClose();
+        GimmickUIClose();
 
     }
     IEnumerator AuraON()
@@ -86,16 +86,37 @@ public class Bible : GimmickBase
         Debug.Log("Ready to ReUse");
     }
 
-    public void ClickUIStart()
+    //public void ClickUIStart()
+    //{
+    //    GimmickManager.Instance.SetGimmickAction(open);
+    //    GimmickUIsOnOff(false);
+    //}
+    //private void Update()
+    //{
+    //    if (Input.GetButtonDown("Send") && st.selectedObject == gameObject)
+    //    {
+    //        open();
+    //    }
+    //}
+    protected override void PushButtonGamePad(ControllerButton controller)
     {
-        GimmickManager.Instance.SetGimmickAction(open);
-        GimmickUIsOnOff(false);
-    }
-    private void Update()
-    {
-        if (Input.GetButtonDown("Send") && st.selectedObject == gameObject)
+        base.PushButtonGamePad(controller);
+        switch (controller)
         {
-            open();
+            case ControllerButton.A:
+                break;
+            case ControllerButton.B:
+                Debug.Log("Send");
+                open();
+                break;
+            case ControllerButton.X:
+                break;
+            case ControllerButton.Y:
+                break;
+            case ControllerButton.Max:
+                break;
+            default:
+                break;
         }
     }
 }

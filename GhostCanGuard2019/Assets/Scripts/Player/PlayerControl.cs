@@ -14,7 +14,7 @@ public class PlayerControl : MonoBehaviour
     //public static PlayerMove instancePM;
 
     private bool _playerMove = true;
-    public bool CanPlayerMove { get { return _playerMove; } set { _playerMove = value; } }
+    public bool CanPlayerMove { get { return _playerMove; } set { _playerMove = value; rb.velocity = Vector3.zero; } }
 
 
     float horizontal = 0;
@@ -62,4 +62,5 @@ public class PlayerControl : MonoBehaviour
         if (move!= Vector3.zero)
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(move, Vector3.up), turnSpeed);
     }
+    
 }

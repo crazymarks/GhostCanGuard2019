@@ -11,7 +11,12 @@ public enum ControllerButton
     B,
     X,
     Y,
+<<<<<<< HEAD
     Max
+=======
+    Max,
+    Null
+>>>>>>> origin/wangguanyu
 }
 
 public class InputManager : SingletonMonoBehavior<InputManager>
@@ -24,6 +29,7 @@ public class InputManager : SingletonMonoBehavior<InputManager>
 
     private void Update()
     {
+<<<<<<< HEAD
         if (Input.GetKeyDown(KeyCode.A))
             CurrentControllerButton = ControllerButton.A;
         if (Input.GetKeyDown(KeyCode.S))
@@ -32,5 +38,22 @@ public class InputManager : SingletonMonoBehavior<InputManager>
             CurrentControllerButton = ControllerButton.X;
         if (Input.GetKeyDown(KeyCode.F))
             CurrentControllerButton = ControllerButton.Y;
+=======
+        if (Input.GetKeyDown(KeyCode.K) || Input.GetButtonDown("Cancel"))
+            CurrentControllerButton = ControllerButton.A;
+        if (Input.GetKeyDown(KeyCode.L) || Input.GetButtonDown("Send"))
+        {
+            CurrentControllerButton = ControllerButton.B;
+            //Debug.Log("Send");
+        }
+            
+        
+        if (Input.GetKeyDown(KeyCode.J))
+            CurrentControllerButton = ControllerButton.X;
+        if (Input.GetKeyDown(KeyCode.I) || Input.GetButtonDown("Info"))
+            CurrentControllerButton = ControllerButton.Y;
+        //else
+        //    CurrentControllerButton = ControllerButton.Null;
+>>>>>>> origin/wangguanyu
     }
 }

@@ -54,7 +54,7 @@ public class Portal : GimmickBase
 
     private void OnTriggerEnter(Collider other)
     {
-
+        if (other.isTrigger) return;        //他のトリガーコライダーを無視する(実体だけ判定)
         if (IfEnable && !IfPorted && PortDestination.IfEnable)        //開いている且つ目標じゃない
         {
             Debug.Log("Enabled Portal IN TelePort IN " + PortDlay + " Seconds");
@@ -64,6 +64,7 @@ public class Portal : GimmickBase
     }
     private void OnTriggerExit(Collider other)
     {
+        if (other.isTrigger) return;          //他のトリガーコライダーを無視する(実体だけ判定)
         IfPorted = false;   //転送者が離れたら、このゲートをまた使う;
     }
 
@@ -83,11 +84,12 @@ public class Portal : GimmickBase
             PortDestination.IfEnable = true;
             portalPartical.SetActive(true);
             PortDestination.portalPartical.SetActive(true);
+
         }
         //IfEnable = !IfEnable;
         //PortDestination.IfEnable = IfEnable;
         st.gamestop();
-        //GimmickUIClose();
+        GimmickUIClose();
     }
 
 
@@ -162,17 +164,38 @@ public class Portal : GimmickBase
         PortabeTag.Remove(tag);
     }
 
-    public void ClickUIStart()
-    {
-        GimmickManager.Instance.SetGimmickAction(PortOnOff);
-        GimmickUIsOnOff(false);
-    }
+    //public void ClickUIStart()
+    //{
+    //    GimmickManager.Instance.SetGimmickAction(PortOnOff);
+    //    GimmickUIsOnOff(false);
+    //}
     private void Update()
     {
-        if (Input.GetButtonDown("Send") && st.selectedObject == gameObject)
+        //if (Input.GetButtonDown("Send") && st.selectedObject == gameObject)
+        //{
+        //    PortOnOff();
+        //}
+        
+    }
+    protected override void PushButtonGamePad(ControllerButton controller)
+    {
+        base.PushButtonGamePad(controller);
+        switch (controller)
         {
-            PortOnOff();
+            case ControllerButton.A:
+                break;
+            case ControllerButton.B:
+                Debug.Log("Send");
+                PortOnOff();
+                break;
+            case ControllerButton.X:
+                break;
+            case ControllerButton.Y:
+                break;
+            case ControllerButton.Max:
+                break;
+            default:
+                break;
         }
     }
-
 }

@@ -4,19 +4,18 @@
 
 Shader "OutlineShader/OutlinePrePass"
 {
-	/*Properties{
+	Properties{
 		
-		_OutlineColor("OutlineColor", Color) = (1,1,0,1)
-	}*/
+		_OutlineColor("OutlineColor", Color) = (1,1,1,1)
+	}
 	
 	SubShader
 	{
-		
 		Pass
 		{
 			CGPROGRAM
 			#include "UnityCG.cginc"
-				/*fixed4 _OutlineColor;*/
+				//fixed4 _OutlineColor;
 
 				struct v2f
 				{
@@ -32,8 +31,10 @@ Shader "OutlineShader/OutlinePrePass"
 
 				fixed4 frag(v2f i) : SV_Target
 				{
-
+					//fixed4 color = fixed4(1,1,1,1);
 					//単色のテキスチャーをoutする
+					//color = _OutlineColor;
+					//return color;
 					return fixed4(1,1,0,1);//アウトラインの色
 				}
 

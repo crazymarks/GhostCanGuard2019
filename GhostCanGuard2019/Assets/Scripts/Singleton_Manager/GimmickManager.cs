@@ -43,7 +43,15 @@ public class GimmickManager : SingletonMonoBehavior<GimmickManager>
     public void ClearGimmick()
     {
         //PlayerManager.Instance.SetCurrentState(PlayerState.Play);
+<<<<<<< HEAD
 
+=======
+        if (gimmickNames != null)
+        {
+            gimmickNames.ForEach(name => Debug.Log(name));
+            gimmickNames.Clear();
+        }
+>>>>>>> origin/wangguanyu
         GimmickFunc = null;
         GimmickFrag = true;
     }

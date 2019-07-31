@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3521398602406828690}
   - component: {fileID: 3521398602406828693}
-  - component: {fileID: 3521398602406828692}
   - component: {fileID: 3521398602406828695}
+  - component: {fileID: 8090143044764218536}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Ghost
@@ -52,19 +52,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0
---- !u!135 &3521398602406828692
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3521398602406828694}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!114 &3521398602406828695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,6 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da6f1da8aa4be242af7b25451980e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Gs: 0
   chasingSpeed: 2.5
   turnSpeed: 0.5
   walkSpeed: 2
@@ -85,6 +73,20 @@ MonoBehaviour:
   distanceOfGiveUpChase: 5
   maxPatrolRange: 5
   waitTime: 2
+--- !u!136 &8090143044764218536
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3521398602406828694}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.7
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!1 &7167708515310083026
 GameObject:
   m_ObjectHideFlags: 0
