@@ -7,71 +7,59 @@ public class KabinGimmick : GimmickBase
 {
     private Vector3 throwPos = Vector3.zero;   // 花瓶が飛んでいく場所
 
-    [SerializeField]
-    private float power = 5.0f; // 花瓶を押す力
-    [SerializeField]
+    [SerializeField] private float power = 5.0f; // 花瓶を押す力
     private GameObject player = null;
-    [SerializeField]
-    private float speed = 2.0f;
 
-    private bool kabinSetPos = false;
-
-
-    private Rigidbody rb = null;
+    [SerializeField] private float speed = 2.0f;    // speed when kabin move to player
+    private bool kabinSetPos = false;   // 花瓶がplayerの位置にいるかどうか
 
     protected override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null)
+            Debug.LogError("Not find Player");
     }
 
     private void KabinGimmickSetup()
     {
         Vector3 playerPosition = player.transform.position;
-        playerPosition += player.transform.forward;
+        playerPosition += player.transform.forward * 2.0f;
 
-        KabinToPlayer( playerPosition );
-       
+        KabinToPlayer(playerPosition);
     }
 
     private void KabinGimmickAction()
     {
-        KabinGimmickSetup();
-        
-        if (!kabinSetPos) return;
-        if (!Input.GetMouseButtonDown(0)) return;
-
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 10f;
-        throwPos = Camera.main.ScreenToWorldPoint(mousePos);
-        Debug.Log(throwPos);
-        throwPos.y = 5.0f;
-
-        // 力を加える方向をきめる
-        Vector3 direction = (throwPos - this.transform.position).normalized;
-        Debug.Log(direction);
-        Debug.Log("thorw!");
-        rb.AddForce(direction * power);
-        throwPos = Vector3.zero;
 
         GimmickManager.Instance.ClearGimmick();
-
-    }
-
-    // ButtonのonClickで呼ぶ関数
-    public void ClickUIStart()
-    {
-        GimmickManager.Instance.SetGimmickAction(KabinGimmickAction);
     }
 
     private void KabinToPlayer(Vector3 pPos)
     {
-        while(transform.position != pPos)
+        while (transform.position != pPos)
         {
             transform.position = Vector3.MoveTowards(transform.position, pPos, speed);
-            
         }
 
         kabinSetPos = true;
+    }
+    protected override void PushButtonGamePad(ControllerButton controller)
+    {
+        switch (controller)
+        {
+            // 方向選択に移行
+            case ControllerButton.B:
+                break;
+            // 説明ボタン
+            case ControllerButton.Y:
+                break;
+
+            case ControllerButton.A:
+            case ControllerButton.X:
+                NotButtonPushMessage();
+                break;
+            
+        }
     }
 }

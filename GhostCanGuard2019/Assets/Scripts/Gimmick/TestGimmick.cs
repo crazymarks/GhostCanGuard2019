@@ -23,14 +23,14 @@ public class TestGimmick : GimmickBase
     /// </summary>
     protected override void PushButtonGamePad(ControllerButton controller)
     {
-        for(int i = 0; i < gimmickButtons.Length; i++)
-        {
-            if (controller == gimmickButtons[i])
-            {
-                Debug.Log("Push " + gimmickButtons[i]);
-                return;
-            }
-        }
+        //for(int i = 0; i < gimmickButtons.Length; i++)
+        //{
+        //    if (controller == gimmickButtons[i])
+        //    {
+        //        Debug.Log("Push " + gimmickButtons[i]);
+        //        return;
+        //    }
+        //}
 
         Debug.Log("this Gimmick don't setup Button");
         //switch(controller)

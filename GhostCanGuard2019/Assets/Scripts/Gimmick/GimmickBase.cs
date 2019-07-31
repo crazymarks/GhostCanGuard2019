@@ -14,7 +14,7 @@ public class GimmickBase : MonoBehaviour
     [SerializeField] protected GameObject gimmickUIParent;
     protected stop st = null;
     // 各ギミックで必要なボタンを入れる
-    [SerializeField] protected ControllerButton[] gimmickButtons = null; 
+    //[SerializeField] protected ControllerButton[] gimmickButtons = null; 
 
     virtual protected void Start()
     {
@@ -42,7 +42,7 @@ public class GimmickBase : MonoBehaviour
     /// </summary>
     public void ClickGimmick()
     {
-        GimmickManager.Instance.SetGimmickAction(CurrentButtonIN);
+        GimmickManager.Instance.SetGimmickAction( () => CurrentButtonIN() );
     }
     protected void CurrentButtonIN()
     {
@@ -55,5 +55,17 @@ public class GimmickBase : MonoBehaviour
     protected virtual void PushButtonGamePad(ControllerButton controller)
     {
 
+    }
+
+    /// <summary>
+    /// gimmickに対応していないボタンが押された時messageを表示
+    /// </summary>
+    protected void NotButtonPushMessage()
+    {
+        // textのUIを表示する
+        // とりあえずDebugLog出力
+        Debug.Log(
+            InputManager.Instance.CurrentControllerButton.ToString()
+            + "は対応していないボタン");
     }
 }
