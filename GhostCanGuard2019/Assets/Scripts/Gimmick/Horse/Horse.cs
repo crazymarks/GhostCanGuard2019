@@ -134,29 +134,30 @@ public class Horse : GimmickBase
                     
                 }
 
-                if (IfMoving)
+                if (IfMoving && Input.GetButtonDown("Cancel"))
                 {
-                    if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+                    GetOffHorse(Player,Vector3.zero);
+                    //if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+                    //{
+                    //    float horizontal = Input.GetAxis("Horizontal");
+                    //    float vertical = Input.GetAxis("Vertical");
+                    //    LeftOrient = new Vector3(horizontal, 0, vertical).normalized;
+                    //    GetOffHorse(Player, LeftOrient);
+
+                    if (transform.position == StartPosition)
                     {
-                        float horizontal = Input.GetAxis("Horizontal");
-                        float vertical = Input.GetAxis("Vertical");
-                        LeftOrient = new Vector3(horizontal, 0, vertical).normalized;
-                        GetOffHorse(Player, LeftOrient);
-
-                        if (transform.position == StartPosition)
-                        {
-                            resetHorse();
-                        }
-                        else
-                        {
-                            IfBacking = true;
-                            Debug.Log("Start Back");
-                        }
-
+                        resetHorse();
                     }
+                    else
+                    {
+                        IfBacking = true;
+                        Debug.Log("Start Back");
+                    }
+
+                    //}
                 }
             }
-            if (IfBacking)
+            else
             {
                 Back();
             }
@@ -225,11 +226,11 @@ public class Horse : GimmickBase
             IfActivated = true;
             if (!st.SecondPhase)
             {
-                st.SecondPhase = true;
+                st.changeToSecondPhase();
                 return;
             }
         }
-
+        
         //if (!Input.GetMouseButtonDown(0)) return;
         //RaycastHit hitInfo;
         //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -242,11 +243,7 @@ public class Horse : GimmickBase
         //        MoveOrient = dir - transform.position;
         //        transform.rotation = Quaternion.LookRotation(MoveOrient);
         //    }
-
-
         //}
-        
-        
         
         if (!Input.GetButtonDown("Send")) return;
         RaycastHit hitInfo;
@@ -268,7 +265,6 @@ public class Horse : GimmickBase
         Debug.Log(_moveorient);
         
         st.gamestop();
-        st.SecondPhase = false;
         GimmickUIClose();
     }
 

@@ -36,7 +36,7 @@ public class Throw : MonoBehaviour
             IfActivated = true;
         if (!st.SecondPhase)
         {
-            st.SecondPhase = true;
+            st.changeToSecondPhase();
             AimSlider.gameObject.SetActive(true);
             Debug.Log("Choose target");
             return;
@@ -48,7 +48,6 @@ public class Throw : MonoBehaviour
         Rigidbody rb = holywater.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * force, ForceMode.Impulse);
         st.gamestop();
-        st.SecondPhase = false;
         IfActivated = false;
         count--;
     }

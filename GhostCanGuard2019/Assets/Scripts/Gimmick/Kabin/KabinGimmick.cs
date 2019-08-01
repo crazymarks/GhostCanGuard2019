@@ -66,7 +66,7 @@ public class KabinGimmick : GimmickBase
         
         if (!st.SecondPhase)
         {
-            st.SecondPhase = true;
+            st.changeToSecondPhase();
             Debug.Log("Choose target");
             return;
         }
@@ -90,7 +90,6 @@ public class KabinGimmick : GimmickBase
 
         GimmickManager.Instance.ClearGimmick();
         GimmickUIClose();
-        st.SecondPhase = false;
         st.gamestop();
         
     }

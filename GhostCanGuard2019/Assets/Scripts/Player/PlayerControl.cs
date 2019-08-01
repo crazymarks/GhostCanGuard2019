@@ -53,10 +53,7 @@ public class PlayerControl : MonoBehaviour
             //rb.velocity = Vector3.zero;
             return;
         }
-       
         Vector3 move = new Vector3(horizontal, 0, vertical).normalized;
-        
-
         rb.velocity = move * speed;
         //Debug.Log("プレイヤーのスピードは"+speed+"です");
         if (move!= Vector3.zero)
