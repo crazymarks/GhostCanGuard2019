@@ -12,10 +12,11 @@ public class Ghost_targeting : MonoBehaviour
         Chasing_Thief,
         Patrol,
         Bible_Affected,
-        HolyWater_Affected
+        HolyWater_Affected,
+        Stop
     }
     [SerializeField]
-    GhostState Gs;
+    public GhostState Gs;
     //目標を追う速度
     public float chasingSpeed = 5f;
     //体を回す速度

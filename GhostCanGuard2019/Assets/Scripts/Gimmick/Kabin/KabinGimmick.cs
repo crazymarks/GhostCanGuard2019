@@ -32,34 +32,36 @@ public class KabinGimmick : GimmickBase
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player"  || other.tag == "Ghost") return;
-        
-        if (IfActivated)
-        {
-            if (other.tag == "Thief")
-            {
+        if (other.tag == "Player"  || other.tag == "Ghost" ) return;
 
-            }
+        if (IfActivated && other.tag == "Thief")
+        {
+            //泥棒の処理
+        }
+        if (IfActivated && other.tag == "Untagged")
+        {
             rb.velocity = Vector3.zero;
             Debug.Log("Broken");
             Broken = true;
             Destroy(gameObject, 2f);
+            GimmickUIClose();
         }
     }
 
     private void KabinGimmickSetup()
     {
+        if (IfActivated) return;
         Vector3 playerPosition = player.transform.position;
         playerPosition += player.transform.forward;
 
-        KabinToPlayer( playerPosition );
+        KabinToPlayer(playerPosition);
        
     }
 
     private void KabinGimmickAction()
     {
         KabinGimmickSetup();
-        
+        if (IfActivated) return;
         if (!kabinSetPos) return;
         
         if (!st.SecondPhase)
@@ -82,8 +84,8 @@ public class KabinGimmick : GimmickBase
         Vector3 target = st.getCursorWorldPosition();
         player.transform.LookAt(new Vector3(target.x, gameObject.transform.position.y, target.z));
 
-        KabinToPlayer(player.transform.position+player.transform.forward);
-        rb.AddForce(player.transform.forward * power + player.transform.up, ForceMode.Impulse);
+        KabinToPlayer(player.transform.position + player.transform.forward);
+        rb.AddForce(player.transform.forward * power + player.transform.up ,ForceMode.Impulse);
         IfActivated = true;
 
         GimmickManager.Instance.ClearGimmick();

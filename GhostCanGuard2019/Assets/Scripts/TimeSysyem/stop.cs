@@ -3,31 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-//using System.Runtime.InteropServices;
 
 public class stop : MonoBehaviour
 {
     public LayerMask mask;
     [SerializeField]
     OutLineCamera outline;
-
+    [SerializeField]
+    private Color HighlightColor = Color.green;
+    public Outline.Mode HighlightMode = Outline.Mode.OutlineAll;
+    [Range(0f,10f)]
+    public float HighlightWidth = 5f;
     public GameObject selectedObject;
+    private GameObject outlineObject;
     [SerializeField]
     float speed = 10f;
     
     public GameObject cursor;
-
+   
     public bool SecondPhase;
-
+    public Sprite cursor_first;
+    public Sprite cursor_second;
+    
     bool stopped = false;
-    //[DllImport("user32.dll")]
-    //public static extern int SetCursorPos(float x, float y); //マウス位置を設定する
-
-    //public void SetMouseToAnyOfScreenPosition()
-    //{
-    //    SetCursorPos(Camera.main.WorldToScreenPoint(cursor.transform.position).x, Camera.main.WorldToScreenPoint(cursor.transform.position).y);
-    //}
-
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +34,8 @@ public class stop : MonoBehaviour
         outline = Camera.main.GetComponent<OutLineCamera>();
         outline.enabled = false;
         cursor.SetActive (false);
-        //Cursor.visible = false;
         stopped = false;
+        cursor.GetComponent<Image>().sprite = cursor_first;
     }
 
     // Update is called once per frame
@@ -58,11 +57,36 @@ public class stop : MonoBehaviour
             if (!SecondPhase)
             {
                 getObjectAtPosition();
+                if(cursor.GetComponent<Image>().sprite == cursor_second)
+                {
+                    cursor.GetComponent<Image>().sprite = cursor_first;
+                }
             }
-            
+            else
+            {
+                if (cursor.GetComponent<Image>().sprite == cursor_first)
+                {
+                    cursor.GetComponent<Image>().sprite = cursor_second;
+                }
+            }
+            if (outlineObject)
+            {
+                if (outlineObject.GetComponent<Outline>() != null && outlineObject != selectedObject)
+                {
+                    Destroy(outlineObject.GetComponent<Outline>());
+                }
+                if(outlineObject==selectedObject && selectedObject.GetComponent<Outline>() == null)
+                {
+                    var outline = outlineObject.AddComponent<Outline>();
+                    outline.OutlineMode = HighlightMode;
+                    outline.OutlineColor = HighlightColor;
+                    outline.OutlineWidth = HighlightWidth;
+                }
+            }
+            outlineObject = selectedObject;
+            PrepareGimmick(selectedObject);
         }
-            
-
+        
     }
     public void gamestop()
     {
@@ -75,6 +99,9 @@ public class stop : MonoBehaviour
             PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
             stopped=false;
             GameManager.Instance.pc.CanPlayerMove = true;
+            if (outlineObject && outlineObject.GetComponent<Outline>() != null)
+                Destroy(outlineObject.GetComponent<Outline>());
+            outlineObject = null;
         }
         else
         {
@@ -98,10 +125,11 @@ public class stop : MonoBehaviour
         {
             if (hit.collider.tag == "Gimmik")
             {
-                PrepareGimmick(hit.collider.gameObject);
                 //EventSystem.current.SetSelectedGameObject(hit.collider.gameObject);
                 //gimmickmanager.instance.GetGimick = hit.collidr.gamaobject;
                 Debug.Log(hit.collider.gameObject.name);
+                selectedObject = hit.collider.gameObject;
+
             }
             else if (hit.collider.tag == "Player")
             {
@@ -139,6 +167,7 @@ public class stop : MonoBehaviour
 
     private void PrepareGimmick(GameObject gimmick)
     {
+
         if (gimmick == null)
         {
             GimmickManager.Instance.ClearGimmick();
@@ -147,8 +176,11 @@ public class stop : MonoBehaviour
         // UI展開
         //gimmick.GetComponent<GimmickBase>().GimmickUIsOnOff(true);
         // コントローラー入力待ち状態に送る
-        if(gimmick.tag== "Gimmik")
+        if (gimmick.tag == "Gimmik")
+        {
             gimmick.GetComponent<GimmickBase>().ClickGimmick();
+            
+        }
         
     }
 }
