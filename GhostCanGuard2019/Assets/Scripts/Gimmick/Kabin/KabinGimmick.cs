@@ -74,7 +74,7 @@ public class KabinGimmick : GimmickBase
 
         if (!Input.GetButtonDown("Send")) return;
         
-        throwPos = Camera.main.ScreenToWorldPoint(st.getCursorWorldPosition());
+        throwPos = Camera.main.ScreenToWorldPoint(st.getCursorScreenPosition());
         Debug.Log(throwPos);
         throwPos.y = 5.0f;
 

@@ -218,8 +218,12 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     }
     public float getXZDistance(GameObject a, GameObject b)
     {
-        float distance = Mathf.Sqrt((a.transform.position.x - b.transform.position.x) * (a.transform.position.x - b.transform.position.x) + (a.transform.position.z - b.transform.position.z) * (a.transform.position.z - b.transform.position.z));
-        return distance;
+        Vector3 ay0 = new Vector3(a.transform.position.x, 0, a.transform.position.z);
+        Vector3 by0 = new Vector3(b.transform.position.x, 0, b.transform.position.z);
+        float d0 = Vector3.Distance(ay0, by0);
+        return d0;
+        //float distance = Mathf.Sqrt((a.transform.position.x - b.transform.position.x) * (a.transform.position.x - b.transform.position.x) + (a.transform.position.z - b.transform.position.z) * (a.transform.position.z - b.transform.position.z));
+        //return distance;
     }
     public IEnumerator showTextWithSeconds(string msg,float seconds)
     {

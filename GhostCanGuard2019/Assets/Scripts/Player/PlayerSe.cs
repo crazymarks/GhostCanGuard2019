@@ -9,6 +9,7 @@ public class PlayerSe : MonoBehaviour
     //SE
     [SerializeField] AudioClip moveSE;
     AudioSource audioSource;
+    AudioSource specialSe;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +21,10 @@ public class PlayerSe : MonoBehaviour
 
     public void playSE(AudioClip SEName)
     {
-        audioSource.clip = SEName;
-        if (!audioSource.isPlaying)
-            audioSource.Play();
-        else
-            audioSource.Stop();
+        if(!specialSe)
+            specialSe = gameObject.AddComponent<AudioSource>();
+        specialSe.clip = SEName;
+        specialSe.PlayOneShot(SEName);
     }
 
 
@@ -34,12 +34,12 @@ public class PlayerSe : MonoBehaviour
         audioSource.pitch = Mathf.Abs(player.speed / 5);
         if (!audioSource.isPlaying)
         {
-            if (rb.velocity.magnitude > 0.2)
+            if (rb.velocity.magnitude > 0.2 && player.CanPlayerMove)
                 audioSource.Play();
         }
         else
         {
-            if (rb.velocity.magnitude <=0.2)
+            if (rb.velocity.magnitude <=0.2 || !player.CanPlayerMove)
             {
                 audioSource.Stop();
             }

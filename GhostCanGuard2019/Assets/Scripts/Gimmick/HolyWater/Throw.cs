@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class Throw : MonoBehaviour
 {
-    
-    
+    public Slider AimSlider;
     public GameObject HolyWater;
     public float force=10;
     [Range(0, 10)]
@@ -25,7 +24,6 @@ public class Throw : MonoBehaviour
         if (Input.GetButtonDown("Send") && st.selectedObject == gameObject && (!IfActivated || st.SecondPhase == true))
         {
             throwHolyWater();
-            
         }
     }
 
@@ -39,6 +37,7 @@ public class Throw : MonoBehaviour
         if (!st.SecondPhase)
         {
             st.SecondPhase = true;
+            AimSlider.gameObject.SetActive(true);
             Debug.Log("Choose target");
             return;
         }

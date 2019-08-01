@@ -40,7 +40,6 @@ public class testStatue : GimmickBase
         if (Mathf.Abs(transform.rotation.eulerAngles.x) < tiltAngle)
         {
             transform.RotateAround(tiltpoint.transform.position, transform.right, smooth);
-
         }
         
         if (isFallen)

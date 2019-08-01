@@ -22,6 +22,7 @@ public class stop : MonoBehaviour
     public GameObject cursor;
    
     public bool SecondPhase;
+    //public Slider AimSlider;
     public Sprite cursor_first;
     public Sprite cursor_second;
     
@@ -77,15 +78,16 @@ public class stop : MonoBehaviour
                 }
                 if(outlineObject==selectedObject && selectedObject.GetComponent<Outline>() == null)
                 {
-                    var outline = outlineObject.AddComponent<Outline>();
-                    outline.OutlineMode = HighlightMode;
-                    outline.OutlineColor = HighlightColor;
-                    outline.OutlineWidth = HighlightWidth;
+                    addSingleOutline(HighlightMode, HighlightColor, HighlightWidth);
                 }
             }
             outlineObject = selectedObject;
             PrepareGimmick(selectedObject);
         }
+        //if (SecondPhase && !AimSlider.gameObject.activeSelf)
+        //{
+        //    AimSlider.gameObject.SetActive(true);
+        //}
         
     }
     public void gamestop()
@@ -102,6 +104,7 @@ public class stop : MonoBehaviour
             if (outlineObject && outlineObject.GetComponent<Outline>() != null)
                 Destroy(outlineObject.GetComponent<Outline>());
             outlineObject = null;
+            SecondPhase = false;
         }
         else
         {
@@ -147,12 +150,16 @@ public class stop : MonoBehaviour
 
     public Vector3 getCursorWorldPosition()
     {
+
         Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
         RaycastHit hit;
         Physics.Raycast(ray, out hit);
-        return hit.point;
+        return new Vector3(hit.point.x,0,hit.point.y);
     }
-
+    public Vector3 getCursorScreenPosition()
+    {
+        return cursor.transform.position;
+    }
     /// <summary>
     /// 物を画面内に制限する
     /// </summary>
@@ -182,5 +189,15 @@ public class stop : MonoBehaviour
             
         }
         
+    }
+
+    public void addSingleOutline(Outline.Mode mode,Color color,float width)
+    {
+        if (width >= 10) width = 10;
+        if (width <= 0) width = 0;
+        var outline = outlineObject.AddComponent<Outline>();
+        outline.OutlineMode = mode;
+        outline.OutlineColor = color;
+        outline.OutlineWidth = width;
     }
 }
