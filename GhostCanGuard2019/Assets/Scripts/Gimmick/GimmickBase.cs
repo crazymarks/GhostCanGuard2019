@@ -34,7 +34,7 @@ public class GimmickBase : MonoBehaviour
         
         if (gimmickUIParent == null)
         {
-            gimmickUIParent = transform.Find("UI").gameObject;
+            gimmickUIParent = transform.Find("ButtonUICanvas").gameObject;
         }
     }
     /// <summary>
@@ -47,7 +47,7 @@ public class GimmickBase : MonoBehaviour
         if (onoff != GimmickManager.Instance.GimmickFrag) return;
         
         // playerの動きを止める
-        PlayerManager.Instance.SetCurrentState(PlayerState.Gimmick);
+        //PlayerManager.Instance.SetCurrentState(PlayerState.Gimmick);
         // UI表示
         gimmickUIParent.SetActive(onoff);
         // Gimmickが発動待ち
@@ -60,7 +60,7 @@ public class GimmickBase : MonoBehaviour
         Debug.Log("gimmick touch");
         PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
         GimmickUIsOnOff(true);
-        st.gamestop();
+        //st.gamestop();
     }
     /// <summary>
     /// gimmickの選択を解除する
@@ -109,6 +109,7 @@ public class GimmickBase : MonoBehaviour
         // 押したときのボタンをギミック処理に送る
         PushButtonGamePad(InputManager.Instance.CurrentControllerButton);
         InputManager.Instance.ClearCurrentButton();
+        GimmickUIsOnOff(false);
         //Debug.Log(InputManager.Instance.CurrentControllerButton);
     }
     /// <summary>

@@ -42,7 +42,7 @@ public class stop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Stop") && !SecondPhase && GameManager.Instance.gameStart)
+        if (Input.GetButtonDown("Stop") && !SecondPhase && GameManager.Instance.gameStart && !GameManager.Instance.gameover)
         {
             gamestop();
         }
@@ -56,17 +56,17 @@ public class stop : MonoBehaviour
             DragRangeLimit(cursor.transform);
             if (!SecondPhase)
             {
-                getObjectAtPosition();
+                getObjectAtPosition();          //selectedObjectの変更、SecondPhaseには変更しません
             }
             if (outlineObject)
             {
                 if (outlineObject.GetComponent<Outline>() != null && outlineObject != selectedObject)
                 {
-                    outlineObject.GetComponent<Outline>().OutlineWidth = 0;
+                    outlineObject.GetComponent<Outline>().OutlineWidth = 0;                 //アウトライを消す
                 }
-                if(outlineObject==selectedObject )
+                if(outlineObject==selectedObject)
                 {
-                    if(selectedObject.GetComponent<Outline>() == null)
+                    if (selectedObject.GetComponent<Outline>() == null)
                         addSingleOutline(HighlightMode, HighlightColor, HighlightWidth);
                     else
                     {
@@ -112,8 +112,10 @@ public class stop : MonoBehaviour
         PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
         stopped = false;
         GameManager.Instance.pc.CanPlayerMove = true;
-        if (outlineObject && outlineObject.GetComponent<Outline>() != null)
-            Destroy(outlineObject.GetComponent<Outline>());
+        if (outlineObject && outlineObject.GetComponent<Outline>() != null)         //アウトライを消す
+        {
+            outlineObject.GetComponent<Outline>().OutlineWidth = 0; 
+        }
         outlineObject = null;
         SecondPhase = false;
         StopCoroutine(changesprite());
@@ -143,7 +145,7 @@ public class stop : MonoBehaviour
             else
             {
                 //if (selectedObject != null)
-                //    selectedObject.GetComponent<GimmickBase>().GimmickUIsOnOff(false);
+                    //selectedObject.GetComponent<GimmickBase>().GimmickUIsOnOff(false);
                 selectedObject = null;
             }
         }
@@ -224,5 +226,9 @@ public class stop : MonoBehaviour
         outline.OutlineMode = mode;
         outline.OutlineColor = color;
         outline.OutlineWidth = width;
+    }
+    private void hideOutline(Outline outline)
+    {
+        outline.OutlineWidth = 0;
     }
 }

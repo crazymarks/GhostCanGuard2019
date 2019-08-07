@@ -14,7 +14,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     [SerializeField]
     private Thief tf;  //泥棒を取得
     [SerializeField]
-    public PlayerControl pc;  //Playerを取得
+    public PlayerControl pc { get; private set; }  //Playerを取得
 
     bool ghostEnable = true;  //殺人鬼があるかどうか
     [SerializeField]
@@ -23,7 +23,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     [SerializeField]
     private LoadScene ldc;  //Scene管理コンポーネント
 
-    bool gameover = false;   //ゲーム状態flag
+    public bool gameover { get; private set; } = false;   //ゲーム状態flag
     [SerializeField]
     float checkdistance = 0.2f;     //ゲーム勝負の判定距離
 
@@ -44,6 +44,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     private GameObject treasure;
     private ParticleSystem swordlight;
 
+    stop st;
     // Start is called before the first frame update
     void Start()
     {
@@ -112,7 +113,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             }
             
         }
-
+        st = GetComponent<stop>();
         gameStart = false;
         text.text = "";
         GimmickManager.Instance.GimmickFrag = false;
@@ -235,12 +236,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         Time.timeScale = 1;
     }
 
-    private void theWorld()
-    {
-        Time.timeScale = 0.1f;
-    }
-
-
-
-
+    //private void theWorld()
+    //{
+    //    Time.timeScale = 0.1f;
+    //}
 }

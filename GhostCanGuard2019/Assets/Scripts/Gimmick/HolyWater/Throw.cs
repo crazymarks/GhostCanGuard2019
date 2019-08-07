@@ -1,9 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Throw : MonoBehaviour
+public class Throw : GimmickBase
 {
     public Slider AimSlider;
     public GameObject HolyWater;
@@ -11,11 +9,12 @@ public class Throw : MonoBehaviour
     [Range(0, 10)]
     public int count = 1;       //残り弾数
     private bool IfActivated;
-    stop st;
+    
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        st = GameManager.Instance.GetComponent<stop>();
+        base.Start();
+        //st = GameManager.Instance.GetComponent<stop>();
     }
 
     // Update is called once per frame

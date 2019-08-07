@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Horse : GimmickBase
 {
@@ -15,6 +14,8 @@ public class Horse : GimmickBase
     }
 
     HorseState horseState;
+
+    public Slider AimSlider;
 
     [SerializeField]
     private bool IfActivated = false;   //使う中ですか
@@ -227,6 +228,8 @@ public class Horse : GimmickBase
             if (!st.SecondPhase)
             {
                 st.changeToSecondPhase();
+                AimSlider.gameObject.SetActive(true);
+                Debug.Log("Choose target");
                 return;
             }
         }
