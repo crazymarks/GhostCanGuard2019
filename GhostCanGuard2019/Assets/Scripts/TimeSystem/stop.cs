@@ -76,7 +76,7 @@ public class stop : MonoBehaviour
         //{
         //    AimSlider.gameObject.SetActive(true);
         //}
-        
+       
     }
     public void gamestop()
     {
@@ -112,6 +112,7 @@ public class stop : MonoBehaviour
         outlineObject = null;
         SecondPhase = false;
         cursor.GetComponent<Image>().sprite = cursor_first;
+        selectedObject = null;
     }
 
     public void getObjectAtPosition()
@@ -144,10 +145,13 @@ public class stop : MonoBehaviour
     public Vector3 getCursorWorldPosition()
     {
 
-        Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit);
-        return new Vector3(hit.point.x,0,hit.point.y);
+        //Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
+        //RaycastHit hit;
+        //Physics.Raycast(ray, out hit);
+        //return new Vector3(hit.point.x,0,hit.point.y);
+        Vector3 pos =Camera.main.ScreenToWorldPoint(new Vector3(cursor.transform.position.x, cursor.transform.position.y,Camera.main.transform.position.y));
+        Debug.Log("cursor position = " + pos);
+        return pos;
     }
     public Vector3 getCursorScreenPosition()
     {

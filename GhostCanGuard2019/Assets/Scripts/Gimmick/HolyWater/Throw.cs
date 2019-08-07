@@ -42,9 +42,10 @@ public class Throw : MonoBehaviour
             return;
         }
         if (!Input.GetButtonDown("Send")) return;
-        GameObject holywater = Instantiate(HolyWater, new Vector3(gameObject.transform.position.x, 1, gameObject.transform.position.z), Quaternion.identity);
         Vector3 target = st.getCursorWorldPosition();
         transform.LookAt(new Vector3(target.x, gameObject.transform.position.y, target.z));
+        GameObject holywater = Instantiate(HolyWater, new Vector3(gameObject.transform.position.x, 1, gameObject.transform.position.z) + gameObject.transform.forward, Quaternion.identity);
+        Debug.Log(target);
         Rigidbody rb = holywater.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * force, ForceMode.Impulse);
         st.gamestop();
