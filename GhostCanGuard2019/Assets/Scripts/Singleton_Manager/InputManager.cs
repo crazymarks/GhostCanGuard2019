@@ -17,6 +17,7 @@ public enum ControllerButton
 
 public class InputManager : SingletonMonoBehavior<InputManager>
 {
+    
     private stop st;
     /// <summary>
     /// 現在押されているボタン
@@ -30,7 +31,10 @@ public class InputManager : SingletonMonoBehavior<InputManager>
 
     private void Update()
     {
-        if (!st.stopped) return;
+        if (!st.stopped)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.K) || Input.GetButtonDown("Cancel"))
             CurrentControllerButton = ControllerButton.A;
         if (Input.GetKeyDown(KeyCode.L) || Input.GetButtonDown("Send"))
@@ -42,6 +46,7 @@ public class InputManager : SingletonMonoBehavior<InputManager>
             CurrentControllerButton = ControllerButton.X;
         if (Input.GetKeyDown(KeyCode.I) || Input.GetButtonDown("Info"))
             CurrentControllerButton = ControllerButton.Y;
+        
         //else
         //    CurrentControllerButton = ControllerButton.Null;
     }
@@ -49,4 +54,6 @@ public class InputManager : SingletonMonoBehavior<InputManager>
     {
         CurrentControllerButton = ControllerButton.Null;
     }
+ 
+    
 }

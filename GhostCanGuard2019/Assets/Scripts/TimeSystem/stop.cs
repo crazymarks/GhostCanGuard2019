@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -7,8 +8,7 @@ using UnityEngine.EventSystems;
 public class stop : MonoBehaviour
 {
     public LayerMask mask;
-    [SerializeField]
-    OutLineCamera outline;
+    OutLineCamera outlineCamera;
     [SerializeField]
     private Color HighlightColor = Color.green;
     public Outline.Mode HighlightMode = Outline.Mode.OutlineAll;
@@ -24,7 +24,7 @@ public class stop : MonoBehaviour
     public bool SecondPhase { get; private set; }
     //public Slider AimSlider;
     public Sprite cursor_first;
-    public Sprite cursor_second;
+    public List<Sprite> cursor_second;
     
     public bool stopped { get; private set; } = false;
    
@@ -32,8 +32,8 @@ public class stop : MonoBehaviour
     void Start()
     {
         SecondPhase = false;
-        outline = Camera.main.GetComponent<OutLineCamera>();
-        outline.enabled = false;
+        outlineCamera = Camera.main.GetComponent<OutLineCamera>();
+        outlineCamera.enabled = false;
         cursor.SetActive (false);
         stopped = false;
         cursor.GetComponent<Image>().sprite = cursor_first;
@@ -99,7 +99,7 @@ public class stop : MonoBehaviour
         cursor.SetActive(true);
         cursor.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.pc.gameObject.transform.position);
         Time.timeScale = 0.1f;
-        outline.enabled = true;
+        outlineCamera.enabled = true;
         PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
         stopped = true;
         GameManager.Instance.pc.CanPlayerMove = false;
@@ -108,7 +108,7 @@ public class stop : MonoBehaviour
     {
         Time.timeScale = 1;
         cursor.SetActive(false);
-        outline.enabled = false;
+        outlineCamera.enabled = false;
         PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
         stopped = false;
         GameManager.Instance.pc.CanPlayerMove = true;
@@ -116,8 +116,10 @@ public class stop : MonoBehaviour
             Destroy(outlineObject.GetComponent<Outline>());
         outlineObject = null;
         SecondPhase = false;
+        StopCoroutine(changesprite());
         cursor.GetComponent<Image>().sprite = cursor_first;
         selectedObject = null;
+        InputManager.Instance.ClearCurrentButton();
     }
 
     public void getObjectAtPosition()
@@ -195,7 +197,23 @@ public class stop : MonoBehaviour
     public void changeToSecondPhase()
     {
         SecondPhase = true;
-        cursor.GetComponent<Image>().sprite = cursor_second;
+        StartCoroutine(changesprite());
+    }
+
+    IEnumerator changesprite()
+    {
+        int spritenumber = 0;
+        Sprite selectedSprite = cursor_second[spritenumber];
+        while (true)
+        {
+            if (!SecondPhase) break;
+            spritenumber++;
+            spritenumber = spritenumber % cursor_second.Count;
+            selectedSprite = cursor_second[spritenumber];
+            cursor.GetComponent<Image>().sprite = selectedSprite;
+            yield return new WaitForSecondsRealtime(0.125f);
+        }
+        cursor.GetComponent<Image>().sprite = cursor_first;
     }
 
     public void addSingleOutline(Outline.Mode mode,Color color,float width)

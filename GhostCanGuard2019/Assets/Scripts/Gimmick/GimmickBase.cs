@@ -100,8 +100,8 @@ public class GimmickBase : MonoBehaviour
     /// </summary>
     public void ClickGimmick()
     {
+        
         GimmickManager.Instance.SetGimmickAction(() => CurrentButtonIN());      //λ式
-
         //Debug.Log("Click");
     }
     protected void CurrentButtonIN()

@@ -233,9 +233,16 @@ MonoBehaviour:
   selectedObject: {fileID: 0}
   speed: 10
   cursor: {fileID: 8505182018842484137}
-  SecondPhase: 0
   cursor_first: {fileID: 21300000, guid: 43b38d5123d119745b9edcaf3b61b680, type: 3}
-  cursor_second: {fileID: 21300000, guid: 1aa081933c126cb45b16f41d9c34befc, type: 3}
+  cursor_second:
+  - {fileID: 21300000, guid: ecde9e9b630ffde4a9b33b3ca898d192, type: 3}
+  - {fileID: 21300002, guid: ecde9e9b630ffde4a9b33b3ca898d192, type: 3}
+  - {fileID: 21300004, guid: ecde9e9b630ffde4a9b33b3ca898d192, type: 3}
+  - {fileID: 21300006, guid: ecde9e9b630ffde4a9b33b3ca898d192, type: 3}
+  - {fileID: 21300008, guid: ecde9e9b630ffde4a9b33b3ca898d192, type: 3}
+  - {fileID: 21300010, guid: ecde9e9b630ffde4a9b33b3ca898d192, type: 3}
+  - {fileID: 21300012, guid: ecde9e9b630ffde4a9b33b3ca898d192, type: 3}
+  - {fileID: 21300014, guid: ecde9e9b630ffde4a9b33b3ca898d192, type: 3}
 --- !u!114 &755357400
 MonoBehaviour:
   m_ObjectHideFlags: 0
