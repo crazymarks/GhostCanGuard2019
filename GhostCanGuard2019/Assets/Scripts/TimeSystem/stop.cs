@@ -26,7 +26,7 @@ public class stop : MonoBehaviour
     public Sprite cursor_first;
     public Sprite cursor_second;
     
-    bool stopped = false;
+    public bool stopped { get; private set; } = false;
    
     // Start is called before the first frame update
     void Start()
@@ -62,11 +62,16 @@ public class stop : MonoBehaviour
             {
                 if (outlineObject.GetComponent<Outline>() != null && outlineObject != selectedObject)
                 {
-                    Destroy(outlineObject.GetComponent<Outline>());
+                    outlineObject.GetComponent<Outline>().OutlineWidth = 0;
                 }
-                if(outlineObject==selectedObject && selectedObject.GetComponent<Outline>() == null)
+                if(outlineObject==selectedObject )
                 {
-                    addSingleOutline(HighlightMode, HighlightColor, HighlightWidth);
+                    if(selectedObject.GetComponent<Outline>() == null)
+                        addSingleOutline(HighlightMode, HighlightColor, HighlightWidth);
+                    else
+                    {
+                        outlineObject.GetComponent<Outline>().OutlineWidth = HighlightWidth;
+                    }
                 }
             }
             outlineObject = selectedObject;
@@ -126,7 +131,7 @@ public class stop : MonoBehaviour
             {
                 //EventSystem.current.SetSelectedGameObject(hit.collider.gameObject);
                 //gimmickmanager.instance.GetGimick = hit.collidr.gamaobject;
-                Debug.Log(hit.collider.gameObject.name);
+                //Debug.Log(hit.collider.gameObject.name);
                 selectedObject = hit.collider.gameObject;
             }
             else if (hit.collider.tag == "Player")
@@ -150,7 +155,7 @@ public class stop : MonoBehaviour
         //Physics.Raycast(ray, out hit);
         //return new Vector3(hit.point.x,0,hit.point.y);
         Vector3 pos =Camera.main.ScreenToWorldPoint(new Vector3(cursor.transform.position.x, cursor.transform.position.y,Camera.main.transform.position.y));
-        Debug.Log("cursor position = " + pos);
+        //Debug.Log("cursor position = " + pos);
         return pos;
     }
     public Vector3 getCursorScreenPosition()

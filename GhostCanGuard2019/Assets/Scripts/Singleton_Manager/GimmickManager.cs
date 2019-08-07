@@ -44,7 +44,7 @@ public class GimmickManager : SingletonMonoBehavior<GimmickManager>
         //PlayerManager.Instance.SetCurrentState(PlayerState.Play);
         if (gimmickNames != null)
         {
-            gimmickNames.ForEach(name => Debug.Log(name));
+            //gimmickNames.ForEach(name => Debug.Log(name));
             gimmickNames.Clear();
         }
         GimmickFunc = null;
