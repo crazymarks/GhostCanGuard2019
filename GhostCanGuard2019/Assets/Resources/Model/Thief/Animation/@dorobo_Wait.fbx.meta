@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: ff26bc124bfd0bf4aae045e7e64e2283
+guid: 71e8971e6909cad48a52540333eb703a
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Body
-    100002: Chest
-    100004: Clavicle
-    100006: //RootNode
+    100000: //RootNode
+    100002: Body
+    100004: Chest
+    100006: Clavicle
     100008: Groin
     100010: Head
     100012: L1
@@ -36,10 +36,10 @@ ModelImporter:
     100060: R_Wrist
     100062: Rib
     100064: Waist
-    400000: Body
-    400002: Chest
-    400004: Clavicle
-    400006: //RootNode
+    400000: //RootNode
+    400002: Body
+    400004: Chest
+    400006: Clavicle
     400008: Groin
     400010: Head
     400012: L1
@@ -101,35 +101,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Take 001
-      takeName: Take 001
-      firstFrame: 1
-      lastFrame: 50
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
