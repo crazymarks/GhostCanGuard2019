@@ -7,13 +7,13 @@ public class ParticalDelaytime : MonoBehaviour
 {
     [SerializeField]
     ParticleSystem pObject;
-    bool ifenabled;
+    //bool ifenabled = false;
     //パーティクルが停止される時間を指定
     public float ParticleDelaytime = .2f;
     // Start is called before the first frame update
     void Awake()
     {
-        ifenabled = true;
+        //ifenabled = true;
         pObject = GetComponent<ParticleSystem>();
     }
 

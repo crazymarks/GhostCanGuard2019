@@ -2882,41 +2882,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 476733419}
-    - target: {fileID: 708210332387505832, guid: c961fa70556fe3645aeec19b5b74bf30,
-        type: 3}
-      propertyPath: power
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 708210333818039330, guid: c961fa70556fe3645aeec19b5b74bf30,
-        type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 708210333818039330, guid: c961fa70556fe3645aeec19b5b74bf30,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 708210333816107746, guid: c961fa70556fe3645aeec19b5b74bf30,
-        type: 3}
-      propertyPath: m_DynamicOccludee
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 708210333816107746, guid: c961fa70556fe3645aeec19b5b74bf30,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 708210333538676824, guid: c961fa70556fe3645aeec19b5b74bf30,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 708210333538676824, guid: c961fa70556fe3645aeec19b5b74bf30,
-        type: 3}
-      propertyPath: m_Convex
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c961fa70556fe3645aeec19b5b74bf30, type: 3}
 --- !u!1001 &2259769206140021475
@@ -3252,6 +3217,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Horse
       objectReference: {fileID: 0}
+    - target: {fileID: 5668870895577207175, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4966074045109257231, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3315,11 +3285,6 @@ PrefabInstance:
     - target: {fileID: 5668870895577207174, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5668870895577207175, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5668870895805252815, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,

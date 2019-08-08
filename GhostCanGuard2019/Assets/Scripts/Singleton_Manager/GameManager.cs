@@ -21,7 +21,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     private Ghost_targeting ght;  //殺人鬼を取得
 
     [SerializeField]
-    private LoadScene ldc;  //Scene管理コンポーネント
+    private LoadScene ldc = null;  //Scene管理コンポーネント
 
     public bool gameover { get; private set; } = false;   //ゲーム状態flag
     [SerializeField]
@@ -38,17 +38,21 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     float startWait = 2f;   //始まるまでの時間設定
 
     [SerializeField]
-    Text text;      //ゲームメッセージを表すメッセージボックス
+    Text text = null;      //ゲームメッセージを表すメッセージボックス
 
     [SerializeField]
     private GameObject treasure;
     private ParticleSystem swordlight;
 
     stop st;
+
+    bool iestart = false;  /////後で消す必要
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        iestart = false;
+       
         ///キャラクタをそれぞれ取得
         if (pc == null)
         {
@@ -185,12 +189,17 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         }
         else
         {
-            StartCoroutine(ie());
+            if(st.canStop)
+                st.canStop = false;
+            if(!iestart)
+                StartCoroutine(ie());
         }
+        
     }
 
     IEnumerator ie()
     {
+        iestart = true;
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(2f);
         Time.timeScale = 1f;
@@ -214,6 +223,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         text.enabled = false;
         Debug.Log("start!!");
         gameStart = true;
+        st.canStop = true;
         Time.timeScale = 1f;
         GimmickManager.Instance.GimmickFrag = true;
     }

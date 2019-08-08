@@ -7,6 +7,8 @@ using UnityEngine.EventSystems;
 
 public class stop : MonoBehaviour
 {
+    public bool canStop = false;
+    
     public LayerMask mask;
     OutLineCamera outlineCamera;
     [SerializeField]
@@ -31,6 +33,7 @@ public class stop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        canStop = false;
         SecondPhase = false;
         outlineCamera = Camera.main.GetComponent<OutLineCamera>();
         outlineCamera.enabled = false;
@@ -42,10 +45,14 @@ public class stop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Stop") && !SecondPhase && GameManager.Instance.gameStart && !GameManager.Instance.gameover)
+        if (canStop)
         {
-            gamestop();
+            if (Input.GetButtonDown("Stop") && !SecondPhase)
+            {
+                gamestop();
+            }
         }
+       
         if (stopped)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");

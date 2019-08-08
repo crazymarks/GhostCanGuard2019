@@ -42,7 +42,7 @@ public class Thief : MonoBehaviour
     /// animation
     /// </summary>
     [SerializeField]
-    ThiefAnimationController anim;
+    ThiefAnimationController anim = null;
 
     void Start()
     {

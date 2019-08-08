@@ -79,6 +79,50 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u304A\u5316\u3051\u3092\u9000\u6CBB\u3067\u304D\u308B\u2026\u2026\n\u304B\u3082\u3057\u308C\u3093"
+--- !u!1 &5622618479242802421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3583672470363702240}
+  - component: {fileID: 5468173545100635300}
+  m_Layer: 2
+  m_Name: Aura
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3583672470363702240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5622618479242802421}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7124790183465678054}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5468173545100635300
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5622618479242802421}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7124790183465678072
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,6 +159,7 @@ Transform:
   - {fileID: 3997359389709100448}
   - {fileID: 4412380857521712041}
   - {fileID: 5074375466247140273}
+  - {fileID: 3583672470363702240}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -143,12 +188,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfe685a7236c47343aed8f8775295a30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gimmickUIParent: {fileID: 8545009209536835964}
+  gimmickUIParent: {fileID: 5074375466247140272}
   gimmickButtons: 
   buffTime: 5
   coolDownTime: 5
   auraTime: 5
   auraRadius: 5
+  collision: {fileID: 5468173545100635300}
 --- !u!136 &7124790183465678052
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -628,8 +674,36 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -150
       objectReference: {fileID: 0}
+    - target: {fileID: 3866976911128156097, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
+        type: 3}
+      propertyPath: m_Text
+      value: "\u3000\u767A\u52D5\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866976911128156097, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4587ab20600c21e429de302c933afeab,
+        type: 3}
+    - target: {fileID: 2920191666494938885, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
+        type: 3}
+      propertyPath: m_Text
+      value: "\u8A73\u7D30"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920191666494938885, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4587ab20600c21e429de302c933afeab,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a88a14eaeb2a944f86f39a1f054ab75, type: 3}
+--- !u!1 &5074375466247140272 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2920191666421242926, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
+    type: 3}
+  m_PrefabInstance: {fileID: 7993140849188155294}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &5074375466247140273 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2920191666421242927, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
@@ -885,12 +959,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6d5894c61bf5e48489c380c30cc56449, type: 3}
---- !u!1 &8545009209536835964 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 462991974789556335, guid: 6d5894c61bf5e48489c380c30cc56449,
-    type: 3}
-  m_PrefabInstance: {fileID: 8140564349578270995}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8545009209536835952 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 462991974789556323, guid: 6d5894c61bf5e48489c380c30cc56449,
