@@ -78,7 +78,7 @@ public class Thief : MonoBehaviour
     void HeadExitUpdate()
     {
         StartSecondaryCounter();
-        unit.HeadExit();
+        //unit.HeadExit();  　　　　　　　　　　　　　　　　　　<-------------------------------------------ここは元凶！！！！！！！！！
     }
 
     void PauseUpdate()
