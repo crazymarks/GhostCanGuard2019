@@ -311,21 +311,32 @@ public class Horse : GimmickBase
         switch (controller)
         {
             case ControllerButton.A:
+                if (descriptionUIOn)
+                {
+                    HideDescription();
+                }
                 break;
             case ControllerButton.B:
                 Debug.Log("Send");
-                if (GameManager.Instance.getXZDistance(gameObject, Player) <= 3)
-                    Active();
-                else
+                if (!descriptionUIOn)
                 {
-                    StartCoroutine(GameManager.Instance.showTextWithSeconds("もっと近づいてください！", 1f));
-                    st.gamestop();
-                    GimmickUIClose();
+                    if (GameManager.Instance.getXZDistance(gameObject, Player) <= 5)
+                        Active();
+                    else
+                    {
+                        StartCoroutine(GameManager.Instance.showTextWithSeconds("もっと近づいてください！", 1f));
+                        st.gamestop();
+                        GimmickUIClose();
+                    }
                 }
                 break;
             case ControllerButton.X:
                 break;
             case ControllerButton.Y:
+                if (!descriptionUIOn)
+                {
+                    ShowDescription("horse");
+                }
                 break;
             case ControllerButton.Max:
                 break;

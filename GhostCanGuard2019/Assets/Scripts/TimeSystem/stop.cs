@@ -24,6 +24,8 @@ public class stop : MonoBehaviour
     public GameObject cursor;
    
     public bool SecondPhase { get; private set; }
+    public bool DescriptionPhase { get; set; }
+
     //public Slider AimSlider;
     public Sprite cursor_first;
     public List<Sprite> cursor_second;
@@ -35,6 +37,7 @@ public class stop : MonoBehaviour
     {
         canStop = false;
         SecondPhase = false;
+        DescriptionPhase = false;
         outlineCamera = Camera.main.GetComponent<OutLineCamera>();
         outlineCamera.enabled = false;
         cursor.SetActive (false);
@@ -61,7 +64,7 @@ public class stop : MonoBehaviour
 
             cursor.transform.Translate(move * speed);
             DragRangeLimit(cursor.transform);
-            if (!SecondPhase)
+            if (!SecondPhase && !DescriptionPhase)
             {
                 getObjectAtPosition();          //selectedObjectの変更、SecondPhaseには変更しません
             }
@@ -138,15 +141,11 @@ public class stop : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit,mask) && hit.collider.gameObject != selectedObject)
         {
-            if (hit.collider.tag == "Gimmik")
+            if (hit.collider.tag == "Gimmik" || hit.collider.tag == "Player")
             {
                 //EventSystem.current.SetSelectedGameObject(hit.collider.gameObject);
                 //gimmickmanager.instance.GetGimick = hit.collidr.gamaobject;
                 //Debug.Log(hit.collider.gameObject.name);
-                selectedObject = hit.collider.gameObject;
-            }
-            else if (hit.collider.tag == "Player")
-            {
                 selectedObject = hit.collider.gameObject;
             }
             else
@@ -196,12 +195,13 @@ public class stop : MonoBehaviour
         // UI展開
         //gimmick.GetComponent<GimmickBase>().GimmickUIsOnOff(true);
         // コントローラー入力待ち状態に送る
-        if (gimmick.tag == "Gimmik")
+        if (gimmick.tag == "Gimmik"　|| gimmick.tag == "Player")
         {
             gimmick.GetComponent<GimmickBase>().ClickGimmick(); 
         }
         
     }
+    
 
     public void changeToSecondPhase()
     {

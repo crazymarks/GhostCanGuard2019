@@ -169,6 +169,8 @@ public class Portal : GimmickBase
         PortabeTag.Remove(tag);
     }
 
+
+
     //public void ClickUIStart()
     //{
     //    GimmickManager.Instance.SetGimmickAction(PortOnOff);
@@ -199,14 +201,26 @@ public class Portal : GimmickBase
         switch (controller)
         {
             case ControllerButton.A:
+                if (descriptionUIOn)
+                {
+                    HideDescription();
+                }
                 break;
             case ControllerButton.B:
                 Debug.Log("Send");
-                PortOnOff();
+                if (!descriptionUIOn)
+                {
+                    PortOnOff();
+                }
+               
                 break;
             case ControllerButton.X:
                 break;
             case ControllerButton.Y:
+                if (!descriptionUIOn)
+                {
+                    ShowDescription("portal");
+                }
                 break;
             case ControllerButton.Max:
                 break;

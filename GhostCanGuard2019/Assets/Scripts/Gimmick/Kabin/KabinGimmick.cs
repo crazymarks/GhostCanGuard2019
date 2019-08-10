@@ -131,14 +131,23 @@ public class KabinGimmick : GimmickBase
         switch (controller)
         {
             case ControllerButton.A:
+                if (descriptionUIOn)
+                {
+                    HideDescription();
+                }
                 break;
             case ControllerButton.B:
                 Debug.Log("Send");
-                KabinGimmickAction();
+                if(!descriptionUIOn)
+                    KabinGimmickAction();
                 break;
             case ControllerButton.X:
                 break;
             case ControllerButton.Y:
+                if (!descriptionUIOn)
+                {
+                    ShowDescription("kabin");
+                }
                 break;
             case ControllerButton.Max:
                 break;
@@ -146,4 +155,5 @@ public class KabinGimmick : GimmickBase
                 break;
         }
     }
+
 }

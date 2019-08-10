@@ -123,14 +123,26 @@ public class testStatue : GimmickBase
         switch (controller)
         {
             case ControllerButton.A:
+                if (descriptionUIOn)
+                {
+                    HideDescription();
+                }
                 break;
             case ControllerButton.B:
                 Debug.Log("Fall");
-                FallForwards();
+                if (!descriptionUIOn)
+                {
+                    FallForwards();
+                }
+               
                 break;
             case ControllerButton.X:
                 break;
             case ControllerButton.Y:
+                if (!descriptionUIOn)
+                {
+                    ShowDescription("statue");
+                }
                 break;
             case ControllerButton.Max:
                 break;

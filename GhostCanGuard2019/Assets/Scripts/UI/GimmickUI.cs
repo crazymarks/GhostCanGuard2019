@@ -18,20 +18,22 @@ public class GimmickUI : MonoBehaviour
     }
     private void OnEnable()
     {
-        parentGimmickPos = this.transform.root.position;    // 親のGimmick取得
-        rectTransformUI = transform as RectTransform;       // UIのRectTransformを取得
-        rectTransformUI.position = RectTransformUtility.WorldToScreenPoint(Camera.main, parentGimmickPos + offset);
+        setUIPosition();
     }
-    private void Awaken()
-    {
-        parentGimmickPos = this.transform.root.position;    // 親のGimmick取得
-        rectTransformUI = transform as RectTransform;       // UIのRectTransformを取得
-        rectTransformUI.position = RectTransformUtility.WorldToScreenPoint(Camera.main, parentGimmickPos + offset);
-    }
+    //private void Awaken()
+    //{
+    //    setUIPosition();
+    //}
     private void Start()
     {
+        setUIPosition();
+    }
+
+    void setUIPosition()
+    {
         parentGimmickPos = this.transform.root.position;    // 親のGimmick取得
         rectTransformUI = transform as RectTransform;       // UIのRectTransformを取得
         rectTransformUI.position = RectTransformUtility.WorldToScreenPoint(Camera.main, parentGimmickPos + offset);
     }
+  
 }

@@ -115,25 +115,40 @@ public class Bible : GimmickBase
     //        open();
     //    }
     //}
+
+
     protected override void PushButtonGamePad(ControllerButton controller)
     {
         base.PushButtonGamePad(controller);
         switch (controller)
         {
             case ControllerButton.A:
+                if (descriptionUIOn)
+                {
+                    HideDescription();
+                }
                 break;
             case ControllerButton.B:
                 Debug.Log("Send");
-                open();
+                if (!descriptionUIOn)
+                {
+                    open();
+                }
+
                 break;
             case ControllerButton.X:
                 break;
             case ControllerButton.Y:
+                if (!descriptionUIOn)
+                {
+                    ShowDescription("bible");
+                }
                 break;
             case ControllerButton.Max:
                 break;
             default:
                 break;
+
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Throw : GimmickBase
 {
@@ -14,16 +16,17 @@ public class Throw : GimmickBase
     protected override void Start()
     {
         base.Start();
+        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
         //st = GameManager.Instance.GetComponent<stop>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Send") && st.selectedObject == gameObject && (!IfActivated || st.SecondPhase == true))
-        {
-            throwHolyWater();
-        }
+        //if (Input.GetButtonDown("Send") && st.selectedObject == gameObject && (!IfActivated || st.SecondPhase == true))
+        //{
+        //    throwHolyWater();
+        //}
         if (gimmickUIParent.activeSelf)                              //UIが既に展開している場合
         {
             if (st.selectedObject != gameObject || st.SecondPhase)       //セレクトされていない　または　方向選択段階にいる場合
@@ -63,4 +66,40 @@ public class Throw : GimmickBase
         IfActivated = false;
         count--;
     }
+
+    protected override void PushButtonGamePad(ControllerButton controller)
+    {
+        base.PushButtonGamePad(controller);
+        switch (controller)
+        {
+            case ControllerButton.A:
+                if (descriptionUIOn)
+                {
+                    HideDescription();
+                }
+                break;
+            case ControllerButton.B:
+                Debug.Log("Send");
+                if (!descriptionUIOn)
+                {
+                    throwHolyWater();
+                }
+               
+                break;
+            case ControllerButton.X:
+                break;
+            case ControllerButton.Y:
+                if (!descriptionUIOn)
+                {
+                    ShowDescription("holywater");
+                }
+                break;
+            case ControllerButton.Max:
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }
