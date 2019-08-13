@@ -31,7 +31,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     float distance_player_to_ghost;
     float distance_ghost_to_thief;
 
-
+    Grid grid;
 
     public bool gameStart { get; private set; }  //ゲームが始まるかどうかのflag
     [SerializeField]
@@ -48,6 +48,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     bool iestart = false;  /////後で消す必要
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -116,6 +117,10 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                 Debug.Log("");
             }
             
+        }
+        if (ght)
+        {
+            ghostEnable = ght.gameObject.activeSelf;
         }
         st = GetComponent<stop>();
         gameStart = false;
