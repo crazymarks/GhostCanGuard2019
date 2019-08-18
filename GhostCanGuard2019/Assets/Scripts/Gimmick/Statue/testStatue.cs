@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class testStatue : GimmickBase
 {
     public float thrust;
+    public ParticleSystem SmokeAura = null; //彫像のエフェクト
     //public Rigidbody rb;
     [SerializeField]
     GameObject AirWall = null;
@@ -94,6 +95,7 @@ public class testStatue : GimmickBase
             st.gamestop();
         }
         AirWall.SetActive(true);
+        SmokeAura.Play();  　　　　　　　　　　　　　　　　//エフェクト起動
         //rb.AddForce(transform.forward * thrust);
 
     }
