@@ -50,7 +50,7 @@ public class Throw : GimmickBase
             IfActivated = true;
         if (!st.SecondPhase)
         {
-            st.changeToSecondPhase();
+            st.gamestop(stop.PauseState.DirectionSelect);
             AimSlider.gameObject.SetActive(true);
             Debug.Log("Choose target");
             return;
@@ -62,7 +62,7 @@ public class Throw : GimmickBase
         Debug.Log(target);
         Rigidbody rb = holywater.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * force, ForceMode.Impulse);
-        st.gamestop();
+        st.gamestop(stop.PauseState.Normal);
         IfActivated = false;
         count--;
     }

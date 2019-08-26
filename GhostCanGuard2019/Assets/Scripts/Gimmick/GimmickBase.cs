@@ -135,8 +135,7 @@ public class GimmickBase : MonoBehaviour
         if (descriptionUIOn) return;
         LoadDescription.Instance.ShowDesc(name);
         descriptionUIOn = true;
-        st.canStop = false;
-        st.DescriptionPhase = true;
+        st.gamestop(stop.PauseState.DescriptionOpen);
         gimmickUIParent.GetComponent<DescriptionUIChange>().DescriptionOnOff();
         
     }
@@ -146,8 +145,7 @@ public class GimmickBase : MonoBehaviour
         if (!descriptionUIOn) return;
         LoadDescription.Instance.HideDesc();
         descriptionUIOn = false;
-        st.canStop = true;
-        st.DescriptionPhase = false;
+        st.gamestop(stop.PauseState.DescriptionClose);
         gimmickUIParent.GetComponent<DescriptionUIChange>().DescriptionOnOff();
         GimmickManager.Instance.ClearGimmick();                 //収縮の時はギミックの登録をクリアします
     }

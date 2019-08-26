@@ -107,14 +107,24 @@ public class Horse : GimmickBase
             {
                 gimmickUIParent.SetActive(false);     //UIを収縮
             }
+            if (GameManager.Instance.getXZDistance(gameObject, Player) > 5)
+            {
+                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIHide();
+            }
+
+
         }
         else                                                                    // UIが展開していない場合
         {
-            if (st.selectedObject == gameObject && !st.SecondPhase)    //セレクトされたら、且つ、方向選択段階じゃない場合
+            if (st.selectedObject == gameObject && !st.SecondPhase && !IfActivated)    //セレクトされたら、且つ、方向選択段階じゃない場合
+            {
                 gimmickUIParent.SetActive(true);                                   //UIを展開
+                if (GameManager.Instance.getXZDistance(gameObject, Player) > 5)
+                {
+                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIHide();
+                }
+            }
         }
-
-
     }
 
     void FixedUpdate()
@@ -249,7 +259,7 @@ public class Horse : GimmickBase
             IfActivated = true;
             if (!st.SecondPhase)
             {
-                st.changeToSecondPhase();
+                st.gamestop(stop.PauseState.DirectionSelect);
                 AimSlider.gameObject.SetActive(true);
                 Debug.Log("Choose target");
                 return;
@@ -289,7 +299,7 @@ public class Horse : GimmickBase
 
         Debug.Log(_moveorient);
         
-        st.gamestop();
+        st.gamestop(stop.PauseState.Normal);
         GimmickUIClose();
     }
 
@@ -318,16 +328,16 @@ public class Horse : GimmickBase
                 break;
             case ControllerButton.B:
                 Debug.Log("Send");
-                if (!descriptionUIOn)
+                if (!descriptionUIOn && !IfMoving)
                 {
                     if (GameManager.Instance.getXZDistance(gameObject, Player) <= 5)
                         Active();
-                    else
-                    {
-                        StartCoroutine(GameManager.Instance.showTextWithSeconds("もっと近づいてください！", 1f));
-                        st.gamestop();
-                        GimmickUIClose();
-                    }
+                    //else
+                    //{
+                    //    StartCoroutine(GameManager.Instance.showTextWithSeconds("もっと近づいてください！", 1f));
+                    //    st.gamestop();
+                    //    GimmickUIClose();
+                    //}
                 }
                 break;
             case ControllerButton.X:

@@ -44,4 +44,10 @@ public class DescriptionUIChange : MonoBehaviour
             CancelUIClose();
     }
 
+    public void ActionUIHide()
+    {
+        if(ActionUI.activeSelf)
+            ActionUI.SetActive(false);
+    }
+
 }

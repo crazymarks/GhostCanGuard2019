@@ -7,8 +7,27 @@ using UnityEngine.EventSystems;
 
 public class stop : MonoBehaviour
 {
+
+    public enum PauseState
+    {
+        Normal,
+        ObserverMode,
+        DirectionSelect,
+        DescriptionOpen,
+        DescriptionClose,
+        SystemPause,
+        Resume
+    }
+
+
     public bool canStop = false;
-    
+
+    [Range(0,1)]
+    public float ObserverTimeScale = 0.1f;
+
+    /// <summary>
+    /// Highlight
+    /// </summary>
     public LayerMask mask;
     OutLineCamera outlineCamera;
     [SerializeField]
@@ -18,20 +37,31 @@ public class stop : MonoBehaviour
     public float HighlightWidth = 5f;
     public GameObject selectedObject;
     private GameObject outlineObject;
+
+
+    /// <summary>
+    /// cursor
+    /// </summary>
     [SerializeField]
     float speed = 10f;
-    
     public GameObject cursor;
-   
-    public bool SecondPhase { get; private set; }
-    public bool DescriptionPhase { get; set; }
-
     //public Slider AimSlider;
     public Sprite cursor_first;
     public List<Sprite> cursor_second;
-    
+
+
+    /// <summary>
+    /// PauseState Flag
+    /// </summary>
+    public bool SecondPhase { get; private set; }
+    public bool DescriptionPhase { get; private set; }
+    public bool IfSystemPause { get; private set; }
+    PauseState currentstate;
+    private float currentTimescale;
     public bool stopped { get; private set; } = false;
-   
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +82,14 @@ public class stop : MonoBehaviour
         {
             if (Input.GetButtonDown("Stop") && !SecondPhase)
             {
-                gamestop();
+                if(currentstate == PauseState.ObserverMode)
+                {
+                    gamestop(PauseState.Normal);
+                }
+                else if(currentstate == PauseState.Normal)
+                {
+                    gamestop(PauseState.ObserverMode);
+                }
             }
         }
        
@@ -93,26 +130,49 @@ public class stop : MonoBehaviour
         //}
        
     }
-    public void gamestop()
+
+    public void gamestop(PauseState state)
     {
-        if (stopped)
+        switch (state)
         {
-            gameStopEnd();
+            case PauseState.Normal:
+                gameStopEnd();
+                break;
+            case PauseState.ObserverMode:
+                gameStopStart();
+                break;
+            case PauseState.DirectionSelect:
+                changeToSecondPhase();
+                break;
+            case PauseState.DescriptionOpen:
+                DescriptionOn();
+                break;
+            case PauseState.DescriptionClose:
+                DescriptionClose();
+                break;
+            case PauseState.SystemPause:
+                SystemPause();
+                break;
+            case PauseState.Resume:
+                Resume();
+                break;
+            default:
+                break;
         }
-        else
-        {
-            gameStopStart();
-        }
+       
     }
+    
+
     void gameStopStart()
     {
         cursor.SetActive(true);
         cursor.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.pc.gameObject.transform.position);
-        Time.timeScale = 0.1f;
+        Time.timeScale = ObserverTimeScale;
         outlineCamera.enabled = true;
         PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
         stopped = true;
         GameManager.Instance.pc.CanPlayerMove = false;
+        currentstate = PauseState.ObserverMode;
     }
     void gameStopEnd()
     {
@@ -132,8 +192,54 @@ public class stop : MonoBehaviour
         cursor.GetComponent<Image>().sprite = cursor_first;
         selectedObject = null;
         InputManager.Instance.ClearCurrentButton();
+        currentstate = PauseState.Normal;
     }
 
+    void DescriptionOn()
+    {
+        canStop = false;
+        Time.timeScale = 0f;
+        DescriptionPhase = true;
+        cursor.SetActive(false);
+        outlineCamera.enabled = false;
+        currentstate = PauseState.DescriptionOpen;
+    }
+    void DescriptionClose()
+    {
+        canStop = true;
+        cursor.SetActive(true);
+        outlineCamera.enabled = true;
+        Time.timeScale = ObserverTimeScale;
+        DescriptionPhase = false;
+        currentstate = PauseState.ObserverMode;
+    }
+    void SystemPause()
+    {
+        IfSystemPause = true;
+        canStop = false;
+        SecondPhase = false;
+        DescriptionPhase = false;
+        cursor.SetActive(false);
+        outlineCamera.enabled = false;
+        Time.timeScale = 0f;
+    }
+
+    void Resume()
+    {
+        canStop = true;
+        gamestop(currentstate);
+        IfSystemPause = false;
+    }
+
+    void changeToSecondPhase()
+    {
+        cursor.SetActive(true);
+        SecondPhase = true;
+        currentstate = PauseState.DirectionSelect;
+        StartCoroutine(changesprite());
+    }
+
+    
     public void getObjectAtPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
@@ -157,6 +263,9 @@ public class stop : MonoBehaviour
         }
     }
 
+    
+
+
     public Vector3 getCursorWorldPosition()
     {
 
@@ -172,6 +281,8 @@ public class stop : MonoBehaviour
     {
         return cursor.transform.position;
     }
+
+
     /// <summary>
     /// 物を画面内に制限する
     /// </summary>
@@ -202,12 +313,7 @@ public class stop : MonoBehaviour
         
     }
     
-
-    public void changeToSecondPhase()
-    {
-        SecondPhase = true;
-        StartCoroutine(changesprite());
-    }
+   
 
     IEnumerator changesprite()
     {
@@ -238,4 +344,6 @@ public class stop : MonoBehaviour
     {
         outline.OutlineWidth = 0;
     }
+    
+
 }

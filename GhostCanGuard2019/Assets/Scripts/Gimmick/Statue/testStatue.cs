@@ -92,7 +92,7 @@ public class testStatue : GimmickBase
             tiltAngle = 90f;
             isFallen = true;
             gimmickUIParent.SetActive(false);
-            st.gamestop();
+            st.gamestop(stop.PauseState.Normal);
         }
         AirWall.SetActive(true);
         SmokeAura.Play();  　　　　　　　　　　　　　　　　//エフェクト起動

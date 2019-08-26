@@ -20,7 +20,7 @@ public class Bible : GimmickBase
     ParticleSystem aura;
 
     GameObject obj;
-    Ghost_targeting gt;
+    //Ghost_targeting gt;
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -42,20 +42,12 @@ public class Bible : GimmickBase
         canOpen = true;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Ghost" && isOpen)
-        {
-            gt = other.gameObject.GetComponent<Ghost_targeting>();
-            gt.bible(buffTime);
-        }
-        
-    }
+   
 
     private void Update()
     {
         if (isOpen) return;
-        if (gimmickUIParent.activeSelf)                              //UIが既に展開している場合
+        if (gimmickUIParent.activeSelf)                                  //UIが既に展開している場合
         {
             if (st.selectedObject != gameObject || st.SecondPhase)       //セレクトされていない　または　方向選択段階にいる場合
             {
@@ -64,7 +56,7 @@ public class Bible : GimmickBase
         }
         else                                                                    // UIが展開していない場合
         {
-            if (st.selectedObject == gameObject && !st.SecondPhase)    //セレクトされたら、且つ、方向選択段階じゃない場合
+            if (st.selectedObject == gameObject && !st.SecondPhase)            //セレクトされたら、且つ、方向選択段階じゃない場合
                 gimmickUIParent.SetActive(true);                                   //UIを展開
         }
     }
@@ -84,7 +76,7 @@ public class Bible : GimmickBase
             else
                 Debug.Log("準備中です");
         }
-        st.gamestop(); 
+        st.gamestop(stop.PauseState.Normal); 
         GimmickUIClose();
 
     }
@@ -92,6 +84,7 @@ public class Bible : GimmickBase
     {
         isOpen = true;
         collision.enabled = true;
+        collision.GetComponent<BibleAura>().buffTime = buffTime;
         aura.Play();
         canOpen = false;
         yield return new WaitForSeconds(auraTime);

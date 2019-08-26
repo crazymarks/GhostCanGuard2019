@@ -55,12 +55,25 @@ public class KabinGimmick : GimmickBase
             {
                 gimmickUIParent.SetActive(false);     //UIを収縮
             }
+            if (GameManager.Instance.getXZDistance(gameObject, player) > 5)
+            {
+                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIHide();
+            }
+
+
         }
         else                                                                    // UIが展開していない場合
         {
             if (st.selectedObject == gameObject && !st.SecondPhase)    //セレクトされたら、且つ、方向選択段階じゃない場合
+            {
                 gimmickUIParent.SetActive(true);                                   //UIを展開
+                if (GameManager.Instance.getXZDistance(gameObject, player) > 5)
+                {
+                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIHide();
+                }
+            }
         }
+
     }
     private void KabinGimmickSetup()
     {
@@ -80,7 +93,7 @@ public class KabinGimmick : GimmickBase
         
         if (!st.SecondPhase)
         {
-            st.changeToSecondPhase();
+            st.gamestop(stop.PauseState.DirectionSelect);
             Debug.Log("Choose target");
             return;
         }
@@ -104,7 +117,7 @@ public class KabinGimmick : GimmickBase
 
         GimmickManager.Instance.ClearGimmick();
         GimmickUIClose();
-        st.gamestop();
+        st.gamestop(stop.PauseState.Normal);
         
     }
 
@@ -138,8 +151,17 @@ public class KabinGimmick : GimmickBase
                 break;
             case ControllerButton.B:
                 Debug.Log("Send");
-                if(!descriptionUIOn)
-                    KabinGimmickAction();
+                if (!descriptionUIOn)
+                {
+                    if (GameManager.Instance.getXZDistance(gameObject, player) <= 5)
+                        KabinGimmickAction();
+                    //else
+                    //{
+                    //    StartCoroutine(GameManager.Instance.showTextWithSeconds("もっと近づいてください！", 1f));
+                    //    st.gamestop();
+                    //    GimmickUIClose();
+                    //}
+                }
                 break;
             case ControllerButton.X:
                 break;

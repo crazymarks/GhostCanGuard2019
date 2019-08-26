@@ -91,7 +91,7 @@ public class Portal : GimmickBase
         }
         //IfEnable = !IfEnable;
         //PortDestination.IfEnable = IfEnable;
-        st.gamestop();
+        st.gamestop(stop.PauseState.Normal);
         GimmickUIClose();
     }
 
