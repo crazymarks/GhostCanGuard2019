@@ -20,6 +20,9 @@ public class PlayerControl : MonoBehaviour
     float horizontal = 0;
     float vertical = 0;
 
+    
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,7 +45,7 @@ public class PlayerControl : MonoBehaviour
         if (velocity < 0.1)
             PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Stop);
         else if (PlayerManager.Instance.CurrentPlayerState == PlayerState.Slow)
-            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Walk);
+        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Walk);        
         else
             PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Run);
     }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43836987, g: 0.48642927, b: 0.56670296, a: 1}
+  m_IndirectSpecularColor: {r: 0.4383693, g: 0.48642886, b: 0.5667023, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -467,11 +467,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5639844316279069712, guid: a6f09db9e7f9c7e46835de870444befb,
-        type: 3}
-      propertyPath: playerCollider
-      value: 
-      objectReference: {fileID: 1759226617}
     - target: {fileID: 5639844316279069714, guid: a6f09db9e7f9c7e46835de870444befb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -672,6 +667,11 @@ PrefabInstance:
       propertyPath: escapePoints.Array.data[23]
       value: 
       objectReference: {fileID: 1256938585}
+    - target: {fileID: 5639844316279069712, guid: a6f09db9e7f9c7e46835de870444befb,
+        type: 3}
+      propertyPath: playerCollider
+      value: 
+      objectReference: {fileID: 1759226617}
     - target: {fileID: 5639844316279069713, guid: a6f09db9e7f9c7e46835de870444befb,
         type: 3}
       propertyPath: m_Radius
@@ -1255,11 +1255,6 @@ PrefabInstance:
       propertyPath: playerControl
       value: 
       objectReference: {fileID: 1759226616}
-    - target: {fileID: 8566343946069160460, guid: 28c763a9102517c45909d079c3eec7bb,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1242445073, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
       propertyPath: pc
       value: 
@@ -1268,7 +1263,7 @@ PrefabInstance:
       propertyPath: tf
       value: 
       objectReference: {fileID: 221060749}
-    - target: {fileID: 4465205681192033425, guid: 28c763a9102517c45909d079c3eec7bb,
+    - target: {fileID: 8566343946069160460, guid: 28c763a9102517c45909d079c3eec7bb,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -1998,6 +1993,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 378368409382496694, guid: e8388b1ec5d15984083a6d847fde5c40,
+        type: 3}
+      propertyPath: moveSE
+      value: 
+      objectReference: {fileID: 8300000, guid: 4524dac5a704d9347962652474d36d54, type: 3}
     - target: {fileID: 378368409382496695, guid: e8388b1ec5d15984083a6d847fde5c40,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2052,31 +2052,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8071799838422637403, guid: e8388b1ec5d15984083a6d847fde5c40,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8071799838422637403, guid: e8388b1ec5d15984083a6d847fde5c40,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685557673737047808, guid: e8388b1ec5d15984083a6d847fde5c40,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.43999997
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685557673737047808, guid: e8388b1ec5d15984083a6d847fde5c40,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -1404.9817
-      objectReference: {fileID: 0}
-    - target: {fileID: 5685557673737047808, guid: e8388b1ec5d15984083a6d847fde5c40,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -351.06976
       objectReference: {fileID: 0}
     - target: {fileID: 1313546234758395566, guid: e8388b1ec5d15984083a6d847fde5c40,
         type: 3}
@@ -2185,11 +2160,6 @@ PrefabInstance:
       propertyPath: unwalkableMask.m_Bits
       value: 14337
       objectReference: {fileID: 0}
-    - target: {fileID: 3957643227851540784, guid: f770db28de46b9d41bb3333a9f2dd0ca,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 2060516195}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f770db28de46b9d41bb3333a9f2dd0ca, type: 3}
 --- !u!1001 &1917311151
@@ -2453,9 +2423,3 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2038804251}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &2060516195 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 378368409382496695, guid: e8388b1ec5d15984083a6d847fde5c40,
-    type: 3}
-  m_PrefabInstance: {fileID: 1759226615}
-  m_PrefabAsset: {fileID: 0}
