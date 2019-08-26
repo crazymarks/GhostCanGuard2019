@@ -2,11 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ThiefAnimator
+{
+    Wait = 0,
+    Run = 1,
+    Stun = 5,
+    Steal = 10,
+    Captured = 50,
+    Killed = 99,
+} 
+
 public class ThiefAnimationController : MonoBehaviour
 {
     [SerializeField]
     Thief tf;
     Animator animator;
+    private string _Thief = "ThiefControl";
     // Start is called before the first frame update
     void Start()
     {
@@ -28,5 +39,12 @@ public class ThiefAnimationController : MonoBehaviour
     public void setRunAnimation()
     {
         animator.SetBool("Wait", false);
+    }
+    /// <summary>
+    /// thiefのAnimation
+    /// </summary>
+    public void SetThiefAnimation(ThiefAnimator anim)
+    {
+        animator.SetInteger(_Thief, (int)anim);
     }
 }

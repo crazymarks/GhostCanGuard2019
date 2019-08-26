@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public enum PAnimation
 {
@@ -13,29 +11,42 @@ public enum PAnimation
 
 public enum GimmickAnimation
 {
+    None = 0,
     Push = 2,
-    Float = 4,
+    Horse = 4,
     Revive = 6,
-    Horse = 8,
-    Killed = 99,
+    Float = 8,
 }
 
 public class PlayerrAnimationController : MonoBehaviour
 {
     private Animator animator = null;
-    [SerializeField] private Resources gimmickAnimController = null;   // Gimmick発動時のアニメーション
-    private Resources playerAnimController = null;
+    private string _Player = "PlayerControl";
+    private string _Gimmick = "GimmickParam";
 
     // Start is called before the first frame update
     void Start()
     {
-        //playerAnimController = animator.runtimeAnimatorController
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // https://qiita.com/hakuta/items/7208576a1af399dc8a65
-        // http://tsubakit1.hateblo.jp/entry/2016/02/11/021743
+
+    }
+    /// <summary>
+    /// Playerの普通の行動Animaiton
+    /// </summary>
+    public void SetNormalAnimation(PAnimation anim)
+    {
+        animator.SetInteger(_Player, (int)anim);
+    }
+    /// <summary>
+    /// playerのGimmick行動のAnimaiton
+    /// </summary>
+    public void SetGimmickAnimation(GimmickAnimation anim)
+    {
+        animator.SetInteger(_Gimmick, (int)anim);
     }
 }
