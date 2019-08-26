@@ -115,9 +115,10 @@ public class Ghost_targeting : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!gameObject.activeSelf)
+            return;
         switch (Gs)
         {
-            
             case GhostState.Chasing_Player:
                 lastActTime = Time.time;
                 move(player.transform.position, chasingSpeed, Vector3.zero);
@@ -148,6 +149,8 @@ public class Ghost_targeting : MonoBehaviour
     }
     private void Update()
     {
+        if (!gameObject.activeSelf)
+            return;
         //目標を検知
         targetCheck();
     }

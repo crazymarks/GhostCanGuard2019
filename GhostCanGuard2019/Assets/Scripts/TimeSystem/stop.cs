@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class stop : MonoBehaviour
 {
+    public bool canStop = false;
+    
     public LayerMask mask;
-    [SerializeField]
-    OutLineCamera outline;
+    OutLineCamera outlineCamera;
     [SerializeField]
     private Color HighlightColor = Color.green;
     public Outline.Mode HighlightMode = Outline.Mode.OutlineAll;
@@ -22,18 +24,22 @@ public class stop : MonoBehaviour
     public GameObject cursor;
    
     public bool SecondPhase { get; private set; }
+    public bool DescriptionPhase { get; set; }
+
     //public Slider AimSlider;
     public Sprite cursor_first;
-    public Sprite cursor_second;
+    public List<Sprite> cursor_second;
     
-    bool stopped = false;
+    public bool stopped { get; private set; } = false;
    
     // Start is called before the first frame update
     void Start()
     {
+        canStop = false;
         SecondPhase = false;
-        outline = Camera.main.GetComponent<OutLineCamera>();
-        outline.enabled = false;
+        DescriptionPhase = false;
+        outlineCamera = Camera.main.GetComponent<OutLineCamera>();
+        outlineCamera.enabled = false;
         cursor.SetActive (false);
         stopped = false;
         cursor.GetComponent<Image>().sprite = cursor_first;
@@ -42,10 +48,14 @@ public class stop : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Stop") && !SecondPhase && GameManager.Instance.gameStart)
+        if (canStop)
         {
-            gamestop();
+            if (Input.GetButtonDown("Stop") && !SecondPhase)
+            {
+                gamestop();
+            }
         }
+       
         if (stopped)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
@@ -54,19 +64,24 @@ public class stop : MonoBehaviour
 
             cursor.transform.Translate(move * speed);
             DragRangeLimit(cursor.transform);
-            if (!SecondPhase)
+            if (!SecondPhase && !DescriptionPhase)
             {
-                getObjectAtPosition();
+                getObjectAtPosition();          //selectedObjectの変更、SecondPhaseには変更しません
             }
             if (outlineObject)
             {
                 if (outlineObject.GetComponent<Outline>() != null && outlineObject != selectedObject)
                 {
-                    Destroy(outlineObject.GetComponent<Outline>());
+                    outlineObject.GetComponent<Outline>().OutlineWidth = 0;                 //アウトライを消す
                 }
-                if(outlineObject==selectedObject && selectedObject.GetComponent<Outline>() == null)
+                if(outlineObject==selectedObject)
                 {
-                    addSingleOutline(HighlightMode, HighlightColor, HighlightWidth);
+                    if (selectedObject.GetComponent<Outline>() == null)
+                        addSingleOutline(HighlightMode, HighlightColor, HighlightWidth);
+                    else
+                    {
+                        outlineObject.GetComponent<Outline>().OutlineWidth = HighlightWidth;
+                    }
                 }
             }
             outlineObject = selectedObject;
@@ -76,7 +91,7 @@ public class stop : MonoBehaviour
         //{
         //    AimSlider.gameObject.SetActive(true);
         //}
-        
+       
     }
     public void gamestop()
     {
@@ -94,7 +109,7 @@ public class stop : MonoBehaviour
         cursor.SetActive(true);
         cursor.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.pc.gameObject.transform.position);
         Time.timeScale = 0.1f;
-        outline.enabled = true;
+        outlineCamera.enabled = true;
         PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
         stopped = true;
         GameManager.Instance.pc.CanPlayerMove = false;
@@ -103,15 +118,20 @@ public class stop : MonoBehaviour
     {
         Time.timeScale = 1;
         cursor.SetActive(false);
-        outline.enabled = false;
+        outlineCamera.enabled = false;
         PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
         stopped = false;
         GameManager.Instance.pc.CanPlayerMove = true;
-        if (outlineObject && outlineObject.GetComponent<Outline>() != null)
-            Destroy(outlineObject.GetComponent<Outline>());
+        if (outlineObject && outlineObject.GetComponent<Outline>() != null)         //アウトライを消す
+        {
+            outlineObject.GetComponent<Outline>().OutlineWidth = 0; 
+        }
         outlineObject = null;
         SecondPhase = false;
+        StopCoroutine(changesprite());
         cursor.GetComponent<Image>().sprite = cursor_first;
+        selectedObject = null;
+        InputManager.Instance.ClearCurrentButton();
     }
 
     public void getObjectAtPosition()
@@ -121,21 +141,17 @@ public class stop : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit,mask) && hit.collider.gameObject != selectedObject)
         {
-            if (hit.collider.tag == "Gimmik")
+            if (hit.collider.tag == "Gimmik" || hit.collider.tag == "Player")
             {
                 //EventSystem.current.SetSelectedGameObject(hit.collider.gameObject);
                 //gimmickmanager.instance.GetGimick = hit.collidr.gamaobject;
-                Debug.Log(hit.collider.gameObject.name);
-                selectedObject = hit.collider.gameObject;
-            }
-            else if (hit.collider.tag == "Player")
-            {
+                //Debug.Log(hit.collider.gameObject.name);
                 selectedObject = hit.collider.gameObject;
             }
             else
             {
                 //if (selectedObject != null)
-                //    selectedObject.GetComponent<GimmickBase>().GimmickUIsOnOff(false);
+                    //selectedObject.GetComponent<GimmickBase>().GimmickUIsOnOff(false);
                 selectedObject = null;
             }
         }
@@ -144,10 +160,13 @@ public class stop : MonoBehaviour
     public Vector3 getCursorWorldPosition()
     {
 
-        Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
-        RaycastHit hit;
-        Physics.Raycast(ray, out hit);
-        return new Vector3(hit.point.x,0,hit.point.y);
+        //Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
+        //RaycastHit hit;
+        //Physics.Raycast(ray, out hit);
+        //return new Vector3(hit.point.x,0,hit.point.y);
+        Vector3 pos =Camera.main.ScreenToWorldPoint(new Vector3(cursor.transform.position.x, cursor.transform.position.y,Camera.main.transform.position.y));
+        //Debug.Log("cursor position = " + pos);
+        return pos;
     }
     public Vector3 getCursorScreenPosition()
     {
@@ -176,17 +195,34 @@ public class stop : MonoBehaviour
         // UI展開
         //gimmick.GetComponent<GimmickBase>().GimmickUIsOnOff(true);
         // コントローラー入力待ち状態に送る
-        if (gimmick.tag == "Gimmik")
+        if (gimmick.tag == "Gimmik"　|| gimmick.tag == "Player")
         {
             gimmick.GetComponent<GimmickBase>().ClickGimmick(); 
         }
         
     }
+    
 
     public void changeToSecondPhase()
     {
         SecondPhase = true;
-        cursor.GetComponent<Image>().sprite = cursor_second;
+        StartCoroutine(changesprite());
+    }
+
+    IEnumerator changesprite()
+    {
+        int spritenumber = 0;
+        Sprite selectedSprite = cursor_second[spritenumber];
+        while (true)
+        {
+            if (!SecondPhase) break;
+            spritenumber++;
+            spritenumber = spritenumber % cursor_second.Count;
+            selectedSprite = cursor_second[spritenumber];
+            cursor.GetComponent<Image>().sprite = selectedSprite;
+            yield return new WaitForSecondsRealtime(0.125f);
+        }
+        cursor.GetComponent<Image>().sprite = cursor_first;
     }
 
     public void addSingleOutline(Outline.Mode mode,Color color,float width)
@@ -197,5 +233,9 @@ public class stop : MonoBehaviour
         outline.OutlineMode = mode;
         outline.OutlineColor = color;
         outline.OutlineWidth = width;
+    }
+    private void hideOutline(Outline outline)
+    {
+        outline.OutlineWidth = 0;
     }
 }

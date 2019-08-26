@@ -14,16 +14,16 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     [SerializeField]
     private Thief tf;  //泥棒を取得
     [SerializeField]
-    public PlayerControl pc;  //Playerを取得
+    public PlayerControl pc { get; private set; }  //Playerを取得
 
     bool ghostEnable = true;  //殺人鬼があるかどうか
     [SerializeField]
     private Ghost_targeting ght;  //殺人鬼を取得
 
     [SerializeField]
-    private LoadScene ldc;  //Scene管理コンポーネント
+    private LoadScene ldc = null;  //Scene管理コンポーネント
 
-    bool gameover = false;   //ゲーム状態flag
+    public bool gameover { get; private set; } = false;   //ゲーム状態flag
     [SerializeField]
     float checkdistance = 0.2f;     //ゲーム勝負の判定距離
 
@@ -31,23 +31,29 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     float distance_player_to_ghost;
     float distance_ghost_to_thief;
 
-
+    Grid grid;
 
     public bool gameStart { get; private set; }  //ゲームが始まるかどうかのflag
     [SerializeField]
     float startWait = 2f;   //始まるまでの時間設定
 
     [SerializeField]
-    Text text;      //ゲームメッセージを表すメッセージボックス
+    Text text = null;      //ゲームメッセージを表すメッセージボックス
 
     [SerializeField]
     private GameObject treasure;
     private ParticleSystem swordlight;
 
+    stop st;
+
+    bool iestart = false;  /////後で消す必要
+
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        iestart = false;
+       
         ///キャラクタをそれぞれ取得
         if (pc == null)
         {
@@ -112,7 +118,11 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             }
             
         }
-
+        if (ght)
+        {
+            ghostEnable = ght.gameObject.activeSelf;
+        }
+        st = GetComponent<stop>();
         gameStart = false;
         text.text = "";
         GimmickManager.Instance.GimmickFrag = false;
@@ -184,12 +194,17 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         }
         else
         {
-            StartCoroutine(ie());
+            if(st.canStop)
+                st.canStop = false;
+            if(!iestart)
+                StartCoroutine(ie());
         }
+        
     }
 
     IEnumerator ie()
     {
+        iestart = true;
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(2f);
         Time.timeScale = 1f;
@@ -213,6 +228,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         text.enabled = false;
         Debug.Log("start!!");
         gameStart = true;
+        st.canStop = true;
         Time.timeScale = 1f;
         GimmickManager.Instance.GimmickFrag = true;
     }
@@ -235,12 +251,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         Time.timeScale = 1;
     }
 
-    private void theWorld()
-    {
-        Time.timeScale = 0.1f;
-    }
-
-
-
-
+    //private void theWorld()
+    //{
+    //    Time.timeScale = 0.1f;
+    //}
 }

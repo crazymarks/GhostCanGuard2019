@@ -52,6 +52,9 @@ public class Portal : GimmickBase
         portalPartical.SetActive(false);
     }
 
+    
+
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.isTrigger) return;        //他のトリガーコライダーを無視する(実体だけ判定)
@@ -91,6 +94,8 @@ public class Portal : GimmickBase
         st.gamestop();
         GimmickUIClose();
     }
+
+    
 
 
     //private void Port(GameObject obj)
@@ -164,6 +169,8 @@ public class Portal : GimmickBase
         PortabeTag.Remove(tag);
     }
 
+
+
     //public void ClickUIStart()
     //{
     //    GimmickManager.Instance.SetGimmickAction(PortOnOff);
@@ -175,7 +182,18 @@ public class Portal : GimmickBase
         //{
         //    PortOnOff();
         //}
-        
+        if (gimmickUIParent.activeSelf)                              //UIが既に展開している場合
+        {
+            if (st.selectedObject != gameObject || st.SecondPhase)       //セレクトされていない　または　方向選択段階にいる場合
+            {
+                gimmickUIParent.SetActive(false);     //UIを収縮
+            }
+        }
+        else                                                                    // UIが展開していない場合
+        {
+            if (st.selectedObject == gameObject && !st.SecondPhase)    //セレクトされたら、且つ、方向選択段階じゃない場合
+                gimmickUIParent.SetActive(true);                                   //UIを展開
+        }
     }
     protected override void PushButtonGamePad(ControllerButton controller)
     {
@@ -183,14 +201,26 @@ public class Portal : GimmickBase
         switch (controller)
         {
             case ControllerButton.A:
+                if (descriptionUIOn)
+                {
+                    HideDescription();
+                }
                 break;
             case ControllerButton.B:
                 Debug.Log("Send");
-                PortOnOff();
+                if (!descriptionUIOn)
+                {
+                    PortOnOff();
+                }
+               
                 break;
             case ControllerButton.X:
                 break;
             case ControllerButton.Y:
+                if (!descriptionUIOn)
+                {
+                    ShowDescription("portal");
+                }
                 break;
             case ControllerButton.Max:
                 break;

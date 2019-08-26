@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Horse : GimmickBase
 {
@@ -15,6 +14,8 @@ public class Horse : GimmickBase
     }
 
     HorseState horseState;
+
+    public Slider AimSlider;
 
     [SerializeField]
     private bool IfActivated = false;   //使う中ですか
@@ -92,6 +93,28 @@ public class Horse : GimmickBase
             LeftOrient = Vector3.zero;
             GetOffHorse(Player, LeftOrient);
         }
+    }
+
+    private void Update()
+    {
+        //if (Input.GetButtonDown("Send") && st.selectedObject == gameObject && (!IfActivated || st.SecondPhase))
+        //{
+        //    Active();
+        //}
+        if (gimmickUIParent.activeSelf)                              //UIが既に展開している場合
+        {
+            if (st.selectedObject != gameObject || st.SecondPhase)       //セレクトされていない　または　方向選択段階にいる場合
+            {
+                gimmickUIParent.SetActive(false);     //UIを収縮
+            }
+        }
+        else                                                                    // UIが展開していない場合
+        {
+            if (st.selectedObject == gameObject && !st.SecondPhase)    //セレクトされたら、且つ、方向選択段階じゃない場合
+                gimmickUIParent.SetActive(true);                                   //UIを展開
+        }
+
+
     }
 
     void FixedUpdate()
@@ -227,6 +250,8 @@ public class Horse : GimmickBase
             if (!st.SecondPhase)
             {
                 st.changeToSecondPhase();
+                AimSlider.gameObject.SetActive(true);
+                Debug.Log("Choose target");
                 return;
             }
         }
@@ -279,35 +304,39 @@ public class Horse : GimmickBase
     //    }
     //    GimmickUIsOnOff(false);
     //}
-    //private void Update()
-    //{
-    //    if (Input.GetButtonDown("Send") && st.selectedObject == gameObject &&  (!IfActivated||st.SecondPhase))
-    //    {
-    //        Active();
-    //    }
-        
-    //}
+
     protected override void PushButtonGamePad(ControllerButton controller)
     {
         base.PushButtonGamePad(controller);
         switch (controller)
         {
             case ControllerButton.A:
+                if (descriptionUIOn)
+                {
+                    HideDescription();
+                }
                 break;
             case ControllerButton.B:
                 Debug.Log("Send");
-                if (GameManager.Instance.getXZDistance(gameObject, Player) <= 3)
-                    Active();
-                else
+                if (!descriptionUIOn)
                 {
-                    StartCoroutine(GameManager.Instance.showTextWithSeconds("もっと近づいてください！", 1f));
-                    st.gamestop();
-                    GimmickUIClose();
+                    if (GameManager.Instance.getXZDistance(gameObject, Player) <= 5)
+                        Active();
+                    else
+                    {
+                        StartCoroutine(GameManager.Instance.showTextWithSeconds("もっと近づいてください！", 1f));
+                        st.gamestop();
+                        GimmickUIClose();
+                    }
                 }
                 break;
             case ControllerButton.X:
                 break;
             case ControllerButton.Y:
+                if (!descriptionUIOn)
+                {
+                    ShowDescription("horse");
+                }
                 break;
             case ControllerButton.Max:
                 break;

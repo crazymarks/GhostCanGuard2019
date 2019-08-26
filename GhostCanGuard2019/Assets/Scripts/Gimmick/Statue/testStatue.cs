@@ -6,8 +6,10 @@ using UnityEngine.EventSystems;
 public class testStatue : GimmickBase
 {
     public float thrust;
-    public Rigidbody rb;
-
+    public ParticleSystem SmokeAura = null; //彫像のエフェクト
+    //public Rigidbody rb;
+    [SerializeField]
+    GameObject AirWall = null;
 
     public float smooth = 3f;
     float tiltAngle = 0f;
@@ -21,14 +23,14 @@ public class testStatue : GimmickBase
     protected override void Start()
     {
         base.Start();
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
         GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
-        rb.isKinematic = true;
+        //rb.isKinematic = true;
         tiltAroundX = 0f;
         tiltAroundZ = 0f;
         tiltAngle = 0f;
         transform.localPosition = new Vector3(transform.localPosition.x, 0f, transform.localPosition.z);
-
+        AirWall.SetActive(false);
 
     }
 
@@ -48,27 +50,40 @@ public class testStatue : GimmickBase
         }
         
     }
-    //private void Update()
-    //{
-    //    if (Input.GetButtonDown("Send") && st.selectedObject == gameObject)
-    //    {
-    //        FallForwards();
-    //    }
-    //}
+    private void Update()
+    {
+        //if (Input.GetButtonDown("Send") && st.selectedObject == gameObject)
+        //{
+        //    FallForwards();
+        //}
+        if (isFallen) return;
+        if (gimmickUIParent.activeSelf)                              //UIが既に展開している場合
+        {
+            if (st.selectedObject != gameObject || st.SecondPhase)       //セレクトされていない　または　方向選択段階にいる場合
+            {
+                gimmickUIParent.SetActive(false);     //UIを収縮
+            }
+        }
+        else                                                                    // UIが展開していない場合
+        {
+            if (st.selectedObject == gameObject && !st.SecondPhase)    //セレクトされたら、且つ、方向選択段階じゃない場合
+                gimmickUIParent.SetActive(true);                                   //UIを展開
+        }
+    }
     // for buttons
-    public void FallRight()
-    {
-        tiltAroundZ = tiltAngle;
-        //rb.AddForce(transform.right * thrust);
-        GimmickUIClose();
-    }
+    //public void FallRight()
+    //{
+    //    tiltAroundZ = tiltAngle;
+    //    //rb.AddForce(transform.right * thrust);
+    //    GimmickUIClose();
+    //}
 
-    public void FallLeft()
-    {
-        tiltAroundZ = -tiltAngle;
-        //rb.AddForce(-transform.right * thrust);
-        GimmickUIClose();
-    }
+    //public void FallLeft()
+    //{
+    //    tiltAroundZ = -tiltAngle;
+    //    //rb.AddForce(-transform.right * thrust);
+    //    GimmickUIClose();
+    //}
 
     public void FallForwards()
     {
@@ -76,20 +91,21 @@ public class testStatue : GimmickBase
         {
             tiltAngle = 90f;
             isFallen = true;
+            gimmickUIParent.SetActive(false);
             st.gamestop();
-            GimmickUIClose();
         }
-       
+        AirWall.SetActive(true);
+        SmokeAura.Play();  　　　　　　　　　　　　　　　　//エフェクト起動
         //rb.AddForce(transform.forward * thrust);
 
     }
 
-    public void FallBackwards()
-    {
-        tiltAroundX = -tiltAngle;
-        //rb.AddForce(-transform.forward * thrust);
-        GimmickUIClose();
-    }
+    //public void FallBackwards()
+    //{
+    //    tiltAroundX = -tiltAngle;
+    //    //rb.AddForce(-transform.forward * thrust);
+    //    GimmickUIClose();
+    //}
 
     public void resetPillar()
     {
@@ -109,14 +125,26 @@ public class testStatue : GimmickBase
         switch (controller)
         {
             case ControllerButton.A:
+                if (descriptionUIOn)
+                {
+                    HideDescription();
+                }
                 break;
             case ControllerButton.B:
-                Debug.Log("Send");
-                FallForwards();
+                Debug.Log("Fall");
+                if (!descriptionUIOn)
+                {
+                    FallForwards();
+                }
+               
                 break;
             case ControllerButton.X:
                 break;
             case ControllerButton.Y:
+                if (!descriptionUIOn)
+                {
+                    ShowDescription("statue");
+                }
                 break;
             case ControllerButton.Max:
                 break;

@@ -14,7 +14,8 @@ public class Bible : GimmickBase
     bool isOpen;
     bool canOpen;
     float startTime;
-    SphereCollider collision;
+    [SerializeField]
+    SphereCollider collision = null;
 
     ParticleSystem aura;
 
@@ -25,7 +26,7 @@ public class Bible : GimmickBase
     {
         base.Start();
         GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
-        collision = GetComponent<SphereCollider>();
+       
         if (collision != null)
         {
             collision.enabled = false;
@@ -51,7 +52,22 @@ public class Bible : GimmickBase
         
     }
 
-    
+    private void Update()
+    {
+        if (isOpen) return;
+        if (gimmickUIParent.activeSelf)                              //UIが既に展開している場合
+        {
+            if (st.selectedObject != gameObject || st.SecondPhase)       //セレクトされていない　または　方向選択段階にいる場合
+            {
+                gimmickUIParent.SetActive(false);     //UIを収縮
+            }
+        }
+        else                                                                    // UIが展開していない場合
+        {
+            if (st.selectedObject == gameObject && !st.SecondPhase)    //セレクトされたら、且つ、方向選択段階じゃない場合
+                gimmickUIParent.SetActive(true);                                   //UIを展開
+        }
+    }
 
 
     private void open()
@@ -59,6 +75,7 @@ public class Bible : GimmickBase
         if (canOpen)
         {
             StartCoroutine(AuraON());
+            gimmickUIParent.SetActive(false);     //UIを収縮
         }
         else
         {
@@ -98,25 +115,40 @@ public class Bible : GimmickBase
     //        open();
     //    }
     //}
+
+
     protected override void PushButtonGamePad(ControllerButton controller)
     {
         base.PushButtonGamePad(controller);
         switch (controller)
         {
             case ControllerButton.A:
+                if (descriptionUIOn)
+                {
+                    HideDescription();
+                }
                 break;
             case ControllerButton.B:
                 Debug.Log("Send");
-                open();
+                if (!descriptionUIOn)
+                {
+                    open();
+                }
+
                 break;
             case ControllerButton.X:
                 break;
             case ControllerButton.Y:
+                if (!descriptionUIOn)
+                {
+                    ShowDescription("bible");
+                }
                 break;
             case ControllerButton.Max:
                 break;
             default:
                 break;
+
         }
     }
 }

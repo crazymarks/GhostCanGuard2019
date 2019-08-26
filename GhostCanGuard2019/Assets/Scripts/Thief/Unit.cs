@@ -29,10 +29,12 @@ public class Unit : MonoBehaviour
     bool mIsHeadable = false;
 
     int pathFindIndex = 0;
+    IEnumerator FollowPathCorotine;
+
 
     void Start()
     {
-
+        FollowPathCorotine = FollowPath();
         currTarget = treasure;
         currSpeed = initialSpeed;
         //InvokeRepeating("RefindPath", 0f, 0.5f);
@@ -104,8 +106,12 @@ public class Unit : MonoBehaviour
             mIsAllowFollow = true;
             path = newPath;
             targetIndex = 0;
-            StopCoroutine("FollowPath");
-            StartCoroutine("FollowPath");
+            //StopCoroutine("FollowPath");
+            //StartCoroutine("FollowPath");
+            StopCoroutine(FollowPathCorotine);
+            FollowPathCorotine = null;
+            FollowPathCorotine = FollowPath();
+            StartCoroutine(FollowPathCorotine);
         }
         else
         {
@@ -125,8 +131,13 @@ public class Unit : MonoBehaviour
             if(thief.ghostCollider!=null)thief.ghostCollider.SetActive(true);
             path = newPath;
             targetIndex = 0;
-            StopCoroutine("FollowPath");
-            StartCoroutine("FollowPath");
+
+            //StopCoroutine("FollowPath");
+            //StartCoroutine("FollowPath");
+            StopCoroutine(FollowPathCorotine);
+            FollowPathCorotine = null;
+            FollowPathCorotine = FollowPath();
+            StartCoroutine(FollowPathCorotine);
             pathFindIndex = 0;
         }
         else
@@ -253,7 +264,9 @@ public class Unit : MonoBehaviour
             //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(currentWayPoint, Vector3.up), 0.5f);
             yield return null;
         }
+        
     }
+
 
     IEnumerator Stunned(float sec)
     {

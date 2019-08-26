@@ -42,7 +42,7 @@ public class Thief : MonoBehaviour
     /// animation
     /// </summary>
     [SerializeField]
-    ThiefAnimationController anim;
+    ThiefAnimationController anim = null;
 
     void Start()
     {
@@ -78,7 +78,7 @@ public class Thief : MonoBehaviour
     void HeadExitUpdate()
     {
         StartSecondaryCounter();
-        unit.HeadExit();
+        //unit.HeadExit();  　　　　　　　　　　　　　　　　　　<-------------------------------------------ここは元凶！！！！！！！！！
     }
 
     void PauseUpdate()
@@ -139,7 +139,7 @@ public class Thief : MonoBehaviour
             Debug.Log("detected Player");
             mIsPlayerExitedState = false;
             thiefState = ThiefState.ESCAPE;
-            playerCollider.SetActive(true);// activates the collider of player, thus not pasing that route
+            //playerCollider.SetActive(true);// activates the collider of player, thus not pasing that route
             unit.GetNewTarget();
             mIsTouched = true;
             //unit.RefindPath();
@@ -152,7 +152,7 @@ public class Thief : MonoBehaviour
             Debug.Log("detected Ghost");
             mIsPlayerExitedState = false;
             thiefState = ThiefState.ESCAPE;
-            if(ghostCollider!=null)ghostCollider.SetActive(true);// activates the collider of player, thus not pasing that route
+            //if(ghostCollider!=null)ghostCollider.SetActive(true);// activates the collider of player, thus not pasing that route
             unit.GetNewTarget();
             //unit.RefindPath();
             //unit.FollowPriority();

@@ -38,7 +38,7 @@ public class PlayerManager: SingletonMonoBehavior<PlayerManager>
         //playerSpeed = playerMove.PlayerSpeed;
         playerSpeed = playerControl.speed;
         playerTurnSpeed = playerControl.turnSpeed;
-        Debug.Log("playerの初期のspeedは"+playerSpeed);
+        //Debug.Log("playerの初期のspeedは"+playerSpeed);
         //animcontrol = playerControl.gameObject.GetComponentInChildren<Animator>();
         
     }

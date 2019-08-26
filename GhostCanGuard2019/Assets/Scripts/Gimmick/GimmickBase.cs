@@ -20,6 +20,8 @@ public class GimmickBase : MonoBehaviour
     protected ControllerButton[] gimmickButtons = null;
     private EventTrigger.Entry entry = new EventTrigger.Entry();
 
+    protected bool descriptionUIOn = false; //説明文が展開されているかのフラグ　//オウカンウ
+
     // public static bool GimmickFlag = false;
 
     //virtual protected void Start()
@@ -34,7 +36,7 @@ public class GimmickBase : MonoBehaviour
         
         if (gimmickUIParent == null)
         {
-            gimmickUIParent = transform.Find("UI").gameObject;
+            gimmickUIParent = transform.Find("ButtonUICanvas").gameObject;
         }
     }
     /// <summary>
@@ -47,7 +49,7 @@ public class GimmickBase : MonoBehaviour
         if (onoff != GimmickManager.Instance.GimmickFrag) return;
         
         // playerの動きを止める
-        PlayerManager.Instance.SetCurrentState(PlayerState.Gimmick);
+        //PlayerManager.Instance.SetCurrentState(PlayerState.Gimmick);
         // UI表示
         gimmickUIParent.SetActive(onoff);
         // Gimmickが発動待ち
@@ -60,7 +62,7 @@ public class GimmickBase : MonoBehaviour
         Debug.Log("gimmick touch");
         PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
         GimmickUIsOnOff(true);
-        st.gamestop();
+        //st.gamestop();
     }
     /// <summary>
     /// gimmickの選択を解除する
@@ -83,7 +85,7 @@ public class GimmickBase : MonoBehaviour
         // eventを作成し、Triggerに追加する
         entry.eventID = triggerType;
         entry.callback.AddListener((data) => action(data));
-        this.eventTrigger.triggers.Add(entry);
+        eventTrigger.triggers.Add(entry);
     }
 
     /// <summary>
@@ -100,18 +102,20 @@ public class GimmickBase : MonoBehaviour
     /// </summary>
     public void ClickGimmick()
     {
-        if (Input.GetButtonDown("Send"))
+        if (Input.GetButtonDown("Send") || Input.GetButtonDown("Info"))  //前押し処理お避けるため加えた制限//オウカンウ
         {
-            GimmickManager.Instance.SetGimmickAction(CurrentButtonIN);
-            Debug.Log("Click");
+            GimmickManager.Instance.SetGimmickAction(() => CurrentButtonIN());      
         }
-        
+           
+        //Debug.Log("Click");
     }
     protected void CurrentButtonIN()
     {
         // 押したときのボタンをギミック処理に送る
         PushButtonGamePad(InputManager.Instance.CurrentControllerButton);
-        Debug.Log(InputManager.Instance.CurrentControllerButton);
+        InputManager.Instance.ClearCurrentButton();
+        GimmickUIsOnOff(false);
+        //Debug.Log(InputManager.Instance.CurrentControllerButton);
     }
     /// <summary>
     /// switch文で押されたボタンに対する処理を各ギミックで行う
@@ -120,4 +124,33 @@ public class GimmickBase : MonoBehaviour
     {
 
     }
+
+
+    /// <summary>
+    /// 説明文UIの展開と収縮関数です　//オウカンウ
+    /// </summary>
+    /// <param name="ギミックのCSVファイル中の名前"></param>
+    protected void ShowDescription(string name)
+    {
+        if (descriptionUIOn) return;
+        LoadDescription.Instance.ShowDesc(name);
+        descriptionUIOn = true;
+        st.canStop = false;
+        st.DescriptionPhase = true;
+        gimmickUIParent.GetComponent<DescriptionUIChange>().DescriptionOnOff();
+        
+    }
+
+    protected void HideDescription()
+    {
+        if (!descriptionUIOn) return;
+        LoadDescription.Instance.HideDesc();
+        descriptionUIOn = false;
+        st.canStop = true;
+        st.DescriptionPhase = false;
+        gimmickUIParent.GetComponent<DescriptionUIChange>().DescriptionOnOff();
+        GimmickManager.Instance.ClearGimmick();                 //収縮の時はギミックの登録をクリアします
+    }
+
+
 }

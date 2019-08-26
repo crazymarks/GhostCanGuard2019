@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TimeManager
 {
-    bool pauseflag = false;
+    //bool pauseflag = false;
 
     TimeManager(){
         timescale.Add(1f);

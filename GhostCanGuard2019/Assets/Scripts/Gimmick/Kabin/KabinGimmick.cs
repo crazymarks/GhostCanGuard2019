@@ -47,7 +47,21 @@ public class KabinGimmick : GimmickBase
             GimmickUIClose();
         }
     }
-
+    private void Update()
+    {
+        if (gimmickUIParent.activeSelf)                              //UIが既に展開している場合
+        {
+            if (st.selectedObject != gameObject || st.SecondPhase)       //セレクトされていない　または　方向選択段階にいる場合
+            {
+                gimmickUIParent.SetActive(false);     //UIを収縮
+            }
+        }
+        else                                                                    // UIが展開していない場合
+        {
+            if (st.selectedObject == gameObject && !st.SecondPhase)    //セレクトされたら、且つ、方向選択段階じゃない場合
+                gimmickUIParent.SetActive(true);                                   //UIを展開
+        }
+    }
     private void KabinGimmickSetup()
     {
         if (IfActivated) return;
@@ -117,14 +131,23 @@ public class KabinGimmick : GimmickBase
         switch (controller)
         {
             case ControllerButton.A:
+                if (descriptionUIOn)
+                {
+                    HideDescription();
+                }
                 break;
             case ControllerButton.B:
                 Debug.Log("Send");
-                KabinGimmickAction();
+                if(!descriptionUIOn)
+                    KabinGimmickAction();
                 break;
             case ControllerButton.X:
                 break;
             case ControllerButton.Y:
+                if (!descriptionUIOn)
+                {
+                    ShowDescription("kabin");
+                }
                 break;
             case ControllerButton.Max:
                 break;
@@ -132,4 +155,5 @@ public class KabinGimmick : GimmickBase
                 break;
         }
     }
+
 }

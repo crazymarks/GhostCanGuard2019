@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class Throw : MonoBehaviour
+public class Throw : GimmickBase
 {
     public Slider AimSlider;
     public GameObject HolyWater;
@@ -11,19 +11,33 @@ public class Throw : MonoBehaviour
     [Range(0, 10)]
     public int count = 1;       //残り弾数
     private bool IfActivated;
-    stop st;
+    
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        st = GameManager.Instance.GetComponent<stop>();
+        base.Start();
+        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        //st = GameManager.Instance.GetComponent<stop>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Send") && st.selectedObject == gameObject && (!IfActivated || st.SecondPhase == true))
+        //if (Input.GetButtonDown("Send") && st.selectedObject == gameObject && (!IfActivated || st.SecondPhase == true))
+        //{
+        //    throwHolyWater();
+        //}
+        if (gimmickUIParent.activeSelf)                              //UIが既に展開している場合
         {
-            throwHolyWater();
+            if (st.selectedObject != gameObject || st.SecondPhase)       //セレクトされていない　または　方向選択段階にいる場合
+            {
+                gimmickUIParent.SetActive(false);     //UIを収縮
+            }
+        }
+        else                                                                    // UIが展開していない場合
+        {
+            if (st.selectedObject == gameObject && !st.SecondPhase)    //セレクトされたら、且つ、方向選択段階じゃない場合
+                gimmickUIParent.SetActive(true);                                   //UIを展開
         }
     }
 
@@ -42,13 +56,50 @@ public class Throw : MonoBehaviour
             return;
         }
         if (!Input.GetButtonDown("Send")) return;
-        GameObject holywater = Instantiate(HolyWater, new Vector3(gameObject.transform.position.x, 1, gameObject.transform.position.z), Quaternion.identity);
         Vector3 target = st.getCursorWorldPosition();
         transform.LookAt(new Vector3(target.x, gameObject.transform.position.y, target.z));
+        GameObject holywater = Instantiate(HolyWater, new Vector3(gameObject.transform.position.x, 1, gameObject.transform.position.z) + gameObject.transform.forward, Quaternion.identity);
+        Debug.Log(target);
         Rigidbody rb = holywater.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * force, ForceMode.Impulse);
         st.gamestop();
         IfActivated = false;
         count--;
     }
+
+    protected override void PushButtonGamePad(ControllerButton controller)
+    {
+        base.PushButtonGamePad(controller);
+        switch (controller)
+        {
+            case ControllerButton.A:
+                if (descriptionUIOn)
+                {
+                    HideDescription();
+                }
+                break;
+            case ControllerButton.B:
+                Debug.Log("Send");
+                if (!descriptionUIOn)
+                {
+                    throwHolyWater();
+                }
+               
+                break;
+            case ControllerButton.X:
+                break;
+            case ControllerButton.Y:
+                if (!descriptionUIOn)
+                {
+                    ShowDescription("holywater");
+                }
+                break;
+            case ControllerButton.Max:
+                break;
+            default:
+                break;
+        }
+    }
+
+
 }

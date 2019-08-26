@@ -7,12 +7,17 @@ public class PlayerSe : MonoBehaviour
     Rigidbody rb;
     PlayerControl player;
     //SE
-    [SerializeField] AudioClip moveSE;
+    [SerializeField] AudioClip moveSE = null;
     AudioSource audioSource;
     AudioSource specialSe;
     // Start is called before the first frame update
     void Start()
     {
+        if (moveSE == null)
+        {
+            Debug.Log("moveSE未指定");
+            Destroy(this);
+        }
         player = GetComponent<PlayerControl>();
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
