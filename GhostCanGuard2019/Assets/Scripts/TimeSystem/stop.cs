@@ -110,7 +110,7 @@ public class stop : MonoBehaviour
         cursor.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.pc.gameObject.transform.position);
         Time.timeScale = 0.1f;
         outlineCamera.enabled = true;
-        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
+        PlayerrAnimationController.Instance.SetNormalAnimation(PAnimation.Hold);
         stopped = true;
         GameManager.Instance.pc.CanPlayerMove = false;
     }
@@ -119,7 +119,7 @@ public class stop : MonoBehaviour
         Time.timeScale = 1;
         cursor.SetActive(false);
         outlineCamera.enabled = false;
-        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
+        PlayerrAnimationController.Instance.SetGimmickAnimation(GimmickAnimation.Push);
         stopped = false;
         GameManager.Instance.pc.CanPlayerMove = true;
         if (outlineObject && outlineObject.GetComponent<Outline>() != null)         //アウトライを消す

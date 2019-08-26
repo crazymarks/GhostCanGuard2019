@@ -54,7 +54,8 @@ public class Ghost_targeting : MonoBehaviour
     //目標までの回転
     Quaternion targetQuaternion;
 
-   
+    // GhostのAnimation
+    private GhostAnimationController _ghostAnim;
 
     //目標を失う位置(パトロールの範囲判定用)
     Vector3 missingPosition;
@@ -109,7 +110,8 @@ public class Ghost_targeting : MonoBehaviour
             trb = thief.GetComponent<Rigidbody>();
             ifThiefHide = thief.GetComponent<thiefHide>().ifHide;
         }
-
+        // 子のAnimator取得
+        _ghostAnim = GetComponentInChildren<GhostAnimationController>();
     }
 
     // Update is called once per frame
@@ -192,8 +194,9 @@ public class Ghost_targeting : MonoBehaviour
     void move(Vector3 target,float speed, Vector3 advance_speed)
     {
         if((target - transform.position).sqrMagnitude < 0.2f)  return;//ターゲットに近づく時に止まる
-        
-        
+
+        _ghostAnim.SetGhostAnimation(GhostAnimator.Walk);
+
         //毎フレイムの移動距離を計算する
         Vector3 moveSpeed = (target + advance_speed - transform.position).normalized * speed * Time.deltaTime;
         //壁を無視する移動から、transformで位置を操作する
@@ -313,12 +316,14 @@ public class Ghost_targeting : MonoBehaviour
     }
     IEnumerator bibleEffect(float time)
     {
+        _ghostAnim.SetGhostAnimation(GhostAnimator.Down);
         ifBibleAffect = true;
         Gs = GhostState.Bible_Affected;
         targetpos = targetobj.transform.position;
         //Debug.Log("bible affected");
         yield return new WaitForSeconds(time);
         ifBibleAffect = false;
+        _ghostAnim.SetGhostAnimation(GhostAnimator.StandUp);
     }
 
     public void HolyWater(float time)
@@ -328,10 +333,12 @@ public class Ghost_targeting : MonoBehaviour
     }
     IEnumerator HolyWaterEffect(float time)
     {
+        _ghostAnim.SetGhostAnimation(GhostAnimator.Down);
         ifHolyWaterAffect = true;
         Gs = GhostState.HolyWater_Affected;
         Debug.Log("HolyWater affected");
         yield return new WaitForSeconds(time);
         ifHolyWaterAffect = false;
+        _ghostAnim.SetGhostAnimation(GhostAnimator.StandUp);
     }
 }

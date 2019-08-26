@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 /*
  * gimmickに継承するクラス
@@ -13,27 +12,20 @@ public class GimmickBase : MonoBehaviour
     //ギミックの効果や説明のUIの展開
     [SerializeField]
     protected GameObject gimmickUIParent;
-    protected EventTrigger eventTrigger;
     protected stop st;
     // 各ギミックで必要なボタンを入れる
     [SerializeField]
     protected ControllerButton[] gimmickButtons = null;
-    private EventTrigger.Entry entry = new EventTrigger.Entry();
 
     protected bool descriptionUIOn = false; //説明文が展開されているかのフラグ　//オウカンウ
 
-    // public static bool GimmickFlag = false;
-
-    //virtual protected void Start()
-    //{
-    //    eventTrigger = this.gameObject.GetComponent<EventTrigger>();
-    //    gimmickUIParent = this.transform.GetChild(0).gameObject;
-    //}
-    virtual protected void Start()
+    private void Awake()
     {
         st = GameManager.Instance.GetComponent<stop>();
-        eventTrigger = this.gameObject.GetComponent<EventTrigger>();
-        
+    }
+
+    virtual protected void Start()
+    {        
         if (gimmickUIParent == null)
         {
             gimmickUIParent = transform.Find("ButtonUICanvas").gameObject;
@@ -54,48 +46,6 @@ public class GimmickBase : MonoBehaviour
         gimmickUIParent.SetActive(onoff);
         // Gimmickが発動待ち
         GimmickManager.Instance.GimmickFrag = false;
-    }
-    // Eventに追加される関数
-    public void GimmickEventOpen(BaseEventData data)
-    {
-
-        Debug.Log("gimmick touch");
-        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
-        GimmickUIsOnOff(true);
-        //st.gamestop();
-    }
-    /// <summary>
-    /// gimmickの選択を解除する
-    /// </summary>
-    public void GimmickUIClose()
-    {
-        GimmickUIsOnOff(false);
-        PlayerAnimationController.Instance.CancelPlayerAnimation(SetPAnimator.Hold);
-        GimmickManager.Instance.ClearGimmick();
-        //PlayerManager.Instance.SetCurrentState(PlayerState.Play);
-    }
-
-    /// <summary>
-    /// gimmickのイベント作成関数
-    /// </summary>
-    /// <param name="triggerType">EventtTrriget.type</param>
-    /// <param name="action">BaseEventDataが引数のvoid関数</param>
-    protected void GimmickEventSetUp(EventTriggerType triggerType, Action<BaseEventData> action)
-    {
-        // eventを作成し、Triggerに追加する
-        entry.eventID = triggerType;
-        entry.callback.AddListener((data) => action(data));
-        eventTrigger.triggers.Add(entry);
-    }
-
-    /// <summary>
-    /// Gimmickのイベントを削除する
-    /// </summary>
-    protected void ClearGimmickEvent()
-    {
-        if (this.eventTrigger.triggers == null) return;
-
-        this.eventTrigger.triggers.Remove(entry);
     }
     /// <summary>
     /// playerがギミックとカーソルが重なっているときにボタンを押した時に呼ぶ

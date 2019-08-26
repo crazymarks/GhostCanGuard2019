@@ -14,11 +14,12 @@ public enum GimmickAnimation
     None = 0,
     Push = 2,
     Horse = 4,
+    HorseRun = 5,
     Revive = 6,
     Float = 8,
 }
 
-public class PlayerrAnimationController : MonoBehaviour
+public class PlayerrAnimationController : SingletonMonoBehavior<PlayerrAnimationController>
 {
     private Animator animator = null;
     private string _Player = "PlayerControl";
@@ -28,12 +29,6 @@ public class PlayerrAnimationController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
     /// <summary>
     /// Playerの普通の行動Animaiton

@@ -7,8 +7,6 @@ public class TestGimmick : GimmickBase
 {
     protected override void Start()
     {
-        base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
     }
 
     public void OnClickGimmickStart()

@@ -25,4 +25,8 @@ public class GhostAnimationController : MonoBehaviour
     {
         animator.SetInteger(_Ghost, (int)anim);
     }
+    public void ResetGhostAnimation()
+    {
+        animator.SetInteger(_Ghost, (int)GhostAnimator.Walk);
+    }
 }

@@ -24,7 +24,7 @@ public class testStatue : GimmickBase
     {
         base.Start();
         //rb = GetComponent<Rigidbody>();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        
         //rb.isKinematic = true;
         tiltAroundX = 0f;
         tiltAroundZ = 0f;
@@ -117,7 +117,6 @@ public class testStatue : GimmickBase
 
     public void CloseUI()
     {
-        GimmickUIClose();
     }
     protected override void PushButtonGamePad(ControllerButton controller)
     {

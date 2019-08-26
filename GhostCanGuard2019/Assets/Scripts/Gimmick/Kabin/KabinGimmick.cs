@@ -24,7 +24,7 @@ public class KabinGimmick : GimmickBase
     protected override void Start()
     {
         base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        
         rb = GetComponent<Rigidbody>();
         Broken = false;
         IfActivated = false;
@@ -44,7 +44,6 @@ public class KabinGimmick : GimmickBase
             Debug.Log("Broken");
             Broken = true;
             Destroy(gameObject, 2f);
-            GimmickUIClose();
         }
     }
     private void Update()
@@ -87,7 +86,8 @@ public class KabinGimmick : GimmickBase
         
 
         if (!Input.GetButtonDown("Send")) return;
-        
+        PlayerrAnimationController.Instance.SetGimmickAnimation(GimmickAnimation.Float);
+
         throwPos = Camera.main.ScreenToWorldPoint(st.getCursorScreenPosition());
         Debug.Log(throwPos);
         throwPos.y = 5.0f;
@@ -103,7 +103,6 @@ public class KabinGimmick : GimmickBase
         IfActivated = true;
 
         GimmickManager.Instance.ClearGimmick();
-        GimmickUIClose();
         st.gamestop();
         
     }

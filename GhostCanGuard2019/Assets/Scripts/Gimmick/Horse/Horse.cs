@@ -54,7 +54,7 @@ public class Horse : GimmickBase
     protected override void Start()
     {
         base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        
         tag = "Gimmik";
         StartPosition = transform.position;
         startQuaternion = transform.localRotation;
@@ -244,7 +244,7 @@ public class Horse : GimmickBase
         
         if (!IfActivated)
         {
-            
+            PlayerrAnimationController.Instance.SetGimmickAnimation(GimmickAnimation.Horse);
             GetOnHorse(Player);
             IfActivated = true;
             if (!st.SecondPhase)
@@ -271,6 +271,7 @@ public class Horse : GimmickBase
         //}
         
         if (!Input.GetButtonDown("Send")) return;
+        PlayerrAnimationController.Instance.SetGimmickAnimation(GimmickAnimation.HorseRun);
         RaycastHit hitInfo;
         Ray ray = Camera.main.ScreenPointToRay(st.cursor.transform.position);
         if (Physics.Raycast(ray, out hitInfo, 100))
@@ -290,7 +291,6 @@ public class Horse : GimmickBase
         Debug.Log(_moveorient);
         
         st.gamestop();
-        GimmickUIClose();
     }
 
     //public void OnClickUIStart()
@@ -326,7 +326,6 @@ public class Horse : GimmickBase
                     {
                         StartCoroutine(GameManager.Instance.showTextWithSeconds("もっと近づいてください！", 1f));
                         st.gamestop();
-                        GimmickUIClose();
                     }
                 }
                 break;

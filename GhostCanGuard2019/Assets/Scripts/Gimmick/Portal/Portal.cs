@@ -33,7 +33,7 @@ public class Portal : GimmickBase
     protected override void Start()
     {
         base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        
         if (PortDestination == null) 
         {
             PortDestination = this;
@@ -80,6 +80,7 @@ public class Portal : GimmickBase
             PortDestination.IfEnable = false;
             portalPartical.SetActive(false);
             PortDestination.portalPartical.SetActive(false);
+
         }
         else
         {
@@ -87,12 +88,12 @@ public class Portal : GimmickBase
             PortDestination.IfEnable = true;
             portalPartical.SetActive(true);
             PortDestination.portalPartical.SetActive(true);
+            PlayerrAnimationController.Instance.SetGimmickAnimation(GimmickAnimation.Revive);
 
         }
         //IfEnable = !IfEnable;
         //PortDestination.IfEnable = IfEnable;
         st.gamestop();
-        GimmickUIClose();
     }
 
     

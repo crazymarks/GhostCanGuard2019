@@ -25,7 +25,6 @@ public class Bible : GimmickBase
     protected override void Start()
     {
         base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
        
         if (collision != null)
         {
@@ -85,7 +84,6 @@ public class Bible : GimmickBase
                 Debug.Log("準備中です");
         }
         st.gamestop(); 
-        GimmickUIClose();
 
     }
     IEnumerator AuraON()
