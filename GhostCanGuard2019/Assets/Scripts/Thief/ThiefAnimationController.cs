@@ -14,7 +14,6 @@ public enum ThiefAnimator
 
 public class ThiefAnimationController : MonoBehaviour
 {
-    [SerializeField]
     Thief tf;
     Animator animator;
     private string _Thief = "ThiefControl";
@@ -22,6 +21,7 @@ public class ThiefAnimationController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        tf = transform.parent.GetComponent<Thief>();
     }
 
     // Update is called once per frame

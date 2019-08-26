@@ -20,9 +20,6 @@ public class PlayerControl : MonoBehaviour
     float horizontal = 0;
     float vertical = 0;
 
-    
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -37,17 +34,17 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
+        if (!_playerMove) return;
+
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
         // playerのAnimation処理
         //if (horizontal == 0 && vertical == 0)
         if (velocity < 0.1)
-            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Stop);
-        else if (PlayerManager.Instance.CurrentPlayerState == PlayerState.Slow)
-        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Walk);        
+            PlayerrAnimationController.Instance.SetNormalAnimation(PAnimation.Wait);
         else
-            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Run);
+            PlayerrAnimationController.Instance.SetNormalAnimation(PAnimation.Run);
     }
 
     private void move(float speed)

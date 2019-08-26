@@ -4,7 +4,6 @@ public enum PAnimation
 {
     Wait = 0,
     Run = 1,
-    Hold = 10,
     Capture = 50,
     Killed = 99,
 }
@@ -12,11 +11,13 @@ public enum PAnimation
 public enum GimmickAnimation
 {
     None = 0,
+    Hold = 1,
     Push = 2,
     Horse = 4,
     HorseRun = 5,
     Revive = 6,
     Float = 8,
+    Killed = 99,
 }
 
 public class PlayerrAnimationController : SingletonMonoBehavior<PlayerrAnimationController>

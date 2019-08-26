@@ -18,14 +18,14 @@ public class GimmickBase : MonoBehaviour
     protected ControllerButton[] gimmickButtons = null;
 
     protected bool descriptionUIOn = false; //説明文が展開されているかのフラグ　//オウカンウ
-
-    private void Awake()
-    {
-        st = GameManager.Instance.GetComponent<stop>();
-    }
-
-    virtual protected void Start()
+    
+    protected void _start()
     {        
+        if(st == null)
+        {
+            st = GameManager.Instance.GetComponent<stop>();
+        }
+
         if (gimmickUIParent == null)
         {
             gimmickUIParent = transform.Find("ButtonUICanvas").gameObject;

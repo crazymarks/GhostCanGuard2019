@@ -20,9 +20,9 @@ public class testStatue : GimmickBase
     float tiltAroundX = 0f;
     float tiltAroundZ = 0f;
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
+        _start();
         //rb = GetComponent<Rigidbody>();
         
         //rb.isKinematic = true;
@@ -120,7 +120,6 @@ public class testStatue : GimmickBase
     }
     protected override void PushButtonGamePad(ControllerButton controller)
     {
-        base.PushButtonGamePad(controller);
         switch (controller)
         {
             case ControllerButton.A:

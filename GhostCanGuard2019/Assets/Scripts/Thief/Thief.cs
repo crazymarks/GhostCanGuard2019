@@ -41,13 +41,13 @@ public class Thief : MonoBehaviour
     /// <summary>
     /// animation
     /// </summary>
-    [SerializeField]
     ThiefAnimationController anim = null;
 
     void Start()
     {
         unit = GetComponent<Unit>();
-        anim.setRunAnimation();
+
+        anim = GetComponentInChildren<ThiefAnimationController>();
     }
 
     void Update()
@@ -97,14 +97,14 @@ public class Thief : MonoBehaviour
                 unit.HeadToTreasure();
                 escapeTimer = 0f;
                 thiefState = ThiefState.HEAD_TREASURE;
-                anim.setRunAnimation();
+                anim.SetThiefAnimation(ThiefAnimator.Run);
             }
             else
             {
                 unit.HeadExit();
                 escapeTimer = 0f;
                 thiefState = ThiefState.HEAD_EXIT;
-                anim.setRunAnimation();
+                anim.SetThiefAnimation(ThiefAnimator.Run);
             }
         }
     }
@@ -119,14 +119,14 @@ public class Thief : MonoBehaviour
                 unit.HeadToTreasure();
                 escapeTimer2 = 0f;
                 thiefState = ThiefState.HEAD_TREASURE;
-                anim.setRunAnimation();
+                anim.SetThiefAnimation(ThiefAnimator.Run);
             }
             else
             {
                 unit.HeadExit();
                 escapeTimer2 = 0f;
                 thiefState = ThiefState.HEAD_EXIT;
-                anim.setRunAnimation();
+                anim.SetThiefAnimation(ThiefAnimator.Run);
             }
         }
     }
@@ -161,7 +161,7 @@ public class Thief : MonoBehaviour
         {
             Debug.Log("inTreasure");
             thiefState = ThiefState.STOP;
-            anim.setWaitAnimation();
+            anim.SetThiefAnimation(ThiefAnimator.Run);
         }
         else if (other.tag == "Alarm")
         {
@@ -195,7 +195,7 @@ public class Thief : MonoBehaviour
                 mIsTakenTreasure = true;
                 unit.HeadExit();
                 thiefState = ThiefState.HEAD_EXIT;
-                anim.setRunAnimation();
+                anim.SetThiefAnimation(ThiefAnimator.Run);
             }
         }
         else if (other.tag == "Alarm" && isAlarmActivated)// soon to be changed
@@ -206,7 +206,7 @@ public class Thief : MonoBehaviour
         {
             Debug.Log("exited");
             thiefState = ThiefState.END;
-            anim.setWaitAnimation();
+            anim.SetThiefAnimation(ThiefAnimator.Run);
         }
     }
     void OnTriggerExit(Collider other)

@@ -30,9 +30,9 @@ public class Portal : GimmickBase
     {
         "Player"
     };     //転送できる物のタグ
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
+        _start();
         
         if (PortDestination == null) 
         {
@@ -198,7 +198,6 @@ public class Portal : GimmickBase
     }
     protected override void PushButtonGamePad(ControllerButton controller)
     {
-        base.PushButtonGamePad(controller);
         switch (controller)
         {
             case ControllerButton.A:

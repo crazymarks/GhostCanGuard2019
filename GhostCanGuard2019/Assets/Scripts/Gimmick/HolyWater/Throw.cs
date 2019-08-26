@@ -13,9 +13,9 @@ public class Throw : GimmickBase
     private bool IfActivated;
     
     // Start is called before the first frame update
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
+        _start();
         //st = GameManager.Instance.GetComponent<stop>();
     }
 
@@ -69,7 +69,6 @@ public class Throw : GimmickBase
 
     protected override void PushButtonGamePad(ControllerButton controller)
     {
-        base.PushButtonGamePad(controller);
         switch (controller)
         {
             case ControllerButton.A:

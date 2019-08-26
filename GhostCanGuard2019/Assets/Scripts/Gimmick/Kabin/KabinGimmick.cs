@@ -21,9 +21,9 @@ public class KabinGimmick : GimmickBase
 
     private Rigidbody rb = null;
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
+        _start();
         
         rb = GetComponent<Rigidbody>();
         Broken = false;

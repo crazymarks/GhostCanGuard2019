@@ -51,9 +51,9 @@ public class Horse : GimmickBase
     public Vector3 MoveOrient { get { return _moveorient; } set { _moveorient = value; } }
 
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
+        _start();
         
         tag = "Gimmik";
         StartPosition = transform.position;
@@ -235,7 +235,6 @@ public class Horse : GimmickBase
         LeftOrient = Vector3.zero;
         player.GetComponent<Rigidbody>().isKinematic = false;
         PlayerManager.Instance.SetCurrentState(PlayerState.Play);
-        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
         IfMoving = false;
     }
 
@@ -307,7 +306,6 @@ public class Horse : GimmickBase
 
     protected override void PushButtonGamePad(ControllerButton controller)
     {
-        base.PushButtonGamePad(controller);
         switch (controller)
         {
             case ControllerButton.A:

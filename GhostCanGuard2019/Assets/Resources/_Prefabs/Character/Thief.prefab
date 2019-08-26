@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794b1669059840c419a5f0e6aa5b5ccd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tf: {fileID: 5639844316279069712}
 --- !u!1 &5639844316279069719
 GameObject:
   m_ObjectHideFlags: 0
@@ -155,7 +154,6 @@ MonoBehaviour:
   playerCollider: {fileID: 0}
   ghostCollider: {fileID: 0}
   isAlarmActivated: 0
-  anim: {fileID: 0}
 --- !u!135 &5639844316279069713
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -253,6 +251,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 71e8971e6909cad48a52540333eb703a, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 9f5aa9672b2a10a4fa9b369c711f08bf, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71e8971e6909cad48a52540333eb703a, type: 3}
 --- !u!1 &81314500006207882 stripped

@@ -50,7 +50,7 @@ public class stop : MonoBehaviour
     {
         if (canStop)
         {
-            if (Input.GetButtonDown("Stop") && !SecondPhase)
+            if (Input.GetButtonDown("Stop") && !SecondPhase || Input.GetKeyDown(KeyCode.O))
             {
                 gamestop();
             }
@@ -106,20 +106,20 @@ public class stop : MonoBehaviour
     }
     void gameStopStart()
     {
+        PlayerrAnimationController.Instance.SetGimmickAnimation(GimmickAnimation.Hold);
         cursor.SetActive(true);
         cursor.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.pc.gameObject.transform.position);
         Time.timeScale = 0.1f;
         outlineCamera.enabled = true;
-        PlayerrAnimationController.Instance.SetNormalAnimation(PAnimation.Hold);
         stopped = true;
         GameManager.Instance.pc.CanPlayerMove = false;
     }
     void gameStopEnd()
     {
+        PlayerrAnimationController.Instance.SetGimmickAnimation(GimmickAnimation.None);
         Time.timeScale = 1;
         cursor.SetActive(false);
         outlineCamera.enabled = false;
-        PlayerrAnimationController.Instance.SetGimmickAnimation(GimmickAnimation.Push);
         stopped = false;
         GameManager.Instance.pc.CanPlayerMove = true;
         if (outlineObject && outlineObject.GetComponent<Outline>() != null)         //アウトライを消す
