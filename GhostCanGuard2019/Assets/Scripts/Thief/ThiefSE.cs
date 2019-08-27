@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThiefSE : MonoBehaviour
+public class ThiefSE : SingletonMonoBehavior<GameManager>
 {
     Thief thief;
+    bool gameover = false;
     //SE
     [SerializeField] AudioClip moveSE;
     AudioSource audioSource;
@@ -27,9 +28,12 @@ public class ThiefSE : MonoBehaviour
         }
         else
         {
-            if (thief.thiefState == Thief.ThiefState.ESCAPE) {
+            if (gameover == true) {
                 audioSource.Stop();
             }
+            //if (thief.thiefState == Thief.ThiefState.ESCAPE) {
+              //  audioSource.Stop();
+            //}
         }
     }
 }

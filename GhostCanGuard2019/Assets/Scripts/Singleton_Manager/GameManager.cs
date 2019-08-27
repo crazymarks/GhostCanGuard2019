@@ -31,6 +31,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     float distance_player_to_ghost;
     float distance_ghost_to_thief;
 
+    //GameObject successcanvas;
 
 
     public bool gameStart { get; private set; }  //ゲームが始まるかどうかのflag
@@ -47,7 +48,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        
+        //this.successcanvas = GameObject.Find("SuccessCanvas");   
         ///キャラクタをそれぞれ取得
         if (pc == null)
         {
@@ -156,6 +157,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                 //text.enabled = true;
                 Debug.Log("You Win!");
                 gameover = true;
+                //successcanvasenable = true;
             }
             if (ghostEnable)
             {
@@ -193,7 +195,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(2f);
         Time.timeScale = 1f;
-        ldc.loadScene("TitleScene");
+        //ldc.loadScene("TitleScene");
 
     }
     IEnumerator startCount(float startTime)
