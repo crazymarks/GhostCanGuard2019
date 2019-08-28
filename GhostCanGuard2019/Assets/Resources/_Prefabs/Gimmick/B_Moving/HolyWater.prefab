@@ -63,6 +63,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffTime: 5
   lifeTime: 3
+  holywater: {fileID: 1014124679197186011}
+  cup: {fileID: 1709868673594310657}
+  burstFX: {fileID: 7502809687237478334, guid: 508ce2c539b3c8e4eb51b8c4685e7665, type: 3}
 --- !u!114 &1709868672661609724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,11 +116,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1709868672661609726}
     m_Modifications:
-    - target: {fileID: 2085559416292832457, guid: 6286de922df3fa349a54a0f143dcaef7,
-        type: 3}
-      propertyPath: m_Name
-      value: HolyWater
-      objectReference: {fileID: 0}
     - target: {fileID: 2085559416292832458, guid: 6286de922df3fa349a54a0f143dcaef7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -172,6 +170,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2085559416292832457, guid: 6286de922df3fa349a54a0f143dcaef7,
+        type: 3}
+      propertyPath: m_Name
+      value: HolyWater
       objectReference: {fileID: 0}
     - target: {fileID: 2085559416292832459, guid: 6286de922df3fa349a54a0f143dcaef7,
         type: 3}
@@ -399,6 +402,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a10869e65bfd40a4aa86e24edd095d53, type: 3}
+--- !u!1 &1709868673594310657 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: a10869e65bfd40a4aa86e24edd095d53,
+    type: 3}
+  m_PrefabInstance: {fileID: 1709868673594410657}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1709868673594809377 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: a10869e65bfd40a4aa86e24edd095d53,

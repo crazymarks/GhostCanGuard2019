@@ -19,9 +19,9 @@ public class RealTimeParticle : MonoBehaviour
         if (_particle == null) return;
         _deltaTime = Time.realtimeSinceStartup - _timeAtLastFrame;
         _timeAtLastFrame = Time.realtimeSinceStartup;
-        if (Mathf.Abs(Time.timeScale) < 1e-6)
+        if (Mathf.Abs(Time.timeScale) < 0.9f)
         {
-            _particle.Simulate(_deltaTime, false, false);
+            _particle.Simulate(_deltaTime, true, false);
             _particle.Play();
         }
     }

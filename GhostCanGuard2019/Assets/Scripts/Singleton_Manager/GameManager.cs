@@ -25,6 +25,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     public bool gameover { get; private set; } = false;   //ゲーム状態flag
     [SerializeField]
+    [Header("勝負の判定距離")]
     float checkdistance = 0.2f;     //ゲーム勝負の判定距離
 
     float distance_player_to_thief;
@@ -42,7 +43,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     [SerializeField]
     private GameObject treasure;
-    private ParticleSystem swordlight;
+    //private ParticleSystem swordlight;
+    //GameObject sword;
 
     stop st;
 
@@ -99,25 +101,26 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             try
             {
                 treasure = GameObject.FindGameObjectWithTag("Treasure");
+
             }
             catch (System.NullReferenceException)
             {
                 Debug.Log("宝未指定" + name);
             }
         }
-        if (treasure != null)
-        {
-            try
-            {
-                swordlight = treasure.GetComponentInChildren<ParticleSystem>(true);
-            }
-            catch (System.NullReferenceException)
-            {
+        //if (treasure != null)
+        //{
+        //    try
+        //    {
+        //        swordlight = treasure.GetComponentInChildren<ParticleSystem>(true);
+        //    }
+        //    catch (System.NullReferenceException)
+        //    {
 
-                Debug.Log("");
-            }
+        //        Debug.Log("");
+        //    }
             
-        }
+        //}
         if (ght)
         {
             ghostEnable = ght.gameObject.activeSelf;
@@ -186,10 +189,11 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                     gameover = true;
                 }
             }
-            if (tf.thiefState == Thief.ThiefState.HEAD_EXIT && swordlight != null)
+            if (tf.thiefState == Thief.ThiefState.HEAD_EXIT /*&& swordlight != null*/)
             {
-                swordlight.Stop();
-                swordlight.Clear();
+                treasure.GetComponent<treasure>().sword.SetActive(false);
+                //swordlight.Stop();
+                //swordlight.Clear();
             }
         }
         else

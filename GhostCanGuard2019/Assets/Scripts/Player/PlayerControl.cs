@@ -16,6 +16,10 @@ public class PlayerControl : MonoBehaviour
     private bool _playerMove = true;
     public bool CanPlayerMove { get { return _playerMove; } set { _playerMove = value; rb.velocity = Vector3.zero; } }
 
+    /// <summary>
+    /// StopFX
+    /// </summary>
+    public GameObject StopFX;
 
     float horizontal = 0;
     float vertical = 0;
@@ -45,7 +49,25 @@ public class PlayerControl : MonoBehaviour
             PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Walk);
         else
             PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Run);
+
+        FXcheck();
     }
+    
+    /// <summary>
+    /// FXcheck
+    /// </summary>
+    void FXcheck()
+    {
+        if (stop.Instance.stopped && !StopFX.activeSelf)
+        {
+            StopFX.SetActive(true);
+        }
+        if (!stop.Instance.stopped && StopFX.activeSelf)
+        {
+            StopFX.SetActive(false);
+        }
+    }
+
 
     private void move(float speed)
     {

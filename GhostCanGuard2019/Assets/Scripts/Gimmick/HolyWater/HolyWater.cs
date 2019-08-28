@@ -11,9 +11,9 @@ public class HolyWater : MonoBehaviour
     public float lifeTime = 5f;
     
 
-    GameObject holywater;
-    GameObject cup;
-
+    public GameObject holywater;
+    public GameObject cup;
+    public GameObject burstFX;
 
 
 
@@ -23,17 +23,16 @@ public class HolyWater : MonoBehaviour
         Destroy(gameObject, lifeTime);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player") return;
+        
         if (collision.gameObject.tag == "Ghost")
         {
+            Destroy(Instantiate(burstFX, collision.transform), 2.5f);
             Destroy(gameObject);
+
             collision.gameObject.GetComponent<Ghost_targeting>().HolyWater(buffTime);
         }
     }

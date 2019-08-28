@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class stop : MonoBehaviour
+public class stop : SingletonMonoBehavior<stop>
 {
 
     public enum PauseState
@@ -22,7 +22,7 @@ public class stop : MonoBehaviour
 
     public bool canStop = false;
 
-    [Range(0,1)]
+    [Range(0,1)][Header("観察modeのTimeScale")]
     public float ObserverTimeScale = 0.1f;
 
     /// <summary>

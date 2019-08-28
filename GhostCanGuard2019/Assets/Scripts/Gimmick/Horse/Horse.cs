@@ -50,6 +50,12 @@ public class Horse : GimmickBase
     Vector3 _moveorient = Vector3.zero;
     public Vector3 MoveOrient { get { return _moveorient; } set { _moveorient = value; } }
 
+    /// <summary>
+    /// ParticalSystem
+    /// </summary>
+    public GameObject Cloud;
+    public GameObject Fly;
+
 
     protected override void Start()
     {
@@ -80,7 +86,7 @@ public class Horse : GimmickBase
         {
             Saddle = transform.Find("Saddle").gameObject;
         }
-        
+        resetHorse();
     }
 
     void OnTriggerEnter(Collider collision)
@@ -218,6 +224,8 @@ public class Horse : GimmickBase
         GimmickManager.Instance.ClearGimmick();
         MoveOrient = Vector3.zero;
         Debug.Log("Ready to Reuse");
+        Cloud.SetActive(false);
+        Fly.SetActive(false);
     }
  
     private void GetOnHorse(GameObject player)
@@ -231,6 +239,7 @@ public class Horse : GimmickBase
         player.transform.SetParent(this.transform);
         player.tag = "Untagged";
         Debug.Log("Saddle Set");
+        Cloud.SetActive(true);
     } 
     private void GetOffHorse(GameObject player,Vector3 orient)
     {
@@ -296,7 +305,7 @@ public class Horse : GimmickBase
 
         }
         IfMoving = true;
-
+        Fly.SetActive(true);
         Debug.Log(_moveorient);
         
         st.gamestop(stop.PauseState.Normal);
