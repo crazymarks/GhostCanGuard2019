@@ -34,9 +34,13 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     Grid grid;
 
-    public bool gameStart { get; private set; }  //ゲームが始まるかどうかのflag
-    [SerializeField]
-    float startWait = 2f;   //始まるまでの時間設定
+    /// <summary>
+    /// gameStart
+    /// </summary>
+    public bool IfGameStart { get; private set; }  //ゲームが始まるかどうかのflag
+    public GameObject StartCount;
+    //[SerializeField]
+    //float startWait = 2f;   //始まるまでの時間設定
 
     [SerializeField]
     Text text = null;      //ゲームメッセージを表すメッセージボックス
@@ -126,10 +130,11 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             ghostEnable = ght.gameObject.activeSelf;
         }
         st = GetComponent<stop>();
-        gameStart = false;
+        IfGameStart = false;
         text.text = "";
         GimmickManager.Instance.GimmickFrag = false;
-        StartCoroutine(startCount(startWait));
+        playStartCount();
+        //StartCoroutine(startCount(startWait));
     }
 
     // Update is called once per frame
@@ -215,27 +220,42 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         ldc.loadScene("TitleScene");
 
     }
-    IEnumerator startCount(float startTime)
+    //IEnumerator startCount(float startTime)
+    //{
+    //    Time.timeScale = 0;
+    //    for (int i = (int)startTime + 1; i >= 0; i--)
+    //    {
+    //        if (i > 0)
+    //        {
+    //            text.text = (i.ToString());
+    //        }
+    //        else
+    //            text.text = "Start!!";
+    //        Debug.Log(i + 1 + "..");
+    //        yield return new WaitForSecondsRealtime(1f);
+    //    }
+    //    text.enabled = false;
+    //    Debug.Log("start!!");
+    //    IfGameStart = true;
+    //    st.canStop = true;
+    //    Time.timeScale = 1f;
+    //    GimmickManager.Instance.GimmickFrag = true;
+    //}
+    public void playStartCount()
     {
         Time.timeScale = 0;
-        for (int i = (int)startTime + 1; i >= 0; i--)
-        {
-            if (i > 0)
-            {
-                text.text = (i.ToString());
-            }
-            else
-                text.text = "Start!!";
-            Debug.Log(i + 1 + "..");
-            yield return new WaitForSecondsRealtime(1f);
-        }
-        text.enabled = false;
+        StartCount.SetActive(true);
+    }
+
+    public void gameStart()
+    {
         Debug.Log("start!!");
-        gameStart = true;
+        IfGameStart = true;
         st.canStop = true;
         Time.timeScale = 1f;
         GimmickManager.Instance.GimmickFrag = true;
     }
+
     public float getXZDistance(GameObject a, GameObject b)
     {
         Vector3 ay0 = new Vector3(a.transform.position.x, 0, a.transform.position.z);
