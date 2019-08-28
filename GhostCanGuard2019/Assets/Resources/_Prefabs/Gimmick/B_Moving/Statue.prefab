@@ -103,6 +103,7 @@ MonoBehaviour:
   thrust: 10000
   SmokeAura: {fileID: 1848808437214676748}
   AirWall: {fileID: 8677045379700007014}
+  Kinght: {fileID: 120233364507813682}
   smooth: 3
   tiltpoint: {fileID: 7910653433627978977}
 --- !u!114 &6136537122827836056
@@ -573,6 +574,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e031477a247b6944f98bef6173950b0c, type: 3}
+--- !u!1 &120233364507813682 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: e031477a247b6944f98bef6173950b0c,
+    type: 3}
+  m_PrefabInstance: {fileID: 120233364507779474}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &120233364507917074 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: e031477a247b6944f98bef6173950b0c,
