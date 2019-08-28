@@ -47,8 +47,11 @@ public class Throw : GimmickBase
             Debug.Log("弾が切れた");
             return;
         }
-        if(!IfActivated)
+        if (!IfActivated)
+        {
             IfActivated = true;
+        }
+            
         if (!st.SecondPhase)
         {
             st.gamestop(stop.PauseState.DirectionSelect);

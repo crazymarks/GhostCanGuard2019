@@ -50,6 +50,7 @@ public class PlayerControl : MonoBehaviour
         else
             PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Run);
 
+
         FXcheck();
     }
     
