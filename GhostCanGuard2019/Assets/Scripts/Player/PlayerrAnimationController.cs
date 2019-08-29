@@ -17,7 +17,6 @@ public enum GimmickAnimation
     HorseRun = 5,
     Revive = 6,
     Float = 8,
-    Killed = 99,
 }
 
 public class PlayerrAnimationController : SingletonMonoBehavior<PlayerrAnimationController>

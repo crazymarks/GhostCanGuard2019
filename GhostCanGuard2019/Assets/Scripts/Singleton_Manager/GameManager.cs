@@ -161,6 +161,10 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             }
             if (distance_player_to_thief <= checkdistance)
             {
+                // animaiton
+                tf.SetAnimationByMain(ThiefAnimator.Captured);
+                PlayerrAnimationController.Instance.SetNormalAnimation(PAnimation.Capture);
+
                 UIManager.Instance.ShowDesPanel("逮捕成功!");
                 //text.text = "逮捕成功!";
                 //text.enabled = true;
@@ -171,6 +175,11 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             {
                 if (distance_ghost_to_thief <= checkdistance)
                 {
+                    // animation
+                    ght.SetAnimationGhostByMain(GhostAnimator.Kill);
+                    tf.SetAnimationByMain(ThiefAnimator.Killed);
+                   
+
                     UIManager.Instance.ShowDesPanel("迷えば、敗れる");
                     //text.text = "迷えば、敗れる";
                     //text.enabled = true;
@@ -179,6 +188,10 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                 }
                 if (distance_player_to_ghost <= checkdistance)
                 {
+                    // animation
+                    ght.SetAnimationGhostByMain(GhostAnimator.Kill);
+                    PlayerrAnimationController.Instance.SetNormalAnimation(PAnimation.Killed);
+
                     UIManager.Instance.ShowDesPanel("死");
                     //text.text = "死";
                     //text.enabled = true;

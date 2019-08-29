@@ -341,4 +341,9 @@ public class Ghost_targeting : MonoBehaviour
         ifHolyWaterAffect = false;
         _ghostAnim.SetGhostAnimation(GhostAnimator.StandUp);
     }
+
+    public void SetAnimationGhostByMain(GhostAnimator ghostAnimator)
+    {
+        _ghostAnim.SetGhostAnimation(ghostAnimator);
+    }
 }

@@ -189,6 +189,7 @@ public class Thief : MonoBehaviour
         }
         else if (other.tag == "Treasure")
         {
+            anim.SetThiefAnimation(ThiefAnimator.Steal);
             treasureTimer += Time.deltaTime;
             if (treasureTimer > 1.0f)//time needed to collect treasure ** hardcode
             {
@@ -218,5 +219,8 @@ public class Thief : MonoBehaviour
             mIsTouched = false;
         }
     }
-
+    public void SetAnimationByMain(ThiefAnimator thiefAnimation)
+    {
+        anim.SetThiefAnimation(thiefAnimation);
+    }
 }
