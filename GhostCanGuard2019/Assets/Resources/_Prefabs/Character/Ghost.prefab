@@ -73,6 +73,8 @@ MonoBehaviour:
   distanceOfGiveUpChase: 5
   maxPatrolRange: 5
   waitTime: 2
+  ifBibleAffect: 0
+  ifHolyWaterAffect: 0
 --- !u!136 &8090143044764218536
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -87,6 +89,18 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &1475133659059278518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4584484393485714048}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2269975806361564a9d14dc4265f4c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7167708515310083026
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,6 +218,12 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 260b0e4b416488648bf1d3253fe6cbed, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc99f860bbf2ef14dab59808d11e57f4, type: 3}
+--- !u!1 &4584484393485714048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: fc99f860bbf2ef14dab59808d11e57f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 4584484393485616160}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4584484393486016160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: fc99f860bbf2ef14dab59808d11e57f4,

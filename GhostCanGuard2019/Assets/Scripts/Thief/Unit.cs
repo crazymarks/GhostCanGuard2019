@@ -31,6 +31,8 @@ public class Unit : MonoBehaviour
     int pathFindIndex = 0;
     IEnumerator FollowPathCorotine;
 
+    private ThiefAnimationController _thiefAnimator = null;
+
 
     void Start()
     {
@@ -41,7 +43,7 @@ public class Unit : MonoBehaviour
         thief = GetComponent<Thief>();
         mIsAllowFollow = true;
         PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
-
+        _thiefAnimator = GetComponentInChildren<ThiefAnimationController>();
     }
 
     void Update()
@@ -245,6 +247,7 @@ public class Unit : MonoBehaviour
             //Debug.Log(path.Length);
         }
         else currentWayPoint = transform.position;
+        _thiefAnimator.SetThiefAnimation(ThiefAnimator.Run);
 
         while (true)
         {

@@ -46,8 +46,9 @@ public class Thief : MonoBehaviour
     void Start()
     {
         unit = GetComponent<Unit>();
-
         anim = GetComponentInChildren<ThiefAnimationController>();
+
+        anim.SetThiefAnimation(ThiefAnimator.Run);
     }
 
     void Update()
