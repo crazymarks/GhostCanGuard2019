@@ -18,7 +18,7 @@ public class ThiefAnimationController : MonoBehaviour
     Animator animator;
     private string _Thief = "ThiefControl";
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
         tf = transform.parent.GetComponent<Thief>();
