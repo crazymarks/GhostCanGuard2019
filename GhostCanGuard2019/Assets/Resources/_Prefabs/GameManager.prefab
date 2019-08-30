@@ -267,6 +267,14 @@ MonoBehaviour:
   checkdistance: 1.2
   StartCount: {fileID: 943215998}
   text: {fileID: 5770323048838871665}
+  arrestCanvas: {fileID: 1122194673518572175, guid: d1eb57240314eab4bbf0f3205b1775e3,
+    type: 3}
+  deadCanvas: {fileID: 6652804806647990082, guid: 569d49a9f10fc674ebd273752645013b,
+    type: 3}
+  policeDeadCanvas: {fileID: 6759285709782414817, guid: 7ccbfcfcf0e3daa45afbef7b91be5f00,
+    type: 3}
+  stealCanvas: {fileID: 773288440454000016, guid: 5eae35fe9809614468e02bc2936d750b,
+    type: 3}
   treasure: {fileID: 0}
 --- !u!114 &3984357385162259094
 MonoBehaviour:
@@ -577,6 +585,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8566343946069160460}
     m_Modifications:
+    - target: {fileID: 3199257972235765211, guid: 72a2268293a93f247bdd28458c392c0b,
+        type: 3}
+      propertyPath: m_Name
+      value: GimmickDescription
+      objectReference: {fileID: 0}
+    - target: {fileID: 3199257972235765211, guid: 72a2268293a93f247bdd28458c392c0b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 301546113857958320, guid: 72a2268293a93f247bdd28458c392c0b,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4587ab20600c21e429de302c933afeab,
+        type: 3}
     - target: {fileID: 3199257972235765212, guid: 72a2268293a93f247bdd28458c392c0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -682,22 +706,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3199257972235765211, guid: 72a2268293a93f247bdd28458c392c0b,
-        type: 3}
-      propertyPath: m_Name
-      value: GimmickDescription
-      objectReference: {fileID: 0}
-    - target: {fileID: 3199257972235765211, guid: 72a2268293a93f247bdd28458c392c0b,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 301546113857958320, guid: 72a2268293a93f247bdd28458c392c0b,
-        type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 4587ab20600c21e429de302c933afeab,
-        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72a2268293a93f247bdd28458c392c0b, type: 3}
 --- !u!1 &7881787175505684558 stripped
@@ -731,6 +739,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3984357385162259095}
     m_Modifications:
+    - target: {fileID: 6757446705375586402, guid: f60e29945cbc1d145997f78485c6115f,
+        type: 3}
+      propertyPath: m_Name
+      value: EndUI
+      objectReference: {fileID: 0}
     - target: {fileID: 6757446704105244626, guid: f60e29945cbc1d145997f78485c6115f,
         type: 3}
       propertyPath: m_FontData.m_FontSize
@@ -855,11 +868,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6757446705375586402, guid: f60e29945cbc1d145997f78485c6115f,
-        type: 3}
-      propertyPath: m_Name
-      value: EndUI
       objectReference: {fileID: 0}
     - target: {fileID: 6757446704105244652, guid: f60e29945cbc1d145997f78485c6115f,
         type: 3}

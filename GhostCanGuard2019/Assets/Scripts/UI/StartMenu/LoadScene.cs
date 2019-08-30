@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class LoadScene : MonoBehaviour
 {
-    
+    int CurrentScenenNumber;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +24,10 @@ public class LoadScene : MonoBehaviour
     {
         
         SceneManager.LoadSceneAsync(SceneName);
+    }
+    public void loadScene(int SceneNumber)
+    {
+
+        SceneManager.LoadSceneAsync(SceneNumber);
     }
 }

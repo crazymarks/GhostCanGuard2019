@@ -32,7 +32,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     float distance_player_to_ghost;
     float distance_ghost_to_thief;
 
-    Grid grid;
+   
 
     /// <summary>
     /// gameStart
@@ -44,6 +44,24 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     [SerializeField]
     Text text = null;      //ゲームメッセージを表すメッセージボックス
+
+    /// <summary>
+    /// GameOver
+    /// </summary>
+    public GameObject arrestCanvas;
+    public GameObject deadCanvas;
+    public GameObject policeDeadCanvas;
+    public GameObject stealCanvas;
+    GameObject endingscene;
+
+    enum GameOverState
+    {
+        arrest,
+        thiefDead,
+        policeDead,
+        steal
+    }
+    GameOverState OverState;
 
     [SerializeField]
     private GameObject treasure;
@@ -153,19 +171,22 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             //Debug.Log(distance_player_to_thief);
             if (tf.thiefState == Thief.ThiefState.END)
             {
-                UIManager.Instance.ShowDesPanel("泥棒が逃げました！");
+                //UIManager.Instance.ShowDesPanel("泥棒が逃げました！");
                 //text.text = "泥棒が逃げました！";
                 //text.enabled = true;
                 Debug.Log("泥棒が逃げました！");
                 gameover = true;
+                OverState = GameOverState.steal;
+                
             }
             if (tf.thiefState == Thief.ThiefState.EXITED)
             {
-                UIManager.Instance.ShowDesPanel("平和な夜ですね．．．");
+                //UIManager.Instance.ShowDesPanel("平和な夜ですね．．．");
                 //text.text = "平和な夜ですね．．．";
                 //text.enabled = true;
                 Debug.Log("You Win!");
                 gameover = true;
+                //Invoke("gameOver(GameOverState.steal)", 2f);
             }
             if (distance_player_to_thief <= checkdistance)
             {
@@ -174,24 +195,30 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                 //text.enabled = true;
                 Debug.Log("You Win!");
                 gameover = true;
+                OverState = GameOverState.arrest;
+                
             }
             if (ghostEnable)
             {
                 if (distance_ghost_to_thief <= checkdistance)
                 {
-                    UIManager.Instance.ShowDesPanel("迷えば、敗れる");
+                    //UIManager.Instance.ShowDesPanel("迷えば、敗れる");
                     //text.text = "迷えば、敗れる";
                     //text.enabled = true;
                     Debug.Log("泥棒が殺人鬼に殺された！！");
                     gameover = true;
+                    OverState = GameOverState.thiefDead;
+                    
                 }
                 if (distance_player_to_ghost <= checkdistance)
                 {
-                    UIManager.Instance.ShowDesPanel("死");
+                    //UIManager.Instance.ShowDesPanel("死");
                     //text.text = "死";
                     //text.enabled = true;
                     Debug.Log("死");
                     gameover = true;
+                    OverState = GameOverState.policeDead;
+                    
                 }
             }
             if (tf.thiefState == Thief.ThiefState.HEAD_EXIT /*&& swordlight != null*/)
@@ -203,10 +230,12 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         }
         else
         {
+            st.gamestop(stop.PauseState.Normal);
             if(st.canStop)
                 st.canStop = false;
-            if(!iestart)
+            if (!iestart)
                 StartCoroutine(ie());
+
         }
         
     }
@@ -215,10 +244,11 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     {
         iestart = true;
         Time.timeScale = 0;
+        gameOver();
         yield return new WaitForSecondsRealtime(2f);
         Time.timeScale = 1f;
-        ldc.loadScene("TitleScene");
-
+        
+        //ldc.loadScene("TitleScene");
     }
     //IEnumerator startCount(float startTime)
     //{
@@ -275,8 +305,29 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         Time.timeScale = 1;
     }
 
-    //private void theWorld()
-    //{
-    //    Time.timeScale = 0.1f;
-    //}
+    void gameOver()
+    {
+        tf.gameObject.SetActive(false);
+        //pc.speed = 0;
+        //ght.Gs = Ghost_targeting.GhostState.Stop;
+        //tf.thiefState = Thief.ThiefState.STOP;
+        switch (OverState)
+        {
+            case GameOverState.arrest:
+                endingscene = Instantiate(arrestCanvas);
+                break;
+            case GameOverState.thiefDead:
+                endingscene = Instantiate(deadCanvas);
+                break;
+            case GameOverState.policeDead:
+                endingscene = Instantiate(policeDeadCanvas);
+                break;
+            case GameOverState.steal:
+                endingscene = Instantiate(stealCanvas);
+                break;
+            default:
+                break;
+        }
+        
+    }
 }

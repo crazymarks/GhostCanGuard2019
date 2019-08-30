@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class StartMenu : MonoBehaviour
 {
     public Canvas startMenu;
-    public Canvas select;
+    public Canvas selectStages;
 
     bool selectstageOpen = false;
 
@@ -31,7 +31,7 @@ public class StartMenu : MonoBehaviour
     void Start()
     {
         selectstageOpen = false;
-        select.enabled = false;
+        selectStages.enabled = false;
         startMenusMap = new Dictionary<string, Button>();
         stagesMap = new Dictionary<string, Button>();
         foreach (var button in startMenu.GetComponentsInChildren<Button>())
@@ -39,7 +39,7 @@ public class StartMenu : MonoBehaviour
             startMenuButtons.Add(button);
             startMenusMap.Add(button.name, button);
         }
-        foreach (var button in select.GetComponentsInChildren<Button>())
+        foreach (var button in selectStages.GetComponentsInChildren<Button>())
         {
             stageButtons.Add(button);
             stagesMap.Add(button.name, button);
@@ -166,7 +166,7 @@ public class StartMenu : MonoBehaviour
     }
     public void cancelSelect()
     {
-        select.enabled = false;
+        selectStages.enabled = false;
         startMenu.enabled = true;
         startMenu.GetComponent<CanvasGroup>().alpha = 1;
         selectstageOpen = false;
@@ -177,7 +177,7 @@ public class StartMenu : MonoBehaviour
         IEnumerator startfadeout = fadeout(startMenu.GetComponent<CanvasGroup>(), 0.2f);
         yield return StartCoroutine(startfadeout);
         selectstageOpen = true;
-        select.enabled = true;
+        selectStages.enabled = true;
     }
 
 

@@ -59,7 +59,7 @@ public class Unit : MonoBehaviour
         {
             nextActionTime += period;
             // execute block of code here
-            //RefindPath();
+            RefindPath();
         }
 
 
@@ -146,9 +146,6 @@ public class Unit : MonoBehaviour
             if (pathFindIndex < escapePoints.Count)
             {
                 Debug.Log("index " + pathFindIndex);
-                pathFindIndex++;
-                Debug.Log("index after plus " + pathFindIndex + escapePoints.Count);
-
                 if (pathFindIndex == escapePoints.Count)
                 {
                     if (thief.ghostCollider != null) thief.ghostCollider.SetActive(false);
@@ -159,6 +156,8 @@ public class Unit : MonoBehaviour
                 }
                 else currTarget = escapePoints[pathFindIndex];
                 PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
+                pathFindIndex++;
+                Debug.Log("index after plus " + pathFindIndex + escapePoints.Count);
             }
             //else if (pathFindIndex == escapePoints.Count)
             //{

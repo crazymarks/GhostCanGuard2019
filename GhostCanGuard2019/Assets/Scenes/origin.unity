@@ -3273,6 +3273,36 @@ PrefabInstance:
       propertyPath: treasure
       value: 
       objectReference: {fileID: 894930774}
+    - target: {fileID: 1242445073, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
+      propertyPath: arrestCanvas
+      value: 
+      objectReference: {fileID: 1122194673518572175, guid: d1eb57240314eab4bbf0f3205b1775e3,
+        type: 3}
+    - target: {fileID: 1242445073, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
+      propertyPath: deadCanvas
+      value: 
+      objectReference: {fileID: 6652804806647990082, guid: 569d49a9f10fc674ebd273752645013b,
+        type: 3}
+    - target: {fileID: 1242445073, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
+      propertyPath: policeDeadCanvas
+      value: 
+      objectReference: {fileID: 6759285709782414817, guid: 7ccbfcfcf0e3daa45afbef7b91be5f00,
+        type: 3}
+    - target: {fileID: 1242445073, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
+      propertyPath: stealCanvas
+      value: 
+      objectReference: {fileID: 773288440454000016, guid: 5eae35fe9809614468e02bc2936d750b,
+        type: 3}
+    - target: {fileID: 4465205681192033425, guid: 28c763a9102517c45909d079c3eec7bb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8566343946069160460, guid: 28c763a9102517c45909d079c3eec7bb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28c763a9102517c45909d079c3eec7bb, type: 3}
 --- !u!1001 &4966074043993101280
