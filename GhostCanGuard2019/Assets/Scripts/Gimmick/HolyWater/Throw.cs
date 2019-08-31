@@ -10,6 +10,10 @@ public class Throw : GimmickBase
     public float force=10;
     [Range(0, 10)]
     public int count = 1;       //残り弾数
+    public Sprite CupUI_Full;
+    public Sprite CupUI_Empty;
+    public Image CupUI;
+
     private bool IfActivated;
     
     // Start is called before the first frame update
@@ -36,9 +40,29 @@ public class Throw : GimmickBase
         }
         else                                                                    // UIが展開していない場合
         {
-            if (count <= 0) return;
-            if (st.selectedObject == gameObject && !st.SecondPhase)    //セレクトされたら、且つ、方向選択段階じゃない場合
+
+            if (st.selectedObject == gameObject && !st.SecondPhase && count >= 1)    //セレクトされたら、且つ、方向選択段階じゃない場合
                 gimmickUIParent.SetActive(true);                                   //UIを展開
+        }
+
+        ///
+        /// 聖杯のUI写真
+        ///
+        if (count <= 0)
+        {
+            CupUI.sprite = CupUI_Empty;
+        }
+        else if (CupUI.sprite == CupUI_Empty)
+        {
+            CupUI.sprite = CupUI_Full;
+        }
+        if (st.stopped && !CupUI.enabled)
+        {
+            CupUI.enabled = true;
+        }
+        if(!st.stopped && CupUI.enabled)
+        {
+            CupUI.enabled = false;
         }
     }
 

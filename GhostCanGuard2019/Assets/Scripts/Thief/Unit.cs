@@ -146,16 +146,21 @@ public class Unit : MonoBehaviour
             if (pathFindIndex < escapePoints.Count)
             {
                 Debug.Log("index " + pathFindIndex);
+                //全てのEscapePointを検査して、もし逃げる場所がない場合、鬼のBlockを解除する
                 if (pathFindIndex == escapePoints.Count)
                 {
                     if (thief.ghostCollider != null) thief.ghostCollider.SetActive(false);
                     //thief.playerCollider.SetActive(false);
-                    currTarget = ghost;
+                    
+                    //今の目標を鬼に設置する
+                    //currTarget = ghost;
                     Debug.Log("!");
                     pathFindIndex = 0;
                 }
                 else currTarget = escapePoints[pathFindIndex];
                 PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
+
+                //
                 pathFindIndex++;
                 Debug.Log("index after plus " + pathFindIndex + escapePoints.Count);
             }
