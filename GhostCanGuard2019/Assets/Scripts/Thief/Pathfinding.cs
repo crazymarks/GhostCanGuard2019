@@ -94,11 +94,11 @@ public class Pathfinding : MonoBehaviour
                 }
             }
         }
-        else if(!startNode.walkable || !targetNode.walkable)
-        {
-            //UnityEngine.Debug.Log("not walkable");
+        //else if(!startNode.walkable || !targetNode.walkable)
+        //{
+        //    UnityEngine.Debug.Log("not walkable");
 
-        }
+        //}
         yield return null;
         if (pathSuccess)
         {

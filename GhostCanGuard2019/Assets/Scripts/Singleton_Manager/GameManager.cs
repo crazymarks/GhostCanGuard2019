@@ -295,6 +295,15 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         //float distance = Mathf.Sqrt((a.transform.position.x - b.transform.position.x) * (a.transform.position.x - b.transform.position.x) + (a.transform.position.z - b.transform.position.z) * (a.transform.position.z - b.transform.position.z));
         //return distance;
     }
+    public float getXZDistance(Transform a, Transform b)
+    {
+        Vector2 ay0 = new Vector2(a.position.x, a.position.z);
+        Vector2 by0 = new Vector2(b.position.x, b.position.z);
+        float d0 = Vector2.Distance(ay0, by0);
+        return d0;
+        //float distance = Mathf.Sqrt((a.transform.position.x - b.transform.position.x) * (a.transform.position.x - b.transform.position.x) + (a.transform.position.z - b.transform.position.z) * (a.transform.position.z - b.transform.position.z));
+        //return distance;
+    }
     public IEnumerator showTextWithSeconds(string msg,float seconds)
     {
         Time.timeScale = 0;
@@ -307,7 +316,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     void gameOver()
     {
-        tf.gameObject.SetActive(false);
+        //tf.gameObject.SetActive(false);
         //pc.speed = 0;
         //ght.Gs = Ghost_targeting.GhostState.Stop;
         //tf.thiefState = Thief.ThiefState.STOP;
