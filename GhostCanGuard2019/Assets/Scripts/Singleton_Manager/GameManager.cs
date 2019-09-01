@@ -307,7 +307,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     void gameOver()
     {
-        tf.gameObject.SetActive(false);
+        //tf.gameObject.SetActive(false);
         //pc.speed = 0;
         //ght.Gs = Ghost_targeting.GhostState.Stop;
         //tf.thiefState = Thief.ThiefState.STOP;

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ public class Unit : MonoBehaviour
 {
     //** Values should be changed in the inspector**
 
-    public Transform treasure, exit, ghost;// positions of treasure and exit
+    public Transform treasure, exit;// positions of treasure and exit
     public float initialSpeed = 20;// initial speed for thief
     public float increasedSpeed = 30, increasedSpeedDur = 3.0f;//increased speed and duration
     public float stunnedTime = 1.5f;// stunned gimick effect duration
@@ -16,16 +17,16 @@ public class Unit : MonoBehaviour
     float currSpeed;// current speed
 
     public List<Transform> escapePoints = new List<Transform>();
-    public List<Transform> prirityPoints = new List<Transform>();
+    //public List<Transform> prirityPoints = new List<Transform>();
 
-    Transform currTarget;// current target to head to
+    public Transform currTarget;// current target to head to
 
     Thief thief;
 
     private float nextActionTime = 0.0f;
     public float period = 0.1f;
 
-    public bool mIsAllowFollow = false;
+    //public bool mIsAllowFollow = false;
     bool mIsHeadable = false;
 
     int pathFindIndex = 0;
@@ -39,9 +40,8 @@ public class Unit : MonoBehaviour
         currSpeed = initialSpeed;
         //InvokeRepeating("RefindPath", 0f, 0.5f);
         thief = GetComponent<Thief>();
-        mIsAllowFollow = true;
+        //mIsAllowFollow = true;
         PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
-
     }
 
     void Update()
@@ -52,7 +52,7 @@ public class Unit : MonoBehaviour
         //{
         //    PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
         //}
-        if (Input.GetKeyDown(KeyCode.Q)) GotStunned();//stunned gimmick, 
+        //if (Input.GetKeyDown(KeyCode.Q)) GotStunned();//stunned gimmick, 
         //PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
 
         if (Time.time > nextActionTime && thief.thiefState != Thief.ThiefState.STOP)
@@ -65,10 +65,10 @@ public class Unit : MonoBehaviour
 
     }
 
-    public void FollowPriority()
-    {
-        StartCoroutine(FindAndFollow());
-    }
+    //public void FollowPriority()
+    //{
+    //    StartCoroutine(FindAndFollow());
+    //}
 
     public void tempIncreaseSpeed()
     {
@@ -80,11 +80,31 @@ public class Unit : MonoBehaviour
         StartCoroutine(Stunned(stunnedTime));
     }
 
-    public void GetNewTarget()
+    public void HeadToEscapePoint()
     {
         //int rand = Random.Range(0, escapePoints.Capacity);
-        currTarget = escapePoints[0];
+        currTarget = GetClosestEscapePoint();
         PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
+    }
+    /// <summary>
+    /// 一番近いのpointをgetする
+    /// </summary>
+    /// <returns></returns>
+    private Transform GetClosestEscapePoint()
+    {
+        float closestdistance = 99999f;
+        int closestCount = 0;
+        for (int i = 0; i < escapePoints.Count; i++)
+        {
+            float distance = GameManager.Instance.getXZDistance(this.gameObject, escapePoints[i].gameObject);
+            if (distance<=closestdistance)
+            {
+                closestdistance = distance;
+                closestCount = i;
+            }
+        }
+
+        return escapePoints[closestCount];
     }
 
     public void HeadToTreasure()
@@ -93,7 +113,7 @@ public class Unit : MonoBehaviour
         PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
     }
 
-    public void HeadExit()
+    public void HeadToExit()
     {
         currTarget = exit;
         PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
@@ -103,15 +123,16 @@ public class Unit : MonoBehaviour
     {
         if (pathSuccessful)
         {
-            mIsAllowFollow = true;
+            //mIsAllowFollow = true;
             path = newPath;
-            targetIndex = 0;
+            //targetIndex = 0;
             //StopCoroutine("FollowPath");
             //StartCoroutine("FollowPath");
             StopCoroutine(FollowPathCorotine);
             FollowPathCorotine = null;
             FollowPathCorotine = FollowPath();
             StartCoroutine(FollowPathCorotine);
+            
         }
         else
         {
@@ -128,10 +149,10 @@ public class Unit : MonoBehaviour
         if (pathSuccessful)
         {
             //Debug.Log("pathSuccess");
-            if(thief.ghostCollider!=null)thief.ghostCollider.SetActive(true);
+            //if(thief.ghostCollider!=null)thief.ghostCollider.SetActive(true);
             path = newPath;
             targetIndex = 0;
-
+            thief.setGhostCollider();
             //StopCoroutine("FollowPath");
             //StartCoroutine("FollowPath");
             StopCoroutine(FollowPathCorotine);
@@ -143,27 +164,47 @@ public class Unit : MonoBehaviour
         else
         {
             Debug.Log("inside else0");
-            if (pathFindIndex < escapePoints.Count)
+            //全てのEscapePointを検査して、もし逃げる場所がない場合、鬼のBlockを解除する
+            
+            if (pathFindIndex < escapePoints.Count-1)
             {
-                Debug.Log("index " + pathFindIndex);
-                //全てのEscapePointを検査して、もし逃げる場所がない場合、鬼のBlockを解除する
-                if (pathFindIndex == escapePoints.Count)
-                {
-                    if (thief.ghostCollider != null) thief.ghostCollider.SetActive(false);
-                    //thief.playerCollider.SetActive(false);
-                    
-                    //今の目標を鬼に設置する
-                    //currTarget = ghost;
-                    Debug.Log("!");
-                    pathFindIndex = 0;
-                }
-                else currTarget = escapePoints[pathFindIndex];
-                PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
 
-                //
+                
+                Debug.Log("index " + pathFindIndex);
+                currTarget = escapePoints[pathFindIndex];
+                PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
                 pathFindIndex++;
-                Debug.Log("index after plus " + pathFindIndex + escapePoints.Count);
+                //
+                Debug.Log("index after plus " + pathFindIndex +" "+"total escapePoints: " + escapePoints.Count);
             }
+            else if (pathFindIndex >= escapePoints.Count-1)
+            {
+
+                if (thief.ghostCollider != null) thief.ghostCollider.radius = 1f; //鬼のBlockを解除する
+                //thief.playerCollider.SetActive(false);
+
+                //今の目標を鬼に設置する
+                //currTarget = ghost;
+
+                //今の目標を出口或いは宝に設置する
+                if (thief.mIsTakenTreasure)
+                {
+                    currTarget = exit;
+                }
+                else
+                {
+                    currTarget = treasure;
+                }
+                pathFindIndex = 0;
+                PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
+                Debug.Log("!");
+                //if (transform.position.x == currTarget.position.x && transform.position.z == currTarget.position.z)
+                //{
+                //    PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
+                //}
+
+            }
+           
             //else if (pathFindIndex == escapePoints.Count)
             //{
             //    Debug.Log("hi");
@@ -211,38 +252,38 @@ public class Unit : MonoBehaviour
 
     }
 
-    IEnumerator FindAndFollow()
-    {
-        //float temp = 0;
-        int currIndex = 0;
-        while (currIndex < prirityPoints.Count)
-        {
-            Debug.Log("called");
-            PathRequestManager.RequestPath(transform.position, prirityPoints[currIndex].position, OnPathFound2);
-            Debug.Log(mIsHeadable);
-            //currSpeed = temp;
-            //currSpeed = 0;
-            //yield return new WaitForSeconds(0.2f);
-            //currSpeed = temp;
-            if (mIsHeadable)
-            {
-                Debug.Log("wee");
-                PathRequestManager.RequestPath(transform.position, prirityPoints[currIndex].position, OnPathFound);
-                yield break;
-            }
-            currIndex++;
-        }
+    //IEnumerator FindAndFollow()
+    //{
+    //    //float temp = 0;
+    //    int currIndex = 0;
+    //    while (currIndex < prirityPoints.Count)
+    //    {
+    //        Debug.Log("called");
+    //        PathRequestManager.RequestPath(transform.position, prirityPoints[currIndex].position, OnPathFound2);
+    //        Debug.Log(mIsHeadable);
+    //        //currSpeed = temp;
+    //        //currSpeed = 0;
+    //        //yield return new WaitForSeconds(0.2f);
+    //        //currSpeed = temp;
+    //        if (mIsHeadable)
+    //        {
+    //            Debug.Log("wee");
+    //            PathRequestManager.RequestPath(transform.position, prirityPoints[currIndex].position, OnPathFound);
+    //            yield break;
+    //        }
+    //        currIndex++;
+    //    }
 
-        if (!mIsHeadable)//All prioity targets not headable
-        {
-            //Do someting;
-        }
-    }
+    //    if (!mIsHeadable)//All prioity targets not headable
+    //    {
+    //        //Do someting;
+    //    }
+    //}
 
     IEnumerator FollowPath()
     {
         Vector3 currentWayPoint;
-        if (path != null)
+        if (path.Length != 0)
         {
             currentWayPoint = path[0];
             //Debug.Log(path[0]);
@@ -257,6 +298,7 @@ public class Unit : MonoBehaviour
                 targetIndex++;
                 if (targetIndex >= path.Length)
                 {
+                    thief.reachEscapePoint();                    //終点チェック
                     yield break;
                 }
                 currentWayPoint = path[targetIndex];
