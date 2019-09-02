@@ -125,7 +125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   treasure: {fileID: 0}
   exit: {fileID: 0}
-  ghost: {fileID: 0}
   initialSpeed: 7
   increasedSpeed: 30
   increasedSpeedDur: 2
@@ -134,9 +133,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  prirityPoints: []
+  currTarget: {fileID: 0}
   period: 0.1
-  mIsAllowFollow: 0
 --- !u!114 &5639844316279069712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,10 +149,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thiefState: 0
   headTreasureTimer: 0.1
-  idleTimer: 0.1
+  idleTime: 1
   playerCollider: {fileID: 0}
   ghostCollider: {fileID: 0}
   isAlarmActivated: 0
+  TimeToTakeTreasure: 1
   anim: {fileID: 8382288735331181043}
 --- !u!135 &5639844316279069713
 SphereCollider:

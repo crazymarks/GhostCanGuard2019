@@ -49,12 +49,17 @@ public class Horse : GimmickBase
     Vector3 LeftOrient = Vector3.zero;
     Vector3 _moveorient = Vector3.zero;
     public Vector3 MoveOrient { get { return _moveorient; } set { _moveorient = value; } }
-
+    
     /// <summary>
     /// ParticalSystem
     /// </summary>
     public GameObject Cloud;
     public GameObject Fly;
+
+    /// <summary>
+    /// FadeOut
+    /// </summary>
+    GetHorseMaterial horseMat;
 
 
     protected override void Start()
@@ -80,8 +85,9 @@ public class Horse : GimmickBase
         {
             Debug.Log("プレイヤー未発見" + name);
         }
-        
-        
+
+        horseMat = GetComponentInChildren<GetHorseMaterial>();
+
         if (Saddle == null)
         {
             Saddle = transform.Find("Saddle").gameObject;
@@ -207,7 +213,8 @@ public class Horse : GimmickBase
     private void Back()
     {
         Stime += Time.fixedDeltaTime;
-       
+        horseMat.alpha = 1 - Stime*2 / HorseBackTime;
+        horseMat.UpdateAlpha();
         if (Stime> HorseBackTime)
         {
             resetHorse();
@@ -226,6 +233,8 @@ public class Horse : GimmickBase
         Debug.Log("Ready to Reuse");
         Cloud.SetActive(false);
         Fly.SetActive(false);
+        horseMat.alpha = 1;
+        horseMat.UpdateAlpha();
     }
  
     private void GetOnHorse(GameObject player)
