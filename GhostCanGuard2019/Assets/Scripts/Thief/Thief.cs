@@ -30,15 +30,15 @@ public class Thief : MonoBehaviour
     Unit unit;// unit scrpt
 
     float escapeTimer = 0.0f;// timer in escape state
-    float escapeTimer2 = 0.0f;
+    //float escapeTimer2 = 0.0f;
     float stayTimer = 0.0f; // timer in the radius of player, changes target after certain time
     float treasureTimer = 0.0f; // time taken to take treasure
     public float TimeToTakeTreasure = 1f;
     float idleTimer = 0.0f;
     bool mIsPlayerExitedState = false;
     public bool mIsTakenTreasure { get; private set; }// exited from radius 
-    bool mIsPaused = false;
-    bool mIsTouched = false;
+    //bool mIsPaused = false;
+    //bool mIsTouched = false;
     bool mIsAllowFind = true;
     /// <summary>
     /// animation
@@ -265,7 +265,7 @@ public class Thief : MonoBehaviour
         {
             Debug.Log("Restart Find Treasure or Exit");
             mIsPlayerExitedState = true;
-            mIsTouched = false;
+            //mIsTouched = false;
         }
 
     }

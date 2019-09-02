@@ -28,7 +28,7 @@ public class Unit : MonoBehaviour
     public float period = 0.1f;
 
     //public bool mIsAllowFollow = false;
-    bool mIsHeadable = false;
+    //bool mIsHeadable = false;
 
     int pathFindIndex = 0;
     IEnumerator FollowPathCorotine;

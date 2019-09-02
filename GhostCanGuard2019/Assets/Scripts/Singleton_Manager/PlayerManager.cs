@@ -34,6 +34,18 @@ public class PlayerManager: SingletonMonoBehavior<PlayerManager>
 
     private void Start()
     {
+        if (playerControl == null)
+        {
+            try
+            {
+                playerControl = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControl>();
+            }
+            catch (System.NullReferenceException)
+            {
+                Debug.Log("プレイヤー未発見" + name);
+            }
+
+        }
         // playerの初期のspeedを取得する
         //playerSpeed = playerMove.PlayerSpeed;
         playerSpeed = playerControl.speed;

@@ -5,29 +5,33 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 
 
-public class LoadScene : MonoBehaviour
+public static class LoadScene
 {
-    int CurrentScenenNumber;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void loadScene(string SceneName)
+    
+    public static void loadScene(string SceneName)
     {
         
         SceneManager.LoadSceneAsync(SceneName);
     }
-    public void loadScene(int SceneNumber)
+    public static void loadScene(int SceneNumber)
     {
 
         SceneManager.LoadSceneAsync(SceneNumber);
+    }
+    public static void reloadCurrent()
+    {
+        loadScene(SceneManager.GetActiveScene().name);
+    }
+    public static void loadNext()
+    {
+        if (SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings - 2)
+        {
+            loadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+        else
+        {
+
+            Debug.Log("Has Been Last Available Scene, Cant Load");
+        }
     }
 }

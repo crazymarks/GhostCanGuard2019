@@ -20,8 +20,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     [SerializeField]
     private Ghost_targeting ght;  //殺人鬼を取得
 
-    [SerializeField]
-    private LoadScene ldc = null;  //Scene管理コンポーネント
+    
 
     public bool gameover { get; private set; } = false;   //ゲーム状態flag
     [SerializeField]
