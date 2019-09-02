@@ -93,22 +93,22 @@ public class Unit : MonoBehaviour
     /// 一番近いのpointをgetする
     /// </summary>
     /// <returns></returns>
-    private Transform GetClosestEscapePoint()
-    {
-        float closestdistance = 99999f;
-        int closestCount = 0;
-        for (int i = 0; i < escapePoints.Count; i++)
-        {
-            float distance = GameManager.Instance.getXZDistance(this.transform, escapePoints[i]);
-            if (distance <= closestdistance)
-            {
-                closestdistance = distance;
-                closestCount = i;
-            }
-        }
+    //private Transform GetClosestEscapePoint()
+    //{
+    //    float closestdistance = 99999f;
+    //    int closestCount = 0;
+    //    for (int i = 0; i < escapePoints.Count; i++)
+    //    {
+    //        float distance = GameManager.Instance.getXZDistance(this.transform, escapePoints[i]);
+    //        if (distance <= closestdistance)
+    //        {
+    //            closestdistance = distance;
+    //            closestCount = i;
+    //        }
+    //    }
 
-        return escapePoints[closestCount];
-    }
+    //    return escapePoints[closestCount];
+    //}
     IOrderedEnumerable<Transform> escapePointsByDistance;
     void SortEscapePoints()
     {

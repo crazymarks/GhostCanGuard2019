@@ -32,14 +32,14 @@ public class Thief : MonoBehaviour
     float escapeTimer = 0.0f;// timer in escape state
     float escapeTimer2 = 0.0f;
     float stayTimer = 0.0f; // timer in the radius of player, changes target after certain time
-    public float treasureTimer = 0.0f; // time taken to take treasure
+    float treasureTimer = 0.0f; // time taken to take treasure
+    public float TimeToTakeTreasure = 1f;
     float idleTimer = 0.0f;
     bool mIsPlayerExitedState = false;
     public bool mIsTakenTreasure { get; private set; }// exited from radius 
     bool mIsPaused = false;
     bool mIsTouched = false;
     bool mIsAllowFind = true;
-    public bool takentreasure;
     /// <summary>
     /// animation
     /// </summary>
@@ -56,7 +56,7 @@ public class Thief : MonoBehaviour
 
     void Update()
     {
-        takentreasure = mIsTakenTreasure;
+        
         switch (thiefState)
         {
             case ThiefState.HEAD_TREASURE:
@@ -76,6 +76,7 @@ public class Thief : MonoBehaviour
                 PauseUpdate();
                 break;
             case ThiefState.STOP:
+                StopUpdate();
                 break;
             case ThiefState.EXITED:
                 break;
@@ -117,10 +118,15 @@ public class Thief : MonoBehaviour
 
     }
 
+    void StopUpdate()
+    {
+        unit.enabled = false;
+    }
+
     void InTreasureUpdate()
     {
         treasureTimer += Time.deltaTime;
-        if (treasureTimer > 3.0f)//time needed to collect treasure ** hardcode
+        if (treasureTimer > TimeToTakeTreasure)//time needed to collect treasure ** hardcode
         {
             mIsTakenTreasure = true;
             unit.HeadToExit();
@@ -246,50 +252,21 @@ public class Thief : MonoBehaviour
                 stayTimer = 0f;
             }
         }
-        //else if (other.tag == "Treasure")
-        //{
-        //    //if (!mIsTakenTreasure)
-        //    //{
-        //    //    thiefState = ThiefState.IN_TREASURE;
-        //    //    anim.setWaitAnimation();
-        //    //}
-        //    if (thiefState != ThiefState.IN_TREASURE)
-        //    {
-        //        treasureTimer += Time.deltaTime;
-        //        if (treasureTimer > 1.0f)//time needed to collect treasure ** hardcode
-        //        {
-        //            mIsTakenTreasure = true;
-        //            unit.HeadToExit();
-        //            thiefState = ThiefState.HEAD_EXIT;
-        //            anim.setRunAnimation();
-        //        }
-        //    }
-            
-        //}
+        
         else if (other.tag == "Alarm" && isAlarmActivated)// soon to be changed
         {
             unit.tempIncreaseSpeed();//increase thief speed during inside Alarm radius
         }
-        //else if (other.tag == "Exit" && thiefState == ThiefState.HEAD_EXIT)
-        //{
-        //    Debug.Log("exit_success");
-        //    thiefState = ThiefState.END;
-        //    anim.setWaitAnimation();
-        //}
+        
     }
     void OnTriggerExit(Collider other)
     {
         if (other.tag == "PlayerCollider" || other.tag == "Ghost")
         {
-            Debug.Log("exitedtrigger");
+            Debug.Log("Restart Find Treasure or Exit");
             mIsPlayerExitedState = true;
             mIsTouched = false;
         }
-        //else if (other.tag == "Treasure" && !mIsTakenTreasure)
-        //{
-        //    Debug.Log("Taking Treasure interrupted");
-        //    TakingTreasureInterrupted();
-        //}
 
     }
 
