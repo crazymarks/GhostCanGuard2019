@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class testStatue : GimmickBase
+public class Statue : GimmickBase
 {
     //public float thrust;
     public GameObject SmokeAura = null; //彫像のエフェクト
@@ -11,7 +11,7 @@ public class testStatue : GimmickBase
     [SerializeField]
     GameObject AirWall = null;
     [SerializeField]
-    GameObject Kinght;
+    GameObject KinghtModel;
 
     public float smooth = 3f;
     float tiltAngle = 0f;
@@ -41,14 +41,14 @@ public class testStatue : GimmickBase
         Quaternion target = Quaternion.Euler(tiltAroundX, transform.rotation.eulerAngles.y, tiltAroundZ);
 
         //transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * smooth);
-        if (Mathf.Abs(Kinght.transform.rotation.eulerAngles.x) < tiltAngle)
+        if (Mathf.Abs(KinghtModel.transform.rotation.eulerAngles.x) < tiltAngle)
         {
-            Kinght.transform.RotateAround(tiltpoint.transform.position, transform.right, smooth);
+            KinghtModel.transform.RotateAround(tiltpoint.transform.position, transform.right, smooth);
         }
         
         if (isFallen)
         {
-            Kinght.transform.position = new Vector3(transform.localPosition.x, 0.5f, transform.localPosition.z);
+            KinghtModel.transform.position = new Vector3(transform.localPosition.x, 0.5f, transform.localPosition.z);
         }
         
     }

@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 721267517247951369}
-  - component: {fileID: 721267517247951374}
-  - component: {fileID: 721267517247951375}
   - component: {fileID: 6136537123830657570}
   - component: {fileID: 6136537122827836056}
   - component: {fileID: 6310736649284805305}
@@ -41,51 +39,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!33 &721267517247951374
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721267517247951373}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &721267517247951375
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721267517247951373}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: d42ca6feedad55d409c40e7bcafcd0c2, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!114 &6136537123830657570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,7 +55,7 @@ MonoBehaviour:
   gimmickButtons: 
   SmokeAura: {fileID: 1848808437214676750}
   AirWall: {fileID: 8677045379700007014}
-  Kinght: {fileID: 120233364507813682}
+  KinghtModel: {fileID: 120233364507813682}
   smooth: 3
   tiltpoint: {fileID: 7910653433627978977}
 --- !u!114 &6136537122827836056
@@ -597,6 +550,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 721267517247951369}
     m_Modifications:
+    - target: {fileID: 462991974789556335, guid: 6d5894c61bf5e48489c380c30cc56449,
+        type: 3}
+      propertyPath: m_Name
+      value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 462991974789556335, guid: 6d5894c61bf5e48489c380c30cc56449,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 462991974789556323, guid: 6d5894c61bf5e48489c380c30cc56449,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -700,16 +663,6 @@ PrefabInstance:
     - target: {fileID: 462991974789556323, guid: 6d5894c61bf5e48489c380c30cc56449,
         type: 3}
       propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 462991974789556335, guid: 6d5894c61bf5e48489c380c30cc56449,
-        type: 3}
-      propertyPath: m_Name
-      value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 462991974789556335, guid: 6d5894c61bf5e48489c380c30cc56449,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 462991973539802645, guid: 6d5894c61bf5e48489c380c30cc56449,
@@ -897,17 +850,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 3866976911128156097, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
-        type: 3}
-      propertyPath: m_FontData.m_Font
-      value: 
-      objectReference: {fileID: 12800000, guid: 4587ab20600c21e429de302c933afeab,
-        type: 3}
-    - target: {fileID: 3866976911128156097, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
-        type: 3}
-      propertyPath: m_Text
-      value: "\u3000\u767A\u52D5\uFF01"
-      objectReference: {fileID: 0}
     - target: {fileID: 2920191666494938885, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
         type: 3}
       propertyPath: m_FontData.m_Font
@@ -918,6 +860,17 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: "\u8A73\u7D30"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866976911128156097, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4587ab20600c21e429de302c933afeab,
+        type: 3}
+    - target: {fileID: 3866976911128156097, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
+        type: 3}
+      propertyPath: m_Text
+      value: "\u3000\u767A\u52D5\uFF01"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a88a14eaeb2a944f86f39a1f054ab75, type: 3}
