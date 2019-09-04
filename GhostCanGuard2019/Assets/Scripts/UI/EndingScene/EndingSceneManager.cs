@@ -32,12 +32,12 @@ public class EndingSceneManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Up"))
         {
-            selectNextButton();
+            selectLastButton();
             changed = true;
         }
         if (Input.GetButtonDown("Down"))
         {
-            selectLastButton();
+            selectNextButton();
             changed = true;
         }
         if (Input.GetAxisRaw("Down") != 0)

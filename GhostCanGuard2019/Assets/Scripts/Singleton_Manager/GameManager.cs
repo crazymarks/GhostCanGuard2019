@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class GameManager : SingletonMonoBehavior<GameManager>
 {
@@ -262,8 +261,6 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         yield return new WaitForSecondsRealtime(2f);
         
         
-        
-        //ldc.loadScene("TitleScene");
     }
     //IEnumerator startCount(float startTime)
     //{
@@ -331,10 +328,11 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     void gameOver()
     {
+        pc.CanPlayerMove = false;
         tf.thiefState = Thief.ThiefState.STOP;
         if(ghostEnable)
             ght.Gs = Ghost_targeting.GhostState.GameOver;
-        //pc.speed = 0;
+        
         switch (OverState)
         {
             case GameOverState.arrest:

@@ -24,7 +24,6 @@ public class StartMenu : MonoBehaviour
     int selectstageIndex;
     public Image StartMenuSelectArray;
     public Image StageSelectArray;
-
     
 
     // Start is called before the first frame update
@@ -80,12 +79,14 @@ public class StartMenu : MonoBehaviour
                 startmenuIndex = (startmenuIndex + 1) % startMenuButtons.Count;
                 selectStartmenu = startMenuButtons[startmenuIndex];
                 StartMenuSelectArray.rectTransform.position = selectStartmenu.GetComponent<RectTransform>().position - new Vector3(300, 0);
+                changed = true;
             }
             if (Input.GetButtonDown("Left"))
             {
                 startmenuIndex = (startmenuIndex + startMenuButtons.Count - 1) % startMenuButtons.Count;
                 selectStartmenu = startMenuButtons[startmenuIndex];
                 StartMenuSelectArray.rectTransform.position = selectStartmenu.GetComponent<RectTransform>().position - new Vector3(300, 0);
+                changed = true;
             }
             if (Input.GetAxisRaw("Right") != 0)
             {
@@ -126,13 +127,30 @@ public class StartMenu : MonoBehaviour
                 selectstageIndex = (selectstageIndex + 1) % stageButtons.Count;
                 selectStage = stageButtons[selectstageIndex];
                 StageSelectArray.rectTransform.position = selectStage.GetComponent<RectTransform>().position - new Vector3(200, 0);
+                changed = true;
             }
             if (Input.GetButtonDown("Up"))
             {
                 selectstageIndex = (selectstageIndex + stageButtons.Count - 1) % stageButtons.Count;
                 selectStage = stageButtons[selectstageIndex];
                 StageSelectArray.rectTransform.position = selectStage.GetComponent<RectTransform>().position - new Vector3(200, 0);
+                changed = true;
             }
+            if (Input.GetButtonDown("Right"))
+            {
+                selectstageIndex = (selectstageIndex + 4) % stageButtons.Count;
+                selectStage = stageButtons[selectstageIndex];
+                StageSelectArray.rectTransform.position = selectStage.GetComponent<RectTransform>().position - new Vector3(200, 0);
+                changed = true;
+            }
+            if (Input.GetButtonDown("Left"))
+            {
+                selectstageIndex = (selectstageIndex + stageButtons.Count - 4) % stageButtons.Count;
+                selectStage = stageButtons[selectstageIndex];
+                StageSelectArray.rectTransform.position = selectStage.GetComponent<RectTransform>().position - new Vector3(200, 0);
+                changed = true;
+            }
+
 
             if (Input.GetAxisRaw("Down") != 0)
             {
@@ -152,7 +170,26 @@ public class StartMenu : MonoBehaviour
                     changed = true;
                 }
             }
-            if (changed && Input.GetAxisRaw("Down") == 0)
+            if (Input.GetAxisRaw("Right") != 0)
+            {
+                if (changed) return;
+                if (Input.GetAxisRaw("Right") >= 0)
+                {
+                    selectstageIndex = (selectstageIndex + 4) % stageButtons.Count;
+                    selectStage = stageButtons[selectstageIndex];
+                    StageSelectArray.rectTransform.position = selectStage.GetComponent<RectTransform>().position - new Vector3(200, 0);
+                    changed = true;
+                }
+                else
+                {
+                    selectstageIndex = (selectstageIndex + stageButtons.Count - 4) % stageButtons.Count;
+                    selectStage = stageButtons[selectstageIndex];
+                    StageSelectArray.rectTransform.position = selectStage.GetComponent<RectTransform>().position - new Vector3(200, 0);
+                    changed = true;
+                }
+            }
+
+            if (changed && Input.GetAxisRaw("Down") ==0 && Input.GetAxisRaw("Right") == 0)
             {
                 changed = false;
             }
