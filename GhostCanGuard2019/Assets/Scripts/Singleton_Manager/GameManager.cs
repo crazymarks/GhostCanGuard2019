@@ -67,7 +67,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     //private ParticleSystem swordlight;
     //GameObject sword;
 
-    stop st;
+    StopSystem st;
 
     bool iestart = false;  /////後で消す必要
 
@@ -146,7 +146,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         {
             ghostEnable = ght.gameObject.activeSelf;
         }
-        st = GetComponent<stop>();
+        st = GetComponent<StopSystem>();
         IfGameStart = false;
         text.text = "";
         GimmickManager.Instance.GimmickFrag = false;
@@ -157,6 +157,21 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("SystemPause"))
+        {
+            if (!st.IfSystemPause)
+            {
+                Debug.Log("Pause");
+                UIManager.Instance.ShowDesPanel("停止中");
+                st.gamestop(StopSystem.PauseState.SystemPause);
+            }
+            else
+            {
+                UIManager.Instance.menuPanel.SetActive(false);
+                st.gamestop(StopSystem.PauseState.Resume);
+            }
+                
+        }
 
         if (ghostEnable)
         {
@@ -170,7 +185,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             //Debug.Log(distance_player_to_thief);
             if (tf.thiefState == Thief.ThiefState.END)
             {
-                UIManager.Instance.ShowDesPanel("泥棒が逃げました！");
+                //UIManager.Instance.ShowDesPanel("泥棒が逃げました！");
                 //text.text = "泥棒が逃げました！";
                 //text.enabled = true;
                 Debug.Log("泥棒が逃げました！");
@@ -180,7 +195,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             }
             if (tf.thiefState == Thief.ThiefState.EXITED)
             {
-                UIManager.Instance.ShowDesPanel("平和な夜ですね．．．");
+                //UIManager.Instance.ShowDesPanel("平和な夜ですね．．．");
                 //text.text = "平和な夜ですね．．．";
                 //text.enabled = true;
                 Debug.Log("You Win!");
@@ -189,7 +204,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             }
             if (distance_player_to_thief <= checkdistance)
             {
-                UIManager.Instance.ShowDesPanel("逮捕成功!");
+                //UIManager.Instance.ShowDesPanel("逮捕成功!");
                 //text.text = "逮捕成功!";
                 //text.enabled = true;
                 Debug.Log("You Win!");
@@ -201,7 +216,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             {
                 if (distance_ghost_to_thief <= checkdistance)
                 {
-                    UIManager.Instance.ShowDesPanel("迷えば、敗れる");
+                    //UIManager.Instance.ShowDesPanel("迷えば、敗れる");
                     //text.text = "迷えば、敗れる";
                     //text.enabled = true;
                     Debug.Log("泥棒が殺人鬼に殺された！！");
@@ -211,7 +226,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                 }
                 if (distance_player_to_ghost <= checkdistance)
                 {
-                    UIManager.Instance.ShowDesPanel("死");
+                    //UIManager.Instance.ShowDesPanel("死");
                     //text.text = "死";
                     //text.enabled = true;
                     Debug.Log("死");
@@ -317,7 +332,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     void gameOver()
     {
         tf.thiefState = Thief.ThiefState.STOP;
-        ght.Gs = Ghost_targeting.GhostState.GameOver;
+        if(ghostEnable)
+            ght.Gs = Ghost_targeting.GhostState.GameOver;
         //pc.speed = 0;
         switch (OverState)
         {

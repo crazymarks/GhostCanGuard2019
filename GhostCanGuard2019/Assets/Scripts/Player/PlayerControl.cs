@@ -59,11 +59,11 @@ public class PlayerControl : MonoBehaviour
     /// </summary>
     void FXcheck()
     {
-        if (stop.Instance.stopped && !StopFX.activeSelf)
+        if (StopSystem.Instance.stopped && !StopFX.activeSelf)
         {
             StopFX.SetActive(true);
         }
-        if (!stop.Instance.stopped && StopFX.activeSelf)
+        if (!StopSystem.Instance.stopped && StopFX.activeSelf)
         {
             StopFX.SetActive(false);
         }

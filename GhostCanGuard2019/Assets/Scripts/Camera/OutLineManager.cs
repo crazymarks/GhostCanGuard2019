@@ -6,13 +6,13 @@ using UnityEngine;
 /// </summary>
 public class OutLineManager : MonoBehaviour
 {
-    public stop st;
+    public StopSystem st;
     public static OutLineManager instanceoutLineManager;
     private GameObject outlineObject = null;
     // Start is called before the first frame update
     void Start()
     {
-        st = GameManager.Instance.GetComponent<stop>();
+        st = GameManager.Instance.GetComponent<StopSystem>();
     }
 
     // Update is called once per frame

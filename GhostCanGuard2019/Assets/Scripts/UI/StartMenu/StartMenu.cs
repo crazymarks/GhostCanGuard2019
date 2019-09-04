@@ -170,10 +170,13 @@ public class StartMenu : MonoBehaviour
         startMenu.enabled = true;
         startMenu.GetComponent<CanvasGroup>().alpha = 1;
         selectstageOpen = false;
+        selectstageIndex = 0;
     }
    
     IEnumerator SelectstageClick()
     {
+        selectStage = stageButtons[selectstageIndex];
+        StageSelectArray.rectTransform.position = selectStage.GetComponent<RectTransform>().position - new Vector3(200, 0);
         IEnumerator startfadeout = fadeout(startMenu.GetComponent<CanvasGroup>(), 0.2f);
         yield return StartCoroutine(startfadeout);
         selectstageOpen = true;

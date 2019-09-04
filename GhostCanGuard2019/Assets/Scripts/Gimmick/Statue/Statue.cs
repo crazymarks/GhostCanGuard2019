@@ -94,7 +94,7 @@ public class Statue : GimmickBase
             tiltAngle = 90f;
             isFallen = true;
             gimmickUIParent.SetActive(false);
-            st.gamestop(stop.PauseState.Normal);
+            st.gamestop(StopSystem.PauseState.Normal);
         }
         AirWall.SetActive(true);
         SmokeAura.SetActive(true);  　　　　　　　　　　　　　　　　//エフェクト起動

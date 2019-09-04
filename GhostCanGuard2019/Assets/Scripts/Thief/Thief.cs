@@ -52,7 +52,8 @@ public class Thief : MonoBehaviour
         unit = GetComponent<Unit>();
         anim.setRunAnimation();
         mIsTakenTreasure = false;
-        colliderradius = ghostCollider.radius;
+        if (ghostCollider != null)
+            colliderradius = ghostCollider.radius;
     }
 
     void Update()

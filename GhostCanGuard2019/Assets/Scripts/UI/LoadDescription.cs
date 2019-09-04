@@ -44,12 +44,7 @@ public class LoadDescription : SingletonMonoBehavior<LoadDescription>
         //}
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    
     void setDescription(string name)
     {
         DescriptionText.text = "\u3000" +gimmickDescriptions [descmap[name]].desc.Replace("|", "\n\u3000");

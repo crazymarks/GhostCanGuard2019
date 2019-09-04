@@ -16,33 +16,26 @@ public class ShowTorurialImage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (stop.Instance.stopped)
+        if (StopSystem.Instance.stopped && !HasShown)
         {
             Show();
         }
-        else Hide();
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel") && HasShown)
         {
-            stop.Instance.gamestop(stop.PauseState.ObserverMode);
             Hide();
         }
             
     }
     void Show()
     {
-        if (!HasShown)
-        {
-            stop.Instance.gamestop(stop.PauseState.DescriptionOpen);
-            image.enabled = true;
-            HasShown = true;
-        }
+        StopSystem.Instance.gamestop(StopSystem.PauseState.SystemPause);
+        StopSystem.Instance.clearselectobj();
+        image.enabled = true;
+        HasShown = true;
     }
     void Hide()
     {
-        if (HasShown)
-        {
-            image.enabled = false;
-            stop.Instance.gamestop(stop.PauseState.DescriptionClose);
-        }
+        StopSystem.Instance.gamestop(StopSystem.PauseState.Resume);
+        image.enabled = false;
     }
 }

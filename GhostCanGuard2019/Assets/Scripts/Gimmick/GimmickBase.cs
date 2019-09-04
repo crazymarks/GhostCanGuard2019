@@ -14,7 +14,7 @@ public class GimmickBase : MonoBehaviour
     [SerializeField]
     protected GameObject gimmickUIParent;
     protected EventTrigger eventTrigger;
-    protected stop st;
+    protected StopSystem st;
     // 各ギミックで必要なボタンを入れる
     [SerializeField]
     protected ControllerButton[] gimmickButtons = null;
@@ -31,7 +31,7 @@ public class GimmickBase : MonoBehaviour
     //}
     virtual protected void Start()
     {
-        st = GameManager.Instance.GetComponent<stop>();
+        st = GameManager.Instance.GetComponent<StopSystem>();
         eventTrigger = this.gameObject.GetComponent<EventTrigger>();
         
         if (gimmickUIParent == null)
@@ -111,6 +111,7 @@ public class GimmickBase : MonoBehaviour
     }
     protected void CurrentButtonIN()
     {
+        if (st.IfSystemPause) return;
         // 押したときのボタンをギミック処理に送る
         PushButtonGamePad(InputManager.Instance.CurrentControllerButton);
         InputManager.Instance.ClearCurrentButton();
@@ -132,10 +133,10 @@ public class GimmickBase : MonoBehaviour
     /// <param name="ギミックのCSVファイル中の名前"></param>
     protected void ShowDescription(string name)
     {
-        if (descriptionUIOn) return;
+        if (descriptionUIOn ||st.SecondPhase) return;
         LoadDescription.Instance.ShowDesc(name);
         descriptionUIOn = true;
-        st.gamestop(stop.PauseState.DescriptionOpen);
+        st.gamestop(StopSystem.PauseState.DescriptionOpen);
         gimmickUIParent.GetComponent<DescriptionUIChange>().DescriptionOnOff();
         
     }
@@ -145,7 +146,7 @@ public class GimmickBase : MonoBehaviour
         if (!descriptionUIOn) return;
         LoadDescription.Instance.HideDesc();
         descriptionUIOn = false;
-        st.gamestop(stop.PauseState.DescriptionClose);
+        st.gamestop(StopSystem.PauseState.DescriptionClose);
         gimmickUIParent.GetComponent<DescriptionUIChange>().DescriptionOnOff();
         GimmickManager.Instance.ClearGimmick();                 //収縮の時はギミックの登録をクリアします
     }

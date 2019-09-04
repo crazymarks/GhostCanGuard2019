@@ -76,7 +76,7 @@ public class Bible : GimmickBase
             else
                 Debug.Log("準備中です");
         }
-        st.gamestop(stop.PauseState.Normal); 
+        st.gamestop(StopSystem.PauseState.Normal); 
         GimmickUIClose();
 
     }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class stop : SingletonMonoBehavior<stop>
+public class StopSystem : SingletonMonoBehavior<StopSystem>
 {
 
     public enum PauseState
@@ -56,7 +56,7 @@ public class stop : SingletonMonoBehavior<stop>
     public bool SecondPhase { get; private set; }
     public bool DescriptionPhase { get; private set; }
     public bool IfSystemPause { get; private set; }
-    PauseState currentstate;
+    public PauseState currentstate;
     private float currentTimescale;
     public bool stopped { get; private set; } = false;
 
@@ -78,6 +78,7 @@ public class stop : SingletonMonoBehavior<stop>
     // Update is called once per frame
     void Update()
     {
+        if (IfSystemPause) return;
         if (canStop)
         {
             if (Input.GetButtonDown("Stop") && !SecondPhase)
@@ -98,8 +99,8 @@ public class stop : SingletonMonoBehavior<stop>
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
             Vector2 move = new Vector2(horizontal, vertical);
-
-            cursor.transform.Translate(move * speed);
+            if(cursor.activeSelf)
+                cursor.transform.Translate(move * speed);
             DragRangeLimit(cursor.transform);
             if (!SecondPhase && !DescriptionPhase)
             {
@@ -201,14 +202,14 @@ public class stop : SingletonMonoBehavior<stop>
         Time.timeScale = 0f;
         DescriptionPhase = true;
         cursor.SetActive(false);
-        outlineCamera.enabled = false;
+        //outlineCamera.enabled = false;
         currentstate = PauseState.DescriptionOpen;
     }
     void DescriptionClose()
     {
         canStop = true;
         cursor.SetActive(true);
-        outlineCamera.enabled = true;
+        //outlineCamera.enabled = true;
         Time.timeScale = ObserverTimeScale;
         DescriptionPhase = false;
         currentstate = PauseState.ObserverMode;
@@ -217,18 +218,26 @@ public class stop : SingletonMonoBehavior<stop>
     {
         IfSystemPause = true;
         canStop = false;
-        SecondPhase = false;
-        DescriptionPhase = false;
         cursor.SetActive(false);
         outlineCamera.enabled = false;
         Time.timeScale = 0f;
+        InputManager.Instance.ClearCurrentButton();
     }
 
     void Resume()
     {
-        canStop = true;
-        gamestop(currentstate);
         IfSystemPause = false;
+        canStop = true;
+        if(currentstate == PauseState.Normal)
+        {
+            Time.timeScale = 1f;
+        }
+        else
+        {
+            cursor.SetActive(true);
+            outlineCamera.enabled = true;
+            Time.timeScale = ObserverTimeScale;
+        }
     }
 
     void changeToSecondPhase()
@@ -344,6 +353,9 @@ public class stop : SingletonMonoBehavior<stop>
     {
         outline.OutlineWidth = 0;
     }
-    
+    public void clearselectobj()
+    {
+        selectedObject = null;
+    }
 
 }

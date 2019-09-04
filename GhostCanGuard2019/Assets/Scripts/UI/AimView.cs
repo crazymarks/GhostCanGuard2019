@@ -3,7 +3,7 @@ using UnityEngine.UI;
 public class AimView : MonoBehaviour
 {
 
-    stop st;
+    StopSystem st;
     Slider slider;
     public Transform parentObject;
     float z;
@@ -11,7 +11,7 @@ public class AimView : MonoBehaviour
     void Start()
     {
         slider = GetComponent<Slider>();
-        st = GameManager.Instance.GetComponent<stop>();
+        st = GameManager.Instance.GetComponent<StopSystem>();
     }
 
     // Update is called once per frame

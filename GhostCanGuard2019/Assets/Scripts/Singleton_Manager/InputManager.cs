@@ -18,7 +18,7 @@ public enum ControllerButton
 public class InputManager : SingletonMonoBehavior<InputManager>
 {
     
-    private stop st;
+    private StopSystem st;
     /// <summary>
     /// 現在押されているボタン
     /// </summary>
@@ -26,7 +26,7 @@ public class InputManager : SingletonMonoBehavior<InputManager>
 
     private void Start()
     {
-        st = GetComponent<stop>();
+        st = GetComponent<StopSystem>();
     }
 
     private void Update()

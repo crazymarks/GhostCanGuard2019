@@ -277,7 +277,7 @@ public class Horse : GimmickBase
             IfActivated = true;
             if (!st.SecondPhase)
             {
-                st.gamestop(stop.PauseState.DirectionSelect);
+                st.gamestop(StopSystem.PauseState.DirectionSelect);
                 AimSlider.gameObject.SetActive(true);
                 Debug.Log("Choose target");
                 return;
@@ -317,7 +317,7 @@ public class Horse : GimmickBase
         Fly.SetActive(true);
         Debug.Log(_moveorient);
         
-        st.gamestop(stop.PauseState.Normal);
+        st.gamestop(StopSystem.PauseState.Normal);
         GimmickUIClose();
     }
 

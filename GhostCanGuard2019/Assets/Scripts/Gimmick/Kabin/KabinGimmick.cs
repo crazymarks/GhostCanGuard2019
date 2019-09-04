@@ -93,7 +93,7 @@ public class KabinGimmick : GimmickBase
         
         if (!st.SecondPhase)
         {
-            st.gamestop(stop.PauseState.DirectionSelect);
+            st.gamestop(StopSystem.PauseState.DirectionSelect);
             Debug.Log("Choose target");
             return;
         }
@@ -117,7 +117,7 @@ public class KabinGimmick : GimmickBase
 
         GimmickManager.Instance.ClearGimmick();
         GimmickUIClose();
-        st.gamestop(stop.PauseState.Normal);
+        st.gamestop(StopSystem.PauseState.Normal);
         
     }
 
