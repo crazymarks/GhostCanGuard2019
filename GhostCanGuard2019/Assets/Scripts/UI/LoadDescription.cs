@@ -65,5 +65,9 @@ public class LoadDescription : SingletonMonoBehavior<LoadDescription>
         DescriptionText.text = "";
         DescriptionPanel.SetActive(false);
     }
-
+    public void ShowDesc()
+    {
+        DescriptionPanel.SetActive(true);
+        
+    }
 }

@@ -13,6 +13,7 @@ public class Thief : MonoBehaviour
         ESCAPE,
         PAUSE,
         STOP,
+        KILLED,
         EXITED,// player succeed
         END //player failed
     }
@@ -77,6 +78,8 @@ public class Thief : MonoBehaviour
                 break;
             case ThiefState.STOP:
                 StopUpdate();
+                break;
+            case ThiefState.KILLED:
                 break;
             case ThiefState.EXITED:
                 break;
@@ -275,7 +278,8 @@ public class Thief : MonoBehaviour
     /// </summary>
     public void reachEscapePoint()
     {
-       
+        if (thiefState == Thief.ThiefState.END || thiefState == Thief.ThiefState.EXITED || thiefState == Thief.ThiefState.KILLED)
+            return;
         //mIsAllowFind = false;
         //mIsPlayerExitedState = false;
         Debug.Log("ReachTarget");

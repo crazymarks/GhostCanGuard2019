@@ -153,7 +153,7 @@ public class Ghost_targeting : MonoBehaviour
     }
     private void Update()
     {
-        if (!gameObject.activeSelf)
+        if (!gameObject.activeSelf || Gs==GhostState.GameOver)
             return;
         //目標を検知
         targetCheck();

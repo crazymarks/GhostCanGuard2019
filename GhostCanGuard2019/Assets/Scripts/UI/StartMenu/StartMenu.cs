@@ -217,4 +217,9 @@ public class StartMenu : MonoBehaviour
         startMenusMap[startMenuButtonName].onClick.Invoke();
     }
 
+    public void LoadStage(string stageName)
+    {
+        LoadScene.loadScene(stageName);
+    }
+
 }

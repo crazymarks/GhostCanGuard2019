@@ -10,7 +10,6 @@ public static class LoadScene
     
     public static void loadScene(string SceneName)
     {
-        
         SceneManager.LoadSceneAsync(SceneName);
     }
     public static void loadScene(int SceneNumber)
@@ -34,4 +33,5 @@ public static class LoadScene
             Debug.Log("Has Been Last Available Scene, Cant Load");
         }
     }
+
 }

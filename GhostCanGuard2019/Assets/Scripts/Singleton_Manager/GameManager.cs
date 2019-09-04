@@ -170,7 +170,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             //Debug.Log(distance_player_to_thief);
             if (tf.thiefState == Thief.ThiefState.END)
             {
-                //UIManager.Instance.ShowDesPanel("泥棒が逃げました！");
+                UIManager.Instance.ShowDesPanel("泥棒が逃げました！");
                 //text.text = "泥棒が逃げました！";
                 //text.enabled = true;
                 Debug.Log("泥棒が逃げました！");
@@ -180,7 +180,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             }
             if (tf.thiefState == Thief.ThiefState.EXITED)
             {
-                //UIManager.Instance.ShowDesPanel("平和な夜ですね．．．");
+                UIManager.Instance.ShowDesPanel("平和な夜ですね．．．");
                 //text.text = "平和な夜ですね．．．";
                 //text.enabled = true;
                 Debug.Log("You Win!");
@@ -201,7 +201,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             {
                 if (distance_ghost_to_thief <= checkdistance)
                 {
-                    //UIManager.Instance.ShowDesPanel("迷えば、敗れる");
+                    UIManager.Instance.ShowDesPanel("迷えば、敗れる");
                     //text.text = "迷えば、敗れる";
                     //text.enabled = true;
                     Debug.Log("泥棒が殺人鬼に殺された！！");
@@ -211,7 +211,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                 }
                 if (distance_player_to_ghost <= checkdistance)
                 {
-                    //UIManager.Instance.ShowDesPanel("死");
+                    UIManager.Instance.ShowDesPanel("死");
                     //text.text = "死";
                     //text.enabled = true;
                     Debug.Log("死");
@@ -229,7 +229,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         }
         else
         {
-            st.gamestop(stop.PauseState.Normal);
+            //st.gamestop(stop.PauseState.Normal);
             if(st.canStop)
                 st.canStop = false;
             if (!iestart)
@@ -242,10 +242,11 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     IEnumerator ie()
     {
         iestart = true;
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         gameOver();
         yield return new WaitForSecondsRealtime(2f);
-        Time.timeScale = 1f;
+        
+        
         
         //ldc.loadScene("TitleScene");
     }
@@ -316,9 +317,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     void gameOver()
     {
         tf.thiefState = Thief.ThiefState.STOP;
+        ght.Gs = Ghost_targeting.GhostState.GameOver;
         //pc.speed = 0;
-        //ght.Gs = Ghost_targeting.GhostState.Stop;
-        //tf.thiefState = Thief.ThiefState.STOP;
         switch (OverState)
         {
             case GameOverState.arrest:
