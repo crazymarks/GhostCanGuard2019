@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine.SceneManagement;
 using UnityEngine;
 
 
@@ -29,9 +26,7 @@ public static class LoadScene
         }
         else
         {
-
             Debug.Log("Has Been Last Available Scene, Cant Load");
         }
     }
-
 }

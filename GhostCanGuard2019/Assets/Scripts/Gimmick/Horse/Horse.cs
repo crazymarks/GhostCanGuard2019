@@ -165,9 +165,9 @@ public class Horse : GimmickBase
             if (!IfBacking) 
             {
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, _moveorient, out hit))
+                if (Physics.Raycast(transform.position,transform.forward, out hit))
                 {
-                   
+                    //Debug.DrawRay(transform.position, transform.forward,Color.red);
                     //movedistance = Mathf.Clamp(movedistance, 0, hit.distance - radius > 0 ? hit.distance - radius : 0);
                     if (hit.distance <= radius && hit.collider.isTrigger == false)
                     {
