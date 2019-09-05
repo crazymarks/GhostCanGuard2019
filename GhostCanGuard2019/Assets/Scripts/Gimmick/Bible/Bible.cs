@@ -56,7 +56,7 @@ public class Bible : GimmickBase
         }
         else                                                                    // UIが展開していない場合
         {
-            if (st.selectedObject == gameObject && !st.SecondPhase)            //セレクトされたら、且つ、方向選択段階じゃない場合
+            if (st.selectedObject == gameObject && !st.SecondPhase && canOpen)            //セレクトされたら、且つ、方向選択段階じゃない場合
                 gimmickUIParent.SetActive(true);                                   //UIを展開
         }
     }
@@ -68,6 +68,8 @@ public class Bible : GimmickBase
         {
             StartCoroutine(AuraON());
             gimmickUIParent.SetActive(false);     //UIを収縮
+            st.gamestop(StopSystem.PauseState.Normal);
+            AudioController.PlaySnd("A6_SuperPower", Camera.main.transform.position, 1f);
         }
         else
         {
@@ -76,8 +78,8 @@ public class Bible : GimmickBase
             else
                 Debug.Log("準備中です");
         }
-        st.gamestop(StopSystem.PauseState.Normal); 
-        GimmickUIClose();
+        
+        //GimmickUIClose();
 
     }
     IEnumerator AuraON()

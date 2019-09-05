@@ -68,7 +68,7 @@ public class Statue : GimmickBase
         }
         else                                                                    // UIが展開していない場合
         {
-            if (st.selectedObject == gameObject && !st.SecondPhase)    //セレクトされたら、且つ、方向選択段階じゃない場合
+            if (st.selectedObject == gameObject && !st.SecondPhase && !isFallen)    //セレクトされたら、且つ、方向選択段階じゃない場合
                 gimmickUIParent.SetActive(true);                                   //UIを展開
         }
     }
@@ -95,9 +95,11 @@ public class Statue : GimmickBase
             isFallen = true;
             gimmickUIParent.SetActive(false);
             st.gamestop(StopSystem.PauseState.Normal);
+            AudioController.PlaySnd("B6_StatueDown", Camera.main.transform.position, 1f);
+            AirWall.SetActive(true);
+            SmokeAura.SetActive(true);  　　　　　　　　　　　　　　　　//エフェクト起動
         }
-        AirWall.SetActive(true);
-        SmokeAura.SetActive(true);  　　　　　　　　　　　　　　　　//エフェクト起動
+       
         //rb.AddForce(transform.forward * thrust);
 
     }

@@ -166,6 +166,7 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
 
     void gameStopStart()
     {
+        AudioController.PlaySnd("A7_FingerSnapping",Camera.main.transform.position,1f);
         cursor.SetActive(true);
         cursor.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.pc.gameObject.transform.position);
         Time.timeScale = ObserverTimeScale;

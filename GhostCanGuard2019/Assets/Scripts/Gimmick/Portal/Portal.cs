@@ -130,7 +130,7 @@ public class Portal : GimmickBase
     }
     IEnumerator Teleport(GameObject obj)
     {
-       
+        AudioController.PlaySnd("B7_Teleport", Camera.main.transform.position, 1f);
                 //MayDo:animation tele_Start_Anime;
         yield return new WaitForSeconds(PortDlay);
         if (PortDestination != null)

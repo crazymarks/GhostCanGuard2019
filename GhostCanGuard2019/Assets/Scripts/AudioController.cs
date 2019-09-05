@@ -7,26 +7,26 @@ public static class AudioController
 
     public static Dictionary<string, AudioClip> audioDic = new Dictionary<string, AudioClip>();
     // Start is called before the first frame update
-    //<param name ="dir"> SE路径, Resources</param>
+    //<param name ="dir"> SEソースルート, Resources</param>
     //<param name ="name">SEの名前</param>
-    public static void PlaySnd(string dir, string name)
+    public static void PlaySnd(string name ,Vector3 position,float volume)
     {
-        AudioClip clip = LoadClip(dir, name);
+        
+        AudioClip clip = LoadClip(name);
         if (clip != null)
 
-            AudioSource.PlayClipAtPoint(clip, Vector3.zero); //音楽プレイする場所
-
+            AudioSource.PlayClipAtPoint(clip, position, volume);
         else
 
             Debug.LogError("Clip is Missing" + name);
     }
         
 
-    public static AudioClip LoadClip(string dir, string name)
+    static AudioClip LoadClip(string name)
         {
             if (!audioDic.ContainsKey(name))
             {
-                string dirSound = dir + "/" + name;
+                string dirSound = "Sounds/" + name;
                 AudioClip clip = Resources.Load(dirSound) as AudioClip;
                 if (clip != null)
                     audioDic.Add(clip.name, clip);

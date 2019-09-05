@@ -316,9 +316,9 @@ public class Horse : GimmickBase
         IfMoving = true;
         Fly.SetActive(true);
         Debug.Log(_moveorient);
-        
         st.gamestop(StopSystem.PauseState.Normal);
-        GimmickUIClose();
+        //GimmickUIClose();
+        AudioController.PlaySnd("A8_HorseScream",Camera.main.transform.position, 1f);
     }
 
     //public void OnClickUIStart()

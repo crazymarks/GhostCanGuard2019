@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowTorurialImage : MonoBehaviour
+public class ShowToturialImage : MonoBehaviour
 {
     public Image image;
     bool HasShown = false;
