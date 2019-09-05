@@ -70,7 +70,6 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     bool iestart = false;  /////後で消す必要
 
-    
     // Start is called before the first frame update
     void Start()
     {

@@ -18,6 +18,7 @@ public class Unit : MonoBehaviour
     float currSpeed;// current speed
 
     public List<Transform> escapePoints = new List<Transform>();
+    IOrderedEnumerable<Transform> escapePointsByDistance;
     //public List<Transform> prirityPoints = new List<Transform>();
 
     public Transform currTarget;// current target to head to
@@ -33,16 +34,21 @@ public class Unit : MonoBehaviour
     int pathFindIndex = 0;
     IEnumerator FollowPathCorotine;
 
+    private void Awake()
+    {
+        StopAllCoroutines();
+    }
+
 
     void Start()
     {
-        FollowPathCorotine = FollowPath();
+        //FollowPathCorotine = FollowPath();
         currTarget = treasure;
         currSpeed = initialSpeed;
         //InvokeRepeating("RefindPath", 0f, 0.5f);
         thief = GetComponent<Thief>();
         //mIsAllowFollow = true;
-        PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
+        //PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
         SortEscapePoints();
     }
 
@@ -65,7 +71,6 @@ public class Unit : MonoBehaviour
             RefindPath();
         }
 
-
     }
 
     //public void FollowPriority()
@@ -87,8 +92,11 @@ public class Unit : MonoBehaviour
     {
         SortEscapePoints();
         //int rand = Random.Range(0, escapePoints.Capacity);
-        currTarget = escapePointsByDistance.ElementAt(0);
-        PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
+        if(escapePointsByDistance.Count() > 1)
+        {
+            currTarget = escapePointsByDistance.ElementAt(0);
+            PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound2);
+        }
     }
     /// <summary>
     /// 一番近いのpointをgetする
@@ -110,10 +118,10 @@ public class Unit : MonoBehaviour
 
     //    return escapePoints[closestCount];
     //}
-    IOrderedEnumerable<Transform> escapePointsByDistance;
     void SortEscapePoints()
     {
-        escapePointsByDistance = escapePoints.OrderBy(t => GameManager.Instance.getXZDistance(this.transform, t));  
+        if (escapePoints != null)
+            escapePointsByDistance = escapePoints.OrderBy(t => GameManager.Instance.getXZDistance(this.transform, t));  
     }
 
 
@@ -138,10 +146,11 @@ public class Unit : MonoBehaviour
             //targetIndex = 0;
             //StopCoroutine("FollowPath");
             //StartCoroutine("FollowPath");
-            StopCoroutine(FollowPathCorotine);
-            FollowPathCorotine = null;
-            FollowPathCorotine = FollowPath();
-            StartCoroutine(FollowPathCorotine);
+
+            //StopCoroutine(FollowPathCorotine);
+            //FollowPathCorotine = null;
+            //FollowPathCorotine = FollowPath();
+            //StartCoroutine(FollowPathCorotine);
             
         }
         else
@@ -165,10 +174,12 @@ public class Unit : MonoBehaviour
             thief.setGhostCollider();
             //StopCoroutine("FollowPath");
             //StartCoroutine("FollowPath");
-            StopCoroutine(FollowPathCorotine);
-            FollowPathCorotine = null;
-            FollowPathCorotine = FollowPath();
-            StartCoroutine(FollowPathCorotine);
+
+            //StopCoroutine(FollowPathCorotine);
+            //FollowPathCorotine = null;
+            //FollowPathCorotine = FollowPath();
+            //StartCoroutine(FollowPathCorotine);
+
             pathFindIndex = 0;
             SortEscapePoints();
         }
@@ -291,9 +302,11 @@ public class Unit : MonoBehaviour
     //    }
     //}
 
-    IEnumerator FollowPath()
+    Vector3 currentWayPoint;
+
+    private void FixedUpdate()
     {
-        Vector3 currentWayPoint;
+        if (path == null) return;
         if (path.Length != 0)
         {
             currentWayPoint = path[0];
@@ -302,27 +315,58 @@ public class Unit : MonoBehaviour
         }
         else currentWayPoint = transform.position;
 
-        while (true)
+       
+        if (transform.position == currentWayPoint)
         {
-            if (transform.position == currentWayPoint)
+            targetIndex++;
+            if (targetIndex >= path.Length)
             {
-                targetIndex++;
-                if (targetIndex >= path.Length)
-                {
-                    thief.reachEscapePoint();                    //終点チェック
-                    yield break;
-                }
-                currentWayPoint = path[targetIndex];
+                thief.reachEscapePoint();                    //終点チェック
             }
-            transform.position = Vector3.MoveTowards(transform.position, currentWayPoint, currSpeed * Time.deltaTime);
-            //GetComponent<Rigidbody>().velocity = new Vector3(currentWayPoint.x - transform.position.x, 0, currentWayPoint.z - transform.position.z).normalized * currSpeed;
-            //Debug.Log(GetComponent<Rigidbody>().velocity);
-            transform.LookAt(new Vector3(currentWayPoint.x, transform.position.y, currentWayPoint.z));
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(currentWayPoint, Vector3.up), 0.5f);
-            yield return null;
+            else
+            {
+                currentWayPoint = path[targetIndex];
+            } 
         }
+        transform.position = Vector3.MoveTowards(transform.position, currentWayPoint, currSpeed * Time.deltaTime);
+        //GetComponent<Rigidbody>().velocity = new Vector3(currentWayPoint.x - transform.position.x, 0, currentWayPoint.z - transform.position.z).normalized * currSpeed;
+        //Debug.Log(GetComponent<Rigidbody>().velocity);
+        transform.LookAt(new Vector3(currentWayPoint.x, transform.position.y, currentWayPoint.z));
+        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(currentWayPoint, Vector3.up), 0.5f);
         
     }
+
+    //IEnumerator FollowPath()
+    //{
+    //    Vector3 currentWayPoint;
+    //    if (path.Length != 0)
+    //    {
+    //        currentWayPoint = path[0];
+    //        //Debug.Log(path[0]);
+    //        //Debug.Log(path.Length);
+    //    }
+    //    else currentWayPoint = transform.position;
+
+    //    while (true)
+    //    {
+    //        if (transform.position == currentWayPoint)
+    //        {
+    //            targetIndex++;
+    //            if (targetIndex >= path.Length)
+    //            {
+    //                thief.reachEscapePoint();                    //終点チェック
+    //                yield break;
+    //            }
+    //            currentWayPoint = path[targetIndex];
+    //        }
+    //        transform.position = Vector3.MoveTowards(transform.position, currentWayPoint, currSpeed * Time.deltaTime);
+    //        //GetComponent<Rigidbody>().velocity = new Vector3(currentWayPoint.x - transform.position.x, 0, currentWayPoint.z - transform.position.z).normalized * currSpeed;
+    //        //Debug.Log(GetComponent<Rigidbody>().velocity);
+    //        transform.LookAt(new Vector3(currentWayPoint.x, transform.position.y, currentWayPoint.z));
+    //        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(currentWayPoint, Vector3.up), 0.5f);
+    //        yield return new WaitForEndOfFrame();
+    //    }
+    //}
 
 
     IEnumerator Stunned(float sec)
