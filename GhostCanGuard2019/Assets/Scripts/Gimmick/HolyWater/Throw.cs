@@ -52,18 +52,19 @@ public class Throw : GimmickBase
         {
             CupUI.sprite = CupUI_Empty;
         }
-        else if (CupUI.sprite == CupUI_Empty)
+        else 
         {
-            CupUI.sprite = CupUI_Full;
+            if (CupUI.sprite == CupUI_Empty)
+                CupUI.sprite = CupUI_Full;
         }
-        if (st.stopped && !CupUI.enabled)
-        {
-            CupUI.enabled = true;
-        }
-        if(!st.stopped && CupUI.enabled)
-        {
-            CupUI.enabled = false;
-        }
+        //if (st.stopped && !CupUI.enabled)
+        //{
+        //    CupUI.enabled = true;
+        //}
+        //if(!st.stopped && CupUI.enabled)
+        //{
+        //    CupUI.enabled = false;
+        //}
     }
 
     void throwHolyWater(){
