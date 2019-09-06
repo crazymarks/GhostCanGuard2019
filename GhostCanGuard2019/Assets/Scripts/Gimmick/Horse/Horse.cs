@@ -28,12 +28,16 @@ public class Horse : GimmickBase
     //馬の速さ
     [SerializeField][Range(0,15)]
     private float HorseSpeed = 10.0f;
-   
+    public float range = 5f;
+    public RangeUI rangeui;
+
     [Range(0, 2)]
     public float HorseBackTime = 2.0f;
     [Range(0,1)]
     public float DispearAlpha =0.3f;
     float floorheight = 0;
+
+
 
     private float radius = 0.5f;
     [SerializeField]
@@ -109,6 +113,27 @@ public class Horse : GimmickBase
 
     private void Update()
     {
+        if(st.stopped)
+        {
+            if(!st.SecondPhase)
+                rangeui.Show(range);
+            else
+            {
+                rangeui.Hide();
+            }
+            if (GameManager.Instance.getXZDistance(gameObject, Player) > range)
+            {
+                rangeui.SetColor(Color.red);
+            }
+            else
+            {
+                rangeui.SetColor(Color.green);
+            }
+        }
+        else
+        {
+            rangeui.Hide();
+        }
         //if (Input.GetButtonDown("Send") && st.selectedObject == gameObject && (!IfActivated || st.SecondPhase))
         //{
         //    Active();
@@ -119,9 +144,13 @@ public class Horse : GimmickBase
             {
                 gimmickUIParent.SetActive(false);     //UIを収縮
             }
-            if (GameManager.Instance.getXZDistance(gameObject, Player) > 5)
+            if (GameManager.Instance.getXZDistance(gameObject, Player) > range)
             {
                 gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIHide();
+            }
+            else
+            {
+                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow();
             }
 
 
@@ -131,9 +160,13 @@ public class Horse : GimmickBase
             if (st.selectedObject == gameObject && !st.SecondPhase && !IfActivated)    //セレクトされたら、且つ、方向選択段階じゃない場合
             {
                 gimmickUIParent.SetActive(true);                                   //UIを展開
-                if (GameManager.Instance.getXZDistance(gameObject, Player) > 5)
+                if (GameManager.Instance.getXZDistance(gameObject, Player) > range)
                 {
                     gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIHide();
+                }
+                else
+                {
+                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow();
                 }
             }
         }
@@ -348,7 +381,7 @@ public class Horse : GimmickBase
                 Debug.Log("Send");
                 if (!descriptionUIOn && !IfMoving)
                 {
-                    if (GameManager.Instance.getXZDistance(gameObject, Player) <= 5)
+                    if (GameManager.Instance.getXZDistance(gameObject, Player) <= range)
                         Active();
                     //else
                     //{

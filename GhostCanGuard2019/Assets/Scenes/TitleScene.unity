@@ -1639,21 +1639,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1998408487}
-    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadStage
-      objectReference: {fileID: 0}
-    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Cp3
-      objectReference: {fileID: 0}
     - target: {fileID: 3732496495574840561, guid: 586001d1ba9d4a547b93d27e2bfba9da,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -1685,6 +1670,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.lineCount
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1998408487}
+    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadStage
+      objectReference: {fileID: 0}
+    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Cp3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 586001d1ba9d4a547b93d27e2bfba9da, type: 3}
@@ -2527,21 +2527,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1998408487}
-    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadStage
-      objectReference: {fileID: 0}
-    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Cp1
-      objectReference: {fileID: 0}
     - target: {fileID: 3732496495574840561, guid: 586001d1ba9d4a547b93d27e2bfba9da,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -2556,6 +2541,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_text
       value: Day1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1998408487}
+    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadStage
+      objectReference: {fileID: 0}
+    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Cp1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 586001d1ba9d4a547b93d27e2bfba9da, type: 3}
@@ -3250,7 +3250,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: TitleScene
+          m_StringArgument: Cp1
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -3768,21 +3768,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1998408487}
-    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: LoadStage
-      objectReference: {fileID: 0}
-    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Cp2
-      objectReference: {fileID: 0}
     - target: {fileID: 3732496495574840561, guid: 586001d1ba9d4a547b93d27e2bfba9da,
         type: 3}
       propertyPath: m_havePropertiesChanged
@@ -3809,6 +3794,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.spaceCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1998408487}
+    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadStage
+      objectReference: {fileID: 0}
+    - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Cp2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 586001d1ba9d4a547b93d27e2bfba9da, type: 3}
@@ -3968,6 +3968,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2137907557}
     m_Modifications:
+    - target: {fileID: 7092993391070801449, guid: 7402de74338a39245ad40488cbb99205,
+        type: 3}
+      propertyPath: m_Name
+      value: StageSelectArray
+      objectReference: {fileID: 0}
     - target: {fileID: 7092993391070801450, guid: 7402de74338a39245ad40488cbb99205,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4072,11 +4077,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7092993391070801449, guid: 7402de74338a39245ad40488cbb99205,
-        type: 3}
-      propertyPath: m_Name
-      value: StageSelectArray
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7402de74338a39245ad40488cbb99205, type: 3}

@@ -49,5 +49,9 @@ public class DescriptionUIChange : MonoBehaviour
         if(ActionUI.activeSelf)
             ActionUI.SetActive(false);
     }
-
+    public void ActionUIShow()
+    {
+        if (!ActionUI.activeSelf)
+            ActionUI.SetActive(true);
+    }
 }

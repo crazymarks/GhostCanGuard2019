@@ -122,7 +122,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: low_so_initialShadingGroup1
-    second: {fileID: 2100000, guid: fc99f860bbf2ef14dab59808d11e57f4, type: 3}
+    second: {fileID: 2100000, guid: ec628589e1e0a3e49a2bc77fa5926e08, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
