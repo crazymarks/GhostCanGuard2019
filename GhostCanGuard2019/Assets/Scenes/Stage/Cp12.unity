@@ -303,7 +303,7 @@ PrefabInstance:
     - target: {fileID: 1313546234758395566, guid: e8388b1ec5d15984083a6d847fde5c40,
         type: 3}
       propertyPath: m_Radius
-      value: 1.5
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 476733420, guid: e8388b1ec5d15984083a6d847fde5c40, type: 3}
       propertyPath: count
@@ -1920,7 +1920,7 @@ PrefabInstance:
     - target: {fileID: 3749461932045439641, guid: 74cfcdc012de9c24b8dde93b61635c13,
         type: 3}
       propertyPath: field of view
-      value: 51.5
+      value: 36
       objectReference: {fileID: 0}
     - target: {fileID: 3749461932045439640, guid: 74cfcdc012de9c24b8dde93b61635c13,
         type: 3}
@@ -1930,12 +1930,12 @@ PrefabInstance:
     - target: {fileID: 3749461932045439640, guid: 74cfcdc012de9c24b8dde93b61635c13,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.43
+      value: 24.7
       objectReference: {fileID: 0}
     - target: {fileID: 3749461932045439640, guid: 74cfcdc012de9c24b8dde93b61635c13,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -2.13
       objectReference: {fileID: 0}
     - target: {fileID: 3749461932045439640, guid: 74cfcdc012de9c24b8dde93b61635c13,
         type: 3}
@@ -2099,7 +2099,7 @@ PrefabInstance:
     - target: {fileID: 4966074045109257231, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.58
+      value: -3.16
       objectReference: {fileID: 0}
     - target: {fileID: 4966074045109257231, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
         type: 3}
@@ -2109,7 +2109,7 @@ PrefabInstance:
     - target: {fileID: 4966074045109257231, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.94
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4966074045109257231, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
         type: 3}
@@ -2175,6 +2175,11 @@ PrefabInstance:
         type: 3}
       propertyPath: HorseSpeed
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4966074045109257227, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
+        type: 3}
+      propertyPath: DispearAlpha
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5668870895805252815, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
         type: 3}
@@ -2373,7 +2378,7 @@ PrefabInstance:
     - target: {fileID: 3957643227851540784, guid: f770db28de46b9d41bb3333a9f2dd0ca,
         type: 3}
       propertyPath: maxUnwalkableCheckDistance
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f770db28de46b9d41bb3333a9f2dd0ca, type: 3}
