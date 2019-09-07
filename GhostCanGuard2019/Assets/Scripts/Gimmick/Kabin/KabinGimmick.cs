@@ -20,15 +20,16 @@ public class KabinGimmick : GimmickBase
     private bool Broken = false;
 
     private Rigidbody rb = null;
+    private MeshCollider meshCollider = null;
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        _start();
         rb = GetComponent<Rigidbody>();
         Broken = false;
         IfActivated = false;
         player = GameObject.FindGameObjectWithTag("Player");
+        rb.isKinematic = true;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -36,7 +37,12 @@ public class KabinGimmick : GimmickBase
 
         if (IfActivated && other.tag == "Thief")
         {
-            //泥棒の処理
+            //泥棒のスタン処理
+            var thief = other.GetComponent<Thief>();
+            var unit = other.GetComponent<Unit>();
+            thief.thiefState = Thief.ThiefState.PAUSE;
+            thief.SetAnimationByMain(ThiefAnimator.Stun);
+            unit.GotStunned();
         }
         if (IfActivated && other.tag == "Untagged")
         {
@@ -59,8 +65,6 @@ public class KabinGimmick : GimmickBase
             {
                 gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIHide();
             }
-
-
         }
         else                                                                    // UIが展開していない場合
         {
@@ -80,6 +84,8 @@ public class KabinGimmick : GimmickBase
         if (IfActivated) return;
         Vector3 playerPosition = player.transform.position;
         playerPosition += player.transform.forward;
+        meshCollider.convex = false;
+
 
         KabinToPlayer(playerPosition);
        
@@ -97,7 +103,8 @@ public class KabinGimmick : GimmickBase
             Debug.Log("Choose target");
             return;
         }
-        
+
+        meshCollider.convex = true;
 
         if (!Input.GetButtonDown("Send")) return;
         

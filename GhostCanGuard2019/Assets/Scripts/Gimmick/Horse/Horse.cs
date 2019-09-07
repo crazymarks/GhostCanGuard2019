@@ -66,10 +66,9 @@ public class Horse : GimmickBase
     GetHorseMaterial horseMat;
 
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        _start();
         tag = "Gimmik";
         StartPosition = transform.position;
         startQuaternion = transform.localRotation;

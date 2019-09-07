@@ -30,10 +30,9 @@ public class Portal : GimmickBase
     {
         "Player"
     };     //転送できる物のタグ
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        _start();
         if (PortDestination == null) 
         {
             PortDestination = this;

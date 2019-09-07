@@ -22,10 +22,9 @@ public class Bible : GimmickBase
     GameObject obj;
     //Ghost_targeting gt;
     // Start is called before the first frame update
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        _start();
        
         if (collision != null)
         {
