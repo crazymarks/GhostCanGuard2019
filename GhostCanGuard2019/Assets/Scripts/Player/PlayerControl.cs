@@ -16,10 +16,6 @@ public class PlayerControl : MonoBehaviour
     private bool _playerMove = true;
     public bool CanPlayerMove { get { return _playerMove; } set { _playerMove = value; rb.velocity = Vector3.zero; } }
 
-    /// <summary>
-    /// StopFX
-    /// </summary>
-    public GameObject StopFX;
 
     float horizontal = 0;
     float vertical = 0;
@@ -38,37 +34,18 @@ public class PlayerControl : MonoBehaviour
 
     private void Update()
     {
+        if (!_playerMove) return;
+
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
         // playerのAnimation処理
         //if (horizontal == 0 && vertical == 0)
         if (velocity < 0.1)
-            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Stop);
-        else if (PlayerManager.Instance.CurrentPlayerState == PlayerState.Slow)
-            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Walk);
+            PlayerrAnimationController.Instance.SetNormalAnimation(PAnimation.Wait);
         else
-            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Run);
-
-
-        FXcheck();
+            PlayerrAnimationController.Instance.SetNormalAnimation(PAnimation.Run);
     }
-    
-    /// <summary>
-    /// FXcheck
-    /// </summary>
-    void FXcheck()
-    {
-        if (StopSystem.Instance.stopped && !StopFX.activeSelf)
-        {
-            StopFX.SetActive(true);
-        }
-        if (!StopSystem.Instance.stopped && StopFX.activeSelf)
-        {
-            StopFX.SetActive(false);
-        }
-    }
-
 
     private void move(float speed)
     {

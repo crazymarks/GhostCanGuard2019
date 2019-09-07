@@ -22,11 +22,11 @@ public class Statue : GimmickBase
     float tiltAroundX = 0f;
     float tiltAroundZ = 0f;
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
+        _start();
         //rb = GetComponent<Rigidbody>();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        
         //rb.isKinematic = true;
         tiltAroundX = 0f;
         tiltAroundZ = 0f;
@@ -121,11 +121,9 @@ public class Statue : GimmickBase
 
     public void CloseUI()
     {
-        GimmickUIClose();
     }
     protected override void PushButtonGamePad(ControllerButton controller)
     {
-        base.PushButtonGamePad(controller);
         switch (controller)
         {
             case ControllerButton.A:

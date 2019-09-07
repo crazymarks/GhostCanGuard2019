@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class AudioController
+public static class AudioController 
 {
 
     public static Dictionary<string, AudioClip> audioDic = new Dictionary<string, AudioClip>();
@@ -34,9 +34,9 @@ public static class AudioController
             return audioDic[name];
         }
 
-        
     
 
-}
+       
+ }
     
 

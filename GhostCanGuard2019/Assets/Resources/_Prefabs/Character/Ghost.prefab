@@ -11,9 +11,7 @@ GameObject:
   - component: {fileID: 3521398602406828690}
   - component: {fileID: 3521398602406828693}
   - component: {fileID: 3521398602406828695}
-  - component: {fileID: 8560469214928130514}
   - component: {fileID: 8090143044764218536}
-  - component: {fileID: 1097237735835036524}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Ghost
@@ -70,25 +68,13 @@ MonoBehaviour:
   chasingSpeed: 2.5
   turnSpeed: 0.5
   walkSpeed: 2
+  isTargeting: 1
   distanceOfChasingPlayer: 3
   distanceOfGiveUpChase: 5
   maxPatrolRange: 5
   waitTime: 2
   ifBibleAffect: 0
   ifHolyWaterAffect: 0
---- !u!114 &8560469214928130514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3521398602406828694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6afd3b411a32e034b8a49c6367161f00, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSE: {fileID: 8300000, guid: c02cff3e837ecc740904ca8803ba9791, type: 3}
 --- !u!136 &8090143044764218536
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -103,102 +89,18 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1.5, z: 0}
---- !u!82 &1097237735835036524
-AudioSource:
+--- !u!114 &1475133659059278518
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3521398602406828694}
+  m_GameObject: {fileID: 4584484393485714048}
   m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 0.21
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 9.494614
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2269975806361564a9d14dc4265f4c5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7167708515310083026
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +218,12 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 260b0e4b416488648bf1d3253fe6cbed, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc99f860bbf2ef14dab59808d11e57f4, type: 3}
+--- !u!1 &4584484393485714048 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: fc99f860bbf2ef14dab59808d11e57f4,
+    type: 3}
+  m_PrefabInstance: {fileID: 4584484393485616160}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4584484393486016160 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: fc99f860bbf2ef14dab59808d11e57f4,

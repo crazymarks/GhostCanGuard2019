@@ -13,108 +13,73 @@ public class Thief : MonoBehaviour
         ESCAPE,
         PAUSE,
         STOP,
-        KILLED,
         EXITED,// player succeed
         END //player failed
     }
-
     public ThiefState thiefState = ThiefState.HEAD_TREASURE;
 
-    public float headTreasureTimer = 0.5f; //duration of timer in escape before heading treasure
-    public float idleTime = 1.0f;
-    public SphereCollider playerCollider;// collider object of the player , for passage blocking
-    public SphereCollider ghostCollider;
-    float colliderradius;
+    public float headTreasureTimer = 5.0f; //duration of timer in escape before heading treasure
+    public float idleTimer = 1.0f;
+    public GameObject playerCollider;// collider object of the player , for passage blocking
+    public GameObject ghostCollider;
+
 
     public bool isAlarmActivated = false; // for detecting alarm 
 
     Unit unit;// unit scrpt
 
     float escapeTimer = 0.0f;// timer in escape state
-    //float escapeTimer2 = 0.0f;
+    float escapeTimer2 = 0.0f;
     float stayTimer = 0.0f; // timer in the radius of player, changes target after certain time
     float treasureTimer = 0.0f; // time taken to take treasure
-    public float TimeToTakeTreasure = 1f;
-    float idleTimer = 0.0f;
-    bool mIsPlayerExitedState = false;
-    public bool mIsTakenTreasure { get; private set; }// exited from radius 
-    //bool mIsPaused = false;
-    //bool mIsTouched = false;
-    bool mIsAllowFind = true;
+    float idleTime = 0.0f;
+    bool mIsPlayerExitedState = false, mIsTakenTreasure = false;// exited from radius 
+    bool mIsPaused = false;
+    bool mIsTouched = false;
+    bool mIsAllowFInd = true;
+
     /// <summary>
     /// animation
     /// </summary>
-    [SerializeField]
     ThiefAnimationController anim = null;
 
     void Start()
     {
         unit = GetComponent<Unit>();
-        anim.setRunAnimation();
-        mIsTakenTreasure = false;
-        if (ghostCollider != null)
-            colliderradius = ghostCollider.radius;
+        anim = GetComponentInChildren<ThiefAnimationController>();
+
+        anim.SetThiefAnimation(ThiefAnimator.Run);
     }
 
     void Update()
     {
-        
-        switch (thiefState)
-        {
-            case ThiefState.HEAD_TREASURE:
-                break;
-            case ThiefState.IN_TREASURE:
-                InTreasureUpdate();
-                break;
-            case ThiefState.HEAD_EXIT:
-                HeadExitUpdate();
-                break;
-            case ThiefState.HEAD_GHOST:
-                break;
-            case ThiefState.ESCAPE:
-                EscapeUpdate();
-                break;
-            case ThiefState.PAUSE:
-                PauseUpdate();
-                break;
-            case ThiefState.STOP:
-                StopUpdate();
-                break;
-            case ThiefState.KILLED:
-                break;
-            case ThiefState.EXITED:
-                break;
-            case ThiefState.END:
-                break;
-            default:
-                break;
-        }
-        
+        if (thiefState == ThiefState.ESCAPE) EscapeUpdate();
+        if (thiefState == ThiefState.PAUSE) PauseUpdate();
+        if (thiefState == ThiefState.HEAD_EXIT) HeadExitUpdate();
     }
 
     void EscapeUpdate()
     {
-        idleTimer += Time.deltaTime;
-        if (idleTimer > idleTime)
+        idleTime += Time.deltaTime;
+        if (idleTime > idleTimer)
         {
-            idleTimer = 0f;
-            mIsAllowFind = true;
+            idleTime = 0f;
+            mIsAllowFInd = true;
         }
         if (mIsPlayerExitedState == true)
         {
             StartCounter();
         }
-        //if (mIsTouched == true)
-        //{
-        //    StartSecondaryCounter(); 
-        //}
+        if (mIsTouched == true)
+        {
+            StartSecondaryCounter();
+        }
     }
 
     void HeadExitUpdate()
     {
-        StartCounter();
-        //StartSecondaryCounter();
-        //unit.HeadExit();  　　　　　　　　　　　　　　　　　
+        StartSecondaryCounter();
+        //unit.HeadExit();  　　　　　　　　　　　　　　　　　　<-------------------------------------------ここは元凶！！！！！！！！！
     }
 
     void PauseUpdate()
@@ -122,37 +87,9 @@ public class Thief : MonoBehaviour
 
     }
 
-    void StopUpdate()
-    {
-        unit.enabled = false;
-    }
-
-    void InTreasureUpdate()
-    {
-        treasureTimer += Time.deltaTime;
-        if (treasureTimer > TimeToTakeTreasure)//time needed to collect treasure ** hardcode
-        {
-            mIsTakenTreasure = true;
-            unit.HeadToExit();
-            thiefState = ThiefState.HEAD_EXIT;
-            anim.setRunAnimation();
-            treasureTimer = 0f;
-        }
-        if(unit.currTarget != unit.treasure)
-        {
-            TakingTreasureInterrupted();
-        }
-    }
-    void TakingTreasureInterrupted()
-    {
-        thiefState = ThiefState.ESCAPE;
-        anim.setRunAnimation();
-        treasureTimer = 0f;
-    }
-
     void StartCounter()
     {
-        //Debug.Log("startCounter");
+        //Debug.Log("startCOunter");
         escapeTimer += Time.deltaTime;
         if (escapeTimer > headTreasureTimer)
         {
@@ -161,83 +98,81 @@ public class Thief : MonoBehaviour
                 unit.HeadToTreasure();
                 escapeTimer = 0f;
                 thiefState = ThiefState.HEAD_TREASURE;
-                anim.setRunAnimation();
+                anim.SetThiefAnimation(ThiefAnimator.Run);
             }
             else
             {
-                unit.HeadToExit();
+                unit.HeadExit();
                 escapeTimer = 0f;
                 thiefState = ThiefState.HEAD_EXIT;
-                anim.setRunAnimation();
+                anim.SetThiefAnimation(ThiefAnimator.Run);
             }
         }
     }
-    //void StartSecondaryCounter() //
-    //{
-    //    //Debug.Log("start2ndCounter");
-    //    escapeTimer2 += Time.deltaTime;
-    //    if (escapeTimer2 > headTreasureTimer)
-    //    {
-    //        if (!mIsTakenTreasure)
-    //        {
-    //            unit.HeadToTreasure();
-    //            escapeTimer2 = 0f;
-    //            thiefState = ThiefState.HEAD_TREASURE;
-    //            anim.setRunAnimation();
-    //        }
-    //        else
-    //        {
-    //            unit.HeadToExit();
-    //            escapeTimer2 = 0f;
-    //            thiefState = ThiefState.HEAD_EXIT;
-    //            anim.setRunAnimation();
-    //        }
-    //    }
-    //}
+    void StartSecondaryCounter()
+    {
+        //Debug.Log("start2ndCOunter");
+        escapeTimer2 += Time.deltaTime;
+        if (escapeTimer2 > headTreasureTimer)
+        {
+            if (!mIsTakenTreasure)
+            {
+                unit.HeadToTreasure();
+                escapeTimer2 = 0f;
+                thiefState = ThiefState.HEAD_TREASURE;
+                anim.SetThiefAnimation(ThiefAnimator.Run);
+            }
+            else
+            {
+                unit.HeadExit();
+                escapeTimer2 = 0f;
+                thiefState = ThiefState.HEAD_EXIT;
+                anim.SetThiefAnimation(ThiefAnimator.Run);
+            }
+        }
+    }
 
     void OnTriggerEnter(Collider other)
     {
-        
-        if (other.tag == "PlayerCollider" && thiefState != ThiefState.END && mIsAllowFind == true)
+        if (other.tag == "PlayerCollider" && thiefState != ThiefState.END && mIsAllowFInd == true)
         {
-            mIsAllowFind = false;
+            mIsAllowFInd = false;
             Debug.Log("detected Player");
             mIsPlayerExitedState = false;
             thiefState = ThiefState.ESCAPE;
             //playerCollider.SetActive(true);// activates the collider of player, thus not pasing that route
-            unit.HeadToEscapePoint();
-            //mIsTouched = true;
+            unit.GetNewTarget();
+            mIsTouched = true;
             //unit.RefindPath();
             //unit.FollowPriority();
             //StartCounter();
         }
-        else if (other.tag == "Ghost" && thiefState != ThiefState.END && mIsAllowFind == true)
+        else if (other.tag == "Ghost" && thiefState != ThiefState.END && mIsAllowFInd == true)
         {
-            mIsAllowFind = false;
+            mIsAllowFInd = false;
             Debug.Log("detected Ghost");
             mIsPlayerExitedState = false;
             thiefState = ThiefState.ESCAPE;
             //if(ghostCollider!=null)ghostCollider.SetActive(true);// activates the collider of player, thus not pasing that route
-            unit.HeadToEscapePoint();
+            unit.GetNewTarget();
             //unit.RefindPath();
             //unit.FollowPriority();
         }
-        //else if (other.tag == "Treasure")
-        //{
-        //    Debug.Log("inTreasure");
-        //    thiefState = ThiefState.IN_TREASURE;
-        //    anim.setWaitAnimation();
-        //}
+        else if (other.tag == "Treasure")
+        {
+            Debug.Log("inTreasure");
+            thiefState = ThiefState.STOP;
+            anim.SetThiefAnimation(ThiefAnimator.Run);
+        }
         else if (other.tag == "Alarm")
         {
             Debug.Log("sensed alarm");
         }
-        //else if (other.tag == "Exit" && thiefState == ThiefState.HEAD_EXIT)
-        //{
-        //    Debug.Log("exited");
-        //    thiefState = ThiefState.END;
-        //    anim.setWaitAnimation();
-        //}
+        else if (other.tag == "Exit" && thiefState == ThiefState.HEAD_EXIT)
+        {
+            Debug.Log("exited");
+            thiefState = ThiefState.END;
+        }
         else if (other.tag == "Exit" && !mIsTakenTreasure)
         {
             thiefState = ThiefState.EXITED;
@@ -247,83 +182,46 @@ public class Thief : MonoBehaviour
     void OnTriggerStay(Collider other)
     {
 
-        if ((other.tag == "PlayerCollider" || other.tag == "Ghost") && thiefState != ThiefState.END)
+        if ((other.tag == "Player" || other.tag == "Ghost") && thiefState != ThiefState.END)
         {
             mIsPlayerExitedState = false;
             stayTimer += Time.deltaTime;
-            if (stayTimer > 0.1f)
-            {   unit.HeadToEscapePoint();//changes escape target if still inside player radius for a certain time **hardcode
-                stayTimer = 0f;
+            //if (stayTimer > 2.0f) unit.GetNewTarget();//changes escape target if still inside player radius for a certain time **hardcode 
+        }
+        else if (other.tag == "Treasure")
+        {
+            anim.SetThiefAnimation(ThiefAnimator.Steal);
+            treasureTimer += Time.deltaTime;
+            if (treasureTimer > 1.0f)//time needed to collect treasure ** hardcode
+            {
+                mIsTakenTreasure = true;
+                unit.HeadExit();
+                thiefState = ThiefState.HEAD_EXIT;
+                anim.SetThiefAnimation(ThiefAnimator.Run);
             }
         }
-        
         else if (other.tag == "Alarm" && isAlarmActivated)// soon to be changed
         {
             unit.tempIncreaseSpeed();//increase thief speed during inside Alarm radius
         }
-        
+        else if (other.tag == "Exit" && thiefState == ThiefState.HEAD_EXIT)
+        {
+            Debug.Log("exited");
+            thiefState = ThiefState.END;
+            anim.SetThiefAnimation(ThiefAnimator.Run);
+        }
     }
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "PlayerCollider" || other.tag == "Ghost")
+        if (other.tag == "Player" || other.tag == "Ghost")
         {
-            Debug.Log("Restart Find Treasure or Exit");
+            Debug.Log("exitedtrigger");
             mIsPlayerExitedState = true;
-            //mIsTouched = false;
+            mIsTouched = false;
         }
-
     }
-
-    /// <summary>
-    /// 終点チェック
-    /// </summary>
-    public void reachEscapePoint()
+    public void SetAnimationByMain(ThiefAnimator thiefAnimation)
     {
-        if (thiefState == Thief.ThiefState.END || thiefState == Thief.ThiefState.EXITED || thiefState == Thief.ThiefState.KILLED)
-            return;
-        //mIsAllowFind = false;
-        //mIsPlayerExitedState = false;
-        Debug.Log("ReachTarget");
-        if (mIsTakenTreasure)
-        {
-            if (unit.currTarget == unit.exit && thiefState == ThiefState.HEAD_EXIT && GameManager.Instance.getXZDistance(unit.exit.gameObject,unit.gameObject) <= 2f)
-            {
-                Debug.Log("exit_success");
-                thiefState = ThiefState.END;
-                anim.setWaitAnimation();
-            }
-           
-            else
-            {
-                thiefState = ThiefState.HEAD_EXIT;
-                unit.HeadToExit();
-            }
-        }
-        else
-        {
-            if (unit.currTarget == unit.treasure && GameManager.Instance.getXZDistance(unit.treasure.gameObject, unit.gameObject) <= 2f)
-            {
-                if (thiefState != ThiefState.IN_TREASURE)
-                {
-                    Debug.Log("inTreasure");
-                    thiefState = ThiefState.IN_TREASURE;
-                    anim.setWaitAnimation();
-                }
-            }
-            else
-            {
-                thiefState = ThiefState.HEAD_TREASURE;
-                unit.HeadToTreasure();
-            }
-        }
-        setGhostCollider();
-        //if(ghostCollider!=null)ghostCollider.SetActive(true);// activates the collider of player, thus not pasing that route
-       
+        anim.SetThiefAnimation(thiefAnimation);
     }
-
-    public void setGhostCollider()
-    {
-        if (ghostCollider != null) ghostCollider.radius = colliderradius;
-    }
-
 }

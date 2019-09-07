@@ -17,10 +17,9 @@ public class Throw : GimmickBase
     private bool IfActivated;
     
     // Start is called before the first frame update
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        _start();
         //st = GameManager.Instance.GetComponent<stop>();
     }
 
@@ -85,6 +84,7 @@ public class Throw : GimmickBase
             return;
         }
         if (!Input.GetButtonDown("Send")) return;
+        PlayerrAnimationController.Instance.SetGimmickAnimation(GimmickAnimation.Float);
         Vector3 target = st.getCursorWorldPosition();
         transform.LookAt(new Vector3(target.x, gameObject.transform.position.y, target.z));
         GameObject holywater = Instantiate(HolyWater, new Vector3(gameObject.transform.position.x, 1, gameObject.transform.position.z) + gameObject.transform.forward, Quaternion.identity);
@@ -98,7 +98,6 @@ public class Throw : GimmickBase
 
     protected override void PushButtonGamePad(ControllerButton controller)
     {
-        base.PushButtonGamePad(controller);
         switch (controller)
         {
             case ControllerButton.A:

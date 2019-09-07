@@ -13,7 +13,7 @@ public class GimickOpen : GimmickBase
 
     //private void Start()
     //{
-    //    GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+    //    
     //    GimmickEventSetUp(EventTriggerType.PointerDown, SelectGimmick);
     //    gimmickUIParent = this.gameObject.transform.GetChild(0).gameObject;
     //}

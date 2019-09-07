@@ -5,29 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class StopSystem : SingletonMonoBehavior<StopSystem>
+public class stop : MonoBehaviour
 {
-
-    public enum PauseState
-    {
-        Normal,
-        ObserverMode,
-        DirectionSelect,
-        DescriptionOpen,
-        DescriptionClose,
-        SystemPause,
-        Resume
-    }
-
-
     public bool canStop = false;
-
-    [Range(0,1)][Header("観察modeのTimeScale")]
-    public float ObserverTimeScale = 0.1f;
-
-    /// <summary>
-    /// Highlight
-    /// </summary>
+    
     public LayerMask mask;
     OutLineCamera outlineCamera;
     [SerializeField]
@@ -37,35 +18,23 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
     public float HighlightWidth = 5f;
     public GameObject selectedObject;
     private GameObject outlineObject;
-
-
-    /// <summary>
-    /// cursor
-    /// </summary>
     [SerializeField]
     float speed = 10f;
+    
     public GameObject cursor;
+   
+    public bool SecondPhase { get; private set; }
+    public bool DescriptionPhase { get; set; }
+
     //public Slider AimSlider;
     public Sprite cursor_first;
     public List<Sprite> cursor_second;
-
-
-    /// <summary>
-    /// PauseState Flag
-    /// </summary>
-    public bool SecondPhase { get; private set; }
-    public bool DescriptionPhase { get; private set; }
-    public bool IfSystemPause { get; private set; }
-    public PauseState currentstate;
-    private float currentTimescale;
-    public bool stopped { get; private set; } = false;
-
     
-
+    public bool stopped { get; private set; } = false;
+   
     // Start is called before the first frame update
     void Start()
     {
-        currentTimescale = 1f;
         canStop = false;
         SecondPhase = false;
         DescriptionPhase = false;
@@ -79,19 +48,11 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
     // Update is called once per frame
     void Update()
     {
-        if (IfSystemPause) return;
         if (canStop)
         {
-            if (Input.GetButtonDown("Stop") && !SecondPhase)
+            if (Input.GetButtonDown("Stop") && !SecondPhase || Input.GetKeyDown(KeyCode.O))
             {
-                if(currentstate == PauseState.ObserverMode)
-                {
-                    gamestop(PauseState.Normal);
-                }
-                else if(currentstate == PauseState.Normal)
-                {
-                    gamestop(PauseState.ObserverMode);
-                }
+                gamestop();
             }
         }
        
@@ -100,8 +61,8 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
             Vector2 move = new Vector2(horizontal, vertical);
-            if(cursor.activeSelf)
-                cursor.transform.Translate(move * speed);
+
+            cursor.transform.Translate(move * speed);
             DragRangeLimit(cursor.transform);
             if (!SecondPhase && !DescriptionPhase)
             {
@@ -132,59 +93,33 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
         //}
        
     }
-
-    public void gamestop(PauseState state)
+    public void gamestop()
     {
-        switch (state)
+        if (stopped)
         {
-            case PauseState.Normal:
-                gameStopEnd();
-                break;
-            case PauseState.ObserverMode:
-                gameStopStart();
-                break;
-            case PauseState.DirectionSelect:
-                changeToSecondPhase();
-                break;
-            case PauseState.DescriptionOpen:
-                DescriptionOn();
-                break;
-            case PauseState.DescriptionClose:
-                DescriptionClose();
-                break;
-            case PauseState.SystemPause:
-                SystemPause();
-                break;
-            case PauseState.Resume:
-                Resume();
-                break;
-            default:
-                break;
+            gameStopEnd();
         }
-       
+        else
+        {
+            gameStopStart();
+        }
     }
-    
-
     void gameStopStart()
     {
-        AudioController.PlaySnd("A7_FingerSnapping",Camera.main.transform.position,1f);
+        PlayerrAnimationController.Instance.SetGimmickAnimation(GimmickAnimation.Hold);
         cursor.SetActive(true);
         cursor.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.pc.gameObject.transform.position);
-        Time.timeScale = ObserverTimeScale;
-        currentTimescale = ObserverTimeScale;
+        Time.timeScale = 0.1f;
         outlineCamera.enabled = true;
-        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
         stopped = true;
         GameManager.Instance.pc.CanPlayerMove = false;
-        currentstate = PauseState.ObserverMode;
     }
     void gameStopEnd()
     {
-        Time.timeScale = 1f;
-        currentTimescale = 1f;
+        PlayerrAnimationController.Instance.SetGimmickAnimation(GimmickAnimation.None);
+        Time.timeScale = 1;
         cursor.SetActive(false);
         outlineCamera.enabled = false;
-        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
         stopped = false;
         GameManager.Instance.pc.CanPlayerMove = true;
         if (outlineObject && outlineObject.GetComponent<Outline>() != null)         //アウトライを消す
@@ -197,56 +132,8 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
         cursor.GetComponent<Image>().sprite = cursor_first;
         selectedObject = null;
         InputManager.Instance.ClearCurrentButton();
-        currentstate = PauseState.Normal;
     }
 
-    void DescriptionOn()
-    {
-        canStop = false;
-        Time.timeScale = 0f;
-        currentTimescale = 0f;
-        DescriptionPhase = true;
-        cursor.SetActive(false);
-        //outlineCamera.enabled = false;
-        currentstate = PauseState.DescriptionOpen;
-    }
-    void DescriptionClose()
-    {
-        canStop = true;
-        cursor.SetActive(true);
-        //outlineCamera.enabled = true;
-        Time.timeScale = ObserverTimeScale;
-        currentTimescale = ObserverTimeScale;
-        DescriptionPhase = false;
-        currentstate = PauseState.ObserverMode;
-    }
-    void SystemPause()
-    {
-        IfSystemPause = true;
-        canStop = false;
-        //cursor.SetActive(false);
-        //outlineCamera.enabled = false;
-        Time.timeScale = 0f;
-        InputManager.Instance.ClearCurrentButton();
-    }
-
-    void Resume()
-    {
-        if (!IfSystemPause) return;
-        IfSystemPause = false;
-        canStop = true;
-        Time.timeScale = currentTimescale;
-    }
-
-    void changeToSecondPhase()
-    {
-        cursor.SetActive(true);
-        SecondPhase = true;
-        currentstate = PauseState.DirectionSelect;
-        StartCoroutine(changesprite());
-    }
-
-    
     public void getObjectAtPosition()
     {
         Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
@@ -270,9 +157,6 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
         }
     }
 
-    
-
-
     public Vector3 getCursorWorldPosition()
     {
 
@@ -288,8 +172,6 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
     {
         return cursor.transform.position;
     }
-
-
     /// <summary>
     /// 物を画面内に制限する
     /// </summary>
@@ -320,7 +202,12 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
         
     }
     
-   
+
+    public void changeToSecondPhase()
+    {
+        SecondPhase = true;
+        StartCoroutine(changesprite());
+    }
 
     IEnumerator changesprite()
     {
@@ -351,9 +238,4 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
     {
         outline.OutlineWidth = 0;
     }
-    public void clearselectobj()
-    {
-        selectedObject = null;
-    }
-
 }
