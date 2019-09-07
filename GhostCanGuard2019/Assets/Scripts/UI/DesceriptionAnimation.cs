@@ -40,8 +40,6 @@ public class DesceriptionAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-
         //Bracket.rectTransform.offsetMax = new Vector2(-Screen.width / 2, -Screen.height / 2) + CursorPosition.offsetMax; //画面の右上から中心へのベクトル + 中心からカーソルの右上へのベクトル
         //Bracket.rectTransform.offsetMin = new Vector2(Screen.width / 2, Screen.height / 2) + CursorPosition.offsetMin;　//画面の左下から中心へのベクトル + 中心からカーソルの左下へのベクトル
         startTime = 0;
@@ -106,5 +104,22 @@ public class DesceriptionAnimation : MonoBehaviour
         Bracket.rectTransform.offsetMax = new Vector2(-offset.right, -offset.top);
         Bracket.rectTransform.offsetMin = new Vector2(offset.left, offset.bottom);
     }
-
+    public void generate(Sprite bracket,Sprite description)
+    {
+        Bracket.sprite = bracket;
+        Description.sprite = description;
+    }
+    public void generate(Sprite bracket, Sprite description,RectTransform cursor)
+    {
+        Bracket.sprite = bracket;
+        Description.sprite = description;
+        CursorPosition = cursor;
+    }
+    public void generate(Sprite bracket, Sprite description, RectTransform cursor ,float _timetofinish)
+    {
+        Bracket.sprite = bracket;
+        Description.sprite = description;
+        CursorPosition = cursor;
+        timeToFinish = _timetofinish;
+    }
 }

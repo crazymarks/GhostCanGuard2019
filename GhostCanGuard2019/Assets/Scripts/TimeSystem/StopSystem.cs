@@ -65,6 +65,7 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
     // Start is called before the first frame update
     void Start()
     {
+        currentTimescale = 1f;
         canStop = false;
         SecondPhase = false;
         DescriptionPhase = false;
@@ -170,6 +171,7 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
         cursor.SetActive(true);
         cursor.transform.position = Camera.main.WorldToScreenPoint(GameManager.Instance.pc.gameObject.transform.position);
         Time.timeScale = ObserverTimeScale;
+        currentTimescale = ObserverTimeScale;
         outlineCamera.enabled = true;
         PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
         stopped = true;
@@ -178,7 +180,8 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
     }
     void gameStopEnd()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
+        currentTimescale = 1f;
         cursor.SetActive(false);
         outlineCamera.enabled = false;
         PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
@@ -201,6 +204,7 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
     {
         canStop = false;
         Time.timeScale = 0f;
+        currentTimescale = 0f;
         DescriptionPhase = true;
         cursor.SetActive(false);
         //outlineCamera.enabled = false;
@@ -212,6 +216,7 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
         cursor.SetActive(true);
         //outlineCamera.enabled = true;
         Time.timeScale = ObserverTimeScale;
+        currentTimescale = ObserverTimeScale;
         DescriptionPhase = false;
         currentstate = PauseState.ObserverMode;
     }
@@ -219,26 +224,18 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
     {
         IfSystemPause = true;
         canStop = false;
-        cursor.SetActive(false);
-        outlineCamera.enabled = false;
+        //cursor.SetActive(false);
+        //outlineCamera.enabled = false;
         Time.timeScale = 0f;
         InputManager.Instance.ClearCurrentButton();
     }
 
     void Resume()
     {
+        if (!IfSystemPause) return;
         IfSystemPause = false;
         canStop = true;
-        if(currentstate == PauseState.Normal)
-        {
-            Time.timeScale = 1f;
-        }
-        else
-        {
-            cursor.SetActive(true);
-            outlineCamera.enabled = true;
-            Time.timeScale = ObserverTimeScale;
-        }
+        Time.timeScale = currentTimescale;
     }
 
     void changeToSecondPhase()

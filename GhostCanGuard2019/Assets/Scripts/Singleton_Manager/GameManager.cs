@@ -155,21 +155,24 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("SystemPause"))
+        if (IfGameStart && !gameover)
         {
-            if (!st.IfSystemPause)
+            if (Input.GetButtonDown("SystemPause"))
             {
-                Debug.Log("Pause");
-                UIManager.Instance.ShowDesPanel("停止中");
-                st.gamestop(StopSystem.PauseState.SystemPause);
+                if (!st.IfSystemPause)
+                {
+                    Debug.Log("Pause");
+                    UIManager.Instance.ShowDesPanel("停止中");
+                    st.gamestop(StopSystem.PauseState.SystemPause);
+                }
+                else
+                {
+                    UIManager.Instance.menuPanel.SetActive(false);
+                    st.gamestop(StopSystem.PauseState.Resume);
+                }
             }
-            else
-            {
-                UIManager.Instance.menuPanel.SetActive(false);
-                st.gamestop(StopSystem.PauseState.Resume);
-            }
-                
         }
+        
 
         if (ghostEnable)
         {
