@@ -4,8 +4,8 @@ public enum PAnimation
 {
     Wait = 0,
     Run = 1,
-    Capture = 50,
-    Killed = 99,
+    Kebiyin_Capture = 50,
+    Kebiyin_Kill = 99,
 }
 
 public enum GimmickAnimation
@@ -19,7 +19,7 @@ public enum GimmickAnimation
     Float = 8,
 }
 
-public class PlayerrAnimationController : SingletonMonoBehavior<PlayerrAnimationController>
+public class PlayerrAnimationController : MonoBehaviour
 {
     private Animator animator = null;
     private string _Player = "PlayerControl";
@@ -44,5 +44,10 @@ public class PlayerrAnimationController : SingletonMonoBehavior<PlayerrAnimation
     public void SetGimmickAnimation(GimmickAnimation anim)
     {
         animator.SetInteger(_Gimmick, (int)anim);
+    }
+
+    public void PlayPlayerAnimation(PAnimation param)
+    {
+        animator.Play(param.ToString());
     }
 }

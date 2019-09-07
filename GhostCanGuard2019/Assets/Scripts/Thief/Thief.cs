@@ -224,4 +224,8 @@ public class Thief : MonoBehaviour
     {
         anim.SetThiefAnimation(thiefAnimation);
     }
+    public void PlayAnimationByMain(ThiefAnimator param)
+    {
+        anim.ThiefAnimatorPlay(param);
+    }
 }

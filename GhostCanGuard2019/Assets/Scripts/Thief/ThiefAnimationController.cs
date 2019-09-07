@@ -8,20 +8,18 @@ public enum ThiefAnimator
     Run = 1, // ○
     Stun = 5,
     Steal = 10, // ○
-    Captured = 50,
-    Killed = 99,
+    dorobo_Capture = 50,
+    dorobo_Kill = 99,
 }
 
 public class ThiefAnimationController : MonoBehaviour
 {
-    Thief tf;
     Animator animator;
     private string _Thief = "ThiefControl";
     // Start is called before the first frame update
     void Awake()
     {
         animator = GetComponent<Animator>();
-        tf = transform.parent.GetComponent<Thief>();
     }
     /// <summary>
     /// thiefのAnimation
@@ -30,9 +28,13 @@ public class ThiefAnimationController : MonoBehaviour
     {
         animator.SetInteger(_Thief, (int)anim);
     }
-
-    public void ThiefAnimatorPlay(string thiefParam)
+    /// <summary>
+    /// dethとCaptureをPlayさせる関数
+    /// </summary>
+    /// <param name="thiefParam"></param>
+    public void ThiefAnimatorPlay(ThiefAnimator thiefParam)
     {
-        animator.Play(thiefParam);
+        if ((int)thiefParam < 11) return;
+        animator.Play(thiefParam.ToString());
     }
 }

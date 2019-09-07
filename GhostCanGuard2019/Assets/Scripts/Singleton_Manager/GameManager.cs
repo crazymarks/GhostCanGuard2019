@@ -211,7 +211,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                 Debug.Log("You Win!");
                 gameover = true;
                 OverState = GameOverState.arrest;
-
+                pc.SetAnimationByPlayer(PAnimation.Kebiyin_Capture);
+                tf.PlayAnimationByMain(ThiefAnimator.dorobo_Capture);
             }
             if (ghostEnable)
             {
@@ -221,9 +222,10 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                     //text.text = "迷えば、敗れる";
                     //text.enabled = true;
                     Debug.Log("泥棒が殺人鬼に殺された！！");
+                    tf.PlayAnimationByMain(ThiefAnimator.dorobo_Kill);
+                    ght.CallGhostAnimation();
                     gameover = true;
-                    OverState = GameOverState.thiefDead;
-
+                    OverState = GameOverState.thiefDead;                    
                 }
                 if (distance_player_to_ghost <= checkdistance)
                 {
@@ -233,7 +235,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                     Debug.Log("死");
                     gameover = true;
                     OverState = GameOverState.policeDead;
-
+                    ght.CallGhostAnimation();
+                    pc.SetAnimationByPlayer(PAnimation.Kebiyin_Kill);
                 }
             }
             if (tf.thiefState == Thief.ThiefState.HEAD_EXIT /*&& swordlight != null*/)
@@ -305,15 +308,6 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         Vector3 ay0 = new Vector3(a.transform.position.x, 0, a.transform.position.z);
         Vector3 by0 = new Vector3(b.transform.position.x, 0, b.transform.position.z);
         float d0 = Vector3.Distance(ay0, by0);
-        return d0;
-        //float distance = Mathf.Sqrt((a.transform.position.x - b.transform.position.x) * (a.transform.position.x - b.transform.position.x) + (a.transform.position.z - b.transform.position.z) * (a.transform.position.z - b.transform.position.z));
-        //return distance;
-    }
-    public float getXZDistance(Transform a, Transform b)
-    {
-        Vector2 ay0 = new Vector2(a.position.x, a.position.z);
-        Vector2 by0 = new Vector2(b.position.x, b.position.z);
-        float d0 = Vector2.Distance(ay0, by0);
         return d0;
         //float distance = Mathf.Sqrt((a.transform.position.x - b.transform.position.x) * (a.transform.position.x - b.transform.position.x) + (a.transform.position.z - b.transform.position.z) * (a.transform.position.z - b.transform.position.z));
         //return distance;

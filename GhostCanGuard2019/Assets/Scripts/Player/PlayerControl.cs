@@ -20,10 +20,13 @@ public class PlayerControl : MonoBehaviour
     float horizontal = 0;
     float vertical = 0;
 
+    private PlayerrAnimationController animationController;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
+        animationController = GetComponentInChildren<PlayerrAnimationController>();
     }
 
     // Update is called once per frame
@@ -42,9 +45,9 @@ public class PlayerControl : MonoBehaviour
         // playerのAnimation処理
         //if (horizontal == 0 && vertical == 0)
         if (velocity < 0.1)
-            PlayerrAnimationController.Instance.SetNormalAnimation(PAnimation.Wait);
+            animationController.SetNormalAnimation(PAnimation.Wait);
         else
-            PlayerrAnimationController.Instance.SetNormalAnimation(PAnimation.Run);
+            animationController.SetNormalAnimation(PAnimation.Run);
     }
 
     private void move(float speed)
@@ -60,4 +63,8 @@ public class PlayerControl : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(move, Vector3.up), turnSpeed);
     }
     
+    public void SetAnimationByPlayer(PAnimation param)
+    {
+        animationController.PlayPlayerAnimation(param);
+    }
 }
