@@ -75,6 +75,8 @@ public class Ghost_targeting : MonoBehaviour
 
     bool GameOver = false;
 
+    private GhostAnimationController ghostAnimation = null;
+
 
     // Start is called before the first frame update
     void Start()
@@ -116,6 +118,7 @@ public class Ghost_targeting : MonoBehaviour
         SE = GetComponent<Ghost_Sound>();
         SE.playSE();
         GameOver = false;
+        ghostAnimation = GetComponentInChildren<GhostAnimationController>();
     }
 
     // Update is called once per frame
@@ -194,6 +197,7 @@ public class Ghost_targeting : MonoBehaviour
             targetQuaternion = Quaternion.LookRotation(moveSpeed, Vector3.up);
         //slrepで回転する
         transform.rotation = Quaternion.Slerp(transform.rotation, targetQuaternion, turnSpeed);
+        ghostAnimation.SetGhostAnimation(GhostAnimator.Walk);
     }
 
     /// <summary>
@@ -301,10 +305,12 @@ public class Ghost_targeting : MonoBehaviour
     {
         ifBibleAffect = true;
         Gs = GhostState.Bible_Affected;
+        ghostAnimation.SetGhostAnimation(GhostAnimator.Down);
         targetpos = targetobj.transform.position;
         //Debug.Log("bible affected");
         yield return new WaitForSeconds(time);
         ifBibleAffect = false;
+        ghostAnimation.SetGhostAnimation(GhostAnimator.StandUp);
     }
 
     public void HolyWater(float time)
@@ -317,7 +323,12 @@ public class Ghost_targeting : MonoBehaviour
         ifHolyWaterAffect = true;
         Gs = GhostState.HolyWater_Affected;
         Debug.Log("HolyWater affected");
+        ghostAnimation.SetGhostAnimation(GhostAnimator.Stun);
         yield return new WaitForSeconds(time);
         ifHolyWaterAffect = false;
+    }
+    public void CallGhostAnimation()
+    {
+        ghostAnimation.PlayGhostAnimaiton(GhostAnimator.SJK_Kill);
     }
 }

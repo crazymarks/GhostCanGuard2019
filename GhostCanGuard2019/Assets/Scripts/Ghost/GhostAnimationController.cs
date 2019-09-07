@@ -8,7 +8,7 @@ public enum GhostAnimator
     Down = 1,
     StandUp = 2,
     Stun = 5,
-    Kill = 99,
+    SJK_Kill = 99,
 }
 
 public class GhostAnimationController : MonoBehaviour
@@ -28,5 +28,10 @@ public class GhostAnimationController : MonoBehaviour
     public void ResetGhostAnimation()
     {
         animator.SetInteger(_Ghost, (int)GhostAnimator.Walk);
+    }
+
+    public void PlayGhostAnimaiton(GhostAnimator param)
+    {
+        animator.Play(param.ToString());
     }
 }
