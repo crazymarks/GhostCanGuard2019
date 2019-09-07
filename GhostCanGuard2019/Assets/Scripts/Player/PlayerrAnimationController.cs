@@ -26,10 +26,11 @@ public class PlayerrAnimationController : SingletonMonoBehavior<PlayerrAnimation
     private string _Gimmick = "GimmickParam";
 
     // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
     }
+
     /// <summary>
     /// Playerの普通の行動Animaiton
     /// </summary>

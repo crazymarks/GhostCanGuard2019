@@ -16,7 +16,7 @@ public class GhostAnimationController : MonoBehaviour
     private Animator animator = null;
     private string _Ghost = "GhostControl";
 
-    private void Start()
+    private void Awake()
     {
         animator = GetComponent<Animator>();
     }
