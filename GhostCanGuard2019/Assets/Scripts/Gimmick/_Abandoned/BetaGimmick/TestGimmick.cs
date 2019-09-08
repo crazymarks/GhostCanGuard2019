@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class TestGimmick : GimmickBase
 {
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        _start();
+        //GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
     }
 
     public void OnClickGimmickStart()

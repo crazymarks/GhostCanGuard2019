@@ -28,10 +28,10 @@ public class KabinGimmick : GimmickBase
     private Rigidbody rb = null;
     private MeshCollider meshCollider = null;
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        _start();
+        //GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
         rb = GetComponent<Rigidbody>();
         Broken = false;
         IfActivated = false;
@@ -56,7 +56,7 @@ public class KabinGimmick : GimmickBase
             Debug.Log("Broken");
             Broken = true;
             Destroy(gameObject, stunTime-0.1f);
-            GimmickUIClose();
+            //GimmickUIClose();
         }
     }
     private void Update()
@@ -159,7 +159,7 @@ public class KabinGimmick : GimmickBase
 
         
         GimmickManager.Instance.ClearGimmick();
-        GimmickUIClose();
+        //GimmickUIClose();
         player.GetComponent<PlayerControl>().playerAnim.SetGimmickAnimation(GimmickAnimation.Revive);
         st.gamestop(StopSystem.PauseState.Normal);
         

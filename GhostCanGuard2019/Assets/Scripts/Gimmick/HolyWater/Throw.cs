@@ -17,10 +17,10 @@ public class Throw : GimmickBase
     private bool IfActivated;
     
     // Start is called before the first frame update
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-        GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
+        _start();
+        //GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
         //st = GameManager.Instance.GetComponent<stop>();
     }
 

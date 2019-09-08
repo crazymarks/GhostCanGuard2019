@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
+//using UnityEngine.EventSystems;
 
 /*
  * gimmickに継承するクラス
@@ -13,12 +13,12 @@ public class GimmickBase : MonoBehaviour
     //ギミックの効果や説明のUIの展開
     [SerializeField]
     protected GameObject gimmickUIParent;
-    protected EventTrigger eventTrigger;
+    //protected EventTrigger eventTrigger;
     protected StopSystem st;
     // 各ギミックで必要なボタンを入れる
     [SerializeField]
     protected ControllerButton[] gimmickButtons = null;
-    private EventTrigger.Entry entry = new EventTrigger.Entry();
+   // private EventTrigger.Entry entry = new EventTrigger.Entry();
 
     protected bool descriptionUIOn = false; //説明文が展開されているかのフラグ　//オウカンウ
 
@@ -29,10 +29,10 @@ public class GimmickBase : MonoBehaviour
     //    eventTrigger = this.gameObject.GetComponent<EventTrigger>();
     //    gimmickUIParent = this.transform.GetChild(0).gameObject;
     //}
-    virtual protected void Start()
+    protected void _start()
     {
         st = GameManager.Instance.GetComponent<StopSystem>();
-        eventTrigger = this.gameObject.GetComponent<EventTrigger>();
+        //eventTrigger = this.gameObject.GetComponent<EventTrigger>();
         
         if (gimmickUIParent == null)
         {
@@ -56,48 +56,48 @@ public class GimmickBase : MonoBehaviour
         GimmickManager.Instance.GimmickFrag = false;
     }
     // Eventに追加される関数
-    public void GimmickEventOpen(BaseEventData data)
-    {
+    //public void GimmickEventOpen(BaseEventData data)
+    //{
 
-        Debug.Log("gimmick touch");
-        //PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
-        GameManager.Instance.pc.playerAnim.SetGimmickAnimation(GimmickAnimation.Hold);
-        GimmickUIsOnOff(true);
-    }
+    //    Debug.Log("gimmick touch");
+    //    //PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
+    //    GameManager.Instance.pc.playerAnim.SetGimmickAnimation(GimmickAnimation.Hold);
+    //    GimmickUIsOnOff(true);
+    //}
     /// <summary>
     /// gimmickの選択を解除する
     /// </summary>
-    public void GimmickUIClose()
-    {
-        GimmickUIsOnOff(false);
-        //GameManager.Instance.pc.playerAnim.SetGimmickAnimation(GimmickAnimation.Hold);
-        //PlayerAnimationController.Instance.CancelPlayerAnimation(SetPAnimator.Hold);
-        GimmickManager.Instance.ClearGimmick();
-        //PlayerManager.Instance.SetCurrentState(PlayerState.Play);
-    }
+    //public void GimmickUIClose()
+    //{
+    //    GimmickUIsOnOff(false);
+    //    //GameManager.Instance.pc.playerAnim.SetGimmickAnimation(GimmickAnimation.Hold);
+    //    //PlayerAnimationController.Instance.CancelPlayerAnimation(SetPAnimator.Hold);
+    //    GimmickManager.Instance.ClearGimmick();
+    //    //PlayerManager.Instance.SetCurrentState(PlayerState.Play);
+    //}
 
     /// <summary>
     /// gimmickのイベント作成関数
     /// </summary>
     /// <param name="triggerType">EventtTrriget.type</param>
     /// <param name="action">BaseEventDataが引数のvoid関数</param>
-    protected void GimmickEventSetUp(EventTriggerType triggerType, Action<BaseEventData> action)
-    {
-        // eventを作成し、Triggerに追加する
-        entry.eventID = triggerType;
-        entry.callback.AddListener((data) => action(data));
-        eventTrigger.triggers.Add(entry);
-    }
+    //protected void GimmickEventSetUp(EventTriggerType triggerType, Action<BaseEventData> action)
+    //{
+    //    // eventを作成し、Triggerに追加する
+    //    entry.eventID = triggerType;
+    //    entry.callback.AddListener((data) => action(data));
+    //    eventTrigger.triggers.Add(entry);
+    //}
 
     /// <summary>
     /// Gimmickのイベントを削除する
     /// </summary>
-    protected void ClearGimmickEvent()
-    {
-        if (this.eventTrigger.triggers == null) return;
+    //protected void ClearGimmickEvent()
+    //{
+    //    if (this.eventTrigger.triggers == null) return;
 
-        this.eventTrigger.triggers.Remove(entry);
-    }
+    //    this.eventTrigger.triggers.Remove(entry);
+    //}
     /// <summary>
     /// playerがギミックとカーソルが重なっているときにボタンを押した時に呼ぶ
     /// </summary>
