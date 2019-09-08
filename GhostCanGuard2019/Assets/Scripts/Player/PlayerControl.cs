@@ -16,6 +16,10 @@ public class PlayerControl : MonoBehaviour
     private bool _playerMove = true;
     public bool CanPlayerMove { get { return _playerMove; } set { _playerMove = value; rb.velocity = Vector3.zero; } }
 
+    //animation
+    public PlayerAnimationController playerAnim;
+
+
     /// <summary>
     /// StopFX
     /// </summary>
@@ -28,6 +32,10 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         rb = this.gameObject.GetComponent<Rigidbody>();
+        if(playerAnim == null)
+        {
+            playerAnim = GetComponentInChildren<PlayerAnimationController>();
+        }
     }
 
     // Update is called once per frame
@@ -44,11 +52,12 @@ public class PlayerControl : MonoBehaviour
         // playerのAnimation処理
         //if (horizontal == 0 && vertical == 0)
         if (velocity < 0.1)
-            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Stop);
-        else if (PlayerManager.Instance.CurrentPlayerState == PlayerState.Slow)
-            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Walk);
+            playerAnim.SetNormalAnimation(PAnimation.Wait);
+            
+        //else if (PlayerManager.Instance.CurrentPlayerState == PlayerState.Slow)
+        //    playerAnim.SetNormalAnimation(PAnimation.Walk);
         else
-            PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Run);
+            playerAnim.SetNormalAnimation(PAnimation.Run);
 
 
         FXcheck();

@@ -157,8 +157,10 @@ public class KabinGimmick : GimmickBase
         rb.AddForce(player.transform.forward * power + player.transform.up ,ForceMode.Impulse);
         IfActivated = true;
 
+        
         GimmickManager.Instance.ClearGimmick();
         GimmickUIClose();
+        player.GetComponent<PlayerControl>().playerAnim.SetGimmickAnimation(GimmickAnimation.Revive);
         st.gamestop(StopSystem.PauseState.Normal);
         
     }

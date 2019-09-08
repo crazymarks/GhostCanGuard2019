@@ -60,9 +60,9 @@ public class GimmickBase : MonoBehaviour
     {
 
         Debug.Log("gimmick touch");
-        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
+        //PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
+        GameManager.Instance.pc.playerAnim.SetGimmickAnimation(GimmickAnimation.Hold);
         GimmickUIsOnOff(true);
-        //st.gamestop();
     }
     /// <summary>
     /// gimmickの選択を解除する
@@ -70,7 +70,8 @@ public class GimmickBase : MonoBehaviour
     public void GimmickUIClose()
     {
         GimmickUIsOnOff(false);
-        PlayerAnimationController.Instance.CancelPlayerAnimation(SetPAnimator.Hold);
+        //GameManager.Instance.pc.playerAnim.SetGimmickAnimation(GimmickAnimation.Hold);
+        //PlayerAnimationController.Instance.CancelPlayerAnimation(SetPAnimator.Hold);
         GimmickManager.Instance.ClearGimmick();
         //PlayerManager.Instance.SetCurrentState(PlayerState.Play);
     }

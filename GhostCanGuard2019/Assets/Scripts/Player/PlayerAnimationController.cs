@@ -1,80 +1,78 @@
-﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public enum SetPAnimator
+public enum PAnimation
 {
-    Walk,
-    Run,
-    Hold,
-    Push,
-    Stop
+    Wait = 0,
+    Run = 1,
+    Kebiyin_Capture = 50,
+    Kebiyin_Kill = 99,
 }
 
-public class PlayerAnimationController : SingletonMonoBehavior<PlayerAnimationController>
+public enum GimmickAnimation
+{
+    None = 0,
+    Hold = 1,
+    Push = 2,
+    Horse = 4,
+    HorseRun = 5,
+    Revive = 6,
+    Float = 8,
+}
+
+public class PlayerAnimationController : MonoBehaviour
 {
     private Animator animator = null;
-    private List<SetPAnimator> pAnimatorsList = new List<SetPAnimator>();
-    private SetPAnimator pastAnimator = SetPAnimator.Stop;
+    private string _Player = "PlayerControl";
+    private string _Gimmick = "GimmickParam";
 
-
-    void Start()
+    // Start is called before the first frame update
+    private void Awake()
     {
-        // animator取得
-        animator = this.GetComponent<Animator>();
-        // 列挙型SetPAnimatorをList化
-        pAnimatorsList = Enum.GetValues(typeof(SetPAnimator)).Cast<SetPAnimator>().ToList();
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Playerの普通の行動Animaiton
+    /// </summary>
+    public void SetNormalAnimation(PAnimation anim)
     {
-        //Debug用
-        //if (Input.GetKeyDown(KeyCode.Z))
-        //    SetAnimatorValue(SetPAnimator.Walk);
-        //if (Input.GetKeyDown(KeyCode.X))
-        //    SetAnimatorValue(SetPAnimator.Run);
-        //if (Input.GetKeyDown(KeyCode.C))
-        //    SetAnimatorValue(SetPAnimator.Hold);
-        //if (Input.GetKeyDown(KeyCode.V))
-        //    SetAnimatorValue(SetPAnimator.Push);
-        //if (Input.GetKeyDown(KeyCode.B))
-        //    SetAnimatorValue(SetPAnimator.Stop);
+        animator.SetInteger(_Player, (int)anim);
+    }
+    /// <summary>
+    /// playerのGimmick行動のAnimaiton
+    /// </summary>
+    public void SetGimmickAnimation(GimmickAnimation anim)
+    {
+        animator.SetInteger(_Gimmick, (int)anim);
+        if(anim == GimmickAnimation.Hold)
+        {
+            animator.SetTrigger("Hold");
+        }
+    }
+
+    public void PlayPlayerAnimation(PAnimation param)
+    {
         
-
+        switch (param)
+        {
+            case PAnimation.Wait:
+                animator.Play(param.ToString());
+                break;
+            case PAnimation.Run:
+                animator.Play(param.ToString());
+                break;
+            case PAnimation.Kebiyin_Capture:
+                animator.SetTrigger("Arrest");
+                break;
+            case PAnimation.Kebiyin_Kill:
+                animator.SetTrigger("Killed");
+                break;
+            default:
+                break;
+        }
     }
-    /// <summary>
-    /// 指定されたAnimatorの値以外の変数を初期化(falseする 
-    /// </summary>
-    public void SetAnimatorValue(SetPAnimator param)
+    public void SetAnimaionByName(string AnimationName)
     {
-        if(pastAnimator == SetPAnimator.Hold)
-        {
-            if (param != SetPAnimator.Push && param != SetPAnimator.Hold) return;
-        }
-        // animatorで遷移したい動きを先頭に持ってくる。
-        if (pAnimatorsList.IndexOf(param) > 0)
-        {
-            pAnimatorsList.RemoveAt(pAnimatorsList.IndexOf(param));
-            pAnimatorsList.Insert(0, param);
-        }
-        // 遷移したい動きにする。
-        animator.SetBool(param.ToString(), true);
-
-        // そのほかの動きをfalseにする
-        for(int i = 1; i < pAnimatorsList.Count; i++)
-        {
-            animator.SetBool(pAnimatorsList[i].ToString(), false);
-        }
-        pastAnimator = param;
-    }
-    /// <summary>
-    /// falseにする処理
-    /// </summary>
-    public void CancelPlayerAnimation(SetPAnimator param)
-    {
-        animator.SetBool(param.ToString(), false);
-        pastAnimator = SetPAnimator.Stop;
+        animator.Play(AnimationName);
     }
 }

@@ -92,6 +92,7 @@ public class Throw : GimmickBase
         Rigidbody rb = holywater.GetComponent<Rigidbody>();
         rb.AddForce(transform.forward * force, ForceMode.Impulse);
         st.gamestop(StopSystem.PauseState.Normal);
+        GetComponent<PlayerControl>().playerAnim.SetGimmickAnimation(GimmickAnimation.Float);
         IfActivated = false;
         count--;
     }

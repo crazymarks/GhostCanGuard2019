@@ -100,7 +100,8 @@ public class PlayerManager: SingletonMonoBehavior<PlayerManager>
                 break;
             case PlayerState.Slow:
                 playerControl.speed = playerSpeed / 3;
-                PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Walk);
+                playerControl.playerAnim.SetNormalAnimation(PAnimation.Run);
+                //PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Walk);
                 //animcontrol.speed = 1 / 3;
                 break;
             case PlayerState.Gimmick:

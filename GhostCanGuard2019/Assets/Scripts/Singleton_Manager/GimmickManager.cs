@@ -53,7 +53,8 @@ public class GimmickManager : SingletonMonoBehavior<GimmickManager>
 
     public void PlayerPushAnimation()
     {
-        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
+
+        GameManager.Instance.pc.playerAnim.SetGimmickAnimation(GimmickAnimation.Push);
     }
 
     private void Update()

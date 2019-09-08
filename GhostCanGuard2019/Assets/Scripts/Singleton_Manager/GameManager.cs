@@ -225,6 +225,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             gameover = true;
 
         }
+        ///
+        ///廃棄案
         //if (tf.thiefState == Thief.ThiefState.EXITED)
         //{
         //    //UIManager.Instance.ShowDesPanel("平和な夜ですね．．．");
@@ -236,6 +238,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         //    gameover = true;
         //    //Invoke("gameOver(GameOverState.steal)", 2f);
         //}
+        /////
+        /////
         if (distance_player_to_thief <= checkdistance)
         {
             //UIManager.Instance.ShowDesPanel("逮捕成功!");
@@ -243,6 +247,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             //text.enabled = true;
             Debug.Log("You Win!");
             tf.thiefState = Thief.ThiefState.ARRESTED;
+            pc.transform.LookAt(tf.transform);
+            pc.playerAnim.PlayPlayerAnimation(PAnimation.Kebiyin_Capture);
             OverState = GameOverState.arrest;
             gameover = true;
         }
@@ -258,6 +264,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                 tf.thiefState = Thief.ThiefState.KILLED;
                 OverState = GameOverState.thiefDead;
                 ght.ghostState = Ghost_targeting.GhostState.Kill;
+                ght.transform.LookAt(tf.transform);
                 gameover = true;
 
             }
@@ -268,6 +275,9 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                 //text.enabled = true;
                 Debug.Log("死");
                 OverState = GameOverState.policeDead;
+                ght.transform.LookAt(pc.transform);
+                pc.transform.rotation = ght.transform.rotation;
+                pc.playerAnim.PlayPlayerAnimation(PAnimation.Kebiyin_Kill);
                 ght.ghostState = Ghost_targeting.GhostState.Kill;
                 gameover = true;
 

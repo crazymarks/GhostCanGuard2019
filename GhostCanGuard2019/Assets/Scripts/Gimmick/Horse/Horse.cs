@@ -28,6 +28,7 @@ public class Horse : GimmickBase
     //馬の速さ
     [SerializeField][Range(0,15)]
     private float HorseSpeed = 10.0f;
+    //発動距離
     public float range = 5f;
     public RangeUI rangeui;
 
@@ -48,6 +49,9 @@ public class Horse : GimmickBase
     [SerializeField]
     private GameObject Saddle;                          //馬の鞍（くら）
     private Vector3 StartPosition = Vector3.zero;       //馬の初期位置
+    public GameObject RidePlayer;
+    public PlayerAnimationController RideAnimation;
+
     private Quaternion startQuaternion = Quaternion.identity;
 
     Vector3 LeftOrient = Vector3.zero;
@@ -97,6 +101,7 @@ public class Horse : GimmickBase
             Saddle = transform.Find("Saddle").gameObject;
         }
         resetHorse();
+        RidePlayer.SetActive(false);
     }
 
     void OnTriggerEnter(Collider collision)
@@ -273,30 +278,44 @@ public class Horse : GimmickBase
     private void GetOnHorse(GameObject player)
     {
         tag = "Player";
-       
         player.GetComponent<Rigidbody>().isKinematic = true;
         PlayerManager.Instance.SetCurrentState(PlayerState.Gimmick);
-        player.transform.position = Saddle.transform.position;
-        player.transform.rotation = Saddle.transform.rotation;
+        player.transform.position = transform.position;
+        player.transform.rotation = transform.rotation;
         player.transform.SetParent(this.transform);
+        player.SetActive(false);
+
+        //Animation
+        RidePlayer.SetActive(true);
+        RidePlayer.transform.localPosition = Saddle.transform.localPosition;
+        RidePlayer.transform.localRotation = Saddle.transform.localRotation;
+        RideAnimation.SetAnimaionByName("Kebiyin_HorseRide");
+        
         player.tag = "Untagged";
         Debug.Log("Saddle Set");
         Cloud.SetActive(true);
     } 
     private void GetOffHorse(GameObject player,Vector3 orient)
     {
+
+        //Animation
+        RideAnimation.SetGimmickAnimation(GimmickAnimation.None);
+        RidePlayer.SetActive(false);
+        
         tag = "Gimmik";
         //player.transform.position += orient * transform.localScale.magnitude;
         //transform.parent = null;
         player.transform.parent = null;
         player.tag = "Player";
+        player.SetActive(true);
         //joint.connectedBody = null;
-        player.transform.position = new Vector3(player.transform.position.x, floorheight, player.transform.position.z)+orient.normalized;
+        player.transform.position = new Vector3(player.transform.position.x, floorheight, player.transform.position.z) + orient.normalized;
         PlayerManager.Instance.SetCurrentState(PlayerState.Play);
         LeftOrient = Vector3.zero;
         player.GetComponent<Rigidbody>().isKinematic = false;
         PlayerManager.Instance.SetCurrentState(PlayerState.Play);
-        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
+        
+        //PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
         IfMoving = false;
     }
 
@@ -349,6 +368,13 @@ public class Horse : GimmickBase
         IfMoving = true;
         Fly.SetActive(true);
         Debug.Log(_moveorient);
+
+        //Animation
+        RidePlayer.transform.localPosition = new Vector3(0, -0.7f, -0.75f);
+        RidePlayer.transform.localRotation = Quaternion.identity;
+        RideAnimation.SetGimmickAnimation(GimmickAnimation.HorseRun);
+
+
         st.gamestop(StopSystem.PauseState.Normal);
         //GimmickUIClose();
         AudioController.PlaySnd("A8_HorseScream",Camera.main.transform.position, 1f);

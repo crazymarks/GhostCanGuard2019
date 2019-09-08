@@ -173,7 +173,9 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
         Time.timeScale = ObserverTimeScale;
         currentTimescale = ObserverTimeScale;
         outlineCamera.enabled = true;
-        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
+
+        GameManager.Instance.pc.playerAnim.SetGimmickAnimation(GimmickAnimation.Hold);
+        //PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Hold);
         stopped = true;
         GameManager.Instance.pc.CanPlayerMove = false;
         currentstate = PauseState.ObserverMode;
@@ -184,7 +186,8 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
         currentTimescale = 1f;
         cursor.SetActive(false);
         outlineCamera.enabled = false;
-        PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
+        GameManager.Instance.pc.playerAnim.SetGimmickAnimation(GimmickAnimation.Push);
+        //PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
         stopped = false;
         GameManager.Instance.pc.CanPlayerMove = true;
         if (outlineObject && outlineObject.GetComponent<Outline>() != null)         //アウトライを消す
