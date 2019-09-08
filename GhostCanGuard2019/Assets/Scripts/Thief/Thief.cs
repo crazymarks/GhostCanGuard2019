@@ -46,6 +46,8 @@ public class Thief : MonoBehaviour
     //bool mIsPaused = false;
     //bool mIsTouched = false;
     bool mIsAllowFind = true;
+   
+    
     /// <summary>
     /// animation
     /// </summary>
@@ -93,6 +95,8 @@ public class Thief : MonoBehaviour
         
     }
 
+   
+
     void InTreasureUpdate()
     {
         treasureTimer += Time.deltaTime;
@@ -116,6 +120,12 @@ public class Thief : MonoBehaviour
         treasureTimer = 0f;
     }
 
+    void HeadExitUpdate()
+    {
+        StartCounter();
+        //StartSecondaryCounter();
+        //unit.HeadExit();  　　　　　　　　　　　　　　　　　
+    }
 
     void EscapeUpdate()
     {
@@ -134,13 +144,8 @@ public class Thief : MonoBehaviour
         //    StartSecondaryCounter(); 
         //}
     }
-
-    void HeadExitUpdate()
-    {
-        StartCounter();
-        //StartSecondaryCounter();
-        //unit.HeadExit();  　　　　　　　　　　　　　　　　　
-    }
+    
+   
 
     void PauseUpdate()
     {
@@ -157,6 +162,7 @@ public class Thief : MonoBehaviour
         if (!ifKilled)
         {
             ifKilled = true;
+            StopAllCoroutines();
             anim.SetThiefAnimation(ThiefAnimator.dorobo_Kill);
         }
     }
@@ -166,6 +172,7 @@ public class Thief : MonoBehaviour
         if (!ifArrested)
         {
             ifArrested = true;
+            StopAllCoroutines();
             anim.SetThiefAnimation(ThiefAnimator.dorobo_Capture);
         }
     }
@@ -219,7 +226,7 @@ public class Thief : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        
+        if (thiefState == ThiefState.STUN) return;   
         if (other.tag == "PlayerCollider" && thiefState != ThiefState.GAMEOVER && mIsAllowFind == true)
         {
             mIsAllowFind = false;
@@ -268,7 +275,7 @@ public class Thief : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-
+        if (thiefState == ThiefState.STUN) return;
         if ((other.tag == "PlayerCollider" || other.tag == "Ghost") && thiefState != ThiefState.GAMEOVER)
         {
             mIsPlayerExitedState = false;
@@ -287,6 +294,7 @@ public class Thief : MonoBehaviour
     }
     void OnTriggerExit(Collider other)
     {
+        if (thiefState == ThiefState.STUN) return;
         if (other.tag == "PlayerCollider" || other.tag == "Ghost")
         {
             Debug.Log("Restart Find Treasure or Exit");
@@ -348,6 +356,20 @@ public class Thief : MonoBehaviour
     public void setGhostCollider()
     {
         if (ghostCollider != null) ghostCollider.radius = colliderradius;
+    }
+
+    public void GotStunned(float time)
+    {
+        StartCoroutine(Stunned(time));
+    }
+    IEnumerator Stunned(float sec)
+    {
+        ThiefState tempState = thiefState;
+        thiefState = Thief.ThiefState.STUN;
+        anim.SetThiefAnimation(ThiefAnimator.Stun);
+        yield return new WaitForSeconds(sec);
+        thiefState = tempState;
+        anim.SetThiefAnimation(ThiefAnimator.Run);
     }
 
 }

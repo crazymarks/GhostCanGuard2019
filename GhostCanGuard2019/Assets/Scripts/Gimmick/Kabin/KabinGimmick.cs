@@ -13,6 +13,8 @@ public class KabinGimmick : GimmickBase
     private GameObject player = null;
     [SerializeField]
     private float speed = 2.0f;
+    [SerializeField]
+    private float stunTime = 2.0f;
 
     private bool kabinSetPos = false;
 
@@ -20,6 +22,7 @@ public class KabinGimmick : GimmickBase
     private bool Broken = false;
 
     private Rigidbody rb = null;
+    private MeshCollider meshCollider = null;
 
     protected override void Start()
     {
@@ -28,7 +31,10 @@ public class KabinGimmick : GimmickBase
         rb = GetComponent<Rigidbody>();
         Broken = false;
         IfActivated = false;
-        player = GameObject.FindGameObjectWithTag("Player");
+        if(player == null)
+            player = GameObject.FindGameObjectWithTag("Player");
+        rb.isKinematic = true;
+        meshCollider = GetComponentInChildren<MeshCollider>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -36,14 +42,16 @@ public class KabinGimmick : GimmickBase
 
         if (IfActivated && other.tag == "Thief")
         {
-            //泥棒の処理
+            //泥棒のスタン処理
+            var thief = other.GetComponent<Thief>();
+            thief.GotStunned(stunTime);
         }
         if (IfActivated && other.tag == "Untagged")
         {
             rb.velocity = Vector3.zero;
             Debug.Log("Broken");
             Broken = true;
-            Destroy(gameObject, 2f);
+            Destroy(gameObject, stunTime-0.1f);
             GimmickUIClose();
         }
     }
@@ -80,7 +88,7 @@ public class KabinGimmick : GimmickBase
         if (IfActivated) return;
         Vector3 playerPosition = player.transform.position;
         playerPosition += player.transform.forward;
-
+        meshCollider.convex = false;
         KabinToPlayer(playerPosition);
        
     }
@@ -97,7 +105,8 @@ public class KabinGimmick : GimmickBase
             Debug.Log("Choose target");
             return;
         }
-        
+
+        meshCollider.convex = true;
 
         if (!Input.GetButtonDown("Send")) return;
         
@@ -110,7 +119,7 @@ public class KabinGimmick : GimmickBase
         
         Vector3 target = st.getCursorWorldPosition();
         player.transform.LookAt(new Vector3(target.x, gameObject.transform.position.y, target.z));
-
+        rb.isKinematic = false;
         KabinToPlayer(player.transform.position + player.transform.forward);
         rb.AddForce(player.transform.forward * power + player.transform.up ,ForceMode.Impulse);
         IfActivated = true;
