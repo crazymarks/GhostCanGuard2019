@@ -2,34 +2,59 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum ThiefAnimator
+{
+    Wait = 0, // ○
+    Run = 1, // ○
+    Stun = 5,
+    Steal = 10, // ○
+    dorobo_Capture = 50,
+    dorobo_Kill = 99,
+}
+[RequireComponent(typeof(Animator))]
 public class ThiefAnimationController : MonoBehaviour
 {
-    [SerializeField]
-    Thief tf;
     Animator animator;
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
+    private string _Thief = "ThiefControl";
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         animator = GetComponent<Animator>();
     }
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// thiefのAnimation
+    /// </summary>
+    public void SetThiefAnimation(ThiefAnimator anim)
     {
-        //if(tf.thiefState==Thief.ThiefState.PAUSE|| tf.thiefState == Thief.ThiefState.END||tf.thiefState == Thief.ThiefState.EXITED)
-        //{
-        //    animator.SetBool("Wait", true);
-        //}
+        animator.SetInteger(_Thief, (int)anim);
+        switch (anim)
+        {
+            case ThiefAnimator.Stun:
+                animator.SetTrigger("Stun");
+                break;
+            case ThiefAnimator.dorobo_Capture:
+                animator.SetTrigger("Arrested");
+                break;
+            case ThiefAnimator.dorobo_Kill:
+                animator.SetTrigger("Killed");
+                break;
+            default:
+                break;
+        }
     }
-    public void setWaitAnimation()
+   
+    /// <summary>
+    /// dethとCaptureをPlayさせる関数
+    /// </summary>
+    /// <param name="thiefParam"></param>
+    public void ThiefAnimatorPlay(ThiefAnimator thiefParam)
     {
-        animator.SetBool("Wait", true);
+        if ((int)thiefParam < 11) return;
+        animator.Play(thiefParam.ToString());
     }
-    public void setRunAnimation()
+
+    public void SetAnimationbyName(string AnimationName)
     {
-        animator.SetBool("Wait", false);
+        animator.Play(AnimationName);
     }
 }

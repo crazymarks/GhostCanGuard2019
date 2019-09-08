@@ -214,7 +214,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     {
         //Debug.Log(distance_player_to_thief);
         
-        if (tf.thiefState == Thief.ThiefState.END)
+        if (tf.thiefState == Thief.ThiefState.GAMEOVER)
         {
             //UIManager.Instance.ShowDesPanel("泥棒が逃げました！");
             //text.text = "泥棒が逃げました！";
@@ -222,7 +222,6 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             Debug.Log("泥棒が逃げました！");
 
             OverState = GameOverState.steal;
-            ght.ghostState = Ghost_targeting.GhostState.GameOver;
             gameover = true;
 
         }
@@ -243,8 +242,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             //text.text = "逮捕成功!";
             //text.enabled = true;
             Debug.Log("You Win!");
+            tf.thiefState = Thief.ThiefState.ARRESTED;
             OverState = GameOverState.arrest;
-            ght.ghostState = Ghost_targeting.GhostState.GameOver;
             gameover = true;
         }
         if (ghostEnable)
@@ -256,6 +255,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                 //text.text = "迷えば、敗れる";
                 //text.enabled = true;
                 Debug.Log("泥棒が殺人鬼に殺された！！");
+                tf.thiefState = Thief.ThiefState.KILLED;
                 OverState = GameOverState.thiefDead;
                 ght.ghostState = Ghost_targeting.GhostState.Kill;
                 gameover = true;
@@ -289,8 +289,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     void gameOver()
     {
-        tf.thiefState = Thief.ThiefState.STOP;
-
+        if (ghostEnable)
+            ght.ghostState = Ghost_targeting.GhostState.GameOver;
         //条件によるEndingSceneが現す
         switch (OverState)
         {

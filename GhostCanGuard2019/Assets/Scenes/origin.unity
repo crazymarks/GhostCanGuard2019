@@ -1278,7 +1278,7 @@ PrefabInstance:
     - target: {fileID: 5639844316279069718, guid: a6f09db9e7f9c7e46835de870444befb,
         type: 3}
       propertyPath: initialSpeed
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8343161672927344380, guid: a6f09db9e7f9c7e46835de870444befb,
         type: 3}
@@ -3051,7 +3051,7 @@ PrefabInstance:
     - target: {fileID: 3521398602406828694, guid: e299d37bc48078b44834b20893dd1f28,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3521398602406828690, guid: e299d37bc48078b44834b20893dd1f28,
         type: 3}
@@ -3116,7 +3116,7 @@ PrefabInstance:
     - target: {fileID: 3521398602406828695, guid: e299d37bc48078b44834b20893dd1f28,
         type: 3}
       propertyPath: ifNeedAwakenTime
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e299d37bc48078b44834b20893dd1f28, type: 3}

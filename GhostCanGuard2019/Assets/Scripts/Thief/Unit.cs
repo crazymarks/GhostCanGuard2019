@@ -64,7 +64,7 @@ public class Unit : MonoBehaviour
         //}
         //if (Input.GetKeyDown(KeyCode.Q)) GotStunned();//stunned gimmick, 
         //PathRequestManager.RequestPath(transform.position, currTarget.position, OnPathFound);
-        if (thief.thiefState == Thief.ThiefState.END || thief.thiefState == Thief.ThiefState.EXITED || thief.thiefState == Thief.ThiefState.KILLED)
+        if (thief.thiefState == Thief.ThiefState.GAMEOVER || thief.thiefState == Thief.ThiefState.ARRESTED || thief.thiefState == Thief.ThiefState.KILLED || thief.thiefState == Thief.ThiefState.STUN)
             return;
         if (Time.time > nextActionTime && thief.thiefState != Thief.ThiefState.STOP)
         {
