@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,14 +14,17 @@ public class Ghost_targeting : MonoBehaviour
         Patrol,
         Bible_Affected,
         HolyWater_Affected,
-        GameOver
+        GameOver,
+        Kill
     }
     [Header("鬼の状態")]
-    public GhostState Gs;
+    public GhostState ghostState;
 
     //SE
     Ghost_Sound SE;
 
+    //Animation
+    GhostAnimationController GhostAnim;
 
     //目標を追う速度
     public float chasingSpeed = 5f;
@@ -113,17 +117,23 @@ public class Ghost_targeting : MonoBehaviour
             trb = thief.GetComponent<Rigidbody>();
             ifThiefHide = thief.GetComponent<thiefHide>().ifHide;
         }
+
+        GhostAnim = GetComponentInChildren<GhostAnimationController>();
+        GhostAnim.SetGhostAnimation(GhostAnimator.Walk);
         SE = GetComponent<Ghost_Sound>();
         SE.playSE();
+
+        ghostState = GhostState.Patrol;
+        GhostAnim.SetGhostAnimation(GhostAnimator.StandUp);
         GameOver = false;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (!gameObject.activeSelf)
+        if (!gameObject.activeSelf || GameOver)
             return;
-        switch (Gs)
+        switch (ghostState)
         {
             case GhostState.Chasing_Player:
                 lastActTime = Time.time;
@@ -146,18 +156,21 @@ public class Ghost_targeting : MonoBehaviour
             case GhostState.GameOver:
                 GameOverUpdate();
                 return;
+            case GhostState.Kill:
+                KillUpdate();
+                return;
             default:
                 break;
         }
         
-    }
-    private void Update()
-    {
-        if (!gameObject.activeSelf || Gs==GhostState.GameOver)
-            return;
         //目標を検知
         targetCheck();
+        
     }
+    //private void Update()
+    //{
+        
+    //}
     /// <summary>
     /// 終了時の処理
     /// </summary>
@@ -167,11 +180,21 @@ public class Ghost_targeting : MonoBehaviour
         {
             GameOver = true;
             SE.stopSE();
+            StopAllCoroutines();
             GetComponentInChildren<Animator>().speed = 0;
         }
         else return;
     }
-
+    private void KillUpdate()
+    {
+        if (!GameOver)
+        {
+            GhostAnim.SetGhostAnimation(GhostAnimator.SJK_Kill);
+            GameOver = true;
+            SE.stopSE();
+            StopAllCoroutines();
+        }
+    }
 
     /// <summary>
     /// 殺人鬼を移動する
@@ -217,10 +240,10 @@ public class Ghost_targeting : MonoBehaviour
     void generateRandomTarget()
     {
         //パトロール距離を生成する
-        patrolDistance = -maxPatrolRange / (Random.Range(0f, maxPatrolRange - 1f) - maxPatrolRange);
+        patrolDistance = -maxPatrolRange / (UnityEngine.Random.Range(0f, maxPatrolRange - 1f) - maxPatrolRange);
         //Debug.Log(patrolDistance);
         //パトロール方向を生成する
-        Vector2 point = Random.insideUnitCircle * patrolDistance;
+        Vector2 point = UnityEngine.Random.insideUnitCircle * patrolDistance;
         //パトロールの目標を計算する
         patroPosition = new Vector3(transform.position.x + point.x, transform.position.y, transform.position.z + point.y);
         if ((patroPosition - missingPosition).magnitude > maxPatrolRange) //最大距離を超える時
@@ -242,7 +265,7 @@ public class Ghost_targeting : MonoBehaviour
         //デフォルトで泥棒を追う
         if (targetobj == null && !ifThiefHide)
         {
-            Gs = GhostState.Chasing_Thief;
+            ghostState = GhostState.Chasing_Thief;
             targetobj = thief;
         }
         distancetoPlayer = Vector3.Distance(transform.position, player.transform.position);
@@ -253,14 +276,14 @@ public class Ghost_targeting : MonoBehaviour
             if (distancetoPlayer < distanceOfChasingPlayer && distancetoPlayer < distancetoThief)
             {
                 //プレイヤーが泥棒より殺人鬼に近づくかつ、殺人鬼の警戒範囲内に入る
-                Gs = GhostState.Chasing_Player;
+                ghostState = GhostState.Chasing_Player;
                 targetobj = player;
             }
 
             if (distancetoPlayer > distanceOfGiveUpChase || distancetoPlayer > distancetoThief)
             {
                 //プレイヤーが泥棒より殺人鬼に離れた場合、または殺人鬼の最大追跡範囲に出す
-                Gs = GhostState.Chasing_Thief;
+                ghostState = GhostState.Chasing_Thief;
                 targetobj = thief;
             }
         }
@@ -270,12 +293,12 @@ public class Ghost_targeting : MonoBehaviour
             {
                 targetobj = null;
                 missingPosition = transform.position;
-                Gs = GhostState.Patrol;
+                ghostState = GhostState.Patrol;
                 //isTargeting = false;
             }
             if (distancetoPlayer < distanceOfChasingPlayer)
             {
-                Gs = GhostState.Chasing_Player;
+                ghostState = GhostState.Chasing_Player;
                 //isTargeting = true;
                 //targetobj = player;
             }
@@ -283,7 +306,7 @@ public class Ghost_targeting : MonoBehaviour
             if (distancetoPlayer > distanceOfGiveUpChase)
             {
                 targetobj = null;
-                Gs = GhostState.Patrol;
+                ghostState = GhostState.Patrol;
                 //isTargeting = false;
             }
         }
@@ -300,7 +323,7 @@ public class Ghost_targeting : MonoBehaviour
     IEnumerator bibleEffect(float time)
     {
         ifBibleAffect = true;
-        Gs = GhostState.Bible_Affected;
+        ghostState = GhostState.Bible_Affected;
         targetpos = targetobj.transform.position;
         //Debug.Log("bible affected");
         yield return new WaitForSeconds(time);
@@ -314,10 +337,16 @@ public class Ghost_targeting : MonoBehaviour
     }
     IEnumerator HolyWaterEffect(float time)
     {
+        SE.stopSE();                                        //移動SE停止
         ifHolyWaterAffect = true;
-        Gs = GhostState.HolyWater_Affected;
+        ghostState = GhostState.HolyWater_Affected;　　　　　　　　//状態切り替わる
+        GhostAnim.SetGhostAnimation(GhostAnimator.Down);   //アニメーション設定
         Debug.Log("HolyWater affected");
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(time - 1.533f);     
+        GhostAnim.SetGhostAnimation(GhostAnimator.StandUp);  //アニメーション設定
+        yield return new WaitForSeconds(1.533f);             //立て直し時間を待ち
+        GhostAnim.SetGhostAnimation(GhostAnimator.Walk);    //アニメーション設定
         ifHolyWaterAffect = false;
+        SE.playSE();                                        //移動SE再生
     }
 }

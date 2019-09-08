@@ -1275,6 +1275,11 @@ PrefabInstance:
       propertyPath: escapePoints.Array.data[7]
       value: 
       objectReference: {fileID: 1051808703}
+    - target: {fileID: 5639844316279069718, guid: a6f09db9e7f9c7e46835de870444befb,
+        type: 3}
+      propertyPath: initialSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8343161672927344380, guid: a6f09db9e7f9c7e46835de870444befb,
         type: 3}
       propertyPath: m_CastShadows
@@ -2028,7 +2033,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c306e480db80e47b60a31b2cdd0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 36480206}
+  Bracket: {fileID: 0}
+  Desc: {fileID: 0}
+  wts: 0
+  anim: {fileID: 0}
 --- !u!4 &1216061953
 Transform:
   m_ObjectHideFlags: 0
