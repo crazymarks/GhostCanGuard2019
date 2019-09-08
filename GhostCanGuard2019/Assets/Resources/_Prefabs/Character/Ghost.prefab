@@ -66,7 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da6f1da8aa4be242af7b25451980e84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ghostState: 2
+  ghostState: 4
+  ifNeedAwakenTime: 0
   chasingSpeed: 2.5
   turnSpeed: 0.5
   walkSpeed: 2

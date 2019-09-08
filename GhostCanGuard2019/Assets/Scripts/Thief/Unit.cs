@@ -9,9 +9,9 @@ public class Unit : MonoBehaviour
     //** Values should be changed in the inspector**
 
     public Transform treasure, exit;// positions of treasure and exit
-    public float initialSpeed = 20;// initial speed for thief
+    public float initialSpeed = 5;// initial speed for thief
     public float increasedSpeed = 30, increasedSpeedDur = 3.0f;//increased speed and duration
-    public float stunnedTime = 1.5f;// stunned gimick effect duration
+    //public float stunnedTime = 1.5f;// stunned gimick effect duration
 
     Vector3[] path;
     int targetIndex;
@@ -22,6 +22,8 @@ public class Unit : MonoBehaviour
     //public List<Transform> prirityPoints = new List<Transform>();
 
     public Transform currTarget;// current target to head to
+
+    Vector3 currentWayPoint;
 
     Thief thief;
 
@@ -73,6 +75,39 @@ public class Unit : MonoBehaviour
 
     }
 
+    private void FixedUpdate()
+    {
+        if (thief.thiefState == Thief.ThiefState.HEAD_EXIT || thief.thiefState == Thief.ThiefState.HEAD_TREASURE || thief.thiefState == Thief.ThiefState.ESCAPE)
+        {
+            if (path == null) return;
+            if (path.Length != 0)
+            {
+                currentWayPoint = path[0];
+                //Debug.Log(path[0]);
+                //Debug.Log(path.Length);
+            }
+            else currentWayPoint = transform.position;
+
+
+            if (transform.position == currentWayPoint)
+            {
+                targetIndex++;
+                if (targetIndex >= path.Length)
+                {
+                    thief.reachEscapePoint();                    //終点チェック
+                }
+                else
+                {
+                    currentWayPoint = path[targetIndex];
+                }
+            }
+            transform.position = Vector3.MoveTowards(transform.position, currentWayPoint, currSpeed * Time.deltaTime);
+            //GetComponent<Rigidbody>().velocity = new Vector3(currentWayPoint.x - transform.position.x, 0, currentWayPoint.z - transform.position.z).normalized * currSpeed;
+            //Debug.Log(GetComponent<Rigidbody>().velocity);
+            transform.LookAt(new Vector3(currentWayPoint.x, transform.position.y, currentWayPoint.z));
+            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(currentWayPoint, Vector3.up), 0.5f);
+        }
+    }
     //public void FollowPriority()
     //{
     //    StartCoroutine(FindAndFollow());
@@ -83,9 +118,9 @@ public class Unit : MonoBehaviour
         StartCoroutine(IncreaseSpeed(increasedSpeedDur));
     }
 
-    public void GotStunned()
+    public void GotStunned(float time)
     {
-        StartCoroutine(Stunned(stunnedTime));
+        StartCoroutine(Stunned(time));
     }
 
     public void HeadToEscapePoint()
@@ -205,7 +240,7 @@ public class Unit : MonoBehaviour
                 if (thief.ghostCollider != null) thief.ghostCollider.radius = 1f; //鬼のBlockを解除する
                 //thief.playerCollider.SetActive(false);
 
-                //今の目標を鬼に設置する
+                //今の目標を鬼にする
                 //currTarget = ghost;
 
                 //今の目標を出口或いは宝に設置する
@@ -269,10 +304,7 @@ public class Unit : MonoBehaviour
         }
     }
 
-    void FindAndFollow2()
-    {
-
-    }
+   
 
     //IEnumerator FindAndFollow()
     //{
@@ -302,39 +334,7 @@ public class Unit : MonoBehaviour
     //    }
     //}
 
-    Vector3 currentWayPoint;
-
-    private void FixedUpdate()
-    {
-        if (path == null) return;
-        if (path.Length != 0)
-        {
-            currentWayPoint = path[0];
-            //Debug.Log(path[0]);
-            //Debug.Log(path.Length);
-        }
-        else currentWayPoint = transform.position;
-
-       
-        if (transform.position == currentWayPoint)
-        {
-            targetIndex++;
-            if (targetIndex >= path.Length)
-            {
-                thief.reachEscapePoint();                    //終点チェック
-            }
-            else
-            {
-                currentWayPoint = path[targetIndex];
-            } 
-        }
-        transform.position = Vector3.MoveTowards(transform.position, currentWayPoint, currSpeed * Time.deltaTime);
-        //GetComponent<Rigidbody>().velocity = new Vector3(currentWayPoint.x - transform.position.x, 0, currentWayPoint.z - transform.position.z).normalized * currSpeed;
-        //Debug.Log(GetComponent<Rigidbody>().velocity);
-        transform.LookAt(new Vector3(currentWayPoint.x, transform.position.y, currentWayPoint.z));
-        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(currentWayPoint, Vector3.up), 0.5f);
-        
-    }
+   
 
     //IEnumerator FollowPath()
     //{
@@ -371,10 +371,13 @@ public class Unit : MonoBehaviour
 
     IEnumerator Stunned(float sec)
     {
+        Thief.ThiefState tempState = thief.thiefState;
+        thief.thiefState = Thief.ThiefState.STUN;
         float temp = currSpeed;
         currSpeed = 0.0f;
         yield return new WaitForSeconds(sec);
         currSpeed = temp;
+        thief.thiefState = tempState;
     }
 
     IEnumerator IncreaseSpeed(float sec)

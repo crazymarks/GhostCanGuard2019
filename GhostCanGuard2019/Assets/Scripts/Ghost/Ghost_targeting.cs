@@ -26,7 +26,7 @@ public class Ghost_targeting : MonoBehaviour
     //Animation
     GhostAnimationController GhostAnim;
 
-    public bool ifNeedAwakenTime = false;
+   
 
     //目標を追う速度
     public float chasingSpeed = 5f;
@@ -123,13 +123,8 @@ public class Ghost_targeting : MonoBehaviour
         GhostAnim = GetComponentInChildren<GhostAnimationController>();
         SE = GetComponent<Ghost_Sound>();
         SE.playSE();
-
-        ghostState = GhostState.Patrol;
         GameOver = false;
-        if (ifNeedAwakenTime)
-        {
-            HolyWater(1f);
-        }
+        
     }
 
     // Update is called once per frame
@@ -208,6 +203,7 @@ public class Ghost_targeting : MonoBehaviour
     /// <param name="advance_speed">目安追跡ポイントを計算</param>
     void move(Vector3 target,float speed, Vector3 advance_speed)
     {
+        target.y = 0;
         if((target - transform.position).sqrMagnitude < 0.2f)  return;//ターゲットに近づく時に止まる
         
         

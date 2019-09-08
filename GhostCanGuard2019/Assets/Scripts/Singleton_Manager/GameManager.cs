@@ -198,7 +198,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         {
             //ゲームオーバー処理
             st.gamestop(StopSystem.PauseState.Normal);
-            if(st.canStop)
+            pc.CanPlayerMove = false;
+            if (st.canStop)
                 st.canStop = false;
             if (!iestart)
                 StartCoroutine(ie());
@@ -248,7 +249,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         }
         if (ghostEnable)
         {
-            if (ght.ifHolyWaterAffect) return;
+            //if (ght.ifHolyWaterAffect) return;
             if (distance_ghost_to_thief <= checkdistance)
             {
                 //UIManager.Instance.ShowDesPanel("迷えば、敗れる");
@@ -280,7 +281,6 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     /// <returns></returns>
     IEnumerator ie()
     {
-        pc.CanPlayerMove = false;
         iestart = true;
         Time.timeScale = 1f;
         yield return new WaitForSeconds(2f);    //アニメーション時間を待ち

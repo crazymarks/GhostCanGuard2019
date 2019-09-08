@@ -11,6 +11,7 @@ public class Thief : MonoBehaviour
         HEAD_EXIT,
         HEAD_GHOST,
         ESCAPE,
+        STUN,
         PAUSE,
         STOP,
         KILLED,
@@ -129,6 +130,7 @@ public class Thief : MonoBehaviour
 
     void InTreasureUpdate()
     {
+        if(thiefState==ThiefState.STUN)
         treasureTimer += Time.deltaTime;
         if (treasureTimer > TimeToTakeTreasure)//time needed to collect treasure ** hardcode
         {
