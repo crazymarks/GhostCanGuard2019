@@ -101,7 +101,7 @@ public class Horse : GimmickBase
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Ghost" && IfActivated)
+        if (collision.gameObject.tag == "Ghost" && IfMoving)
         {
             collision.gameObject.GetComponent<Ghost_targeting>().HolyWater(5f);
             Debug.Log("殺人鬼をぶつけた!!");

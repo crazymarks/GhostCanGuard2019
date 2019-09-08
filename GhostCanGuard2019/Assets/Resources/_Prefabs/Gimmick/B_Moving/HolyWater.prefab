@@ -116,6 +116,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1709868672661609726}
     m_Modifications:
+    - target: {fileID: 2085559416292832457, guid: 6286de922df3fa349a54a0f143dcaef7,
+        type: 3}
+      propertyPath: m_Name
+      value: HolyWater
+      objectReference: {fileID: 0}
     - target: {fileID: 2085559416292832458, guid: 6286de922df3fa349a54a0f143dcaef7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -170,11 +175,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2085559416292832457, guid: 6286de922df3fa349a54a0f143dcaef7,
-        type: 3}
-      propertyPath: m_Name
-      value: HolyWater
       objectReference: {fileID: 0}
     - target: {fileID: 2085559416292832459, guid: 6286de922df3fa349a54a0f143dcaef7,
         type: 3}
@@ -399,6 +399,18 @@ PrefabInstance:
     - target: {fileID: 400000, guid: a10869e65bfd40a4aa86e24edd095d53, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a10869e65bfd40a4aa86e24edd095d53, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a10869e65bfd40a4aa86e24edd095d53, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: a10869e65bfd40a4aa86e24edd095d53, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a10869e65bfd40a4aa86e24edd095d53, type: 3}

@@ -197,7 +197,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
         else
         {
             //ゲームオーバー処理
-            //st.gamestop(stop.PauseState.Normal);
+            st.gamestop(StopSystem.PauseState.Normal);
             if(st.canStop)
                 st.canStop = false;
             if (!iestart)
@@ -282,8 +282,8 @@ public class GameManager : SingletonMonoBehavior<GameManager>
     {
         pc.CanPlayerMove = false;
         iestart = true;
-        //Time.timeScale = 0;
-        yield return new WaitForSecondsRealtime(2f);    //アニメーション時間を待ち
+        Time.timeScale = 1f;
+        yield return new WaitForSeconds(2f);    //アニメーション時間を待ち
         gameOver();
     }
 

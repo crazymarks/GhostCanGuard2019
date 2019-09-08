@@ -26,6 +26,8 @@ public class Ghost_targeting : MonoBehaviour
     //Animation
     GhostAnimationController GhostAnim;
 
+    public bool ifNeedAwakenTime = false;
+
     //目標を追う速度
     public float chasingSpeed = 5f;
     //体を回す速度
@@ -119,13 +121,15 @@ public class Ghost_targeting : MonoBehaviour
         }
 
         GhostAnim = GetComponentInChildren<GhostAnimationController>();
-        GhostAnim.SetGhostAnimation(GhostAnimator.Walk);
         SE = GetComponent<Ghost_Sound>();
         SE.playSE();
 
         ghostState = GhostState.Patrol;
-        GhostAnim.SetGhostAnimation(GhostAnimator.StandUp);
         GameOver = false;
+        if (ifNeedAwakenTime)
+        {
+            HolyWater(1f);
+        }
     }
 
     // Update is called once per frame
