@@ -15,6 +15,10 @@ public class KabinGimmick : GimmickBase
     private float speed = 2.0f;
     [SerializeField]
     private float stunTime = 2.0f;
+    
+    //発動距離
+    public float range = 1f;
+    public RangeUI rangeui;
 
     private bool kabinSetPos = false;
 
@@ -57,27 +61,56 @@ public class KabinGimmick : GimmickBase
     }
     private void Update()
     {
+        if (st.stopped)
+        {
+            if (!st.SecondPhase)
+                rangeui.Show(range);
+            else
+            {
+                rangeui.Hide();
+            }
+            if (GameManager.Instance.getXZDistance(gameObject, player) > range)
+            {
+                rangeui.SetColor(Color.red);
+            }
+            else
+            {
+                rangeui.SetColor(Color.green);
+            }
+        }
+        else
+        {
+            rangeui.Hide();
+        }
         if (gimmickUIParent.activeSelf)                              //UIが既に展開している場合
         {
             if (st.selectedObject != gameObject || st.SecondPhase)       //セレクトされていない　または　方向選択段階にいる場合
             {
                 gimmickUIParent.SetActive(false);     //UIを収縮
             }
-            if (GameManager.Instance.getXZDistance(gameObject, player) > 5)
+            if (GameManager.Instance.getXZDistance(gameObject, player) > range)
             {
                 gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIHide();
+            }
+            else
+            {
+                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow();
             }
 
 
         }
         else                                                                    // UIが展開していない場合
         {
-            if (st.selectedObject == gameObject && !st.SecondPhase)    //セレクトされたら、且つ、方向選択段階じゃない場合
+            if (st.selectedObject == gameObject && !st.SecondPhase && !IfActivated)    //セレクトされたら、且つ、方向選択段階じゃない場合
             {
                 gimmickUIParent.SetActive(true);                                   //UIを展開
-                if (GameManager.Instance.getXZDistance(gameObject, player) > 5)
+                if (GameManager.Instance.getXZDistance(gameObject, player) > range)
                 {
                     gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIHide();
+                }
+                else
+                {
+                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow();
                 }
             }
         }
@@ -162,7 +195,7 @@ public class KabinGimmick : GimmickBase
                 Debug.Log("Send");
                 if (!descriptionUIOn)
                 {
-                    if (GameManager.Instance.getXZDistance(gameObject, player) <= 5)
+                    if (GameManager.Instance.getXZDistance(gameObject, player) <= range)
                         KabinGimmickAction();
                     //else
                     //{
