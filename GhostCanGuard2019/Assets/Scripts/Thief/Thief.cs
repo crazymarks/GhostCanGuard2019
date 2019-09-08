@@ -227,7 +227,7 @@ public class Thief : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (thiefState == ThiefState.STUN) return;   
-        if (other.tag == "PlayerCollider" && thiefState != ThiefState.GAMEOVER && mIsAllowFind == true)
+        if (other.tag == "PlayerCollider" && thiefState != ThiefState.ARRESTED && mIsAllowFind == true)
         {
             mIsAllowFind = false;
             Debug.Log("detected Player");
@@ -240,7 +240,7 @@ public class Thief : MonoBehaviour
             //unit.FollowPriority();
             //StartCounter();
         }
-        else if (other.tag == "Ghost" && thiefState != ThiefState.GAMEOVER && mIsAllowFind == true)
+        else if (other.tag == "Ghost" && thiefState != ThiefState.ARRESTED && mIsAllowFind == true)
         {
             mIsAllowFind = false;
             Debug.Log("detected Ghost");
@@ -276,7 +276,7 @@ public class Thief : MonoBehaviour
     void OnTriggerStay(Collider other)
     {
         if (thiefState == ThiefState.STUN) return;
-        if ((other.tag == "PlayerCollider" || other.tag == "Ghost") && thiefState != ThiefState.GAMEOVER)
+        if ((other.tag == "PlayerCollider" || other.tag == "Ghost") && thiefState != ThiefState.ARRESTED)
         {
             mIsPlayerExitedState = false;
             stayTimer += Time.deltaTime;

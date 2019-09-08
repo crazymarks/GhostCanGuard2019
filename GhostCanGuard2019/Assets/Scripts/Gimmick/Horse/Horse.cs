@@ -217,7 +217,7 @@ public class Horse : GimmickBase
                     
                 }
 
-                if (IfMoving && Input.GetButtonDown("Cancel"))
+                if (IfMoving && Input.GetButtonDown("Cancel") || GameManager.Instance.gameover)
                 {
                     GetOffHorse(Player,Vector3.zero);
                     //if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
