@@ -251,23 +251,47 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
     {
         Ray ray = Camera.main.ScreenPointToRay(cursor.transform.position);
 
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit,mask) && hit.collider.gameObject != selectedObject)
+        RaycastHit[] hit = Physics.RaycastAll(ray, 100);
+        
+        for (int i = 0; i < hit.Length; i++)
         {
-            if (hit.collider.tag == "Gimmik" || hit.collider.tag == "Player")
-            {
-                //EventSystem.current.SetSelectedGameObject(hit.collider.gameObject);
-                //gimmickmanager.instance.GetGimick = hit.collidr.gamaobject;
-                //Debug.Log(hit.collider.gameObject.name);
-                selectedObject = hit.collider.gameObject;
-            }
-            else
-            {
-                //if (selectedObject != null)
-                    //selectedObject.GetComponent<GimmickBase>().GimmickUIsOnOff(false);
-                selectedObject = null;
-            }
-        }
+            
+                var HitObject = hit[i].collider.gameObject;
+                if(HitObject.tag == "Player")
+                {
+                    selectedObject = HitObject;
+                    break;
+                }
+                else if(HitObject.tag == "Gimmik")
+                {
+                    selectedObject = HitObject;
+                    break;
+                }
+                else
+                {
+                    selectedObject = null;
+                }
+        }     
+
+        //if (Physics.Raycast(ray, out hit,mask) && hit.collider.gameObject != selectedObject)
+        //{
+        //    if (hit.collider.tag == "Gimmik")
+        //    {
+               
+        //        //Debug.Log(hit.collider.gameObject.name);
+        //        selectedObject = hit.collider.gameObject;
+        //    }
+        //    else if (hit.collider.tag == "Player")
+        //    {
+        //        selectedObject = hit.collider.gameObject;
+        //    }
+        //    else
+        //    {
+        //        //if (selectedObject != null)
+        //            //selectedObject.GetComponent<GimmickBase>().GimmickUIsOnOff(false);
+        //        selectedObject = null;
+        //    }
+        //}
     }
 
     

@@ -63,7 +63,7 @@ public class GameManager : SingletonMonoBehavior<GameManager>
 
     [SerializeField]
     private GameObject treasure;
-    //private ParticleSystem swordlight;
+    private ParticleSystem swordlight;
     //GameObject sword;
 
     StopSystem st;
@@ -127,19 +127,19 @@ public class GameManager : SingletonMonoBehavior<GameManager>
                 Debug.Log("宝未指定" + name);
             }
         }
-        //if (treasure != null)
-        //{
-        //    try
-        //    {
-        //        swordlight = treasure.GetComponentInChildren<ParticleSystem>(true);
-        //    }
-        //    catch (System.NullReferenceException)
-        //    {
+        if (treasure != null)
+        {
+            try
+            {
+                swordlight = treasure.GetComponentInChildren<ParticleSystem>(true);
+            }
+            catch (System.NullReferenceException)
+            {
 
-        //        Debug.Log("");
-        //    }
-            
-        //}
+                Debug.Log("");
+            }
+
+        }
         if (ght)
         {
             ghostEnable = ght.gameObject.activeSelf;
@@ -187,11 +187,11 @@ public class GameManager : SingletonMonoBehavior<GameManager>
             EndCheck();
 
             //宝が盗まれたらモデルをHideする
-            if (tf.thiefState == Thief.ThiefState.HEAD_EXIT /*&& swordlight != null*/)
+            if (tf.thiefState == Thief.ThiefState.HEAD_EXIT && swordlight != null)
             {
                 treasure.GetComponent<treasure>().sword.SetActive(false);
-                //swordlight.Stop();
-                //swordlight.Clear();
+                swordlight.Stop();
+                swordlight.Clear();
             }
         }
         else

@@ -649,6 +649,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_Keibiyin
       objectReference: {fileID: 0}
+    - target: {fileID: 5924487943674217215, guid: 1690541159a363145a7e99ca59c992ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5924487943674217208, guid: 1690541159a363145a7e99ca59c992ec,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -703,6 +708,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5632447805616814282, guid: 1690541159a363145a7e99ca59c992ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6443398791386315212, guid: 1690541159a363145a7e99ca59c992ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924487943715648603, guid: 1690541159a363145a7e99ca59c992ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924487943941178408, guid: 1690541159a363145a7e99ca59c992ec,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1690541159a363145a7e99ca59c992ec, type: 3}

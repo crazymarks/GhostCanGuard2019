@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5901346446554357353}
   - component: {fileID: 1053328204627829978}
   - component: {fileID: 2593250184668975309}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: partical
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4709,7 +4709,7 @@ GameObject:
   - component: {fileID: 5924487943674217208}
   - component: {fileID: 5924487943674217209}
   - component: {fileID: 5924487943674217214}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: FX_Keibiyin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9411,7 +9411,7 @@ GameObject:
   - component: {fileID: 5924487943715648602}
   - component: {fileID: 5924487943715648596}
   - component: {fileID: 5924487943715648597}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: super
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14109,7 +14109,7 @@ GameObject:
   - component: {fileID: 5924487943941178411}
   - component: {fileID: 5924487943941178405}
   - component: {fileID: 5924487943941178410}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: sline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18807,7 +18807,7 @@ GameObject:
   - component: {fileID: 2409206597590854458}
   - component: {fileID: 5361751125770279397}
   - component: {fileID: 7017747714522569904}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: cyc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
