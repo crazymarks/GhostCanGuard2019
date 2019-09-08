@@ -257,12 +257,12 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
         {
             
                 var HitObject = hit[i].collider.gameObject;
-                if(HitObject.tag == "Player")
+                if(HitObject.tag == "Player" && HitObject.GetComponent<GimmickBase>() != null)
                 {
                     selectedObject = HitObject;
                     break;
                 }
-                else if(HitObject.tag == "Gimmik")
+                else if(HitObject.tag == "Gimmik" && HitObject.GetComponent<GimmickBase>() != null)
                 {
                     selectedObject = HitObject;
                     break;

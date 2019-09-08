@@ -471,7 +471,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: e031477a247b6944f98bef6173950b0c, type: 3}
       propertyPath: m_TagString
-      value: Gimmik
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e031477a247b6944f98bef6173950b0c, type: 3}
       propertyPath: m_LocalPosition.x
