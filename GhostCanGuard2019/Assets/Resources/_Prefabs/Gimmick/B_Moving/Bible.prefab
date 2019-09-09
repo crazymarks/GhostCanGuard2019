@@ -411,6 +411,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1514435665327520100, guid: 4d4d6206be3592d438ef3e907ea81bce,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1514435665927413594, guid: 4d4d6206be3592d438ef3e907ea81bce,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d4d6206be3592d438ef3e907ea81bce, type: 3}
 --- !u!4 &4412380857521712041 stripped
@@ -876,6 +886,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 462991972898026871, guid: 6d5894c61bf5e48489c380c30cc56449,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7124790183465678053}
+    - target: {fileID: 462991972898026871, guid: 6d5894c61bf5e48489c380c30cc56449,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GimmickUIClose
+      objectReference: {fileID: 0}
+    - target: {fileID: 462991972898026871, guid: 6d5894c61bf5e48489c380c30cc56449,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 462991973539802645, guid: 6d5894c61bf5e48489c380c30cc56449,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -905,21 +930,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 462991972898026871, guid: 6d5894c61bf5e48489c380c30cc56449,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 7124790183465678053}
-    - target: {fileID: 462991972898026871, guid: 6d5894c61bf5e48489c380c30cc56449,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GimmickUIClose
-      objectReference: {fileID: 0}
-    - target: {fileID: 462991972898026871, guid: 6d5894c61bf5e48489c380c30cc56449,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 462991974431600109, guid: 6d5894c61bf5e48489c380c30cc56449,
         type: 3}

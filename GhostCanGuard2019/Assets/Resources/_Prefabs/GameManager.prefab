@@ -357,8 +357,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d192f5eaadf4b2d448a2631f2e7b64e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuPanel: {fileID: 0}
-  desPanel: {fileID: 0}
+  menuPanel: {fileID: 4465205681192033429}
+  desPanel: {fileID: 4465205681192033429}
   ScreenMessageTextBox: {fileID: 4465205679922721573}
 --- !u!114 &2194628699866480728
 MonoBehaviour:
@@ -767,10 +767,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_MaxSize
       value: 170
       objectReference: {fileID: 0}
-    - target: {fileID: 6757446704762286795, guid: f60e29945cbc1d145997f78485c6115f,
+    - target: {fileID: 6757446704105244652, guid: f60e29945cbc1d145997f78485c6115f,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: m_Name
+      value: ScreenMessage
       objectReference: {fileID: 0}
     - target: {fileID: 6757446705375586406, guid: f60e29945cbc1d145997f78485c6115f,
         type: 3}
@@ -877,11 +877,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 6757446704105244652, guid: f60e29945cbc1d145997f78485c6115f,
-        type: 3}
-      propertyPath: m_Name
-      value: ScreenMessage
-      objectReference: {fileID: 0}
     - target: {fileID: 5915867637596412935, guid: f60e29945cbc1d145997f78485c6115f,
         type: 3}
       propertyPath: m_Color.r
@@ -907,8 +902,19 @@ PrefabInstance:
       propertyPath: m_Type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6757446704762286795, guid: f60e29945cbc1d145997f78485c6115f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f60e29945cbc1d145997f78485c6115f, type: 3}
+--- !u!1 &4465205681192033429 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6757446705375586402, guid: f60e29945cbc1d145997f78485c6115f,
+    type: 3}
+  m_PrefabInstance: {fileID: 6931282891910051063}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4465205681192033425 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6757446705375586406, guid: f60e29945cbc1d145997f78485c6115f,

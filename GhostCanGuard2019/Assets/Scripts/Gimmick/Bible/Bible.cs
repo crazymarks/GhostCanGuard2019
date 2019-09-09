@@ -92,6 +92,7 @@ public class Bible : GimmickBase
         yield return new WaitForSeconds(auraTime);
         isOpen = false;
         aura.Stop();
+        aura.Clear();
         collision.enabled = false;
         yield return new WaitForSeconds(coolDownTime);
         canOpen = true;
