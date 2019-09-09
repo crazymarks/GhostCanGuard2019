@@ -43,6 +43,8 @@ public class Thief : MonoBehaviour
     float idleTimer = 0.0f;
     bool mIsPlayerExitedState = false;
     public bool mIsTakenTreasure { get; private set; }// exited from radius 
+    float stunnedTime = 0f;
+
     //bool mIsPaused = false;
     //bool mIsTouched = false;
     bool mIsAllowFind = true;
@@ -76,6 +78,9 @@ public class Thief : MonoBehaviour
                 break;
             case ThiefState.ESCAPE:
                 EscapeUpdate();
+                break;
+            case ThiefState.STUN:
+                stunnedUpdate();
                 break;
             case ThiefState.PAUSE:
                 PauseUpdate();
@@ -358,9 +363,24 @@ public class Thief : MonoBehaviour
         if (ghostCollider != null) ghostCollider.radius = colliderradius;
     }
 
+    void stunnedUpdate()
+    {
+        stunnedTime -= Time.fixedDeltaTime;
+        
+        if (stunnedTime <= 0f)
+        {
+            anim.SetThiefAnimation(ThiefAnimator.Run);    //アニメーション設定
+            thiefState = ThiefState.ESCAPE;
+        }
+
+    }
+
     public void GotStunned(float time)
     {
-        StartCoroutine(Stunned(time));
+        stunnedTime = time;
+        thiefState = Thief.ThiefState.STUN;
+        anim.SetThiefAnimation(ThiefAnimator.Stun);
+        //StartCoroutine(Stunned(time));
     }
     IEnumerator Stunned(float sec)
     {

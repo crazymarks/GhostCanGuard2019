@@ -78,6 +78,7 @@ public class Ghost_targeting : MonoBehaviour
     public bool ifBibleAffect = false;
 
     public bool ifHolyWaterAffect = false;
+    float holyWaterEffectTime = 0f;
 
     bool GameOver = false;
 
@@ -150,7 +151,7 @@ public class Ghost_targeting : MonoBehaviour
                 break;
             case GhostState.HolyWater_Affected:
                 lastActTime = Time.time;
-                move(gameObject.transform.position, 0, Vector3.zero);
+                holyWaterEffectUpdate();
                 break;
             case GhostState.GameOver:
                 GameOverUpdate();
@@ -330,10 +331,31 @@ public class Ghost_targeting : MonoBehaviour
         ifBibleAffect = false;
     }
 
+    void holyWaterEffectUpdate()
+    {
+        holyWaterEffectTime -= Time.fixedDeltaTime;
+
+        if (holyWaterEffectTime <= 1.533f && holyWaterEffectTime> 1f)
+        {
+            if(GhostAnim.GetComponent<Animator>().GetInteger("GhostControl")!=2)
+                GhostAnim.SetGhostAnimation(GhostAnimator.StandUp);  //アニメーション設定
+        }
+        if(holyWaterEffectTime <= 0f)
+        {
+            GhostAnim.SetGhostAnimation(GhostAnimator.Walk);    //アニメーション設定
+            ifHolyWaterAffect = false;
+            SE.playSE();
+        }
+
+    }
     public void HolyWater(float time)
     {
-        if (!ifHolyWaterAffect)
-            StartCoroutine(HolyWaterEffect(time));
+        ifHolyWaterAffect = true;
+        holyWaterEffectTime = time;
+        ghostState = GhostState.HolyWater_Affected;
+        SE.stopSE();
+        GhostAnim.SetGhostAnimation(GhostAnimator.Down);   //アニメーション設定
+        // StartCoroutine(HolyWaterEffect(time));
     }
     IEnumerator HolyWaterEffect(float time)
     {
