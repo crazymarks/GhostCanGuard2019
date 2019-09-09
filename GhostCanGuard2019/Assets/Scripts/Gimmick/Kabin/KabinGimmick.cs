@@ -135,6 +135,7 @@ public class KabinGimmick : GimmickBase
         if (!st.SecondPhase)
         {
             st.gamestop(StopSystem.PauseState.DirectionSelect);
+            player.GetComponent<Throw>().AimSlider.gameObject.SetActive(true);
             Debug.Log("Choose target");
             return;
         }
