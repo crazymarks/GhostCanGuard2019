@@ -72,6 +72,8 @@ MonoBehaviour:
   stunTime: 2
   range: 1.5
   rangeui: {fileID: 7655451939587748311}
+  OutRangeMsg: "\u8FD1\u3065\u3051\u308B\u3068\u4F7F\u3048\u308B"
+  InRangeMsg: "\u8D85\u80FD\u529B\u3067\u6295\u3052\u308B\uFF01"
 --- !u!114 &708210332387505835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,7 +465,7 @@ PrefabInstance:
     - target: {fileID: 2920191666494938885, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
         type: 3}
       propertyPath: m_Text
-      value: "\u8A73\u7D30"
+      value: "\u82B1\u74F6\u306B\u3064\u3044\u3066"
       objectReference: {fileID: 0}
     - target: {fileID: 3866976911128156097, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
         type: 3}
@@ -475,6 +477,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: "\u3000\u62FE\u3046\uFF01"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866976911128156097, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3866976911128156097, guid: 0a88a14eaeb2a944f86f39a1f054ab75,
+        type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a88a14eaeb2a944f86f39a1f054ab75, type: 3}

@@ -216,6 +216,11 @@ PrefabInstance:
       propertyPath: m_TargetCamera
       value: 
       objectReference: {fileID: 463705879}
+    - target: {fileID: 6496518351776421092, guid: 265a2a4ca9e6b5f4ab3f66d06f0ae845,
+        type: 3}
+      propertyPath: m_DirectAudioVolumes.Array.data[0]
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 6496518351776421093, guid: 265a2a4ca9e6b5f4ab3f66d06f0ae845,
         type: 3}
       propertyPath: m_LocalPosition.x

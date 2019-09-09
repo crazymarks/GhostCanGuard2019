@@ -11,7 +11,7 @@ public class MarkUI : MonoBehaviour
     {
         parentGimmickPos = this.transform.root.position;    // 親のGimmick取得
         rectTransformUI = transform as RectTransform;       // UIのRectTransformを取得
-        rectTransformUI.position = RectTransformUtility.WorldToScreenPoint(Camera.main, parentGimmickPos + plusoffset);
+        rectTransformUI.position = RectTransformUtility.WorldToScreenPoint(Camera.main, plusoffset);
     }
     private void OnEnable()
     {
@@ -30,6 +30,6 @@ public class MarkUI : MonoBehaviour
     {
         parentGimmickPos = this.transform.root.position;    // 親のGimmick取得
         rectTransformUI = transform as RectTransform;       // UIのRectTransformを取得
-        rectTransformUI.position = RectTransformUtility.WorldToScreenPoint(Camera.main, parentGimmickPos + plusoffset);
+        rectTransformUI.position = RectTransformUtility.WorldToScreenPoint(Camera.main,  plusoffset);
     }
 }
