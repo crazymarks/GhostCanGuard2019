@@ -32,6 +32,9 @@ public class Horse : GimmickBase
     //発動距離
     public float range = 5f;
     public RangeUI rangeui;
+    public string OutRangeMsg;
+    public string InRangeMsg;
+
 
     [Range(0, 2)]
     public float HorseBackTime = 2.0f;
@@ -141,11 +144,11 @@ public class Horse : GimmickBase
             }
             if (GameManager.Instance.getXZDistance(gameObject, Player) > range)
             {
-                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("近づけると使える");
+                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow(OutRangeMsg);
             }
             else
             {
-                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("乗る！");
+                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow(InRangeMsg);
             }
 
 
@@ -157,11 +160,11 @@ public class Horse : GimmickBase
                 gimmickUIParent.SetActive(true);                                   //UIを展開
                 if (GameManager.Instance.getXZDistance(gameObject, Player) > range)
                 {
-                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("近づけると使える");
+                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow(OutRangeMsg);
                 }
                 else
                 {
-                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("乗る！");
+                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow(InRangeMsg);
                 }
             }
         }

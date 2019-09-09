@@ -19,6 +19,8 @@ public class KabinGimmick : GimmickBase
     //発動距離
     public float range = 1f;
     public RangeUI rangeui;
+    public string OutRangeMsg;
+    public string InRangeMsg;
 
     private bool kabinSetPos = false;
 
@@ -90,11 +92,11 @@ public class KabinGimmick : GimmickBase
             }
             if (GameManager.Instance.getXZDistance(gameObject, player) > range)
             {
-                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("近づけると使える");
+                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow(OutRangeMsg);
             }
             else
             {
-                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("拾う");
+                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow(InRangeMsg);
             }
 
 
@@ -106,11 +108,11 @@ public class KabinGimmick : GimmickBase
                 gimmickUIParent.SetActive(true);                                   //UIを展開
                 if (GameManager.Instance.getXZDistance(gameObject, player) > range)
                 {
-                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("近づけると使える");
+                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow(OutRangeMsg);
                 }
                 else
                 {
-                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("拾う");
+                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow(InRangeMsg);
                 }
             }
         }
