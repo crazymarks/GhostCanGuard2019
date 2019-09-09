@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class DescriptionUIChange : MonoBehaviour
 {
@@ -60,5 +59,13 @@ public class DescriptionUIChange : MonoBehaviour
     {
         if (!ActionUI.activeSelf)
             ActionUI.SetActive(true);
+    }
+    public void ActionUIShow(string Msg)
+    {
+        if (!ActionUI.activeSelf)
+        {
+            ActionUI.SetActive(true);
+        }
+        ActionUI.GetComponentInChildren<Text>().text = Msg;
     }
 }

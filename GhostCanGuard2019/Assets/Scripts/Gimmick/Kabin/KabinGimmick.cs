@@ -90,11 +90,11 @@ public class KabinGimmick : GimmickBase
             }
             if (GameManager.Instance.getXZDistance(gameObject, player) > range)
             {
-                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIHide();
+                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("近づけると使える");
             }
             else
             {
-                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow();
+                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("拾う");
             }
 
 
@@ -106,11 +106,11 @@ public class KabinGimmick : GimmickBase
                 gimmickUIParent.SetActive(true);                                   //UIを展開
                 if (GameManager.Instance.getXZDistance(gameObject, player) > range)
                 {
-                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIHide();
+                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("近づけると使える");
                 }
                 else
                 {
-                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow();
+                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("拾う");
                 }
             }
         }

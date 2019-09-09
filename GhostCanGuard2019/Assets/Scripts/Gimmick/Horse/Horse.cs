@@ -141,11 +141,11 @@ public class Horse : GimmickBase
             }
             if (GameManager.Instance.getXZDistance(gameObject, Player) > range)
             {
-                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIHide();
+                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("近づけると使える");
             }
             else
             {
-                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow();
+                gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("乗る！");
             }
 
 
@@ -157,11 +157,11 @@ public class Horse : GimmickBase
                 gimmickUIParent.SetActive(true);                                   //UIを展開
                 if (GameManager.Instance.getXZDistance(gameObject, Player) > range)
                 {
-                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIHide();
+                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("近づけると使える");
                 }
                 else
                 {
-                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow();
+                    gimmickUIParent.GetComponent<DescriptionUIChange>().ActionUIShow("乗る！");
                 }
             }
         }
