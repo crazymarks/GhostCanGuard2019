@@ -455,7 +455,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -289.9585, y: 410.8578}
+  m_AnchoredPosition: {x: -0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1018563604356263012
@@ -1058,7 +1058,6 @@ MonoBehaviour:
   rangeui: {fileID: 5769826018293367334}
   HorseBackTime: 2
   DispearAlpha: 0
-  playerControl: {fileID: 0}
   Player: {fileID: 0}
   Saddle: {fileID: 4966074044680152195}
   RidePlayer: {fileID: 1720368589783935748}
