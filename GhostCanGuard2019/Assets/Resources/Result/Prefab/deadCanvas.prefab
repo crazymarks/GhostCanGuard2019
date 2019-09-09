@@ -1028,11 +1028,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6652804806647990081}
     m_Modifications:
-    - target: {fileID: 7092993391070801449, guid: 7402de74338a39245ad40488cbb99205,
-        type: 3}
-      propertyPath: m_Name
-      value: StageSelectArray
-      objectReference: {fileID: 0}
     - target: {fileID: 7092993391070801450, guid: 7402de74338a39245ad40488cbb99205,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1137,6 +1132,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092993391070801449, guid: 7402de74338a39245ad40488cbb99205,
+        type: 3}
+      propertyPath: m_Name
+      value: StageSelectArray
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7402de74338a39245ad40488cbb99205, type: 3}
