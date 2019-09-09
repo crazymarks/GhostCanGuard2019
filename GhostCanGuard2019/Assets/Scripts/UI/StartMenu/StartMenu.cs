@@ -55,6 +55,7 @@ public class StartMenu : MonoBehaviour
         //}
         startmenuIndex = 0;
         selectStartmenu = startMenuButtons[startmenuIndex];
+        SwapSpriteState(selectStartmenu, ButtonState.Stay);
         StartMenuSelectArray.rectTransform.position = selectStartmenu.GetComponent<RectTransform>().position - new Vector3(300, 0);
         selectstageIndex = 0;
         selectStage = stageButtons[selectstageIndex];
@@ -230,6 +231,7 @@ public class StartMenu : MonoBehaviour
     }
     public void cancelSelect()
     {
+        SwapSpriteState(selectStage, ButtonState.None);
         selectStages.enabled = false;
         startMenu.enabled = true;
         startMenu.GetComponent<CanvasGroup>().alpha = 1;
@@ -240,6 +242,7 @@ public class StartMenu : MonoBehaviour
     IEnumerator SelectstageClick()
     {
         selectStage = stageButtons[selectstageIndex];
+        SwapSpriteState(selectStage, ButtonState.Stay);
         StageSelectArray.rectTransform.position = selectStage.GetComponent<RectTransform>().position - new Vector3(200, 0);
         IEnumerator startfadeout = fadeout(startMenu.GetComponent<CanvasGroup>(), 0.2f);
         yield return StartCoroutine(startfadeout);

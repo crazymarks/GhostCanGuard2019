@@ -19,11 +19,13 @@ public class EndingSceneManager : MonoBehaviour
         {
             EndingSelects.Add(button);
             //EndindSelectMap.Add(button.name, button);
+            SwapSpriteState(button, ButtonState.None);
         }
         selectButtonIndex = 0;
         selectedButton = EndingSelects[selectButtonIndex];
         SelectArray.rectTransform.position = selectedButton.GetComponent<RectTransform>().position - new Vector3(200, 0);
         SelectArray.transform.SetParent(selectedButton.transform);
+        SwapSpriteState(selectedButton, ButtonState.Stay);
     }
 
     // Update is called once per frame
@@ -60,6 +62,7 @@ public class EndingSceneManager : MonoBehaviour
         }
         if (Input.GetButtonDown("Send"))
         {
+            SwapSpriteState(selectedButton, ButtonState.Release);
             switch (selectedButton.name)
             {
                 case "Restart":
@@ -79,18 +82,43 @@ public class EndingSceneManager : MonoBehaviour
 
     void selectNextButton()
     {
+        SwapSpriteState(selectedButton, ButtonState.None);
         selectButtonIndex = (selectButtonIndex + 1) % EndingSelects.Count;
         selectedButton = EndingSelects[selectButtonIndex];
         SelectArray.rectTransform.position = selectedButton.GetComponent<RectTransform>().position - new Vector3(200, 0);
         SelectArray.transform.SetParent(selectedButton.transform);
+        SwapSpriteState(selectedButton, ButtonState.Stay);
         Debug.Log("last");
     }
     void selectLastButton()
     {
         Debug.Log("next");
+        SwapSpriteState(selectedButton, ButtonState.None);
         selectButtonIndex = (selectButtonIndex + EndingSelects.Count - 1) % EndingSelects.Count;
         selectedButton = EndingSelects[selectButtonIndex];
         SelectArray.rectTransform.position = selectedButton.GetComponent<RectTransform>().position - new Vector3(200, 0);
         SelectArray.transform.SetParent(selectedButton.transform);
+        SwapSpriteState(selectedButton, ButtonState.Stay);
+    }
+    public void SwapSpriteState(Button button, ButtonState buttonState)
+    {
+        switch (buttonState)
+        {
+            //デフォルト
+            case ButtonState.None:
+                button.GetComponent<Image>().sprite = button.spriteState.disabledSprite;
+                break;
+            //選択されて
+            case ButtonState.Stay:
+                button.GetComponent<Image>().sprite = button.spriteState.highlightedSprite;
+                break;
+            //押されて
+            case ButtonState.Release:
+                button.GetComponent<Image>().sprite = button.spriteState.pressedSprite;
+                break;
+            default:
+                break;
+        }
+
     }
 }
