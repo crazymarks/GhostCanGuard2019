@@ -17,21 +17,28 @@ public class DescriptionUIChange : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CancelUI.transform.position = ActionUI.transform.position;
-        cancelUIon = CancelUI.activeSelf;
+        if (CancelUI != null)
+        {
+            CancelUI.transform.position = ActionUI.transform.position;
+            cancelUIon = CancelUI.activeSelf;
+        }
     }
 
     void CancelUIShow()
     {
-        InfoUI.SetActive(false);
-        ActionUI.SetActive(false);
+        if(InfoUI!=null)
+            InfoUI.SetActive(false);
+        if(ActionUI!=null)
+            ActionUI.SetActive(false);
         CancelUI.SetActive(true);
         cancelUIon = true;
     }
     void CancelUIClose()
     {
-        InfoUI.SetActive(true);
-        ActionUI.SetActive(true);
+        if (InfoUI != null)
+            InfoUI.SetActive(true);
+        if (ActionUI != null)
+            ActionUI.SetActive(true);
         CancelUI.SetActive(false);
         cancelUIon = false;
     }

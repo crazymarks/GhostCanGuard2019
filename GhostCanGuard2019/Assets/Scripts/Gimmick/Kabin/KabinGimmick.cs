@@ -136,6 +136,7 @@ public class KabinGimmick : GimmickBase
         {
             st.gamestop(StopSystem.PauseState.DirectionSelect);
             player.GetComponent<Throw>().AimSlider.gameObject.SetActive(true);
+            player.GetComponent<Throw>().MarkUI.SetActive(true);
             Debug.Log("Choose target");
             return;
         }
@@ -157,8 +158,8 @@ public class KabinGimmick : GimmickBase
         KabinToPlayer(player.transform.position + player.transform.forward);
         rb.AddForce(player.transform.forward * power + player.transform.up ,ForceMode.Impulse);
         IfActivated = true;
+        player.GetComponent<Throw>().MarkUI.SetActive(false);
 
-        
         GimmickManager.Instance.ClearGimmick();
         //GimmickUIClose();
         player.GetComponent<PlayerControl>().playerAnim.SetGimmickAnimation(GimmickAnimation.Revive);

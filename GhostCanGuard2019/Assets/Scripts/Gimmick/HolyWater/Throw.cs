@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class Throw : GimmickBase
 {
     public Slider AimSlider;
+    public GameObject MarkUI;
     public GameObject HolyWater;
     public float force=10;
     [Range(0, 10)]
@@ -20,6 +21,7 @@ public class Throw : GimmickBase
     private void Start()
     {
         _start();
+        MarkUI.SetActive(false);
         //GimmickEventSetUp(EventTriggerType.PointerDown, GimmickEventOpen);
         //st = GameManager.Instance.GetComponent<stop>();
     }
@@ -81,6 +83,7 @@ public class Throw : GimmickBase
         {
             st.gamestop(StopSystem.PauseState.DirectionSelect);
             AimSlider.gameObject.SetActive(true);
+            MarkUI.SetActive(true);
             Debug.Log("Choose target");
             return;
         }
@@ -94,6 +97,7 @@ public class Throw : GimmickBase
         st.gamestop(StopSystem.PauseState.Normal);
         GetComponent<PlayerControl>().playerAnim.SetGimmickAnimation(GimmickAnimation.Float);
         IfActivated = false;
+        MarkUI.SetActive(false);
         count--;
     }
 

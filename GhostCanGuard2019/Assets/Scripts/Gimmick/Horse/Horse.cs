@@ -15,6 +15,7 @@ public class Horse : GimmickBase
 
     HorseState horseState;
 
+    public GameObject MarkUI;
     public Slider AimSlider;
 
     [SerializeField]
@@ -41,9 +42,8 @@ public class Horse : GimmickBase
 
 
     private float radius = 0.5f;
-    [SerializeField]
-    //private PlayerMove playerMove;
-    private PlayerControl playerControl;
+
+    //private PlayerControl playerControl;
     [SerializeField]
     private GameObject Player;
     [SerializeField]
@@ -85,16 +85,10 @@ public class Horse : GimmickBase
         {
             Player = GameObject.FindGameObjectWithTag("Player");
         }
-        try
-        {
-            playerControl = Player.GetComponent<PlayerControl>();
-        }
-        catch (NullReferenceException)
-        {
-            Debug.Log("プレイヤー未発見" + name);
-        }
+
 
         horseMat = GetComponentInChildren<GetHorseMaterial>();
+        MarkUI.SetActive(false);
 
         if (Saddle == null)
         {
@@ -139,10 +133,6 @@ public class Horse : GimmickBase
         {
             rangeui.Hide();
         }
-        //if (Input.GetButtonDown("Send") && st.selectedObject == gameObject && (!IfActivated || st.SecondPhase))
-        //{
-        //    Active();
-        //}
         if (gimmickUIParent.activeSelf)                              //UIが既に展開している場合
         {
             if (st.selectedObject != gameObject || st.SecondPhase)       //セレクトされていない　または　方向選択段階にいる場合
@@ -175,13 +165,33 @@ public class Horse : GimmickBase
                 }
             }
         }
+        if (MarkUI.activeSelf)
+        {
+            MarkUI.GetComponentInChildren<MarkUI>().setUIPosition();
+        }
+        if (IfActivated && !IfBacking)
+        {
+            if (IfMoving && Input.GetButtonDown("Cancel") || GameManager.Instance.gameover)
+            {
+                GetOffHorse(Player, Vector3.zero);
+                if (transform.position == StartPosition)
+                {
+                    resetHorse();
+                }
+                else
+                {
+                    IfBacking = true;
+                    Debug.Log("Start Back");
+                }
+            }
+        }
     }
 
     void FixedUpdate()
     {
         MoveUpdate();
     }
-
+   
  
     float Stime = 0;
     private void Move(float speed,Vector3 orient)
@@ -215,29 +225,6 @@ public class Horse : GimmickBase
                         GetOffHorse(Player, LeftOrient);
                     }
                     
-                }
-
-                if (IfMoving && Input.GetButtonDown("Cancel") || GameManager.Instance.gameover)
-                {
-                    GetOffHorse(Player,Vector3.zero);
-                    //if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
-                    //{
-                    //    float horizontal = Input.GetAxis("Horizontal");
-                    //    float vertical = Input.GetAxis("Vertical");
-                    //    LeftOrient = new Vector3(horizontal, 0, vertical).normalized;
-                    //    GetOffHorse(Player, LeftOrient);
-
-                    if (transform.position == StartPosition)
-                    {
-                        resetHorse();
-                    }
-                    else
-                    {
-                        IfBacking = true;
-                        Debug.Log("Start Back");
-                    }
-
-                    //}
                 }
             }
             else
@@ -314,7 +301,9 @@ public class Horse : GimmickBase
         LeftOrient = Vector3.zero;
         player.GetComponent<Rigidbody>().isKinematic = false;
         PlayerManager.Instance.SetCurrentState(PlayerState.Play);
-        
+
+        MarkUI.GetComponent<DescriptionUIChange>().DescriptionOnOff();
+        MarkUI.SetActive(false);
         //PlayerAnimationController.Instance.SetAnimatorValue(SetPAnimator.Push);
         IfMoving = false;
     }
@@ -330,28 +319,17 @@ public class Horse : GimmickBase
             if (!st.SecondPhase)
             {
                 st.gamestop(StopSystem.PauseState.DirectionSelect);
+                MarkUI.SetActive(true);
                 AimSlider.gameObject.SetActive(true);
                 Debug.Log("Choose target");
                 return;
             }
         }
-        
-        //if (!Input.GetMouseButtonDown(0)) return;
-        //RaycastHit hitInfo;
-        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //if (Physics.Raycast(ray, out hitInfo, 100))
-        //{
-        //    Vector3 dir = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
-
-        //    if (_moveorient == Vector3.zero)
-        //    {
-        //        MoveOrient = dir - transform.position;
-        //        transform.rotation = Quaternion.LookRotation(MoveOrient);
-        //    }
-        //}
+       
         
         if (!Input.GetButtonDown("Send")) return;
         RaycastHit hitInfo;
+        //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         Ray ray = Camera.main.ScreenPointToRay(st.cursor.transform.position);
         if (Physics.Raycast(ray, out hitInfo, 100))
         {
@@ -365,12 +343,14 @@ public class Horse : GimmickBase
 
 
         }
+       
+        MarkUI.GetComponent<DescriptionUIChange>().DescriptionOnOff();
         IfMoving = true;
         Fly.SetActive(true);
         Debug.Log(_moveorient);
 
         //Animation
-        RidePlayer.transform.localPosition = new Vector3(0, -0.7f, -0.75f);
+        RidePlayer.transform.localPosition = new Vector3(0, -0.7f, -0.75f) ;
         RidePlayer.transform.localRotation = Quaternion.identity;
         RideAnimation.SetGimmickAnimation(GimmickAnimation.HorseRun);
 
@@ -380,17 +360,7 @@ public class Horse : GimmickBase
         AudioController.PlaySnd("A8_HorseScream",Camera.main.transform.position, 1f);
     }
 
-    //public void OnClickUIStart()
-    //{
-    //    if (GameManager.Instance.getXZDistance(gameObject, Player) <= 3)
-    //        GimmickManager.Instance.SetGimmickAction(Active);
-    //    else
-    //    {
-    //        StartCoroutine(GameManager.Instance.showTextWithSeconds("もっと近づいてください！", 1f));
-    //        GimmickUIClose();
-    //    }
-    //    GimmickUIsOnOff(false);
-    //}
+    
 
     protected override void PushButtonGamePad(ControllerButton controller)
     {

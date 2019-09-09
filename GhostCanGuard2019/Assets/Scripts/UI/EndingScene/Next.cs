@@ -7,7 +7,7 @@ public class Next : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex >= SceneManager.sceneCountInBuildSettings - 2)
         {
-            Destroy(this.gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
