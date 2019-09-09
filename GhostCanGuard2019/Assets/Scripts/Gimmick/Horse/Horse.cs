@@ -118,7 +118,7 @@ public class Horse : GimmickBase
 
     private void Update()
     {
-        if(st.stopped)
+        if(st.stopped && !IfActivated)
         {
             if(!st.SecondPhase)
                 rangeui.Show(range);
