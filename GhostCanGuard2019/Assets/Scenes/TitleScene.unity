@@ -309,6 +309,11 @@ PrefabInstance:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3732496495574840561, guid: 586001d1ba9d4a547b93d27e2bfba9da,
+        type: 3}
+      propertyPath: m_text
+      value: Day4
+      objectReference: {fileID: 0}
     - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -985,7 +990,7 @@ PrefabInstance:
     - target: {fileID: 3732496495574840561, guid: 586001d1ba9d4a547b93d27e2bfba9da,
         type: 3}
       propertyPath: m_text
-      value: Day9
+      value: Day8
       objectReference: {fileID: 0}
     - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
         type: 3}
@@ -1692,7 +1697,7 @@ PrefabInstance:
     - target: {fileID: 3732496495574840561, guid: 586001d1ba9d4a547b93d27e2bfba9da,
         type: 3}
       propertyPath: m_text
-      value: 'Day4
+      value: 'Day3
 
 '
       objectReference: {fileID: 0}
@@ -2770,6 +2775,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_isInputParsingRequired
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3732496495574840561, guid: 586001d1ba9d4a547b93d27e2bfba9da,
+        type: 3}
+      propertyPath: m_text
+      value: Day9
       objectReference: {fileID: 0}
     - target: {fileID: 3732496497553388640, guid: 586001d1ba9d4a547b93d27e2bfba9da,
         type: 3}
