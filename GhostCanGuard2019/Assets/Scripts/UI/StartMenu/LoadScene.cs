@@ -4,7 +4,10 @@ using UnityEngine;
 
 public static class LoadScene
 {
-    
+    public static string GetCurrentSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
     public static void loadScene(string SceneName)
     {
         SceneManager.LoadSceneAsync(SceneName);
