@@ -123,7 +123,7 @@ public class Throw : GimmickBase
             case ControllerButton.X:
                 break;
             case ControllerButton.Y:
-                if (!descriptionUIOn)
+                if (!descriptionUIOn && count > 0)
                 {
                     ShowDescription("holywater");
                 }

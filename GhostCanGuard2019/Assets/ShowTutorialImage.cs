@@ -64,6 +64,8 @@ public class ShowTutorialImage : MonoBehaviour
         anim.reset();
         anim.gameObject.SetActive(false);
         StopSystem.Instance.gamestop(StopSystem.PauseState.DescriptionClose);
+        if(wts == whenToShow.gamestart)
+            StopSystem.Instance.gamestop(StopSystem.PauseState.Normal);
         Destroy(gameObject);
     }
     

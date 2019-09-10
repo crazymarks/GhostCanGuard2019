@@ -94,10 +94,10 @@ public class StartMenu : MonoBehaviour
                 SwapSpriteState(selectStartmenu, ButtonState.Stay);
                 changed = true;
             }
-            if (Input.GetAxisRaw("Right") != 0)
+            if (Input.GetAxisRaw("Horizontal") != 0)
             {
                 if (changed) return;
-                if (Input.GetAxisRaw("Right") >= 0)
+                if (Input.GetAxisRaw("Horizontal") >= 0)
                 {
                     SwapSpriteState(selectStartmenu, ButtonState.None);
                     startmenuIndex = (startmenuIndex + 1) % startMenuButtons.Count;
@@ -116,7 +116,7 @@ public class StartMenu : MonoBehaviour
                     changed = true;
                 }
             }
-            if (changed && Input.GetAxisRaw("Right") == 0)
+            if (changed && Input.GetAxisRaw("Horizontal") == 0)
             {
                 changed = false;
             }
@@ -172,10 +172,10 @@ public class StartMenu : MonoBehaviour
             }
 
 
-            if (Input.GetAxisRaw("Down") != 0)
+            if (Input.GetAxisRaw("Vertical") != 0)
             {
                 if (changed) return;
-                if (Input.GetAxisRaw("Down") <= 0)
+                if (Input.GetAxisRaw("Vertical") <= 0)
                 {
                     SwapSpriteState(selectStage, ButtonState.None);
                     selectstageIndex = (selectstageIndex + 1) % stageButtons.Count;
@@ -194,10 +194,10 @@ public class StartMenu : MonoBehaviour
                     changed = true;
                 }
             }
-            if (Input.GetAxisRaw("Right") != 0)
+            if (Input.GetAxisRaw("Horizontal") != 0)
             {
                 if (changed) return;
-                if (Input.GetAxisRaw("Right") >= 0)
+                if (Input.GetAxisRaw("Horizontal") >= 0)
                 {
                     SwapSpriteState(selectStage, ButtonState.None);
                     selectstageIndex = (selectstageIndex + 4) % stageButtons.Count;
@@ -217,7 +217,7 @@ public class StartMenu : MonoBehaviour
                 }
             }
 
-            if (changed && Input.GetAxisRaw("Down") ==0 && Input.GetAxisRaw("Right") == 0)
+            if (changed && Input.GetAxisRaw("Vertical") ==0 && Input.GetAxisRaw("Horizontal") == 0)
             {
                 changed = false;
             }

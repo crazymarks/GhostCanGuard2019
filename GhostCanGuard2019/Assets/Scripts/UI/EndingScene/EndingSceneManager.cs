@@ -42,10 +42,10 @@ public class EndingSceneManager : MonoBehaviour
             selectNextButton();
             changed = true;
         }
-        if (Input.GetAxisRaw("Down") != 0)
+        if (Input.GetAxisRaw("Vertical") != 0)
         {
             if (changed) return;
-            if (Input.GetAxisRaw("Down") <= 0 )
+            if (Input.GetAxisRaw("Vertical") <= 0 )
             {
                 selectNextButton();
                 changed = true;
@@ -56,7 +56,7 @@ public class EndingSceneManager : MonoBehaviour
                 changed = true;
             }
         }
-        if (changed && Input.GetAxisRaw("Down") == 0)
+        if (changed && Input.GetAxisRaw("Vertical") == 0)
         {
             changed = false;
         }

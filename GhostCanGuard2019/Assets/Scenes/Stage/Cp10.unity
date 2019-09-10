@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43733662, g: 0.48511738, b: 0.56539106, a: 1}
+  m_IndirectSpecularColor: {r: 0.437337, g: 0.4851181, b: 0.5653913, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2216,7 +2216,7 @@ PrefabInstance:
     - target: {fileID: 4966074045109257227, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
         type: 3}
       propertyPath: HorseSpeed
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4966074045109257227, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
         type: 3}
@@ -2854,7 +2854,7 @@ PrefabInstance:
     - target: {fileID: 378368409382496694, guid: e8388b1ec5d15984083a6d847fde5c40,
         type: 3}
       propertyPath: speed
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8071799838422637403, guid: e8388b1ec5d15984083a6d847fde5c40,
         type: 3}

@@ -51,12 +51,17 @@ public class KabinGimmick : GimmickBase
             //泥棒のスタン処理
             var thief = other.GetComponent<Thief>();
             thief.GotStunned(stunTime);
+            IfActivated = false;
+            AudioController.PlaySnd("punch-high1", Camera.main.transform.position, 1);
+            Destroy(gameObject, stunTime - 0.1f);
         }
         if (IfActivated && other.tag == "Untagged")
         {
             rb.velocity = Vector3.zero;
             Debug.Log("Broken");
             Broken = true;
+            IfActivated = false;
+            AudioController.PlaySnd("punch-real2", Camera.main.transform.position, 1);
             Destroy(gameObject, stunTime-0.1f);
             //GimmickUIClose();
         }

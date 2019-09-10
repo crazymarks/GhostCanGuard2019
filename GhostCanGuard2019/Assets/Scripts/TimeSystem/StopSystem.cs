@@ -60,7 +60,7 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
     private float currentTimescale;
     public bool stopped { get; private set; } = false;
 
-    
+    bool getTrigger = false;
 
     // Start is called before the first frame update
     void Start()
@@ -80,17 +80,24 @@ public class StopSystem : SingletonMonoBehavior<StopSystem>
     void Update()
     {
         if (IfSystemPause) return;
+        if((Input.GetAxis("Stop") == 0))
+        {
+            getTrigger = false;
+        }
         if (canStop)
         {
-            if (Input.GetButtonDown("Stop") && !SecondPhase)
+            if ((Input.GetButtonDown("Stop")||Input.GetAxis("Stop")>=1)&& !SecondPhase)
             {
+                if (getTrigger) return;
                 if(currentstate == PauseState.ObserverMode)
                 {
                     gamestop(PauseState.Normal);
+                    getTrigger = true;
                 }
                 else if(currentstate == PauseState.Normal)
                 {
                     gamestop(PauseState.ObserverMode);
+                    getTrigger = true;
                 }
             }
         }

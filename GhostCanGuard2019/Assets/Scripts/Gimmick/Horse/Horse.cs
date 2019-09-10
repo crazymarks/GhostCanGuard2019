@@ -27,7 +27,7 @@ public class Horse : GimmickBase
     private MeshRenderer HorseRenderer;
    
     //馬の速さ
-    [SerializeField][Range(0,15)]
+    [SerializeField][Range(0,21)]
     private float HorseSpeed = 10.0f;
     //発動距離
     public float range = 5f;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43733662, g: 0.48511738, b: 0.56539106, a: 1}
+  m_IndirectSpecularColor: {r: 0.437337, g: 0.4851181, b: 0.5653913, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -995,17 +995,17 @@ PrefabInstance:
     - target: {fileID: 2709763136043298301, guid: 50ed35f256799cc41acca53ef33d543e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.00006103514
       objectReference: {fileID: 0}
     - target: {fileID: 2709763136043298301, guid: 50ed35f256799cc41acca53ef33d543e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -897.236
+      value: -696.236
       objectReference: {fileID: 0}
     - target: {fileID: 2709763136043298301, guid: 50ed35f256799cc41acca53ef33d543e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -398.34473
+      value: 4.6552734
       objectReference: {fileID: 0}
     - target: {fileID: 2709763136043298300, guid: 50ed35f256799cc41acca53ef33d543e,
         type: 3}
@@ -1341,11 +1341,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PortalPrefab (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 2259769206178960839, guid: 7ecfb9b3182d77140b7cc55dd50281d7,
-        type: 3}
-      propertyPath: PortDestination
-      value: 
-      objectReference: {fileID: 951924617}
     - target: {fileID: 2259769206178960843, guid: 7ecfb9b3182d77140b7cc55dd50281d7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1354,7 +1349,7 @@ PrefabInstance:
     - target: {fileID: 2259769206178960843, guid: 7ecfb9b3182d77140b7cc55dd50281d7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.23
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2259769206178960843, guid: 7ecfb9b3182d77140b7cc55dd50281d7,
         type: 3}
@@ -1416,6 +1411,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 2259769206178960839, guid: 7ecfb9b3182d77140b7cc55dd50281d7,
+        type: 3}
+      propertyPath: PortDestination
+      value: 
+      objectReference: {fileID: 951924617}
     - target: {fileID: 1208385808684885314, guid: 7ecfb9b3182d77140b7cc55dd50281d7,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -1463,7 +1463,7 @@ PrefabInstance:
     - target: {fileID: 4966074045109257231, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4966074045109257231, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
         type: 3}
@@ -1513,7 +1513,7 @@ PrefabInstance:
     - target: {fileID: 4966074045109257227, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
         type: 3}
       propertyPath: HorseSpeed
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4966074045109257227, guid: b2f486ab9ac156b4fa4d8a7f717e4d87,
         type: 3}
@@ -2004,11 +2004,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PortalPrefab
       objectReference: {fileID: 0}
-    - target: {fileID: 2259769206178960839, guid: 7ecfb9b3182d77140b7cc55dd50281d7,
-        type: 3}
-      propertyPath: PortDestination
-      value: 
-      objectReference: {fileID: 847311542}
     - target: {fileID: 2259769206178960843, guid: 7ecfb9b3182d77140b7cc55dd50281d7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2017,7 +2012,7 @@ PrefabInstance:
     - target: {fileID: 2259769206178960843, guid: 7ecfb9b3182d77140b7cc55dd50281d7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.23
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2259769206178960843, guid: 7ecfb9b3182d77140b7cc55dd50281d7,
         type: 3}
@@ -2079,6 +2074,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6
       objectReference: {fileID: 0}
+    - target: {fileID: 2259769206178960839, guid: 7ecfb9b3182d77140b7cc55dd50281d7,
+        type: 3}
+      propertyPath: PortDestination
+      value: 
+      objectReference: {fileID: 847311542}
     - target: {fileID: 1208385808684885315, guid: 7ecfb9b3182d77140b7cc55dd50281d7,
         type: 3}
       propertyPath: plusoffset.x
@@ -2213,17 +2213,17 @@ PrefabInstance:
     - target: {fileID: 2359295117243915568, guid: e8388b1ec5d15984083a6d847fde5c40,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.00003051757
       objectReference: {fileID: 0}
     - target: {fileID: 2359295117243915568, guid: e8388b1ec5d15984083a6d847fde5c40,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -108.10406
+      value: 92.89598
       objectReference: {fileID: 0}
     - target: {fileID: 2359295117243915568, guid: e8388b1ec5d15984083a6d847fde5c40,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 504.02515
+      value: 907.02515
       objectReference: {fileID: 0}
     - target: {fileID: 3689962110635279247, guid: e8388b1ec5d15984083a6d847fde5c40,
         type: 3}
@@ -2317,12 +2317,12 @@ PrefabInstance:
     - target: {fileID: 2709763136043298301, guid: 50ed35f256799cc41acca53ef33d543e,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 627.36237
+      value: 828.3624
       objectReference: {fileID: 0}
     - target: {fileID: 2709763136043298301, guid: 50ed35f256799cc41acca53ef33d543e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -14.545959
+      value: 388.45404
       objectReference: {fileID: 0}
     - target: {fileID: 2709763136043298300, guid: 50ed35f256799cc41acca53ef33d543e,
         type: 3}
@@ -3634,7 +3634,7 @@ PrefabInstance:
     - target: {fileID: 5639844316279069718, guid: a6f09db9e7f9c7e46835de870444befb,
         type: 3}
       propertyPath: initialSpeed
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5639844316279069718, guid: a6f09db9e7f9c7e46835de870444befb,
         type: 3}

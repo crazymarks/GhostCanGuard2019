@@ -239,7 +239,7 @@ MeshCollider:
   m_GameObject: {fileID: 2705193038496390995}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -251,14 +251,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2259769206178960843}
     m_Modifications:
-    - target: {fileID: 100000, guid: e22af4a89dda8b44fa55d608d2425685, type: 3}
-      propertyPath: m_Name
-      value: system_simple
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: e22af4a89dda8b44fa55d608d2425685, type: 3}
-      propertyPath: m_Layer
-      value: 11
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e22af4a89dda8b44fa55d608d2425685, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -314,6 +306,14 @@ PrefabInstance:
     - target: {fileID: 400000, guid: e22af4a89dda8b44fa55d608d2425685, type: 3}
       propertyPath: m_LocalScale.z
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e22af4a89dda8b44fa55d608d2425685, type: 3}
+      propertyPath: m_Name
+      value: system_simple
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: e22af4a89dda8b44fa55d608d2425685, type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: e22af4a89dda8b44fa55d608d2425685, type: 3}
       propertyPath: m_Materials.Array.size
@@ -665,16 +665,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2259769206178960843}
     m_Modifications:
-    - target: {fileID: 20112341605536193, guid: af873ba1cbe38b64db292f40435e6d89,
-        type: 3}
-      propertyPath: m_Name
-      value: PortPartical
-      objectReference: {fileID: 0}
-    - target: {fileID: 20112341605536193, guid: af873ba1cbe38b64db292f40435e6d89,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7306771785844106954, guid: af873ba1cbe38b64db292f40435e6d89,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -739,6 +729,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 20112341605536193, guid: af873ba1cbe38b64db292f40435e6d89,
+        type: 3}
+      propertyPath: m_Name
+      value: PortPartical
+      objectReference: {fileID: 0}
+    - target: {fileID: 20112341605536193, guid: af873ba1cbe38b64db292f40435e6d89,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af873ba1cbe38b64db292f40435e6d89, type: 3}
