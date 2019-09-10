@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class BGMManager : MonoBehaviour
-{
+{ 
     AudioSource BGM;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         BGM = GetComponent<AudioSource>();
         DontDestroyOnLoad(gameObject);
+        
     }
 
     // Update is called once per frame
