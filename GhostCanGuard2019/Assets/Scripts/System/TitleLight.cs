@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Title : MonoBehaviour
+public class TitleLight : MonoBehaviour
 {
 
     public float speed = 0.2f;
