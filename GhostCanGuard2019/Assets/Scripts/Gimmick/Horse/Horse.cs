@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine.EventSystems;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Horse : GimmickBase
